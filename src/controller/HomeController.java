@@ -75,7 +75,7 @@ public class HomeController {
                 model.addAttribute("message", "dang nhap that bai");
                 return "home/index";
             } else {
-//                httpSession.setAttribute("ssuser", tk);
+                httpSession.setAttribute("loguser", tk);
             	System.out.println("dang nhap thanh cong");
             	model.addAttribute("title", "Cẩm nang du lịch");
                 model.addAttribute("message", "dang nhap thanh cong");

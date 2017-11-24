@@ -1,13 +1,14 @@
 package entities;
-// Generated Nov 24, 2017 9:45:39 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -76,7 +77,7 @@ public class Trangthai implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trangthai")
+	@OneToMany( mappedBy = "trangthai")
 	public Set<Datphong> getDatphongs() {
 		return this.datphongs;
 	}
@@ -85,7 +86,7 @@ public class Trangthai implements java.io.Serializable {
 		this.datphongs = datphongs;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trangthai")
+	@OneToMany( mappedBy = "trangthai")
 	public Set<Khachsan> getKhachsans() {
 		return this.khachsans;
 	}
@@ -94,7 +95,7 @@ public class Trangthai implements java.io.Serializable {
 		this.khachsans = khachsans;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trangthai")
+	@OneToMany( mappedBy = "trangthai")
 	public Set<Taikhoan> getTaikhoans() {
 		return this.taikhoans;
 	}
@@ -103,7 +104,7 @@ public class Trangthai implements java.io.Serializable {
 		this.taikhoans = taikhoans;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trangthai")
+	@OneToMany( mappedBy = "trangthai")
 	public Set<Dattour> getDattours() {
 		return this.dattours;
 	}
