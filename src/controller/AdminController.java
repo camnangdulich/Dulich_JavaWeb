@@ -608,12 +608,12 @@ public class AdminController {
 	
 	
 	// Thêm loai phòng
-//	@RequestMapping("tloaiphong")
-//	public String tloaiphong(ModelMap model) {
-//		model.addAttribute("title", "Thêm tỉnh thành mới");
-//		return "admin/tloaiphong";
-//	}
-//	
+	@RequestMapping("tloaiphong")
+	public String tloaiphong(ModelMap model) {
+		model.addAttribute("title", "Thêm loại phòng mới");
+		return "admin/tloaiphong";
+	}
+	
 //	@RequestMapping(value = "tloaiphong", method = RequestMethod.POST)
 //	public String tloaiphong(ModelMap model,
 //			@RequestParam("tenloai") String tenloai,
@@ -881,6 +881,77 @@ public class AdminController {
 	
 	// ------------------------------------------------------------------
 
+	
+	//Sửa thông tin loại phòng
+	@RequestMapping("sloaiphong/{id}")
+	public String sloaiphong(ModelMap model, @PathVariable("id") Integer idlp) {
+		model.addAttribute("title", "Sửa loại phòng");
+		Session session = factory.getCurrentSession();
+		Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idlp);
+		
+		model.addAttribute("lstlp", lp);
+		return "admin/sloaiphong";
+	}
+	
+//	@RequestMapping(value = "sloaiphong", method = RequestMethod.POST )
+//	public String sloaiphong(ModelMap model,
+//			@RequestParam("idlp") Integer idlp,
+//			@RequestParam("tenloai") String tenloai,
+//			@RequestParam("mota") String mota,
+//			@RequestParam("dientich") Integer dientich,
+//			@RequestParam("songuoi") Integer songuoi,
+//			@RequestParam("loaigiuong") String loaigiuong,
+//			@RequestParam("themgiuong") Integer themgiuong,
+//			@RequestParam("huong") String huong,
+//			@RequestParam("hinhanh") MultipartFile hinhanh,
+//			@RequestParam("khachsan") Integer khachsan){
+//		
+//		Session session = factory.openSession();
+//		Transaction t = session.beginTransaction();
+//		Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idlp);
+//		String photoPath = context.getRealPath("/files/" + hinhanh.getOriginalFilename());
+//		Khachsan ks = (Khachsan) session.get(Khachsan.class, khachsan);
+//		
+//		
+//		lp.setTenloai(tenloai);;
+//		lp.setMota(mota);
+//		lp.setDientich(dientich);
+//		lp.setSonguoi(songuoi);
+//		lp.setLoaigiuong(loaigiuong);
+//		lp.setThemgiuong(themgiuong);
+//		lp.setHuong(huong);
+//		
+//		try {
+//			if(hinhanh.getOriginalFilename().equals("")){
+//				session.update(lp);
+//				t.commit();
+//				model.addAttribute("message", "Chỉnh sửa loại phòng thành công !");
+//				System.out.println("Thành công không thêm ảnh");
+//				return "redirect:/admin/sloaiphong/"+idlp+".html";
+//			}else{
+//				hinhanh.transferTo(new File(photoPath));
+//				lp.setHinhanh(hinhanh.getOriginalFilename());
+//				session.update(lp);
+//				t.commit();
+//				model.addAttribute("message", "Chỉnh sửa loại phòng thành công !");
+//				System.out.println("Thành công có ảnh");
+//				return "redirect:/admin/sloaiphong/"+idlp+".html";
+//			}
+//		} 
+//		catch (Exception e) {
+//			t.rollback();
+//			model.addAttribute("message", "Chỉnh sửa loại phòng thất bại !" + e.getMessage());
+//			System.out.println("that bai");
+//			return "redirect:/admin/tintuc/"+idlp+".html";
+//		}
+//		finally {
+//			session.close();
+//		}
+//	}
+	
+	// ------------------------------------------------------------------
+	
+	
 	// Sửa thông tin bài viết
 	@RequestMapping("sbaiviet/{id}")
 	public String sbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
