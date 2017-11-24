@@ -844,9 +844,12 @@ public class AdminController {
 	// ------------------------------------------------------------------
 
 	// Sửa thông tin quyền
-	@RequestMapping("squyen")
-	public String squyen(ModelMap model) {
+	@RequestMapping("squyen/{id}")
+	public String squyen(ModelMap model, @PathVariable("id") Integer idquyen) {
 		model.addAttribute("title", "Sửa quyền");
+		Session session = factory.getCurrentSession();
+		Quyen q = (Quyen) session.get(Quyen.class, idquyen);
+		model.addAttribute("role", q);
 		return "admin/squyen";
 	}
 	
