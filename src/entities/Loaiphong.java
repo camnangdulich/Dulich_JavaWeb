@@ -28,9 +28,9 @@ public class Loaiphong implements java.io.Serializable {
 	private Huong huong;
 	private String tenloai;
 	private String mota;
-	private Integer themgiuong;
+	private int themgiuong;
 	private String hinhanh;
-	private Integer gia;
+	private int gia;
 	private Set<Datphong> datphongs = new HashSet<Datphong>(0);
 	private Set<Chitietloaiphong> chitietloaiphongs = new HashSet<Chitietloaiphong>(0);
 
