@@ -21,7 +21,6 @@
                 <table class="table table-bordered" id="dataTable">
                     <thead>
                         <tr>
-                            <th style="width: 50px;">ID</th>
                             <th>Hình ảnh</th>
                             <th>Tên tỉnh</th>
                             <th>Mô tả</th>
@@ -30,7 +29,6 @@
                     </thead>
                     <tfoot>
                         <tr>
-                        	<th>ID</th>
                         	<th>Hình ảnh</th>
                             <th>Tên tỉnh</th>
                             <th>Mô tả</th>
@@ -40,8 +38,7 @@
                     <tbody>
                         <c:forEach var="tt" items="${ttlist}">
                             <tr>
-                                <td>${tt.idtinhthanh}</td>
-                                <td style="width: 50px;"><img src="files/tinhthanh/${tt.hinhanh}" width="50px" height="50px"></td>
+                                <td style="width: 50px;"><img src="files/tinhthanh/${tt.hinhanh}" width="150px"></td>
                                 <td>${tt.tinhthanh}</td>
                                 <td>${tt.mota}</td>
                                 <td>

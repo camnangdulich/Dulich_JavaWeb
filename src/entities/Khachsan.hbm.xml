@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 24, 2017 4:52:57 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Nov 24, 2017 9:45:39 PM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Khachsan" table="khachsan" catalog="db_dulich" optimistic-lock="version">
         <id name="idkhachsan" type="java.lang.Integer">
             <column name="idkhachsan" />
             <generator class="identity" />
         </id>
-        <many-to-one name="loaiphong" class="entities.Loaiphong" fetch="select">
-            <column name="idloaiphong" not-null="true" />
-        </many-to-one>
         <many-to-one name="taikhoan" class="entities.Taikhoan" fetch="select">
             <column name="idtaikhoan" not-null="true" />
         </many-to-one>
@@ -46,6 +43,12 @@
                 <column name="idkhachsan" />
             </key>
             <one-to-many class="entities.Danhgia" />
+        </set>
+        <set name="chitietloaiphongs" table="chitietloaiphong" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idkhachsan" not-null="true" />
+            </key>
+            <one-to-many class="entities.Chitietloaiphong" />
         </set>
     </class>
 </hibernate-mapping>

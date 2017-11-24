@@ -21,52 +21,43 @@
                 <table class="table table-bordered" id="dataTable" >
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Hình ảnh</th>
                             <th>Tên loại</th>
                             <th>Mô tả</th>
-                            <th>Diện tích</th>
-                            <th>Số người</th>
                             <th>Loại giường</th>
                             <th>Thêm giường</th>
                             <th>Hướng</th>
-                            <th>Hình ảnh</th>
-                            <th>Khách sạn</th>
-                            
+                            <th>Giá</th>
                             <th><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                             <th>ID</th>
+                            <th>Hình ảnh</th>
                             <th>Tên loại</th>
                             <th>Mô tả</th>
-                            <th>Diện tích</th>
-                            <th>Số người</th>
                             <th>Loại giường</th>
                             <th>Thêm giường</th>
                             <th>Hướng</th>
-                            <th>Hình ảnh</th>
-                            <th>Khách sạn</th>
+                            <th>Giá</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <c:forEach var="lp" items="${lplist}">
                             <tr>
-                                <td>${lp.idloaiphong}</td>
+                            	<td style="width: 50px;"><img src="files/phong/${lp.hinhanh}" width="150px"></td>
                                 <td>${lp.tenloai}</td>
-                                <td>${lp.mota}</td>
-                                <td>${lp.dientich}</td>
-                                <td>${lp.songuoi}</td>
-                                <td>${lp.loaigiuong}</td>
+                                <td>${lp.mota.substring(0,30)}...</td>
+                                <td>${lp.loaigiuong.tenloaigiuong}</td>
                                 <td>${lp.themgiuong}</td>
-                                <td>${lp.huong}</td>
-                               <td style="width: 50px;"><img src="files/khachsan/${lp.hinhanh}" width="50px" height="50px"></td>
-                                <td>${lp.khachsan.tenkhachsan}</td>
+                                <td>${lp.huong.tenhuong}</td>
+                                <td>${lp.gia}</td>
                                 <td>
                                 	<a href="#" style="padding-right: 5px;">
 	                                	<i class="fa fa-pencil" title="Sửa loại phòng"></i> 
 	                                </a>
-	                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('${u.email}',2)">
+	                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="">
 	                                	<i class="fa fa-times" title="Xóa tài khoản"></i>
 	                                </a>
 								</td>

@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 24, 2017 4:52:57 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 24, 2017 9:45:39 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -29,7 +29,6 @@ import javax.persistence.UniqueConstraint;
 public class Khachsan implements java.io.Serializable {
 
 	private Integer idkhachsan;
-	private Loaiphong loaiphong;
 	private Taikhoan taikhoan;
 	private Tinhthanh tinhthanh;
 	private Trangthai trangthai;
@@ -40,13 +39,13 @@ public class Khachsan implements java.io.Serializable {
 	private Date ngaydang;
 	private Set<Chitietdichvu> chitietdichvus = new HashSet<Chitietdichvu>(0);
 	private Set<Danhgia> danhgias = new HashSet<Danhgia>(0);
+	private Set<Chitietloaiphong> chitietloaiphongs = new HashSet<Chitietloaiphong>(0);
 
 	public Khachsan() {
 	}
 
-	public Khachsan(Loaiphong loaiphong, Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai,
-			String tenkhachsan, String hinhanh, String sodienthoai, String diachi, Date ngaydang) {
-		this.loaiphong = loaiphong;
+	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
+			String sodienthoai, String diachi, Date ngaydang) {
 		this.taikhoan = taikhoan;
 		this.tinhthanh = tinhthanh;
 		this.trangthai = trangthai;
@@ -57,10 +56,9 @@ public class Khachsan implements java.io.Serializable {
 		this.ngaydang = ngaydang;
 	}
 
-	public Khachsan(Loaiphong loaiphong, Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai,
-			String tenkhachsan, String hinhanh, String sodienthoai, String diachi, Date ngaydang,
-			Set<Chitietdichvu> chitietdichvus, Set<Danhgia> danhgias) {
-		this.loaiphong = loaiphong;
+	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
+			String sodienthoai, String diachi, Date ngaydang, Set<Chitietdichvu> chitietdichvus, Set<Danhgia> danhgias,
+			Set<Chitietloaiphong> chitietloaiphongs) {
 		this.taikhoan = taikhoan;
 		this.tinhthanh = tinhthanh;
 		this.trangthai = trangthai;
@@ -71,6 +69,7 @@ public class Khachsan implements java.io.Serializable {
 		this.ngaydang = ngaydang;
 		this.chitietdichvus = chitietdichvus;
 		this.danhgias = danhgias;
+		this.chitietloaiphongs = chitietloaiphongs;
 	}
 
 	@Id
@@ -83,16 +82,6 @@ public class Khachsan implements java.io.Serializable {
 
 	public void setIdkhachsan(Integer idkhachsan) {
 		this.idkhachsan = idkhachsan;
-	}
-
-	@ManyToOne()
-	@JoinColumn(name = "idloaiphong", nullable = false)
-	public Loaiphong getLoaiphong() {
-		return this.loaiphong;
-	}
-
-	public void setLoaiphong(Loaiphong loaiphong) {
-		this.loaiphong = loaiphong;
 	}
 
 	@ManyToOne()
@@ -187,6 +176,15 @@ public class Khachsan implements java.io.Serializable {
 
 	public void setDanhgias(Set<Danhgia> danhgias) {
 		this.danhgias = danhgias;
+	}
+
+	@OneToMany( mappedBy = "khachsan")
+	public Set<Chitietloaiphong> getChitietloaiphongs() {
+		return this.chitietloaiphongs;
+	}
+
+	public void setChitietloaiphongs(Set<Chitietloaiphong> chitietloaiphongs) {
+		this.chitietloaiphongs = chitietloaiphongs;
 	}
 
 }

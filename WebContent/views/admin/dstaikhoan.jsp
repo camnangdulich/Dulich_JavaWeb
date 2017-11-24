@@ -26,7 +26,6 @@
                             <th>Mật khẩu</th>
                             <th>Họ và tên</th>
                             <th>Số điện thoại</th>
-                            <th>Địa chỉ</th>
                             <th>Quyền</th>
                             <th>Trạng thái</th>
                             <th><i class="fa fa-cog"></i></th>
@@ -39,7 +38,6 @@
                             <th>Mật khẩu</th>
                             <th>Họ và tên</th>
                             <th>Số điện thoại</th>
-                            <th>Địa chỉ</th>
                             <th>Quyền</th>
                             <th>Trạng thái</th>
                             <th></th>
@@ -53,7 +51,6 @@
                                 <td>${u.matkhau}</td>
                                 <td>${u.hodem} ${u.ten}</td>
                                 <td>${u.sodienthoai}</td>
-                                <td>${u.diachi}</td>
                                 <td>${u.quyen.quyen}</td>
                                 <c:choose>
 								    <c:when test="${u.trangthai.idtrangthai == 1}">

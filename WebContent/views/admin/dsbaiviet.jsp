@@ -21,7 +21,7 @@
                 <table class="table table-bordered" id="dataTable">
                     <thead>
                         <tr>
-                            <th>Ảnh</th>
+                            <th>Id</th>
                             <th>Tiêu đề</th>
                             <th>Tóm tắt</th>
                             <th>Thời gian</th>
@@ -32,7 +32,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Ảnh</th>
+                            <th>Id</th>
                             <th>Tiêu đề</th>
                             <th>Tóm tắt</th>
                             <th>Thời gian</th>
@@ -44,15 +44,13 @@
                     	<tbody>
 							<c:forEach var="u" items="${bvlist}">
 								<tr>
-									<td style="width: 50px;">
-										<img src="files/avatar/${u.hinhanh}" width="50px" height="50px">
-									</td>
+									<td>${u.idtintuc}</td>
 									<td>${u.tieude.substring(0,25)}...</td>
-									<td>${u.tomtat}</td>
+									<td>${u.tomtat.substring(0,25)}...</td>
 									<td>${u.thoigian}</td>
 									<td>${u.taikhoan.hodem} ${u.taikhoan.ten}</td>
 									<td>
-										<select>
+										<select style="width: 150px;">
 			                               	 <c:forEach var="a" items="${ctbvlist}">
 			                               	 	<c:if test="${a.tintuc.idtintuc == u.idtintuc}" >
 			                                   	 	<option value="${a.loaitin.loaitin}">${a.loaitin.loaitin}</option>

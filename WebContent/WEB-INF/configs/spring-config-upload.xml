@@ -15,8 +15,8 @@
 	<!-- Khai báo bean CommonsMultipartResolver cho phép xử lý upload file -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- maxUploadSize = 20MB -->
-		<property name="maxUploadSize" value="20971520" />
+		<!-- maxUploadSize = 500MB -->
+		<property name="maxUploadSize" value="524288000" />
 	</bean>
 
 </beans>
