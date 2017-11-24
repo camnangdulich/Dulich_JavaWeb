@@ -28,9 +28,9 @@ public class Loaiphong implements java.io.Serializable {
 	private Huong huong;
 	private String tenloai;
 	private String mota;
-	private Integer themgiuong;
+	private int themgiuong;
 	private String hinhanh;
-	private Integer gia;
+	private int gia;
 	private Set<Datphong> datphongs = new HashSet<Datphong>(0);
 	private Set<Chitietloaiphong> chitietloaiphongs = new HashSet<Chitietloaiphong>(0);
 
@@ -42,16 +42,6 @@ public class Loaiphong implements java.io.Serializable {
 		this.hinhanh = hinhanh;
 		this.gia = gia;
 	}
-	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong,
-			String hinhanh, int gia) {
-		this.huong = huong;
-		this.tenloai = tenloai;
-		this.mota = mota;
-		this.themgiuong = themgiuong;
-		this.hinhanh = hinhanh;
-		this.gia = gia;
-	}
-
 
 	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong, String hinhanh, int gia,
 			Set<Datphong> datphongs, Set<Chitietloaiphong> chitietloaiphongs) {

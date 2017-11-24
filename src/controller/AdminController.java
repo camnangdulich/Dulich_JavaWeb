@@ -43,7 +43,6 @@ import entities.Loaiphong;
 import entities.Tinhthanh;
 import entities.Chitietdichvu;
 import entities.Dichvu;
-import entities.Huong;
 
 /**
  *
@@ -614,47 +613,52 @@ public class AdminController {
 		model.addAttribute("title", "Thêm loại phòng mới");
 		return "admin/tloaiphong";
 	}
-	@RequestMapping(value = "tloaiphong", method = RequestMethod.POST)
-	public String tloaiphong(ModelMap model,
-			@RequestParam("tenloai") String tenloai,
-			@RequestParam("mota") String mota,
-			@RequestParam("themgiuong") Integer themgiuong,
-			@RequestParam("huong") Integer idhuong,
-			@RequestParam("hinhanh") MultipartFile hinhanh,
-			@RequestParam("gia") Integer gia) {
-
-		Session session = factory.openSession();
-		Huong huong = (Huong) session.get(Huong.class, idhuong);
-		// Tạo đường dẫn lưu hình ảnh
-		String photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
-		
-		// Lưu hình ảnh
-		try {
-			hinhanh.transferTo(new File(photoPath));
-		} catch (IllegalStateException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		Loaiphong lp = new Loaiphong(tenloai, mota, themgiuong, huong, hinhanh, gia);
-		
-		try {
-			session.save(lp);
-			t.commit();
-			model.addAttribute("message", "Thêm loại phòng thành công!");
-			return "admin/tloaiphong";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Thêm loại phòng thất bại!");
-		} finally {
-			session.close();
-		}
-		return "admin/tloaiphong";
-	}
 	
+//	@RequestMapping(value = "tloaiphong", method = RequestMethod.POST)
+//	public String tloaiphong(ModelMap model,
+//			@RequestParam("tenloai") String tenloai,
+//			@RequestParam("mota") String mota,
+//			@RequestParam("dientich") Integer dientich,
+//			@RequestParam("songuoi") Integer songuoi,
+//			@RequestParam("loaigiuong") String loaigiuong,
+//			@RequestParam("themgiuong") Integer themgiuong,
+//			@RequestParam("huong") String huong,
+//			@RequestParam("hinhanh") MultipartFile hinhanh,
+//			@RequestParam("khachsan") Integer khachsan) {
+//
+//		Session session = factory.openSession();
+//		Khachsan ks = (Khachsan) session.get(Khachsan.class, khachsan);
+//		
+//		// Tạo đường dẫn lưu hình ảnh
+//		String photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
+//		
+//		// Lưu hình ảnh
+//		try {
+//			hinhanh.transferTo(new File(photoPath));
+//		} catch (IllegalStateException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		
+//		Loaiphong lp = new Loaiphong(tenloai, mota, dientich, songuoi, loaigiuong, themgiuong, huong, hinhanh.getOriginalFilename(), ks);
+//		Transaction t = session.beginTransaction();
+//		
+//		try {
+//			session.save(lp);
+//			t.commit();
+//			model.addAttribute("message", "Thêm loại phòng thành công!");
+//			return "admin/tloaiphong";
+//		} catch (Exception e) {
+//			t.rollback();
+//			model.addAttribute("message", "Thêm loại phòng thất bại!");
+//		} finally {
+//			session.close();
+//		}
+//		return "admin/tloaiphong";
+//	}
 	// ------------------------------------------------------------------
 	
 	
