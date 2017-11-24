@@ -26,10 +26,9 @@ public class Loaiphong implements java.io.Serializable {
 
 	private Integer idloaiphong;
 	private Huong huong;
-	private Loaigiuong loaigiuong;
 	private String tenloai;
 	private String mota;
-	private Boolean themgiuong;
+	private int themgiuong;
 	private String hinhanh;
 	private int gia;
 	private Set<Datphong> datphongs = new HashSet<Datphong>(0);
@@ -38,17 +37,15 @@ public class Loaiphong implements java.io.Serializable {
 	public Loaiphong() {
 	}
 
-	public Loaiphong(Loaigiuong loaigiuong, String tenloai, String hinhanh, int gia) {
-		this.loaigiuong = loaigiuong;
+	public Loaiphong(String tenloai, String hinhanh, int gia) {
 		this.tenloai = tenloai;
 		this.hinhanh = hinhanh;
 		this.gia = gia;
 	}
 
-	public Loaiphong(Huong huong, Loaigiuong loaigiuong, String tenloai, String mota, Boolean themgiuong,
+	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong,
 			String hinhanh, int gia, Set<Datphong> datphongs, Set<Chitietloaiphong> chitietloaiphongs) {
 		this.huong = huong;
-		this.loaigiuong = loaigiuong;
 		this.tenloai = tenloai;
 		this.mota = mota;
 		this.themgiuong = themgiuong;
@@ -80,16 +77,6 @@ public class Loaiphong implements java.io.Serializable {
 		this.huong = huong;
 	}
 
-	@ManyToOne()
-	@JoinColumn(name = "loaigiuong", nullable = false)
-	public Loaigiuong getLoaigiuong() {
-		return this.loaigiuong;
-	}
-
-	public void setLoaigiuong(Loaigiuong loaigiuong) {
-		this.loaigiuong = loaigiuong;
-	}
-
 	@Column(name = "tenloai", unique = true, nullable = false, length = 100)
 	public String getTenloai() {
 		return this.tenloai;
@@ -109,11 +96,11 @@ public class Loaiphong implements java.io.Serializable {
 	}
 
 	@Column(name = "themgiuong")
-	public Boolean getThemgiuong() {
+	public int getThemgiuong() {
 		return this.themgiuong;
 	}
 
-	public void setThemgiuong(Boolean themgiuong) {
+	public void setThemgiuong(int themgiuong) {
 		this.themgiuong = themgiuong;
 	}
 
