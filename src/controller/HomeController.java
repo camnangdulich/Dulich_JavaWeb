@@ -71,15 +71,18 @@ public class HomeController {
             
             if (!tk.getMatkhau().equals(Matkhaumahoa)) {
             	System.out.println("dang nhap that bai");
+            	model.addAttribute("title", "Cẩm nang du lịch");
                 model.addAttribute("message", "dang nhap that bai");
                 return "home/index";
             } else {
 //                httpSession.setAttribute("ssuser", tk);
             	System.out.println("dang nhap thanh cong");
+            	model.addAttribute("title", "Cẩm nang du lịch");
                 model.addAttribute("message", "dang nhap thanh cong");
             }
         } catch (Exception e) {
         	System.out.println("dang nhap that bai");
+        	model.addAttribute("title", "Cẩm nang du lịch");
             model.addAttribute("message", "dang nhap that bai");
             return "home/index";
         }
