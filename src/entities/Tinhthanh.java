@@ -36,6 +36,12 @@ public class Tinhthanh implements java.io.Serializable {
 		this.hinhanh = hinhanh;
 		this.tinhthanh = tinhthanh;
 	}
+	
+	public Tinhthanh(String hinhanh, String tentinh, String mota) {
+		this.hinhanh = hinhanh;
+		this.tinhthanh = tentinh;
+		this.mota = mota;
+	}
 
 	public Tinhthanh(String hinhanh, String tinhthanh, String mota, Set<Khachsan> khachsans, Set<Tour> tours) {
 		this.hinhanh = hinhanh;

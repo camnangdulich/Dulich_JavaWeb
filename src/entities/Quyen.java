@@ -33,6 +33,11 @@ public class Quyen implements java.io.Serializable {
 	public Quyen(String quyen) {
 		this.quyen = quyen;
 	}
+	
+	public Quyen(String quyen, String mota) {
+		this.quyen = quyen;
+		this.mota = mota;
+	}
 
 	public Quyen(String quyen, String mota, Set<Taikhoan> taikhoans) {
 		this.quyen = quyen;
