@@ -74,7 +74,7 @@
                     <li class="nav-item" data-toggle="tooltip" data-placement="right">
                         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlbaiviet" data-parent="#exampleAccordion">
                             <i class="fa fa-fw fa-newspaper-o"></i>
-                            <span class="nav-link-text">Quản bài viết</span>
+                            <span class="nav-link-text">Quản lý bài viết</span>
                         </a>
                         <ul class="sidenav-second-level collapse" id="qlbaiviet">
                             <li>
@@ -88,7 +88,7 @@
                     <li class="nav-item" data-toggle="tooltip" data-placement="right">
                         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qllbaiviet" data-parent="#exampleAccordion">
                             <i class="fa fa-fw fa-file-text-o"></i>
-                            <span class="nav-link-text">Quản loại bài viết</span>
+                            <span class="nav-link-text">Quản lý loại bài viết</span>
                         </a>
                         <ul class="sidenav-second-level collapse" id="qllbaiviet">
                             <li>
