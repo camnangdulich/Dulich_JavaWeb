@@ -24,7 +24,6 @@
                             <th>Hình ảnh</th>
                             <th>Tên loại</th>
                             <th>Mô tả</th>
-                            <th>Loại giường</th>
                             <th>Thêm giường</th>
                             <th>Hướng</th>
                             <th>Giá</th>
@@ -36,7 +35,6 @@
                             <th>Hình ảnh</th>
                             <th>Tên loại</th>
                             <th>Mô tả</th>
-                            <th>Loại giường</th>
                             <th>Thêm giường</th>
                             <th>Hướng</th>
                             <th>Giá</th>
@@ -49,7 +47,6 @@
                             	<td style="width: 50px;"><img src="files/phong/${lp.hinhanh}" width="150px"></td>
                                 <td>${lp.tenloai}</td>
                                 <td>${lp.mota.substring(0,30)}...</td>
-                                <td>${lp.loaigiuong.tenloaigiuong}</td>
                                 <td>${lp.themgiuong}</td>
                                 <td>${lp.huong.tenhuong}</td>
                                 <td>${lp.gia}</td>

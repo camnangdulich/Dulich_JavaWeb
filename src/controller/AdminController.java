@@ -840,6 +840,33 @@ public class AdminController {
 		model.addAttribute("title", "Sửa quyền");
 		return "admin/squyen";
 	}
+	
+	@RequestMapping(value = "squyen", method = RequestMethod.POST )
+	public String squyen(ModelMap model,
+			@RequestParam("idquyen") Integer idquyen,
+			@RequestParam("tenquyen") String tenquyen,
+			@RequestParam("mota") String mota){
+		
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Quyen q = (Quyen) session.get(Quyen.class, idquyen);
+		q.setQuyen(tenquyen);
+		q.setMota(mota);
+		try {
+			session.update(q);
+			t.commit();
+			model.addAttribute("message", "Chỉnh sửa quyền thành công !");
+			return "redirect:/admin/squyen/"+idquyen+".html";
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Chỉnh sửa quyền thất bại !" + e.getMessage());
+			System.out.println("Thất bại");
+			return "redirect:/admin/tintuc/"+idquyen+".html";
+		}finally {
+			session.close();
+		}
+	}
+	
 	// ------------------------------------------------------------------
 
 	// Sửa thông tin bài viết

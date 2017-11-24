@@ -21,7 +21,7 @@
                 <table class="table table-bordered" id="dataTable">
                     <thead>
                         <tr>
-                            <th style="width: 50px;">ID</th>
+                            <th>ID</th>
                             <th>Tên tour</th>
                             <th>Mô tả</th>
                             <th>Giá</th>
@@ -36,7 +36,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                        	 <th style="width: 50px;">ID</th>
+                        	<th>ID</th>
                             <th>Tên tour</th>
                             <th>Mô tả</th>
                             <th>Giá</th>
@@ -56,8 +56,8 @@
                                 <td>${tu.tentour}</td>
                                 <td>${tu.mota}</td>
                                 <td>${tu.gia}</td>
-                                <td>${tu.tinhthanhByDiemdi.tentinh}</td>
-                                <td>${tu.tinhthanhByDiemden.tentinh}</td>
+                                <td>${tu.diemdi}</td>
+                                <td>${tu.tinhthanh.tinhthanh}</td>
                                 <td>${tu.congty.tencongty}</td>
                                 <td>${tu.giokhoihanh}</td>
                                 <td>${tu.lichtrinh}</td>

@@ -27,7 +27,6 @@
                             <th>Mô tả</th>
                             <th>Email</th>
                             <th>Số điện thoại</th>
-                            <th>Ngày tạo</th>
                             <th><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
@@ -39,7 +38,6 @@
                             <th>Mô tả</th>
                             <th>Email</th>
                             <th>Số điện thoại</th>
-                            <th>Ngày tạo</th>
                             <th></th>
                         </tr>
                     </tfoot>
@@ -52,7 +50,6 @@
                                 <td>${ct.mota}</td>
                                 <td>${ct.email}</td>
                                 <td>${ct.sodienthoai}</td>
-                                <td>${ct.ngaytao}</td>
                                 <td>
                                 	<a href="#" style="padding-right: 5px;">
 	                                	<i class="fa fa-pencil" title="Sửa tài khoản"></i> 
