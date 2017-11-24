@@ -171,4 +171,40 @@ $(document).ready(function() {
 			tenquyen : 'Vui lòng nhập tên quyền'
 		}
 	})
+	// ------------- Kiểm thêm loại phòng ---------------------
+	// -------------------------------------------------------
+		$("#themlp").validate({
+		rules : {
+			tenloai : 'required',
+			gia : {
+				required : true,
+				digits : true
+			}
+		},
+		messages : {
+			tenloai : 'vui lòng nhập tên loại phòng',
+			gia : {
+				required : 'Vui lòng nhập giá loại phòng',
+				digits : 'Giá phải là sô'
+			}
+		}
+	})
+		// ------------- Kiểm sửa loại phòng ---------------------
+	// -------------------------------------------------------
+		$("#sualp").validate({
+		rules : {
+			tenloai : 'required',
+			gia : {
+				required : true,
+				digits : true
+			}
+		},
+		messages : {
+			tenloai : 'vui lòng nhập tên loại phòng',
+			gia : {
+				required : 'Vui lòng nhập giá loại phòng',
+				digits : 'Giá phải là sô'
+			}
+		}
+	})
 });
