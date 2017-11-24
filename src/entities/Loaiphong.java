@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 24, 2017 9:45:39 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -53,8 +53,8 @@ public class Loaiphong implements java.io.Serializable {
 	}
 
 
-	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong,
-			String hinhanh, int gia, Set<Datphong> datphongs, Set<Chitietloaiphong> chitietloaiphongs) {
+	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong, String hinhanh, int gia,
+			Set<Datphong> datphongs, Set<Chitietloaiphong> chitietloaiphongs) {
 		this.huong = huong;
 		this.tenloai = tenloai;
 		this.mota = mota;
