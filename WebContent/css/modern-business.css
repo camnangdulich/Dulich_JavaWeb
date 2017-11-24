@@ -1,0 +1,269 @@
+/*!
+ * Start Bootstrap - Modern Business (http://startbootstrap.com/template-overviews/modern-business)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-logomodern-business-nav/blob/master/LICENSE)
+ */
+
+body {
+    padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 56px;
+    }
+}
+
+.carousel-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+.sl_tinhthanh{
+    float: left;
+    position: relative;
+    max-width: 170px;
+    min-width: 170px;
+    height: 35px;
+}
+
+.ft-logo{
+    color: white;
+    font-weight: 400;
+}
+.ft-logo:hover{
+    color: white;
+    text-decoration:none;
+}
+
+.ft-fx h4{
+    font-weight:400;
+    color: #ad7;
+}
+
+.ft-lh{
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+.ft-lk a{
+    color: white;
+}
+
+.sp-ttm{
+    font-size: 14px;
+    font-style: italic;
+}
+
+.h3-fx{
+    margin-top: 50px !important;
+}
+
+.checked {
+    color: orange;
+}
+
+.p-fx{
+    font-size: 15px;
+}
+
+.tt-bv img{
+    padding-bottom: 15px;
+    max-width: 100%;
+}
+
+
+/*----------POPUP CSS------------*/
+/* Full-width input fields */
+input[class=input_log]{
+    width: 100%;
+    padding: .5rem .75rem;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.container_log{
+    padding: 20px;
+}
+
+.label_log{
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+/* Set a style for all buttons */
+button[class=log]{
+    background-color: #4CAF50;
+    color: white;
+    padding: .55rem .8rem;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button[class=log_opid]{
+    color: white;
+    padding: .55rem .8rem;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 49%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    width: auto;
+    color: white;
+    border: none;
+    padding: .55rem .8rem;
+    background-color: #f44336;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+/* Validate css */
+#repwd_pp .input_log{
+	width: 100%;
+    padding: .5rem .75rem;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#repwd_pp .error{
+	color: red;
+	border-color: red;
+}
+
+#repwd_pp .valid{
+	border-color: #4CAF50;
+}
+
+#login_pp .input_log{
+	width: 100%;
+    padding: .5rem .75rem;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#login_pp .error{
+	color: red;
+	border-color: red;
+}
+
+#login_pp .valid{
+	border-color: #4CAF50;
+}
+
+#register_pp .input_log{
+	width: 100%;
+    padding: .5rem .75rem;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#register_pp .error{
+	color: red;
+	border-color: red;
+}
+
+#register_pp .valid{
+	border-color: #4CAF50;
+}
+
+#dmtt .list-group-item{
+	border: none;
+	border-top: 1px solid rgba(0,0,0,.125);
+}
+
+

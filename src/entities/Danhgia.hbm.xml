@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2017 2:13:28 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="entities.Danhgia" table="danhgia" catalog="db_dulich" optimistic-lock="version">
+        <id name="iddanhgia" type="java.lang.Integer">
+            <column name="iddanhgia" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="khachsan" class="entities.Khachsan" fetch="select">
+            <column name="idkhachsan" />
+        </many-to-one>
+        <many-to-one name="taikhoan" class="entities.Taikhoan" fetch="select">
+            <column name="idtaikhoan" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tour" class="entities.Tour" fetch="select">
+            <column name="idtour" />
+        </many-to-one>
+        <property name="star" type="int">
+            <column name="star" not-null="true" />
+        </property>
+        <property name="noidung" type="string">
+            <column name="noidung" length="65535" not-null="true" />
+        </property>
+        <property name="thoigian" type="timestamp">
+            <column name="thoigian" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

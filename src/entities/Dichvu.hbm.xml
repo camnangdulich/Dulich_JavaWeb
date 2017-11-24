@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2017 2:13:28 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="entities.Dichvu" table="dichvu" catalog="db_dulich" optimistic-lock="version">
+        <id name="iddichvu" type="java.lang.Integer">
+            <column name="iddichvu" />
+            <generator class="identity" />
+        </id>
+        <property name="tendichvu" type="string">
+            <column name="tendichvu" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="mota" type="string">
+            <column name="mota" length="65535" />
+        </property>
+        <set name="chitietdichvus" table="chitietdichvu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="iddichvu" not-null="true" />
+            </key>
+            <one-to-many class="entities.Chitietdichvu" />
+        </set>
+    </class>
+</hibernate-mapping>

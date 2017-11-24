@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-catalog="db_dulich" match-name="chitietdichvu" />
+	<table-filter match-catalog="db_dulich" match-name="chitiettin" />
+	<table-filter match-catalog="db_dulich" match-name="congty" />
+	<table-filter match-catalog="db_dulich" match-name="danhgia" />
+	<table-filter match-catalog="db_dulich" match-name="datphong" />
+	<table-filter match-catalog="db_dulich" match-name="dattour" />
+	<table-filter match-catalog="db_dulich" match-name="dichvu" />
+	<table-filter match-catalog="db_dulich" match-name="khachsan" />
+	<table-filter match-catalog="db_dulich" match-name="loaiphong" />
+	<table-filter match-catalog="db_dulich" match-name="loaitin" />
+	<table-filter match-catalog="db_dulich" match-name="phanhoi" />
+	<table-filter match-catalog="db_dulich" match-name="quyen" />
+	<table-filter match-catalog="db_dulich" match-name="taikhoan" />
+	<table-filter match-catalog="db_dulich" match-name="tinhthanh" />
+	<table-filter match-catalog="db_dulich" match-name="tintuc" />
+	<table-filter match-catalog="db_dulich" match-name="tour" />
+	<table-filter match-catalog="db_dulich" match-name="trangthai" />
+</hibernate-reverse-engineering>
