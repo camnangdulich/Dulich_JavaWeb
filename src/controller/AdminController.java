@@ -319,7 +319,7 @@ public class AdminController {
 			model.addAttribute("title", "Thêm tài khoản mới");
 			model.addAttribute("message", "email ton tai");
 			return "admin/ttaikhoan";
-		}else{
+		} else {
 			System.out.println("Email khong ton tai >> next");
 			Session session = factory.openSession();
 			Date ngaytao = new Date();
@@ -365,20 +365,29 @@ public class AdminController {
 			@RequestParam("tenquyen") String tenquyen,
 			@RequestParam("mota") String mota) {
 
-		Session session = factory.openSession();
-		Quyen q = new Quyen(tenquyen, mota);
-		Transaction t = session.beginTransaction();
-		try {
-			session.save(q);
-			t.commit();
-			model.addAttribute("message", "Thêm quyền thành công!");
+		if(kiemtraQuyen(tenquyen)){
+			model.addAttribute("message", "quyen da ton tai");
+			model.addAttribute("title", "Thêm quyền mới");
 			return "admin/tquyen";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Thêm quyền thất bại!");
-		} finally {
-			session.close();
+		} else {
+			Session session = factory.openSession();
+			Quyen q = new Quyen(tenquyen, mota);
+			Transaction t = session.beginTransaction();
+			try {
+				session.save(q);
+				t.commit();
+				model.addAttribute("message", "them quyen thanh cong");
+				model.addAttribute("title", "Thêm quyền mới");
+				return "admin/tquyen";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "them quyen that bai");
+				model.addAttribute("title", "Thêm quyền mới");
+			} finally {
+				session.close();
+			}
 		}
+		
 		return "admin/tquyen";
 	}
 	
@@ -904,6 +913,33 @@ public class AdminController {
             List<Taikhoan> lstTaikhoans = query.list();
             t.commit();
             if(lstTaikhoans.size() != 0){
+                return kt;
+            }else{
+                return false;
+            }
+        } catch (Exception ex) {
+            if (!(t == null)) {
+                t.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return kt;
+    }
+	
+	// Kiểm tra quyền có tồn tại không
+	public boolean kiemtraQuyen(String tenquyen) {
+    	Session session = factory.openSession();
+    	Transaction t = session.beginTransaction();
+        boolean kt = true;
+        try {
+            String hql = "from Quyen where quyen = :quyen";
+            Query query = session.createQuery(hql);
+            query.setParameter("quyen", tenquyen);
+            @SuppressWarnings("unchecked")
+            List<Quyen> lstQuyen = query.list();
+            t.commit();
+            if(lstQuyen.size() != 0){
                 return kt;
             }else{
                 return false;
