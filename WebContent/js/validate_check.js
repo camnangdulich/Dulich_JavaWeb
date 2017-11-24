@@ -42,6 +42,7 @@ $(document).ready(function() {
 				rangelength : [ 10, 11 ]
 			}
 		},
+		
 		messages : {
 			quyen : 'Vui lòng chọn một quyền',
 			email : {
@@ -146,5 +147,55 @@ $(document).ready(function() {
 			}
 		}
 	});
-
+	// ------------- Kiểm form thêm quyền --------------
+	// -------------------------------------------------------
+	$("#themquyen").validate({
+		rules : {
+			tenquyen : 'required'
+		},
+		messages : {
+			tenquyen : 'Vui lòng nhập tên quyền'
+		}
+	})
+	
+	// ------------- Kiểm form thêm quyền --------------
+	// -------------------------------------------------------
+	$("#staikhoan").validate({
+		rules : {
+			quyen : 'required',
+			email : {
+				required : true,
+				email : true
+			},
+			matkhau : {
+				required : true,
+				minlength : 5
+			},
+			sdt : {
+				required : true,
+				number : true,
+				rangelength : [ 10, 11 ]
+			}
+		},
+		
+		messages : {
+			quyen : 'Vui lòng chọn một quyền',
+			email : {
+				required : 'Email không được để trống',
+				email : 'Email chưa đúng định dạng'
+			},
+			matkhau : {
+				required : 'Mật khẩu không được để trống',
+				minlength : 'Vui lòng nhập ít nhất 5 kí tự'
+			},
+			sdt : {
+				required : 'Vui lòng nhập số điện thoại',
+				number : 'Số điện thoại không được chứa chữ',
+				rangelength : 'Số điện thoại phải từ 10 đến 11 số'
+			}
+		}
+	});
+	
+	// ------------- Kiểm form thêm bài viết --------------
+	// -------------------------------------------------------
 });

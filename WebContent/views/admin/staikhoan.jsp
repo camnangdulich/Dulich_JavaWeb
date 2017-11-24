@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-10 col-md-auto">
-                    <form action="admin/updatetk.html" method="post" enctype="multipart/form-data">
+                    <form action="admin/updatetk.html" method="post" enctype="multipart/form-data" id="staikhoan">
                     	<input name="idtk" type="hidden" value="${user.idtaikhoan}">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Ảnh đại diện</label>
@@ -42,27 +42,27 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" id="label-validation">
                                 <input name="email" type="email" class="form-control" value="${user.email}" placeholder="Nhập Email">
   								<small class="form-text text-muted">${message}</small>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Mật khẩu</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" id="label-validation">
                                 <input name="matkhau" type="password" class="form-control" value="${user.matkhau}" placeholder="Nhập mật khẩu">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Số điện thoại</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" id="label-validation">
                                 <input name="sdt" type="text" class="form-control" value="${user.sodienthoai}" placeholder="Nhập số điện thoại">
                             </div>
                         </div>
                         <hr>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Họ đệm</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" id="label-validation">
                                 <input name="hodem" type="text" class="form-control" value="${user.hodem}" placeholder="Nhập họ đệm">
                             </div>
                         </div>
