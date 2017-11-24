@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 24, 2017 2:13:28 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Nov 24, 2017 4:52:57 PM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Loaiphong" table="loaiphong" catalog="db_dulich" optimistic-lock="version">
         <id name="idloaiphong" type="java.lang.Integer">
@@ -20,11 +20,14 @@
         <property name="mota" type="string">
             <column name="mota" length="65535" />
         </property>
-        <property name="themgiuong" type="java.lang.Integer">
+        <property name="themgiuong" type="java.lang.Boolean">
             <column name="themgiuong" />
         </property>
         <property name="hinhanh" type="string">
             <column name="hinhanh" length="250" not-null="true" />
+        </property>
+        <property name="gia" type="int">
+            <column name="gia" not-null="true" />
         </property>
         <set name="datphongs" table="datphong" inverse="true" lazy="true" fetch="select">
             <key>

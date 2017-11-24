@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 24, 2017 2:13:28 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 24, 2017 4:52:57 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -31,11 +31,6 @@ public class Quyen implements java.io.Serializable {
 
 	public Quyen(String quyen) {
 		this.quyen = quyen;
-	}
-	
-	public Quyen(String quyen, String mota) {
-		this.quyen = quyen;
-		this.mota = mota;
 	}
 
 	public Quyen(String quyen, String mota, Set<Taikhoan> taikhoans) {

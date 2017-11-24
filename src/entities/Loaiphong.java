@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 24, 2017 2:13:28 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 24, 2017 4:52:57 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -28,28 +28,31 @@ public class Loaiphong implements java.io.Serializable {
 	private Loaigiuong loaigiuong;
 	private String tenloai;
 	private String mota;
-	private Integer themgiuong;
+	private int themgiuong;
 	private String hinhanh;
+	private int gia;
 	private Set<Datphong> datphongs = new HashSet<Datphong>(0);
 	private Set<Khachsan> khachsans = new HashSet<Khachsan>(0);
 
 	public Loaiphong() {
 	}
 
-	public Loaiphong(Loaigiuong loaigiuong, String tenloai, String hinhanh) {
+	public Loaiphong(Loaigiuong loaigiuong, String tenloai, String hinhanh, int gia) {
 		this.loaigiuong = loaigiuong;
 		this.tenloai = tenloai;
 		this.hinhanh = hinhanh;
+		this.gia = gia;
 	}
 
-	public Loaiphong(Huong huong, Loaigiuong loaigiuong, String tenloai, String mota, Integer themgiuong,
-			String hinhanh, Set<Datphong> datphongs, Set<Khachsan> khachsans) {
+	public Loaiphong(Huong huong, Loaigiuong loaigiuong, String tenloai, String mota, int themgiuong,
+			String hinhanh, int gia, Set<Datphong> datphongs, Set<Khachsan> khachsans) {
 		this.huong = huong;
 		this.loaigiuong = loaigiuong;
 		this.tenloai = tenloai;
 		this.mota = mota;
 		this.themgiuong = themgiuong;
 		this.hinhanh = hinhanh;
+		this.gia = gia;
 		this.datphongs = datphongs;
 		this.khachsans = khachsans;
 	}
@@ -105,11 +108,11 @@ public class Loaiphong implements java.io.Serializable {
 	}
 
 	@Column(name = "themgiuong")
-	public Integer getThemgiuong() {
+	public int getThemgiuong() {
 		return this.themgiuong;
 	}
 
-	public void setThemgiuong(Integer themgiuong) {
+	public void setThemgiuong(int themgiuong) {
 		this.themgiuong = themgiuong;
 	}
 
@@ -120,6 +123,15 @@ public class Loaiphong implements java.io.Serializable {
 
 	public void setHinhanh(String hinhanh) {
 		this.hinhanh = hinhanh;
+	}
+
+	@Column(name = "gia", nullable = false)
+	public int getGia() {
+		return this.gia;
+	}
+
+	public void setGia(int gia) {
+		this.gia = gia;
 	}
 
 	@OneToMany( mappedBy = "loaiphong")
