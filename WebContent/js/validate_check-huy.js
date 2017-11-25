@@ -78,5 +78,70 @@ $(document).ready(function() {
 			}
 		}
 	});
+	// ------------- Kiểm thêm dịch vụ---------------------
+	// -------------------------------------------------------
+	$("#tdichvu").validate({
+		rules : {
+			tendichvu : 'required'
+		},
+		messages : {
+			tendichvu : 'Không được để trống'
+		}
+	});
+	
+	// ------------- Kiểm sửa dịch vụ---------------------
+	// -------------------------------------------------------
+	$("#sdichvu").validate({
+		rules : {
+			tendichvu : 'required'
+		},
+		messages : {
+			tendichvu : 'Không được để trống'
+		}
+	});
+	
+	// ------------- Kiểm thêm tỉnh thành---------------------
+	// -------------------------------------------------------
+	$("#themtinh").validate({
+		rules : {
+			tentinh : 'required'
+		},
+		messages : {
+			tentinh : 'Không được để trống'
+		}
+	});
+	
+	// ------------- Kiểm sửa tỉnh thành---------------------
+	// -------------------------------------------------------
+	$("#suatt").validate({
+		rules : {
+			tentinh : 'required'
+		},
+		messages : {
+			tentinh : 'Không được để trống'
+		}
+	});
+	
+	// ------------- Kiểm thêm loại bài viết---------------------
+	// -------------------------------------------------------
+	$("#themlbv").validate({
+		rules : {
+			tenloaibv : 'required'
+		},
+		messages : {
+			tenloaibv : 'Không được để trống'
+		}
+	});
+	
+	// ------------- Kiểm sửa loại bài viết---------------------
+	// -------------------------------------------------------
+	$("#sualbv").validate({
+		rules : {
+			tenloai : 'required'
+		},
+		messages : {
+			tenloai : 'Không được để trống'
+		}
+	});
 	
 });

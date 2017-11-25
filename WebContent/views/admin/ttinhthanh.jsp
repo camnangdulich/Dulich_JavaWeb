@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-10 col-md-auto">
-					<form action="admin/ttinhthanh.html" method="post"
+					<form action="admin/ttinhthanh.html" method="post" id="themtinh"
 						enctype="multipart/form-data">
 						<div class="form-group row">
                             <label class="col-sm-2 col-form-label">Ảnh </label>
@@ -21,20 +21,20 @@
                                     <input name="hinhanh" id="my_file" type="file" class="custom-file-input" onchange="onFileSelected(event)">
                                 </label>
                                 <a onclick="document.getElementById('my_file').click();" style="cursor: pointer;">
-                                	<img id="myimage" src="files/tinhthanh/Connecting room.jpg" style="max-width: 120px; max-height: 120px;">
+                                	<img id="myimage" src="files/tinhthanh/av1.png" style="max-width: 120px; max-height: 120px;">
                                 </a>
                             </div>
                         </div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Tỉnh thành</label>
-							<div class="col-sm-10">
+							<div class="col-sm-10" id="label-validation">
 								<input name="tentinh" type="text" class="form-control"
 									placeholder="Nhập tên Tỉnh">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Mô tả</label>
-							<div class="col-sm-10">
+							<div class="col-sm-10" id="label-validation">
 								<input name="mota" type="text" class="form-control"
 									placeholder="Mô tả Tỉnh">${message}
 							</div>

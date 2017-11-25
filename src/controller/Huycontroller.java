@@ -355,7 +355,7 @@ public class Huycontroller {
 		// Tao duong dan luu hinh anh
 		String photoPath = "";
 		if(hinhanh.getOriginalFilename().equals("")){
-			photoPath = context.getRealPath("/files/tinhthanh/Connecting room.jpg");
+			photoPath = context.getRealPath("/files/tinhthanh/av1.png");
 		} else {
 			photoPath = context.getRealPath("/files/tinhthanh/" + hinhanh.getOriginalFilename());
 		}
@@ -371,7 +371,7 @@ public class Huycontroller {
 			e1.printStackTrace();
 		}
 		if(hinhanh.getOriginalFilename().equals("")){
-			Tinhthanh tinh = new Tinhthanh(hinhanh.getOriginalFilename(), tentinh, mota);
+			Tinhthanh tinh = new Tinhthanh("av1.png", tentinh, mota);
 			try {
 				session.save(tinh);
 				t.commit();
