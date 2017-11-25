@@ -705,7 +705,7 @@ public class AdminController {
 		if(hinhanh.getOriginalFilename().equals("")){
 			photoPath = context.getRealPath("/files/tinhthanh/Connecting room.jpg");
 		} else {
-			photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
+			photoPath = context.getRealPath("/files/tinhthanh/" + hinhanh.getOriginalFilename());
 		}
 		
 		// Luu hình anh
@@ -1102,48 +1102,48 @@ public class AdminController {
 		return "admin/stinhthanh";
 	}
 	
-//	@RequestMapping(value = "stinhthanh", method = RequestMethod.POST )
-//	public String stinhthanh(ModelMap model,
-//			@RequestParam("idtinhthanh") Integer idtinhthanh,
-//			@RequestParam("hinhanh") MultipartFile hinhanh,
-//			@RequestParam("tentinh") String tentinh,
-//			@RequestParam("mota") String mota) {
-//		
-//		Session session = factory.openSession();
-//		Transaction t = session.beginTransaction();
-//		Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, idtinhthanh);
-//		String photoPath = context.getRealPath("/files/" + hinhanh.getOriginalFilename());
-//		
-//		tt.setTentinh(tentinh);
-//		tt.setMota(mota);
-//		
-//		try {
-//			if(hinhanh.getOriginalFilename().equals("")){
-//				session.update(tt);
-//				t.commit();
-//				model.addAttribute("message", "Chỉnh tỉnh thành thành công !");
-//				System.out.println("thanh cong khong them anh");
-//				return "redirect:/admin/stinhthanh/"+idtinhthanh+".html";
-//			}else{
-//				hinhanh.transferTo(new File(photoPath));
-//				tt.setHinhanh(hinhanh.getOriginalFilename());
-//				session.update(tt);
-//				t.commit();
-//				model.addAttribute("message", "Chỉnh sửa tỉnh thành thành công !");
-//				System.out.println("thanh cong co them anh");
-//				return "redirect:/admin/stinhthanh/"+idtinhthanh+".html";
-//			}
-//		} 
-//		catch (Exception e) {
-//			t.rollback();
-//			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
-//			System.out.println("that bai");
-//			return "redirect:/admin/tintuc/"+idtinhthanh+".html";
-//		}
-//		finally {
-//			session.close();
-//		}
-//	}
+	@RequestMapping(value = "stinhthanh", method = RequestMethod.POST )
+	public String stinhthanh(ModelMap model,
+			@RequestParam("idtinhthanh") Integer idtinhthanh,
+			@RequestParam("hinhanh") MultipartFile hinhanh,
+			@RequestParam("tentinh") String tentinh,
+			@RequestParam("mota") String mota) {
+		
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, idtinhthanh);
+		String photoPath = context.getRealPath("/files/tinhthanh/" + hinhanh.getOriginalFilename());
+		
+		tt.setTinhthanh(tentinh);
+		tt.setMota(mota);
+		
+		try {
+			if(hinhanh.getOriginalFilename().equals("")){
+				session.update(tt);
+				t.commit();
+				model.addAttribute("message", "Chỉnh tỉnh thành thành công !");
+				System.out.println("thanh cong khong them anh");
+				return "redirect:/admin/stinhthanh/"+idtinhthanh+".html";
+			}else{
+				hinhanh.transferTo(new File(photoPath));
+				tt.setHinhanh(hinhanh.getOriginalFilename());
+				session.update(tt);
+				t.commit();
+				model.addAttribute("message", "Chỉnh sửa tỉnh thành thành công !");
+				System.out.println("thanh cong co them anh");
+				return "redirect:/admin/stinhthanh/"+idtinhthanh+".html";
+			}
+		} 
+		catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
+			System.out.println("that bai");
+			return "redirect:/admin/tintuc/"+idtinhthanh+".html";
+		}
+		finally {
+			session.close();
+		}
+	}
 	
 	
 	// --------------------- DELETE Controller --------------------------
