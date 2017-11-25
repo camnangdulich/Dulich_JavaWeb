@@ -1,9 +1,3 @@
-<%-- 
-    Document   : layout-dispatcher
-    Created on : Sep 2, 2017, 2:29:18 PM
-    Author     : DuongNguyen
---%>
-
 <%
     String view = request.getParameter("view");
     if (view.startsWith("home/")) {

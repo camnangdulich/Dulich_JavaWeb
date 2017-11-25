@@ -184,7 +184,7 @@ public class AdminController {
 		return list;
 	}
 	
-	// Lấy tất cả thông tin Tỉnh thành
+	// Lấy tất cả thông tin tỉnh thành
 	@ModelAttribute("ttlist")
 	public List<Tinhthanh> gettt(ModelMap model) {
 		Session session = factory.getCurrentSession();
@@ -414,7 +414,6 @@ public class AdminController {
 				session.close();
 			}
 		}
-		
 		return "admin/tquyen";
 	}
 	
@@ -933,7 +932,6 @@ public class AdminController {
 		String photoPath = context.getRealPath("/files/" + hinhanh.getOriginalFilename());
 		Huong hg = (Huong) session.get(Huong.class, idhuong);
 		Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idlp);
-		
 		
 		lp.setTenloai(tenloai);;
 		lp.setMota(mota);

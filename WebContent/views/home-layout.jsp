@@ -71,12 +71,88 @@
                                 </span>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a onclick="loginpp()" class="nav-link" style="cursor: pointer;">Đăng nhập</a>
-                        </li>
-                        <li class="nav-item">
-                            <a onclick="registerpp()" class="nav-link" style="cursor: pointer;">Đăng ký</a>
-                        </li>
+                        
+                        <c:choose>
+                        	<c:when test="${loguser.quyen.idquyen == 5}">
+                        		<li class="nav-item dropdown">
+		                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                Xin chào: ${loguser.ten}
+		                            </a>
+		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+		                                <a class="dropdown-item" href="#">Tạo khách sạn mới</a>
+		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            </div>
+		                            <li class="nav-item">
+			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
+			                        </li>
+		                        </li>
+                        	</c:when>
+                        	<c:when test="${loguser.quyen.idquyen == 4}">
+                        		<li class="nav-item dropdown">
+		                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                Xin chào: ${loguser.ten}
+		                            </a>
+		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+		                                <a class="dropdown-item" href="#">Quản lý khách sạn</a>
+		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            </div>
+		                            <li class="nav-item">
+			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
+			                        </li>
+		                        </li>
+                        	</c:when>
+                        	<c:when test="${loguser.quyen.idquyen == 3}">
+                        		<li class="nav-item dropdown">
+		                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                Xin chào: ${loguser.ten}
+		                            </a>
+		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+		                                <a class="dropdown-item" href="#">Quản lý tour du lịch</a>
+		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            </div>
+		                            <li class="nav-item">
+			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
+			                        </li>
+		                        </li>
+                        	</c:when>
+                        	<c:when test="${loguser.quyen.idquyen == 2}">
+                        		<li class="nav-item dropdown">
+		                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                Xin chào: ${loguser.ten}
+		                            </a>
+		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+		                                <a class="dropdown-item" href="#">Quản lý bài viết</a>
+		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            </div>
+		                            <li class="nav-item">
+			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
+			                        </li>
+		                        </li>
+                        	</c:when>
+                        	<c:when test="${loguser.quyen.idquyen == 1}">
+                        		<li class="nav-item dropdown">
+		                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                Xin chào: ${loguser.ten}
+		                            </a>
+		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+		                                <a class="dropdown-item" href="admin/index.html">Đến trang điều khiển</a>
+		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            </div>
+		                            <li class="nav-item">
+			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
+			                        </li>
+		                        </li>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<li class="nav-item">
+		                            <a onclick="loginpp()" class="nav-link" style="cursor: pointer;">Đăng nhập</a>
+		                        </li>
+		                        <li class="nav-item">
+		                            <a onclick="registerpp()" class="nav-link" style="cursor: pointer;">Đăng ký</a>
+		                        </li>
+                        	</c:otherwise>
+                        </c:choose>
+                        
                     </ul>
                 </div>
             </div>
