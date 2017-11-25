@@ -1115,6 +1115,61 @@ public class AdminController {
 	}
 	
 	
+	//Sửa thông tin tỉnh thành
+	@RequestMapping("stinhthanh/{id}")
+	public String stinhthanh(ModelMap model, @PathVariable("id") Integer idtt) {
+		model.addAttribute("title", "Sửa tỉnh thành");
+		Session session = factory.getCurrentSession();
+		Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, idtt);
+		
+		model.addAttribute("tinh", tt);
+		return "admin/stinhthanh";
+	}
+	
+//	@RequestMapping(value = "stinhthanh", method = RequestMethod.POST )
+//	public String stinhthanh(ModelMap model,
+//			@RequestParam("idtinhthanh") Integer idtinhthanh,
+//			@RequestParam("hinhanh") MultipartFile hinhanh,
+//			@RequestParam("tentinh") String tentinh,
+//			@RequestParam("mota") String mota) {
+//		
+//		Session session = factory.openSession();
+//		Transaction t = session.beginTransaction();
+//		Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, idtinhthanh);
+//		String photoPath = context.getRealPath("/files/" + hinhanh.getOriginalFilename());
+//		
+//		tt.setTentinh(tentinh);
+//		tt.setMota(mota);
+//		
+//		try {
+//			if(hinhanh.getOriginalFilename().equals("")){
+//				session.update(tt);
+//				t.commit();
+//				model.addAttribute("message", "Chỉnh tỉnh thành thành công !");
+//				System.out.println("thanh cong khong them anh");
+//				return "redirect:/admin/stinhthanh/"+idtinhthanh+".html";
+//			}else{
+//				hinhanh.transferTo(new File(photoPath));
+//				tt.setHinhanh(hinhanh.getOriginalFilename());
+//				session.update(tt);
+//				t.commit();
+//				model.addAttribute("message", "Chỉnh sửa tỉnh thành thành công !");
+//				System.out.println("thanh cong co them anh");
+//				return "redirect:/admin/stinhthanh/"+idtinhthanh+".html";
+//			}
+//		} 
+//		catch (Exception e) {
+//			t.rollback();
+//			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
+//			System.out.println("that bai");
+//			return "redirect:/admin/tintuc/"+idtinhthanh+".html";
+//		}
+//		finally {
+//			session.close();
+//		}
+//	}
+	
+	
 	// --------------------- DELETE Controller --------------------------
 	// ------------------------------------------------------------------
 	
@@ -1197,7 +1252,7 @@ public class AdminController {
 	// --------------------- SLUG Tool Controller -----------------------
 	// ------------------------------------------------------------------
 	
-	// Thêm tỉnh thành
+	// Slug tool
 	@RequestMapping("slugtool")
 	public String slugtool(ModelMap model) {
 		model.addAttribute("title", "Slug tool");
