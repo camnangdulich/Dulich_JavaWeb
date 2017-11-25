@@ -952,7 +952,7 @@ public class AdminController {
 		
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
-		String photoPath = context.getRealPath("/files/" + hinhanh.getOriginalFilename());
+		String photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
 		Huong hg = (Huong) session.get(Huong.class, idhuong);
 		Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idlp);
 		
