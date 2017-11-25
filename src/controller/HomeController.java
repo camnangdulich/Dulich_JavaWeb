@@ -74,8 +74,18 @@ public class HomeController {
             	model.addAttribute("title", "Cẩm nang du lịch");
                 model.addAttribute("message", "dang nhap that bai");
                 return "home/index";
+            } else if (tk.getTrangthai().getIdtrangthai() == 2) {
+            	System.out.println("tai khoan chua kich hoat");
+            	model.addAttribute("title", "Cẩm nang du lịch");
+                model.addAttribute("message", "tai khoan chua kich hoat");
+                return "home/index";
+            } else if(tk.getTrangthai().getIdtrangthai() == 3){
+            	System.out.println("tai khoan bi khoa");
+            	model.addAttribute("title", "Cẩm nang du lịch");
+                model.addAttribute("message", "tai khoan bi khoa");
+                return "home/index";
             } else {
-                httpSession.setAttribute("loguser", tk);
+            	httpSession.setAttribute("loguser", tk);
             	System.out.println("dang nhap thanh cong");
             	model.addAttribute("title", "Cẩm nang du lịch");
                 model.addAttribute("message", "dang nhap thanh cong");
@@ -88,6 +98,13 @@ public class HomeController {
         }
         return "home/index";
     }
+    
+	// Đăng xuất
+	@RequestMapping("dangxuat")
+	public String dangxuat(HttpSession httpSession) {
+		httpSession.removeAttribute("loguser");
+		return "redirect:/home/index.html";
+	}
     
 	// Đăng ký (register form)
 	@RequestMapping(value = "dangky", method = RequestMethod.POST)

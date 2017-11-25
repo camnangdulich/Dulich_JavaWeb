@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -184,7 +186,7 @@ public class AdminController {
 		return list;
 	}
 	
-	// Lấy tất cả thông tin Tỉnh thành
+	// Lấy tất cả thông tin tỉnh thành
 	@ModelAttribute("ttlist")
 	public List<Tinhthanh> gettt(ModelMap model) {
 		Session session = factory.getCurrentSession();
@@ -414,7 +416,6 @@ public class AdminController {
 				session.close();
 			}
 		}
-		
 		return "admin/tquyen";
 	}
 	
@@ -955,7 +956,6 @@ public class AdminController {
 		Huong hg = (Huong) session.get(Huong.class, idhuong);
 		Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idlp);
 		
-		
 		lp.setTenloai(tenloai);;
 		lp.setMota(mota);
 		lp.setThemgiuong(themgiuong);
@@ -991,6 +991,85 @@ public class AdminController {
 	
 	// ------------------------------------------------------------------
 	
+	//Sua thông tin công ty
+	@RequestMapping("scongty/{id}")
+	public String scongty(ModelMap model, @PathVariable("id") Integer idcongty) {
+		model.addAttribute("title", "Sửa thông tin");
+		Session session = factory.getCurrentSession();
+		Congty c = (Congty) session.get(Congty.class, idcongty);
+		
+		model.addAttribute("com", c);
+		return "admin/scongty";
+	}
+	
+	@RequestMapping(value = "scongty", method = RequestMethod.POST )
+	public String scongty(ModelMap model,
+			@RequestParam("idcongty") Integer idcongty,
+			@RequestParam("tencongty") String tencongty,
+			@RequestParam("diachi") String diachi,
+			@RequestParam("mota") String mota,
+			@RequestParam("email") String email,
+			@RequestParam("sodienthoai") String sodienthoai){
+		
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Congty c = (Congty) session.get(Congty.class, idcongty);
+		c.setTencongty(tencongty);
+		c.setDiachi(diachi);
+		c.setMota(mota);
+		c.setEmail(email);
+		c.setSodienthoai(sodienthoai);
+		
+		try {
+			session.update(c);
+			t.commit();
+			model.addAttribute("message", "Chỉnh sửa thông tin thành công!");
+			return "redirect:/admin/scongty/"+idcongty+".html";
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Chỉnh thông tin thất bại !" + e.getMessage());
+			System.out.println("Thất bại");
+			return "redirect:/admin/tintuc/"+idcongty+".html";
+		}finally {
+			session.close();
+		}
+	}
+	//Sửa thông tin dịch vụ
+	@RequestMapping("sdichvu/{id}")
+	public String sdichvu(ModelMap model, @PathVariable("id") Integer iddv) {
+		model.addAttribute("title", "Sửa dịch vụ");
+		Session session = factory.getCurrentSession();
+		Dichvu d = (Dichvu) session.get(Dichvu.class, iddv);
+		
+		model.addAttribute("di", d);
+		return "admin/sdichvu";
+	}
+	
+	@RequestMapping(value = "sdichvu", method = RequestMethod.POST )
+	public String sdichvu(ModelMap model,
+			@RequestParam("iddichvu") Integer iddichvu,
+			@RequestParam("tendichvu") String tendichvu,
+			@RequestParam("mota") String mota){
+		
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Dichvu d = (Dichvu) session.get(Dichvu.class, iddichvu);
+		d.setTendichvu(tendichvu);
+		d.setMota(mota);
+		try {
+			session.update(d);
+			t.commit();
+			model.addAttribute("message", "Chỉnh sửa dịch vụ thành công !");
+			return "redirect:/admin/sdichvu/"+iddichvu+".html";
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Chỉnh sửa dịch vụ thất bại !" + e.getMessage());
+			System.out.println("Thất bại");
+			return "redirect:/admin/tintuc/"+iddichvu+".html";
+		}finally {
+			session.close();
+		}
+	}
 	
 	// Sửa thông tin bài viết
 	@RequestMapping("sbaiviet/{id}")
@@ -1118,7 +1197,18 @@ public class AdminController {
 	
 	
 	
-	
+	@RequestMapping(value="test", method = RequestMethod.POST)
+	public String test(HttpServletResponse response, @RequestBody String email){
+		try {
+			 System.out.println("EMAIL : " + email);
+			boolean ktmail =  kiemtraEmail(email);
+			response.getWriter().print(ktmail);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 	

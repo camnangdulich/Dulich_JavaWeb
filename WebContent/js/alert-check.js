@@ -55,6 +55,29 @@ window.onclick = function(event) {
 // -------------------------------------- Home_Alert_Check --------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------
 
+// Đăng xuất
+function dangxuat() {
+	swal({
+		title : "Đăng xuất hệ thống?",
+		text : "Chọn đăng xuất để đăng xuất khỏi hệ thống hoặc hủy để kết thúc thao tác",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Đăng xuất!",
+		cancelButtonText : "Hủy!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Đăng xuất", "Đang đăng xuất khỏi hệ thống...", "success");
+			setTimeout(function() {
+				window.location = "home/dangxuat.html";
+			}, 1500);
+		}
+	});
+};
+
 function alert_home_check(message) {
 	
 	// Kiểm tra đăng nhập
@@ -70,9 +93,23 @@ function alert_home_check(message) {
 		swal({
 			title : "Đăng nhập thất bại!",
 			type : "error",
-			text : "Tên đăng nhập hoặc mật khẩu không chính xác\n<a onclick='loginpp()'><button autofocus >Đăng nhập lại!</button></a>",
+			text : "Email hoặc mật khẩu không chính xác\n<a onclick='loginpp()'><button autofocus >Đăng nhập lại!</button></a>",
 			html : true,
 			showConfirmButton : false
+		});
+	} else if (message == 'tai khoan chua kich hoat') {
+		swal({
+			title : "Đăng nhập thất bại!",
+			type : "error",
+			text : "Tài khoản của bạn chưa được kích hoạt!",
+			showConfirmButton : true
+		});
+	} else if (message == 'tai khoan bi khoa') {
+		swal({
+			title : "Đăng nhập thất bại!",
+			type : "error",
+			text : "Tài khoản của bạn đã bị khóa!",
+			showConfirmButton : true
 		});
 	}
 	

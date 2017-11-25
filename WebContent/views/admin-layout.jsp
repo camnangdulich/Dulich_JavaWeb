@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <base href="${pageContext.servletContext.contextPath}/">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -320,6 +319,33 @@
 	        <script src="js/alert-check.js" type="text/javascript"></script>
 	        <!-- Image load js-->
 	        <script src="js/img-load.js" type="text/javascript"></script>
+	        <script type="text/javascript">
+		        $('#btn-themtaikhoan').click(function (){
+		        	var email = $('#email').val();
+		        	$.ajax({
+		                type : "POST",
+		                contentType : "application/json",
+		                url : "${pageContext.request.contextPath}/admin/test.html",
+		                data :   email,
+		                //dataType: 'json',
+		                // timeout: 600000,
+		                success : function(result) {
+		                	//alert(jQuery.type( result ));
+		                    console.log(result);
+		                    var kq = result;
+		                    if(kq == "thanhcong"){
+		                    	alert('hggfgfdfsdsfd');
+		                    	$('#loieml').text("Abc");
+		                    }else {
+		                    	alert();
+		                    }
+		                },
+		                error : function(e) {
+		                    alert("Lỗi ! Vui Lòng Kiểm Tra Lại");
+		                }
+		            });
+		        })
+	        </script>
         </div>
     </body>
 

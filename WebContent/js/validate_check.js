@@ -25,7 +25,8 @@ $(document).ready(function() {
 			quyen : 'required',
 			email : {
 				required : true,
-				email : true
+				email : true,
+				
 			},
 			matkhau : {
 				required : true,
@@ -221,3 +222,7 @@ $(document).ready(function() {
 		}
 	})
 });
+
+
+
+
