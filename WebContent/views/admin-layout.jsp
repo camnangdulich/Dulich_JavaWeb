@@ -319,25 +319,25 @@
 	        <script src="js/alert-check.js" type="text/javascript"></script>
 	        <!-- Image load js-->
 	        <script src="js/img-load.js" type="text/javascript"></script>
+	        <!--
 	        <script type="text/javascript">
 		        $('#btn-themtaikhoan').click(function (){
-		        	var email = $('#email').val();
+		        	var varemail = $('#email').val();
 		        	$.ajax({
 		                type : "POST",
 		                contentType : "application/json",
 		                url : "${pageContext.request.contextPath}/admin/kt-email-ajax.html",
-		                data : emaildata,
+		                data : varemail,
 		                //dataType: 'json',
 		                // timeout: 600000,
 		                success : function(result) {
 		                	//alert(jQuery.type( result ));
 		                    console.log(result);
-		                    var kq = result;
-		                    if(kq == "thanhcong"){
-		                    	alert('hggfgfdfsdsfd');
+		                    if(result == "true"){
+		                    	alert('email ton tai');
 		                    	$('#loieml').text("Abc");
 		                    }else {
-		                    	alert();
+		                    	alert('email chua ton tai');
 		                    }
 		                },
 		                error : function(e) {
@@ -346,6 +346,7 @@
 		            });
 		        })
 	        </script>
+	        -->
         </div>
     </body>
 

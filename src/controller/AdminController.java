@@ -1225,6 +1225,24 @@ public class AdminController {
     }
 	
 	
+	
+	// --------------------- AJAX CHECK Controller ---------------------------
+	// ------------------------------------------------------------------
+	
+	// Check email
+	@RequestMapping(value="kt-email-ajax", method = RequestMethod.POST)
+	public String ktemailajax(HttpServletResponse response, @RequestBody String emaildata){
+		try {
+			System.out.println("EMAIL : " + emaildata);
+			boolean ktmail =  kiemtraEmail(emaildata);
+			response.getWriter().print(ktmail);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	// --------------------- SLUG Tool Controller -----------------------
 	// ------------------------------------------------------------------
 	
@@ -1243,24 +1261,4 @@ public class AdminController {
 		return "admin/slugtool";
 	}
 	
-	
-	
-	
-	
-	@RequestMapping(value="kt-email-ajax", method = RequestMethod.POST)
-	public String ktemailajax(HttpServletResponse response, @RequestBody String emaildata){
-		try {
-			System.out.println("EMAIL : " + emaildata);
-			boolean ktmail =  kiemtraEmail(emaildata);
-			response.getWriter().print(ktmail);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	
-	
-
 }
