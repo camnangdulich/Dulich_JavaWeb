@@ -325,8 +325,8 @@
 		        	$.ajax({
 		                type : "POST",
 		                contentType : "application/json",
-		                url : "${pageContext.request.contextPath}/admin/test.html",
-		                data :   email,
+		                url : "${pageContext.request.contextPath}/admin/kt-email-ajax.html",
+		                data : emaildata,
 		                //dataType: 'json',
 		                // timeout: 600000,
 		                success : function(result) {

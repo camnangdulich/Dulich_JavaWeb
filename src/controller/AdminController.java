@@ -1197,11 +1197,11 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping(value="test", method = RequestMethod.POST)
-	public String test(HttpServletResponse response, @RequestBody String email){
+	@RequestMapping(value="kt-email-ajax", method = RequestMethod.POST)
+	public String ktemailajax(HttpServletResponse response, @RequestBody String emaildata){
 		try {
-			 System.out.println("EMAIL : " + email);
-			boolean ktmail =  kiemtraEmail(email);
+			System.out.println("EMAIL : " + emaildata);
+			boolean ktmail =  kiemtraEmail(emaildata);
 			response.getWriter().print(ktmail);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
