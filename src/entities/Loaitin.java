@@ -35,6 +35,10 @@ public class Loaitin implements java.io.Serializable {
 	public Loaitin(String loaitin) {
 		this.loaitin = loaitin;
 	}
+	public Loaitin(String loaitin, String mota) {
+		this.loaitin = loaitin;
+		this.mota = mota;
+	}
 
 	public Loaitin(String loaitin, String mota, String slug, Set<Tintuc> tintucs) {
 		this.loaitin = loaitin;

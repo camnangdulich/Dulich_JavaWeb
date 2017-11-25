@@ -50,6 +50,16 @@ public class Congty implements java.io.Serializable {
 		this.email = email;
 		this.sodienthoai = sodienthoai;
 	}
+	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String email, String sodienthoai,
+			Date ngaytao) {
+		this.taikhoan = taikhoan;
+		this.tencongty = tencongty;
+		this.diachi = diachi;
+		this.mota = mota;
+		this.email = email;
+		this.sodienthoai = sodienthoai;
+		this.ngaytao = ngaytao;
+	}
 
 	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String email, String sodienthoai,
 			Date ngaytao, String slug, Set<Tour> tours) {
