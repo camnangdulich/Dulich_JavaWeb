@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,12 +19,14 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "quyen", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "quyen") )
+@Table(name = "quyen", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "quyen"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Quyen implements java.io.Serializable {
 
 	private Integer idquyen;
 	private String quyen;
 	private String mota;
+	private String slug;
 	private Set<Taikhoan> taikhoans = new HashSet<Taikhoan>(0);
 
 	public Quyen() {
@@ -39,9 +41,10 @@ public class Quyen implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	public Quyen(String quyen, String mota, Set<Taikhoan> taikhoans) {
+	public Quyen(String quyen, String mota, String slug, Set<Taikhoan> taikhoans) {
 		this.quyen = quyen;
 		this.mota = mota;
+		this.slug = slug;
 		this.taikhoans = taikhoans;
 	}
 
@@ -73,6 +76,15 @@ public class Quyen implements java.io.Serializable {
 
 	public void setMota(String mota) {
 		this.mota = mota;
+	}
+
+	@Column(name = "slug", unique = true, length = 45)
+	public String getSlug() {
+		return this.slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@OneToMany( mappedBy = "quyen")

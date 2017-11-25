@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -12,8 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +25,8 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "tintuc", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "tieude") )
+@Table(name = "tintuc", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tieude"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Tintuc implements java.io.Serializable {
 
 	private Integer idtintuc;
@@ -35,7 +37,8 @@ public class Tintuc implements java.io.Serializable {
 	private String noidung;
 	private Date thoigian;
 	private String nguon;
-	private Set<Chitiettin> chitiettins = new HashSet<Chitiettin>(0);
+	private String slug;
+	private Set<Loaitin> loaitins = new HashSet<Loaitin>(0);
 
 	public Tintuc() {
 	}
@@ -52,7 +55,7 @@ public class Tintuc implements java.io.Serializable {
 	}
 
 	public Tintuc(Taikhoan taikhoan, String hinhanh, String tieude, String tomtat, String noidung, Date thoigian,
-			String nguon, Set<Chitiettin> chitiettins) {
+			String nguon, String slug, Set<Loaitin> loaitins) {
 		this.taikhoan = taikhoan;
 		this.hinhanh = hinhanh;
 		this.tieude = tieude;
@@ -60,7 +63,8 @@ public class Tintuc implements java.io.Serializable {
 		this.noidung = noidung;
 		this.thoigian = thoigian;
 		this.nguon = nguon;
-		this.chitiettins = chitiettins;
+		this.slug = slug;
+		this.loaitins = loaitins;
 	}
 
 	@Id
@@ -140,13 +144,25 @@ public class Tintuc implements java.io.Serializable {
 		this.nguon = nguon;
 	}
 
-	@OneToMany( mappedBy = "tintuc")
-	public Set<Chitiettin> getChitiettins() {
-		return this.chitiettins;
+	@Column(name = "slug", unique = true, length = 250)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setChitiettins(Set<Chitiettin> chitiettins) {
-		this.chitiettins = chitiettins;
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	@ManyToMany()
+	@JoinTable(name = "chitiettin", catalog = "db_dulich", joinColumns = {
+			@JoinColumn(name = "idtintuc", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "idloaitin", nullable = false, updatable = false) })
+	public Set<Loaitin> getLoaitins() {
+		return this.loaitins;
+	}
+
+	public void setLoaitins(Set<Loaitin> loaitins) {
+		this.loaitins = loaitins;
 	}
 
 }

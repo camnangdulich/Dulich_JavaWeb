@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -10,7 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -19,13 +19,15 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "loaitin", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "loaitin") )
+@Table(name = "loaitin", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "loaitin"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Loaitin implements java.io.Serializable {
 
 	private Integer idloaitin;
 	private String loaitin;
 	private String mota;
-	private Set<Chitiettin> chitiettins = new HashSet<Chitiettin>(0);
+	private String slug;
+	private Set<Tintuc> tintucs = new HashSet<Tintuc>(0);
 
 	public Loaitin() {
 	}
@@ -34,10 +36,11 @@ public class Loaitin implements java.io.Serializable {
 		this.loaitin = loaitin;
 	}
 
-	public Loaitin(String loaitin, String mota, Set<Chitiettin> chitiettins) {
+	public Loaitin(String loaitin, String mota, String slug, Set<Tintuc> tintucs) {
 		this.loaitin = loaitin;
 		this.mota = mota;
-		this.chitiettins = chitiettins;
+		this.slug = slug;
+		this.tintucs = tintucs;
 	}
 
 	@Id
@@ -70,13 +73,22 @@ public class Loaitin implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	@OneToMany( mappedBy = "loaitin")
-	public Set<Chitiettin> getChitiettins() {
-		return this.chitiettins;
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setChitiettins(Set<Chitiettin> chitiettins) {
-		this.chitiettins = chitiettins;
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	@ManyToMany( mappedBy = "loaitins")
+	public Set<Tintuc> getTintucs() {
+		return this.tintucs;
+	}
+
+	public void setTintucs(Set<Tintuc> tintucs) {
+		this.tintucs = tintucs;
 	}
 
 }

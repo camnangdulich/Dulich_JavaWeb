@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -25,7 +25,8 @@ import javax.persistence.UniqueConstraint;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "congty", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "email"),
-		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "tencongty") })
+		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "tencongty"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Congty implements java.io.Serializable {
 
 	private Integer idcongty;
@@ -36,6 +37,7 @@ public class Congty implements java.io.Serializable {
 	private String email;
 	private String sodienthoai;
 	private Date ngaytao;
+	private String slug;
 	private Set<Tour> tours = new HashSet<Tour>(0);
 
 	public Congty() {
@@ -50,7 +52,7 @@ public class Congty implements java.io.Serializable {
 	}
 
 	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String email, String sodienthoai,
-			Date ngaytao, Set<Tour> tours) {
+			Date ngaytao, String slug, Set<Tour> tours) {
 		this.taikhoan = taikhoan;
 		this.tencongty = tencongty;
 		this.diachi = diachi;
@@ -58,6 +60,7 @@ public class Congty implements java.io.Serializable {
 		this.email = email;
 		this.sodienthoai = sodienthoai;
 		this.ngaytao = ngaytao;
+		this.slug = slug;
 		this.tours = tours;
 	}
 
@@ -136,6 +139,15 @@ public class Congty implements java.io.Serializable {
 
 	public void setNgaytao(Date ngaytao) {
 		this.ngaytao = ngaytao;
+	}
+
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@OneToMany( mappedBy = "congty")

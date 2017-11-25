@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,13 +19,15 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "tinhthanh", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "tinhthanh") )
+@Table(name = "tinhthanh", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tinhthanh"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Tinhthanh implements java.io.Serializable {
 
 	private Integer idtinhthanh;
 	private String hinhanh;
 	private String tinhthanh;
 	private String mota;
+	private String slug;
 	private Set<Khachsan> khachsans = new HashSet<Khachsan>(0);
 	private Set<Tour> tours = new HashSet<Tour>(0);
 
@@ -37,16 +39,18 @@ public class Tinhthanh implements java.io.Serializable {
 		this.tinhthanh = tinhthanh;
 	}
 	
-	public Tinhthanh(String hinhanh, String tentinh, String mota) {
-		this.hinhanh = hinhanh;
-		this.tinhthanh = tentinh;
-		this.mota = mota;
-	}
-
-	public Tinhthanh(String hinhanh, String tinhthanh, String mota, Set<Khachsan> khachsans, Set<Tour> tours) {
+	public Tinhthanh(String hinhanh, String tinhthanh, String mota) {
 		this.hinhanh = hinhanh;
 		this.tinhthanh = tinhthanh;
 		this.mota = mota;
+	}
+
+	public Tinhthanh(String hinhanh, String tinhthanh, String mota, String slug, Set<Khachsan> khachsans,
+			Set<Tour> tours) {
+		this.hinhanh = hinhanh;
+		this.tinhthanh = tinhthanh;
+		this.mota = mota;
+		this.slug = slug;
 		this.khachsans = khachsans;
 		this.tours = tours;
 	}
@@ -88,6 +92,15 @@ public class Tinhthanh implements java.io.Serializable {
 
 	public void setMota(String mota) {
 		this.mota = mota;
+	}
+
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@OneToMany( mappedBy = "tinhthanh")

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Loaiphong" table="loaiphong" catalog="db_dulich" optimistic-lock="version">
         <id name="idloaiphong" type="java.lang.Integer">
@@ -26,17 +26,22 @@
         <property name="gia" type="int">
             <column name="gia" not-null="true" />
         </property>
+        <property name="slug" type="string">
+            <column name="slug" length="100" unique="true" />
+        </property>
         <set name="datphongs" table="datphong" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idloaiphong" not-null="true" />
             </key>
             <one-to-many class="entities.Datphong" />
         </set>
-        <set name="chitietloaiphongs" table="chitietloaiphong" inverse="true" lazy="true" fetch="select">
+        <set name="khachsans" table="chitietloaiphong" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idloaiphong" not-null="true" />
             </key>
-            <one-to-many class="entities.Chitietloaiphong" />
+            <many-to-many entity-name="entities.Khachsan">
+                <column name="idkhachsan" not-null="true" />
+            </many-to-many>
         </set>
     </class>
 </hibernate-mapping>

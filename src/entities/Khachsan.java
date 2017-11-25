@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +27,7 @@ import javax.persistence.UniqueConstraint;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "khachsan", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tenkhachsan"),
-		@UniqueConstraint(columnNames = "sodienthoai") })
+		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "slug") })
 public class Khachsan implements java.io.Serializable {
 
 	private Integer idkhachsan;
@@ -37,9 +39,10 @@ public class Khachsan implements java.io.Serializable {
 	private String sodienthoai;
 	private String diachi;
 	private Date ngaydang;
-	private Set<Chitietdichvu> chitietdichvus = new HashSet<Chitietdichvu>(0);
+	private String slug;
+	private Set<Dichvu> dichvus = new HashSet<Dichvu>(0);
 	private Set<Danhgia> danhgias = new HashSet<Danhgia>(0);
-	private Set<Chitietloaiphong> chitietloaiphongs = new HashSet<Chitietloaiphong>(0);
+	private Set<Loaiphong> loaiphongs = new HashSet<Loaiphong>(0);
 
 	public Khachsan() {
 	}
@@ -57,8 +60,8 @@ public class Khachsan implements java.io.Serializable {
 	}
 
 	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
-			String sodienthoai, String diachi, Date ngaydang, Set<Chitietdichvu> chitietdichvus, Set<Danhgia> danhgias,
-			Set<Chitietloaiphong> chitietloaiphongs) {
+			String sodienthoai, String diachi, Date ngaydang, String slug, Set<Dichvu> dichvus, Set<Danhgia> danhgias,
+			Set<Loaiphong> loaiphongs) {
 		this.taikhoan = taikhoan;
 		this.tinhthanh = tinhthanh;
 		this.trangthai = trangthai;
@@ -67,9 +70,10 @@ public class Khachsan implements java.io.Serializable {
 		this.sodienthoai = sodienthoai;
 		this.diachi = diachi;
 		this.ngaydang = ngaydang;
-		this.chitietdichvus = chitietdichvus;
+		this.slug = slug;
+		this.dichvus = dichvus;
 		this.danhgias = danhgias;
-		this.chitietloaiphongs = chitietloaiphongs;
+		this.loaiphongs = loaiphongs;
 	}
 
 	@Id
@@ -160,13 +164,25 @@ public class Khachsan implements java.io.Serializable {
 		this.ngaydang = ngaydang;
 	}
 
-	@OneToMany( mappedBy = "khachsan")
-	public Set<Chitietdichvu> getChitietdichvus() {
-		return this.chitietdichvus;
+	@Column(name = "slug", unique = true, length = 45)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setChitietdichvus(Set<Chitietdichvu> chitietdichvus) {
-		this.chitietdichvus = chitietdichvus;
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	@ManyToMany()
+	@JoinTable(name = "chitietdichvu", catalog = "db_dulich", joinColumns = {
+			@JoinColumn(name = "idkhachsan", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "iddichvu", nullable = false, updatable = false) })
+	public Set<Dichvu> getDichvus() {
+		return this.dichvus;
+	}
+
+	public void setDichvus(Set<Dichvu> dichvus) {
+		this.dichvus = dichvus;
 	}
 
 	@OneToMany( mappedBy = "khachsan")
@@ -178,13 +194,16 @@ public class Khachsan implements java.io.Serializable {
 		this.danhgias = danhgias;
 	}
 
-	@OneToMany( mappedBy = "khachsan")
-	public Set<Chitietloaiphong> getChitietloaiphongs() {
-		return this.chitietloaiphongs;
+	@ManyToMany()
+	@JoinTable(name = "chitietloaiphong", catalog = "db_dulich", joinColumns = {
+			@JoinColumn(name = "idkhachsan", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "idloaiphong", nullable = false, updatable = false) })
+	public Set<Loaiphong> getLoaiphongs() {
+		return this.loaiphongs;
 	}
 
-	public void setChitietloaiphongs(Set<Chitietloaiphong> chitietloaiphongs) {
-		this.chitietloaiphongs = chitietloaiphongs;
+	public void setLoaiphongs(Set<Loaiphong> loaiphongs) {
+		this.loaiphongs = loaiphongs;
 	}
 
 }

@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -10,7 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -19,13 +19,15 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "dichvu", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "tendichvu") )
+@Table(name = "dichvu", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tendichvu"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Dichvu implements java.io.Serializable {
 
 	private Integer iddichvu;
 	private String tendichvu;
 	private String mota;
-	private Set<Chitietdichvu> chitietdichvus = new HashSet<Chitietdichvu>(0);
+	private String slug;
+	private Set<Khachsan> khachsans = new HashSet<Khachsan>(0);
 
 	public Dichvu() {
 	}
@@ -39,10 +41,11 @@ public class Dichvu implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	public Dichvu(String tendichvu, String mota, Set<Chitietdichvu> chitietdichvus) {
+	public Dichvu(String tendichvu, String mota, String slug, Set<Khachsan> khachsans) {
 		this.tendichvu = tendichvu;
 		this.mota = mota;
-		this.chitietdichvus = chitietdichvus;
+		this.slug = slug;
+		this.khachsans = khachsans;
 	}
 
 	@Id
@@ -75,13 +78,22 @@ public class Dichvu implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	@OneToMany( mappedBy = "dichvu")
-	public Set<Chitietdichvu> getChitietdichvus() {
-		return this.chitietdichvus;
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setChitietdichvus(Set<Chitietdichvu> chitietdichvus) {
-		this.chitietdichvus = chitietdichvus;
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	@ManyToMany( mappedBy = "dichvus")
+	public Set<Khachsan> getKhachsans() {
+		return this.khachsans;
+	}
+
+	public void setKhachsans(Set<Khachsan> khachsans) {
+		this.khachsans = khachsans;
 	}
 
 }

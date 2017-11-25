@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 1:22:36 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -24,7 +24,8 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "tour", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "tentour") )
+@Table(name = "tour", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tentour"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Tour implements java.io.Serializable {
 
 	private Integer idtour;
@@ -37,6 +38,7 @@ public class Tour implements java.io.Serializable {
 	private Date giokhoihanh;
 	private String lichtrinh;
 	private String luuy;
+	private String slug;
 	private Set<Danhgia> danhgias = new HashSet<Danhgia>(0);
 	private Set<Dattour> dattours = new HashSet<Dattour>(0);
 
@@ -55,7 +57,8 @@ public class Tour implements java.io.Serializable {
 	}
 
 	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, String mota, int gia, String diemdi,
-			Date giokhoihanh, String lichtrinh, String luuy, Set<Danhgia> danhgias, Set<Dattour> dattours) {
+			Date giokhoihanh, String lichtrinh, String luuy, String slug, Set<Danhgia> danhgias,
+			Set<Dattour> dattours) {
 		this.congty = congty;
 		this.tinhthanh = tinhthanh;
 		this.tentour = tentour;
@@ -65,6 +68,7 @@ public class Tour implements java.io.Serializable {
 		this.giokhoihanh = giokhoihanh;
 		this.lichtrinh = lichtrinh;
 		this.luuy = luuy;
+		this.slug = slug;
 		this.danhgias = danhgias;
 		this.dattours = dattours;
 	}
@@ -163,6 +167,15 @@ public class Tour implements java.io.Serializable {
 
 	public void setLuuy(String luuy) {
 		this.luuy = luuy;
+	}
+
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@OneToMany( mappedBy = "tour")
