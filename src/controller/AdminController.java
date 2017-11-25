@@ -723,9 +723,14 @@ public class AdminController {
 			@RequestParam("mota") String mota) {
 
 		Session session = factory.openSession();
-		
+		Transaction t = session.beginTransaction();
 		// Tao duong dan luu hinh anh
-		String photoPath = context.getRealPath("/files/tinhthanh/" + hinhanh.getOriginalFilename());
+		String photoPath = "";
+		if(hinhanh.getOriginalFilename().equals("")){
+			photoPath = context.getRealPath("/files/tinhthanh/Connecting room.jpg");
+		} else {
+			photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
+		}
 		
 		// Luu hình anh
 		try {
@@ -737,20 +742,34 @@ public class AdminController {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		Tinhthanh tinh = new Tinhthanh(hinhanh.getOriginalFilename(), tentinh, mota);
-		Transaction t = session.beginTransaction();
-		
-		try {
-			session.save(tinh);
-			t.commit();
-			model.addAttribute("message", "Thêm loại bài viết thành công!");
-			return "admin/tloaibv";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Thêm loại bài viết thất bại!");
-		} finally {
-			session.close();
+		if(hinhanh.getOriginalFilename().equals("")){
+			Tinhthanh tinh = new Tinhthanh(hinhanh.getOriginalFilename(), tentinh, mota);
+			try {
+				session.save(tinh);
+				t.commit();
+				model.addAttribute("message", "Thêm tỉnh thành công!");
+				return "admin/ttinhthanh";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Thêm tỉnh thất bại!");
+			} finally {
+				session.close();
+			}
+
+		} else {
+			Tinhthanh tinh = new Tinhthanh(hinhanh.getOriginalFilename(), tentinh, mota);
+			try {
+				session.save(tinh);
+				t.commit();
+				model.addAttribute("message", "Thêm tỉnh thành công!");
+				return "admin/ttinhthanh";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Thêm tỉnh thất bại!");
+			} finally {
+				session.close();
+			}
+
 		}
 		return "admin/ttinhthanh";
 	}
