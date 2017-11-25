@@ -22,7 +22,7 @@
                                     <input name="hinhanh" id="my_file" type="file" class="custom-file-input" onchange="onFileSelected(event)">
                                 </label>
                                 <a onclick="document.getElementById('my_file').click();" style="cursor: pointer;">
-                                	<img id="myimage" src="files/${tinh.hinhanh}" style="max-width: 120px; max-height: 120px;">
+                                	<img id="myimage" src="files/tinhthanh/${tinh.hinhanh}" style="max-width: 120px; max-height: 120px;">
                                 </a>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
 							<label class="col-sm-2 col-form-label">Tên tỉnh thành</label>
 							<div class="col-sm-10">
 								<input name="tentinh" type="text" class="form-control"
-									placeholder="Nhập tên tỉnh" value= "${tinh.tentinh }">
+									placeholder="Nhập tên tỉnh" value= "${tinh.tinhthanh }">
 							</div>
 						</div>
 						<div class="form-group row">

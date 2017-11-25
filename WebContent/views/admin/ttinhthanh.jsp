@@ -5,7 +5,7 @@
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#">Điều khiển</a></li>
-		<li class="breadcrumb-item active">Thêm Quyền</li>
+		<li class="breadcrumb-item active">Thêm tỉnh thành</li>
 	</ol>
 	<!-- Icon Cards-->
 	<div class="row">
@@ -21,7 +21,7 @@
                                     <input name="hinhanh" id="my_file" type="file" class="custom-file-input" onchange="onFileSelected(event)">
                                 </label>
                                 <a onclick="document.getElementById('my_file').click();" style="cursor: pointer;">
-                                	<img id="myimage" src="files/abc.jpg" style="max-width: 120px; max-height: 120px;">
+                                	<img id="myimage" src="files/tinhthanh/Connecting room.jpg" style="max-width: 120px; max-height: 120px;">
                                 </a>
                             </div>
                         </div>
