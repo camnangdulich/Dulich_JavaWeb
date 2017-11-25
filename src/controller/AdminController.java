@@ -651,10 +651,16 @@ public class AdminController {
 			@RequestParam("gia") Integer gia) {
 
 		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
 		Huong huong = (Huong) session.get(Huong.class, idhuong);
 		
 		// Tạo đường dẫn lưu hình ảnh
-		String photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
+		String photoPath = "";
+		if(hinhanh.getOriginalFilename().equals("")){
+			photoPath = context.getRealPath("/files/phong/Connecting room.jpg");
+		} else {
+			photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
+		}
 		
 		// Lưu hình ảnh
 		try {
@@ -667,19 +673,34 @@ public class AdminController {
 			e1.printStackTrace();
 		}
 		
-		Loaiphong lp = new Loaiphong(tenloai, mota, themgiuong, huong, hinhanh.getOriginalFilename(), gia);
-		Transaction t = session.beginTransaction();
-		
-		try {
-			session.save(lp);
-			t.commit();
-			model.addAttribute("message", "Thêm loại phòng thành công!");
-			return "admin/tloaiphong";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Thêm loại phòng thất bại!");
-		} finally {
-			session.close();
+		if(hinhanh.getOriginalFilename().equals("")){
+			Loaiphong lp = new Loaiphong(tenloai, mota, themgiuong, huong, "Connecting room.jpg", gia);
+			try {
+				session.save(lp);
+				t.commit();
+				model.addAttribute("message", "Thêm loại phòng thành công!");
+				return "admin/tloaiphong";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Thêm loại phòng thất bại!");
+			} finally {
+				session.close();
+			}
+
+		} else {
+			Loaiphong lp = new Loaiphong(tenloai, mota, themgiuong, huong, hinhanh.getOriginalFilename(), gia);
+			try {
+				session.save(lp);
+				t.commit();
+				model.addAttribute("message", "Thêm loại phòng thành công!");
+				return "admin/tloaiphong";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Thêm loại phòng thất bại!");
+			} finally {
+				session.close();
+			}
+
 		}
 		return "admin/tloaiphong";
 	}

@@ -179,13 +179,20 @@ $(document).ready(function() {
 			gia : {
 				required : true,
 				digits : true
+			},
+			themgiuong : {
+				digits: true
 			}
+			
 		},
 		messages : {
-			tenloai : 'vui lòng nhập tên loại phòng',
+			tenloai : 'Vui lòng nhập tên loại phòng',
 			gia : {
 				required : 'Vui lòng nhập giá loại phòng',
-				digits : 'Giá phải là sô'
+				digits : 'Giá phải là sô',
+			},
+			themgiuong : {
+				digits: 'Phải là số'
 			}
 		}
 	})
@@ -197,6 +204,9 @@ $(document).ready(function() {
 			gia : {
 				required : true,
 				digits : true
+			},
+			themgiuong : {
+				digits: true
 			}
 		},
 		messages : {
@@ -204,6 +214,9 @@ $(document).ready(function() {
 			gia : {
 				required : 'Vui lòng nhập giá loại phòng',
 				digits : 'Giá phải là sô'
+			},
+			themgiuong : {
+				digits: 'Phải là số'
 			}
 		}
 	})

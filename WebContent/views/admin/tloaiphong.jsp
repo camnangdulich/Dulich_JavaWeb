@@ -33,6 +33,20 @@
 							</div>
 						</div>
 						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Giá</label>
+							<div class="col-sm-10" id="label-validation">
+								<input name="gia" type="text" class="form-control"
+									placeholder="Giá">
+							</div>
+						</div>
+							<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Thêm giường</label>
+							<div class="col-sm-10" id = "label-validation">
+								<input name="themgiuong" type="text" class="form-control"
+									placeholder="Thêm giường">
+							</div>
+						</div>	
+						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Mô tả</label>
 							<div class="col-sm-10" id="label-validation">
 								<input name="mota" type="text" class="form-control"
@@ -40,29 +54,15 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Thêm giường giường</label>
-							<div class="col-sm-10">
-								<input name="themgiuong" type="text" class="form-control"
-									placeholder="Thêm giường">
-							</div>
-						</div>
-						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Hướng</label>
-							<div class="col-sm-10">
+							<div class="col-sm-10" label-validation>
 								<select name="huong" class="form-control">
 									<option selected="selected" disabled>-- Chọn hướng
 										--</option>
 									<c:forEach var="h" items="${hulist}">
-										<option value="${h.idhuong}">${h.tenhuong}</option>
+										<option value="${h.idhuong}">${h.tenhuong}</option>${message}
 									</c:forEach>
 								</select>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Giá</label>
-							<div class="col-sm-10" id="label-validation">
-								<input name="gia" type="text" class="form-control"
-									placeholder="Gía">${message}
 							</div>
 						</div>
 						<div class="form-group row">
