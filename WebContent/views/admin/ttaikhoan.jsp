@@ -30,6 +30,7 @@
                             <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10" id="label-validation">
                                 <input id="email" name="email" type="email" class="form-control" placeholder="Nhập Email">
+                                <small id="loieml"></small>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -53,7 +54,7 @@
                         <div class="form-group row">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-10 offset-md-3">
-                                <button type="submit" class="btn btn-primary">Thêm tài khoản</button>
+                                <button id="btn-themtaikhoan" type="button" class="btn btn-primary">Thêm tài khoản</button>
                             </div>
                         </div>
                     </form>
