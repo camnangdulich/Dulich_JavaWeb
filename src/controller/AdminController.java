@@ -74,17 +74,6 @@ public class AdminController {
 		return list;
 	}
 	
-	// Lấy tất cả thông tin quyền
-	@ModelAttribute("qlist")
-	public List<Quyen> getq(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Quyen";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Quyen> list = query.list();
-		return list;
-	}
-	
 	// Lấy tất cả thông tin bài viết (Bảng Tintuc)
 	@ModelAttribute("bvlist")
 	public List<Tintuc> getbv(ModelMap model) {
@@ -93,17 +82,6 @@ public class AdminController {
 		Query query = session.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Tintuc> list = query.list();
-		return list;
-	}
-	
-	// Lấy tất cả thông tin loại bài viết
-	@ModelAttribute("lbvlist")
-	public List<Loaitin> getlbv(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Loaitin";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Loaitin> list = query.list();
 		return list;
 	}
 	
@@ -117,71 +95,7 @@ public class AdminController {
 		List<Khachsan> list = query.list();
 		return list;
 	}
-	
-	// Lấy tất cả thông tin trạng thái
-	@ModelAttribute("trtlist")
-	public List<Trangthai> gettrt(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Trangthai";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Trangthai> list = query.list();
-		return list;
-	}
-	
-	// Lấy tất cả thông tin tinh thanh
-	@ModelAttribute("tthlist")
-	public List<Tinhthanh> gettth(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Tinhthanh";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Tinhthanh> list = query.list();
-		return list;
-	}
-	
-	// Lấy tất cả thông tin dịch vụ
-	@ModelAttribute("dvlist")
-	public List<Dichvu> getdv(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Dichvu";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Dichvu> list = query.list();
-		return list;
-	}
-	
-	// Lấy tất cả thông tin loại phòng
-	@ModelAttribute("lplist")
-	public List<Loaiphong> getlp(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Loaiphong";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Loaiphong> list = query.list();
-		return list;
-	}
-	
-	// Lấy tất cả thông tin tỉnh thành
-	@ModelAttribute("ttlist")
-	public List<Tinhthanh> gettt(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Tinhthanh";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Tinhthanh> list = query.list();
-		return list;
-	}
-	// Lấy tất cả thông tin công ty
-	@ModelAttribute("ctlist")
-	public List<Congty> getct(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Congty";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Congty> list = query.list();
-		return list;
-	}
+
 	// Lấy thông tin Tour
 	@ModelAttribute("tulist")
 	public List<Tour> gettu(ModelMap model) {
@@ -202,16 +116,7 @@ public class AdminController {
 		List<Huong> list = query.list();
 		return list;
 	}
-	//Lấy tất thông tin đặt phòng
-	@ModelAttribute("dlist")
-	public List<Datphong> getd(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Datphong";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Datphong> list = query.list();
-		return list;
-	}
+
 	
 	
 	// --------------------- PAGE Controller ----------------------------
@@ -231,13 +136,6 @@ public class AdminController {
 		return "admin/dstaikhoan";
 	}
 	
-	// Trang danh sách quyền
-	@RequestMapping("dsquyen")
-	public String dsquyen(ModelMap model) {
-		model.addAttribute("title", "Danh sách quyền");
-		return "admin/dsquyen";
-	}
-
 	// Trang danh sách bài viết
 	@RequestMapping("dsbaiviet")
 	public String dsbaiviet(ModelMap model) {
@@ -252,40 +150,7 @@ public class AdminController {
 		return "admin/dskhachsan";
 	}
 	
-	// Trang loại bài viết
-	@RequestMapping("dsloaibv")
-	public String dsloaibv(ModelMap model) {
-		model.addAttribute("title", "Danh loại bài viết");
-		return "admin/dsloaibv";
-	}
 	
-	// Trang loại phòng
-	@RequestMapping("dsloaiphong")
-	public String dsloaiphong(ModelMap model) {
-		model.addAttribute("title", "Danh loại phòng");
-		return "admin/dsloaiphong";
-	}
-	
-	// Quản lý tỉnh thành 
-	@RequestMapping("dstinhthanh")
-	public String dstinhthanh(ModelMap model) {
-		model.addAttribute("title", "Danh sách tỉnh thành");
-		return "admin/dstinhthanh";
-	}
-	
-	// Trang quản lý công ty
-	@RequestMapping("dscongty")
-	public String dscongty(ModelMap model) {
-		model.addAttribute("title", "Danh sách công ty");
-		return "admin/dscongty";
-	}
-	
-	// Trang danh sách dịch vụ
-	@RequestMapping("dsdichvu")
-	public String dsdichvu(ModelMap model) {
-		model.addAttribute("title", "Danh sách dịch vụ");
-		return "admin/dsdichvu";
-	}
 	
 	// Trang tour du lịch
 	@RequestMapping("dstour")
@@ -293,13 +158,7 @@ public class AdminController {
 		model.addAttribute("title", "Danh sách tour");
 		return "admin/dstour";
 	}
-	//Trang danh sách đặt phòng
-	@RequestMapping("dsdatphong")
-	public String dsdatphong(ModelMap model) {
-		model.addAttribute("title", "Danh sách đặt phòng");
-		return "admin/dsdatphong";
-	}
-	
+
 	
 	
 	// --------------------- ADD Controller -----------------------------
