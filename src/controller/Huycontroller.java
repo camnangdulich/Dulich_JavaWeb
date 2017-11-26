@@ -483,22 +483,69 @@ public class Huycontroller {
 			@RequestParam("tenloaibv") String tenloaibv,
 			@RequestParam("mota") String mota) {
 
-		Session session = factory.openSession();
-		Loaitin lbv = new Loaitin(tenloaibv, mota);
-		Transaction t = session.beginTransaction();
-		try {
+		if(kiemtraLBV(tenloaibv)){
+			model.addAttribute("message", "ten loai da ton tai");
+			model.addAttribute("title", "Thêm loại bài viết mới");
+			return "admin/tloaibv";
+		} else {
+			Session session = factory.openSession();
+			Loaitin lbv = new Loaitin(tenloaibv, mota);
+			Transaction t = session.beginTransaction();
+			try {
 			session.save(lbv);
 			t.commit();
-			model.addAttribute("message", "Thêm loại bài viết thành công!");
+			model.addAttribute("message", "them loai bai viet thanh cong");
+			model.addAttribute("title", "Thêm loại bài mới");
 			return "admin/tloaibv";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Thêm loại bài viết thất bại!");
-		} finally {
-			session.close();
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "them loai bai that bai");
+				model.addAttribute("title", "Thêm loại bài mới");
+			} finally {
+				session.close();
+			}
 		}
-		return "admin/tloaibv";
+			return "admin/tloaibv";
 	}
+	
+	
+	//Thêm tour du lịch
+//	@RequestMapping("ttour")
+//	public String ttour(ModelMap model) {
+//		model.addAttribute("title", "Thêm tour du lịch mới");
+//		return "admin/ttour";
+//	}
+//	
+//	@RequestMapping(value = "ttour", method = RequestMethod.POST)
+//	public String ttour(ModelMap model,
+//			@RequestParam("congty") Integer congty,
+//			@RequestParam("diemden") Integer diemden,
+//			@RequestParam("tentour") String tentour,
+//			@RequestParam("mota") String mota,
+//			@RequestParam("gia") Integer gia,
+//			@RequestParam("diemdi") String diemdi,
+//			@RequestParam("ngaykhoihanh") Date ngaykhoihanh,
+//			@RequestParam("lichtrinh") String lichtrinh,
+//			@RequestParam("luuy") String luuy) {
+//
+//		Session session = factory.openSession();
+//		Congty ct = (Congty) session.get(Congty.class, congty);
+//		Tinhthanh tt = (Tinhthanh) session.get(Congty.class, diemden);
+//		Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy);
+//		Transaction t = session.beginTransaction();
+//		try {
+//			session.save(to);
+//			t.commit();
+//			model.addAttribute("message", "Thêm tour thành công!");
+//			return "admin/ttour";
+//		} catch (Exception e) {
+//			t.rollback();
+//			model.addAttribute("message", "Thêm tour thất bại!");
+//		} finally {
+//			session.close();
+//		}
+//		return "admin/ttour";
+//	}
 	
 	
 	
@@ -531,26 +578,33 @@ public class Huycontroller {
 			@RequestParam("idquyen") Integer idquyen,
 			@RequestParam("tenquyen") String tenquyen,
 			@RequestParam("mota") String mota){
-		
-		Session session = factory.openSession();
-		Transaction t = session.beginTransaction();
-		Quyen q = (Quyen) session.get(Quyen.class, idquyen);
-		q.setQuyen(tenquyen);
-		q.setMota(mota);
-		try {
-			session.update(q);
-			t.commit();
-			model.addAttribute("message", "Chỉnh sửa quyền thành công !");
-			return "redirect:/admin/squyen/"+idquyen+".html";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Chỉnh sửa quyền thất bại !" + e.getMessage());
-			System.out.println("Thất bại");
-			return "redirect:/admin/tintuc/"+idquyen+".html";
-		}finally {
-			session.close();
+		if(kiemtraQuyen(tenquyen)){
+			model.addAttribute("message", "quyen da ton tai");
+			model.addAttribute("title", "Sửa lại");
+			return "admin/tquyen";
+		} else {
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			Quyen q = (Quyen) session.get(Quyen.class, idquyen);
+			q.setQuyen(tenquyen);
+			q.setMota(mota);
+			try {
+				session.update(q);
+				t.commit();
+				model.addAttribute("message", "sua quyen thanh cong" );
+				return "admin/squyen";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "sua quyen that bai" );
+				System.out.println("Thất bại");
+				return "admin/squyen";
+			}finally {
+				session.close();
+			}
 		}
 	}
+	
+	
 	
 	
 	
@@ -870,5 +924,31 @@ public class Huycontroller {
         }
         return kt;
     }
+	// Kiểm tra tên loại bài viết có tồn tại không
+		public boolean kiemtraLBV(String loaitin) {
+	    	Session session = factory.openSession();
+	    	Transaction t = session.beginTransaction();
+	        boolean kt = true;
+	        try {
+	            String hql = "from Loaitin where loaitin = :loaibv";
+	            Query query = session.createQuery(hql);
+	            query.setParameter("loaibv", loaitin);
+	            @SuppressWarnings("unchecked")
+	            List<Loaitin> lstloaibv = query.list();
+	            t.commit();
+	            if(lstloaibv.size() != 0){
+	                return kt;
+	            }else{
+	                return false;
+	            }
+	        } catch (Exception ex) {
+	            if (!(t == null)) {
+	                t.rollback();
+	            }
+	        } finally {
+	            session.close();
+	        }
+	        return kt;
+	    }
 	
 }
