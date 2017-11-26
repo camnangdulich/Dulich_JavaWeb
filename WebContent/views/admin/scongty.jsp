@@ -15,6 +15,17 @@
 					<form action="admin/scongty.html" method="post"
 						enctype="multipart/form-data">
 						<input name="idcongty" type="hidden" value="${com.idcongty}">
+							<div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Tài khoản</label>
+                            <div class="col-sm-10" id="label-validation">
+                                <select name="taikhoan" class="form-control" >
+                                	<option selected="selected" hidden value="${com.taikhoan.idtaikhoan}">${com.taikhoan.email}></option>
+                                	<c:forEach var="tk" items="${tklist}">
+                                    	<option value="${tk.idtaikhoan}">${tk.email}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Tên công ty</label>
 							<div class="col-sm-10">

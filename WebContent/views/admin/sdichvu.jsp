@@ -12,17 +12,17 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-10 col-md-auto">
-					<form action="admin/sdichvu.html" method="post">
+					<form action="admin/sdichvu.html" method="post" id="sdichvu">
 						<input name="iddichvu" type="hidden" value="${di.iddichvu}">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Dịch vụ</label>
-							<div class="col-sm-10">
+							<div class="col-sm-10" id="label-validation">
 								<input name="tendichvu" type="text" class="form-control" placeholder="Nhập tên " value="${di.tendichvu }">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Mô tả</label>
-							<div class="col-sm-10">
+							<div class="col-sm-10" id="label-validation">
 								<input name="mota" type="text" class="form-control"
 									placeholder="Mô tả dich vụ" value="${di.mota }">${message}
 							</div>
