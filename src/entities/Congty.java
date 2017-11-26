@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 26, 2017 12:03:03 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -26,7 +26,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "congty", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "email"),
 		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "tencongty"),
-		@UniqueConstraint(columnNames = "slug") })
+		@UniqueConstraint(columnNames = "idtaikhoan"), @UniqueConstraint(columnNames = "slug") })
 public class Congty implements java.io.Serializable {
 
 	private Integer idcongty;
@@ -77,7 +77,7 @@ public class Congty implements java.io.Serializable {
 	}
 
 	@ManyToOne()
-	@JoinColumn(name = "idtaikhoan", nullable = false)
+	@JoinColumn(name = "idtaikhoan", unique = true, nullable = false)
 	public Taikhoan getTaikhoan() {
 		return this.taikhoan;
 	}

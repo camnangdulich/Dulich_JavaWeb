@@ -7,6 +7,7 @@ package controller;
 
 import java.security.InvalidKeyException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import entities.Quyen;
 import entities.Taikhoan;
+import entities.Tinhthanh;
 import entities.Trangthai;
 import model.EnDeCryption;
 
@@ -45,8 +47,48 @@ public class HomeController {
     ServletContext context;
 
     @RequestMapping("index")
-    public String index(ModelMap model) {
+    public String index(ModelMap model, HttpSession httpsession,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
         model.addAttribute("title", "Cẩm nang du lịch");
+        
+		Session session = factory.getCurrentSession();
+		int tthSize = 3, ttmSize = 6, ttxnSize = 5, dgksSize = 5, tourSize = 5;
+
+		// Lấy thông tin tỉnh thành
+		String hql_tth = "from Tinhthanh";
+		Query query_tth = session.createQuery(hql_tth);
+
+		// Lấy thông tin tin tức mới nhất
+		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";
+		Query query_ttm = session.createQuery(hql_ttm);
+		
+		// Lấy tin tức có lượt xem nhiều nhất
+		String hql_ttxn = "from Tintuc ORDER BY luotxem DESC";
+		Query query_ttxn = session.createQuery(hql_ttxn);
+		
+		// Lấy đánh giá khách sạn có sao nhiều nhất
+		String hql_dgks = "from Danhgia ORDER BY star DESC";
+		Query query_dgks = session.createQuery(hql_dgks);
+		
+		// Lấy tour có lượt xem nhiều nhất
+		String hql_tour = "from Tour ORDER BY luotxem DESC";
+		Query query_tour = session.createQuery(hql_tour);
+
+//		query.setFirstResult(pageSize * (page - 1));
+//		query.setMaxResults(pageSize);
+//
+//		querya.setFirstResult(pageSizea * (page - 1));
+//		querya.setMaxResults(pageSizea);
+//
+//		@SuppressWarnings("unchecked")
+//		List<sanpham> list = query.list();
+//
+//		@SuppressWarnings("unchecked")
+//		List<loaisanpham> lista = querya.list();
+
+//		model.addAttribute("splistmoi", list);
+//		model.addAttribute("lsplistmoi", lista);
+
         return "home/index";
     }
 

@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 26, 2017 12:03:03 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -38,13 +38,14 @@ public class Tintuc implements java.io.Serializable {
 	private Date thoigian;
 	private String nguon;
 	private String slug;
+	private int luotxem;
 	private Set<Loaitin> loaitins = new HashSet<Loaitin>(0);
 
 	public Tintuc() {
 	}
 
 	public Tintuc(Taikhoan taikhoan, String hinhanh, String tieude, String tomtat, String noidung, Date thoigian,
-			String nguon) {
+			String nguon, int luotxem) {
 		this.taikhoan = taikhoan;
 		this.hinhanh = hinhanh;
 		this.tieude = tieude;
@@ -52,10 +53,11 @@ public class Tintuc implements java.io.Serializable {
 		this.noidung = noidung;
 		this.thoigian = thoigian;
 		this.nguon = nguon;
+		this.luotxem = luotxem;
 	}
 
 	public Tintuc(Taikhoan taikhoan, String hinhanh, String tieude, String tomtat, String noidung, Date thoigian,
-			String nguon, String slug, Set<Loaitin> loaitins) {
+			String nguon, String slug, int luotxem, Set<Loaitin> loaitins) {
 		this.taikhoan = taikhoan;
 		this.hinhanh = hinhanh;
 		this.tieude = tieude;
@@ -64,6 +66,7 @@ public class Tintuc implements java.io.Serializable {
 		this.thoigian = thoigian;
 		this.nguon = nguon;
 		this.slug = slug;
+		this.luotxem = luotxem;
 		this.loaitins = loaitins;
 	}
 
@@ -151,6 +154,15 @@ public class Tintuc implements java.io.Serializable {
 
 	public void setSlug(String slug) {
 		this.slug = slug;
+	}
+
+	@Column(name = "luotxem", nullable = false)
+	public int getLuotxem() {
+		return this.luotxem;
+	}
+
+	public void setLuotxem(int luotxem) {
+		this.luotxem = luotxem;
 	}
 
 	@ManyToMany()

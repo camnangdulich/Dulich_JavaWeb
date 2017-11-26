@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Nov 26, 2017 12:03:04 PM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Congty" table="congty" catalog="db_dulich" optimistic-lock="version">
         <id name="idcongty" type="java.lang.Integer">
@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="taikhoan" class="entities.Taikhoan" fetch="select">
-            <column name="idtaikhoan" not-null="true" />
+            <column name="idtaikhoan" not-null="true" unique="true" />
         </many-to-one>
         <property name="tencongty" type="string">
             <column name="tencongty" length="100" not-null="true" unique="true" />

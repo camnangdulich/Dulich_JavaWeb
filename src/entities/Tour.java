@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 26, 2017 12:03:03 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -39,14 +39,14 @@ public class Tour implements java.io.Serializable {
 	private String lichtrinh;
 	private String luuy;
 	private String slug;
-	private Set<Danhgia> danhgias = new HashSet<Danhgia>(0);
+	private int luotxem;
 	private Set<Dattour> dattours = new HashSet<Dattour>(0);
 
 	public Tour() {
 	}
 
 	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, int gia, String diemdi, Date giokhoihanh,
-			String lichtrinh) {
+			String lichtrinh, int luotxem) {
 		this.congty = congty;
 		this.tinhthanh = tinhthanh;
 		this.tentour = tentour;
@@ -54,11 +54,11 @@ public class Tour implements java.io.Serializable {
 		this.diemdi = diemdi;
 		this.giokhoihanh = giokhoihanh;
 		this.lichtrinh = lichtrinh;
+		this.luotxem = luotxem;
 	}
 
 	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, String mota, int gia, String diemdi,
-			Date giokhoihanh, String lichtrinh, String luuy, String slug, Set<Danhgia> danhgias,
-			Set<Dattour> dattours) {
+			Date giokhoihanh, String lichtrinh, String luuy, String slug, int luotxem, Set<Dattour> dattours) {
 		this.congty = congty;
 		this.tinhthanh = tinhthanh;
 		this.tentour = tentour;
@@ -69,7 +69,7 @@ public class Tour implements java.io.Serializable {
 		this.lichtrinh = lichtrinh;
 		this.luuy = luuy;
 		this.slug = slug;
-		this.danhgias = danhgias;
+		this.luotxem = luotxem;
 		this.dattours = dattours;
 	}
 
@@ -178,13 +178,13 @@ public class Tour implements java.io.Serializable {
 		this.slug = slug;
 	}
 
-	@OneToMany( mappedBy = "tour")
-	public Set<Danhgia> getDanhgias() {
-		return this.danhgias;
+	@Column(name = "luotxem", nullable = false)
+	public int getLuotxem() {
+		return this.luotxem;
 	}
 
-	public void setDanhgias(Set<Danhgia> danhgias) {
-		this.danhgias = danhgias;
+	public void setLuotxem(int luotxem) {
+		this.luotxem = luotxem;
 	}
 
 	@OneToMany( mappedBy = "tour")

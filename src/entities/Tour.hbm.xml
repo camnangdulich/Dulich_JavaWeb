@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Nov 26, 2017 12:03:04 PM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Tour" table="tour" catalog="db_dulich" optimistic-lock="version">
         <id name="idtour" type="java.lang.Integer">
@@ -38,12 +38,9 @@
         <property name="slug" type="string">
             <column name="slug" length="100" unique="true" />
         </property>
-        <set name="danhgias" table="danhgia" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idtour" />
-            </key>
-            <one-to-many class="entities.Danhgia" />
-        </set>
+        <property name="luotxem" type="int">
+            <column name="luotxem" not-null="true" />
+        </property>
         <set name="dattours" table="dattour" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idtour" not-null="true" />

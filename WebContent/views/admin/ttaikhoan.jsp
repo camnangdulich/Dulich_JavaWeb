@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-10 col-md-auto">
-                    <form action="admin/ttaikhoan.html" method="post" enctype="multipart/form-data" id="ttaikhoan">
+                    <form action="admin/ttaikhoan.html" method="get" enctype="multipart/form-data" id="ttaikhoan">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Quyền</label>
                             <div class="col-sm-10" id="label-validation">
@@ -58,6 +58,35 @@
                             </div>
                         </div>
                     </form>
+			        <script type="text/javascript">
+				        $('#btn-themtaikhoan').click(function (){
+				        	var varemail = $('#email').val();
+				        	$.ajax({
+				                type : "POST",
+				                contentType : "application/json",
+				                url : "${pageContext.request.contextPath}/admin/kt-email-ajax.html",
+				                data : varemail,
+				                //dataType: 'json',
+				                // timeout: 600000,
+				                success : function (result) {
+				                	//alert(jQuery.type( result ));
+				                    //console.log(result);
+				                    if(result == "true"){
+				                    	//alert('email ton tai');
+				                    	$('#loieml').text("email ton tai");
+				                    	document.getElementById('btn-themtaikhoan').type = 'button';
+				                    }else {
+				                    	//alert('email chua ton tai');
+				                    	$('#loieml').text("email chua ton tai");
+				                    	document.getElementById('btn-themtaikhoan').type = 'submit';
+				                    }
+				                },
+				                error : function(e) {
+				                    alert("Lỗi ! Vui Lòng Kiểm Tra Lại");
+				                }
+				            });
+				        })
+			        </script>
                 </div>
             </div>
         </div>

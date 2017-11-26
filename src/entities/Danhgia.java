@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 25, 2017 10:49:23 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 26, 2017 12:03:03 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -27,7 +27,6 @@ public class Danhgia implements java.io.Serializable {
 	private Integer iddanhgia;
 	private Khachsan khachsan;
 	private Taikhoan taikhoan;
-	private Tour tour;
 	private int star;
 	private String noidung;
 	private Date thoigian;
@@ -36,18 +35,17 @@ public class Danhgia implements java.io.Serializable {
 	public Danhgia() {
 	}
 
-	public Danhgia(Taikhoan taikhoan, int star, String noidung, Date thoigian) {
+	public Danhgia(Khachsan khachsan, Taikhoan taikhoan, int star, String noidung, Date thoigian) {
+		this.khachsan = khachsan;
 		this.taikhoan = taikhoan;
 		this.star = star;
 		this.noidung = noidung;
 		this.thoigian = thoigian;
 	}
 
-	public Danhgia(Khachsan khachsan, Taikhoan taikhoan, Tour tour, int star, String noidung, Date thoigian,
-			String slug) {
+	public Danhgia(Khachsan khachsan, Taikhoan taikhoan, int star, String noidung, Date thoigian, String slug) {
 		this.khachsan = khachsan;
 		this.taikhoan = taikhoan;
-		this.tour = tour;
 		this.star = star;
 		this.noidung = noidung;
 		this.thoigian = thoigian;
@@ -67,7 +65,7 @@ public class Danhgia implements java.io.Serializable {
 	}
 
 	@ManyToOne()
-	@JoinColumn(name = "idkhachsan")
+	@JoinColumn(name = "idkhachsan", nullable = false)
 	public Khachsan getKhachsan() {
 		return this.khachsan;
 	}
@@ -84,16 +82,6 @@ public class Danhgia implements java.io.Serializable {
 
 	public void setTaikhoan(Taikhoan taikhoan) {
 		this.taikhoan = taikhoan;
-	}
-
-	@ManyToOne()
-	@JoinColumn(name = "idtour")
-	public Tour getTour() {
-		return this.tour;
-	}
-
-	public void setTour(Tour tour) {
-		this.tour = tour;
 	}
 
 	@Column(name = "star", nullable = false)

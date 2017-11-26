@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function() {
-	
+
 	// ------------- Kiểm form Slug tool ---------------------
 	// -------------------------------------------------------
 	$("#slugtoolform").validate({
@@ -16,7 +16,6 @@ $(document).ready(function() {
 			tukhoa : 'Vui lòng nhập từ khóa cần chuyển đồi'
 		}
 	});
-	
 
 	// ------------- Kiểm tra form thêm tài khoản ------------
 	// -------------------------------------------------------
@@ -25,8 +24,7 @@ $(document).ready(function() {
 			quyen : 'required',
 			email : {
 				required : true,
-				email : true,
-				
+				email : false
 			},
 			matkhau : {
 				required : true,
@@ -43,12 +41,12 @@ $(document).ready(function() {
 				rangelength : [ 10, 11 ]
 			}
 		},
-		
+
 		messages : {
 			quyen : 'Vui lòng chọn một quyền',
 			email : {
 				required : 'Vui lòng nhập email',
-				email : 'Email chưa đúng định dạng'
+				email : 'Email chưa đúng định dạng',
 			},
 			matkhau : {
 				required : 'Vui lòng nhập mật khẩu',
@@ -66,7 +64,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
 
 	// ------------- Kiểm tra form đăng nhập -----------------
 	// -------------------------------------------------------
@@ -92,7 +89,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
 
 	// ------------- Kiểm tra form đăng ký -------------------
 	// -------------------------------------------------------
@@ -127,11 +123,10 @@ $(document).ready(function() {
 				number : 'Số điện thoại không được chứa chữ',
 				rangelength : 'Số điện thoại phải từ 10 đến 11 số'
 			},
-			reg_checkbox: '	'
+			reg_checkbox : '	'
 		}
 	});
-	
-	
+
 	// ------------- Kiểm form lấy lại mật khẩu --------------
 	// -------------------------------------------------------
 	$("#repass_form").validate({
@@ -148,10 +143,5 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
-	
+
 });
-
-
-
-

@@ -660,6 +660,23 @@ public class AdminController {
 		return "admin/sbaiviet";
 	}
 	
+	
+	
+	
+	// Sửa thông tin loại của bài viết
+//	@RequestMapping("sbaiviet/lbaiviet/{id}")
+//	public String slbvcbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
+//		model.addAttribute("title", "Sửa loại bài viết");
+//		Session session = factory.getCurrentSession();
+//		String hql = "from Chitiettin where idtintuc = :idbv";
+//        Query query = session.createQuery(hql);
+//        query.setParameter("idbv", idbv);
+//        @SuppressWarnings("unchecked")
+//		List<Chitiettin> list = query.list();
+//        model.addAttribute("loaitinbv", list);
+//		return "admin/slbvcbaiviet";
+//	}
+	
 
 	
 	

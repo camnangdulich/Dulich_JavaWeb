@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -10,22 +12,22 @@
             <!-- Slide One - Set the background image for this slide in the line below -->
             <div class="carousel-item active" style="background-image: url('./files/home/home1.jpg')">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>First Slide</h3>
-                    <p>This is a description for the first slide.</p>
+                    <h3>Du lịch khắp Việt Nam</h3>
+                    <p>Khám phá ngay những địa điểm du lịch hoài không chán</p>
                 </div>
             </div>
             <!-- Slide Two - Set the background image for this slide in the line below -->
             <div class="carousel-item" style="background-image: url('./files/home/home2.jpg')">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>Second Slide</h3>
-                    <p>This is a description for the second slide.</p>
+                    <h3>Khách sạn lý tưởng</h3>
+                    <p>Tìm kiếm và khám phá những khách sạn nơi bạn muốn đi du lịch</p>
                 </div>
             </div>
             <!-- Slide Three - Set the background image for this slide in the line below -->
             <div class="carousel-item" style="background-image: url('./files/home/home3.jpg')">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>Third Slide</h3>
-                    <p>This is a description for the third slide.</p>
+                    <h3>Các Tour du lịch hấp dẫn</h3>
+                    <p>Cập nhật các tour du lịch hấp dẫn và đặc biệt</p>
                 </div>
             </div>
         </div>
@@ -46,153 +48,118 @@
     <div class="tinhthanh" style="margin-top: 35px;">
         <div class="container-fluid bg-3 text-center">    
             <div class="row">
-                <div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid bg-3 text-center">    
-            <div class="row">
-                <div class="col-sm-3 ih-item square effect13 bottom_to_top" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 bottom_to_top" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 bottom_to_top" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 bottom_to_top" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
+            	<c:forEach var="tth" items="${lsttinhthanh}">
+	            	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
+	                    <a href="#">
+	                        <div class="img">
+	                        	<img src="files/tinhthanh/${tth.hinhanh}" class="img-responsive" style="width:100%" alt="${tth.tinhthanh}">
+	                        </div>
+	                        <div class="info">
+	                            <h3>${tth.tinhthanh}</h3>
+	                            <p>${tth.mota}</p>
+	                        </div>
+	                    </a>
+	                </div>
+            	</c:forEach>
             </div>
         </div>
     </div>
 
-    <h3 class="h3-fx">Tin tức mới</h3>
+    <h3 class="h3-fx">Tin tức du lịch</h3>
     <hr>
-    <!-- Features Section -->
+    
     <div class="row">
-        <div class="col-lg-8">
-            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
-            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
-                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
-            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
-                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
-                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
-                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
-                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
-                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
-            </p>
-            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
-        </div>
-        <div class="col-lg-4">
-            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#tinmoi" role="tab" data-toggle="tab">Bài đăng mới nhất</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#xemnhieu" role="tab" data-toggle="tab">Được xem nhiều nhất</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane in active" id="tinmoi">
+                    <div class="modal-body tt-bv">
+                    	<!-- Features Section -->
+					    <div class="row">
+					        <div class="col-lg-8">
+					            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
+					            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
+					                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
+					            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
+					                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
+					                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
+					                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
+					                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
+					                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
+					            </p>
+					            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
+					        </div>
+					        <div class="col-lg-4">
+					            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+					        </div>
+					    </div>
+					    <hr>
+					    <div class="row">
+					        <div class="col-lg-8">
+					            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
+					            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
+					                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
+					            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
+					                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
+					                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
+					                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
+					                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
+					                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
+					            </p>
+					            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
+					        </div>
+					        <div class="col-lg-4">
+					            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+					        </div>
+					    </div>
+					    <hr>
+					    <div class="row">
+					        <div class="col-lg-8">
+					            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
+					            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
+					                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
+					            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
+					                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
+					                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
+					                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
+					                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
+					                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
+					            </p>
+					            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
+					        </div>
+					        <div class="col-lg-4">
+					            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+					        </div>
+					    </div>
+					    <hr>
+					    <div class="row">
+					        <div class="col-md-12 text-center"> 
+					            <button class="btn btn-success">Xem thêm tin tức</button>
+					        </div>
+					    </div>
+					    <!-- /.row -->
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="xemnhieu">
+                    <div class="modal-body tt-bv">
+                        Nội dung xem nhieu
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-lg-8">
-            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
-            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
-                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
-            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
-                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
-                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
-                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
-                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
-                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
-            </p>
-            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
-        </div>
-        <div class="col-lg-4">
-            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-lg-8">
-            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
-            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
-                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
-            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
-                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
-                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
-                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
-                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
-                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
-            </p>
-            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
-        </div>
-        <div class="col-lg-4">
-            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-12 text-center"> 
-            <button class="btn btn-success">Xem thêm</button>
-        </div>
-    </div>
-    <!-- /.row -->
+    
+    
 
     <!-- Khách sạn tốt nhất -->
     <h3 class="h3-fx">Khách sạn tốt nhất</h3>

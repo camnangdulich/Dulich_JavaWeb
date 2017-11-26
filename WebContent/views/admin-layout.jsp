@@ -321,34 +321,6 @@
 	        <script src="js/alert-check-huy.js" type="text/javascript"></script>
 	        <!-- Image load js-->
 	        <script src="js/img-load.js" type="text/javascript"></script>
-	        <!--
-	        <script type="text/javascript">
-		        $('#btn-themtaikhoan').click(function (){
-		        	var varemail = $('#email').val();
-		        	$.ajax({
-		                type : "POST",
-		                contentType : "application/json",
-		                url : "${pageContext.request.contextPath}/admin/kt-email-ajax.html",
-		                data : varemail,
-		                //dataType: 'json',
-		                // timeout: 600000,
-		                success : function(result) {
-		                	//alert(jQuery.type( result ));
-		                    console.log(result);
-		                    if(result == "true"){
-		                    	alert('email ton tai');
-		                    	$('#loieml').text("Abc");
-		                    }else {
-		                    	alert('email chua ton tai');
-		                    }
-		                },
-		                error : function(e) {
-		                    alert("Lỗi ! Vui Lòng Kiểm Tra Lại");
-		                }
-		            });
-		        })
-	        </script>
-	        -->
         </div>
     </body>
 
