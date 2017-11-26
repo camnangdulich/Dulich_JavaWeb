@@ -143,5 +143,70 @@ $(document).ready(function() {
 			tenloai : 'Không được để trống'
 		}
 	});
+	// ------------- Kiểm thêm công ty---------------------
+	// -------------------------------------------------------
+	$("#themcongty").validate({
+		rules : {
+			taikhoan : 'required',
+			tencongty: 'required',
+			diachi: 'required',
+			email :{
+				required : true,
+				email : true
+			},
+			sodienthoai : {
+				required : true,
+				digits : true,
+				rangelength : [ 10, 11 ]
+			}
+		},
+		messages : {
+			taikhoan : 'Vui lòng chọn quyền bạn muốn thêm',
+			tencongty: 'Tên công ty không được để trống',
+			diachi: 'Vui lòng nhập địa chỉ',
+			email :{
+				required : 'Vui lòng nhập email',
+				email : 'Định dạng email không hợp lệ'
+			},
+			sodienthoai : {
+				required : 'Vui lòng nhập số điện thoại',
+				digits : 'Phải là số',
+				rangelength : 'Số điện thoại phải 10 or 11 ký tự'
+			}
+		}
+	});
+	// ------------- Kiểm sửa công ty---------------------
+	// -------------------------------------------------------
+	$("#suacongty").validate({
+		rules : {
+			taikhoan : 'required',
+			tencongty: 'required',
+			diachi: 'required',
+			email :{
+				required : true,
+				email : true
+			},
+			sodienthoai : {
+				required : true,
+				digits : true,
+				rangelength : [ 10, 11 ]
+			}
+		},
+		messages : {
+			taikhoan : 'Vui lòng chọn quyền bạn muốn thêm',
+			tencongty: 'Tên công ty không được để trống',
+			diachi: 'Vui lòng nhập địa chỉ',
+			email :{
+				required : 'Vui lòng nhập email',
+				email : 'Định dạng email không hợp lệ'
+			},
+			sodienthoai : {
+				required : 'Vui lòng nhập số điện thoại',
+				digits : 'Phải là số',
+				rangelength : 'Số điện thoại phải 10 or 11 ký tự'
+			}
+		}
+	});
+	
 	
 });

@@ -44,6 +44,13 @@
 							</div>
 						</div>
 						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Thêm giường</label>
+							<div class="col-sm-10" id="label-validation">
+								<input name="themgiuong" type="text" class="form-control"
+									value="${lstlp.themgiuong}" placeholder="Thêm giường">
+							</div>
+						</div>
+						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Mô tả</label>
 							<div class="col-sm-10" id="label-validation">
 								<input name="mota" type="text" class="form-control"
@@ -51,13 +58,6 @@
 							</div>
 						</div>
 						<hr>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Thêm giường</label>
-							<div class="col-sm-10">
-								<input name="themgiuong" type="text" class="form-control"
-									value="${lstlp.themgiuong}" placeholder="Thêm giường">
-							</div>
-						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Hướng phòng</label>
 							<div class="col-sm-10">
