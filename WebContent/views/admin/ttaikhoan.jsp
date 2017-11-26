@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-10 col-md-auto">
-                    <form action="admin/ttaikhoan.html" method="get" enctype="multipart/form-data" id="ttaikhoan">
+                    <form action="admin/ttaikhoan.html" method="post" enctype="multipart/form-data" id="ttaikhoan">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Quyền</label>
                             <div class="col-sm-10" id="label-validation">
@@ -54,7 +54,7 @@
                         <div class="form-group row">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-10 offset-md-3">
-                                <button id="btn-themtaikhoan" type="button" class="btn btn-primary">Thêm tài khoản</button>
+                                <button id="btn-themtaikhoan" type="submit" class="btn btn-primary">Thêm tài khoản</button>
                             </div>
                         </div>
                     </form>
@@ -73,12 +73,13 @@
 				                    //console.log(result);
 				                    if(result == "true"){
 				                    	//alert('email ton tai');
+				                    	setTimeout(function(){ alert("Hello"); }, 3000);
 				                    	$('#loieml').text("email ton tai");
-				                    	document.getElementById('btn-themtaikhoan').type = 'button';
+				                    	
 				                    }else {
 				                    	//alert('email chua ton tai');
-				                    	$('#loieml').text("email chua ton tai");
-				                    	document.getElementById('btn-themtaikhoan').type = 'submit';
+				                    	//$('#loieml').text("email chua ton tai");
+				                    	$( "#ttaikhoan" ).submit();
 				                    }
 				                },
 				                error : function(e) {
