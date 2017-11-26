@@ -25,7 +25,7 @@
 							<label class="col-sm-2 col-form-label">Mô tả</label>
 							<div class="col-sm-10" id="label-validation">
 								<input name="mota" type="text" class="form-control"
-									placeholder="Mô tả quyền">${message}
+									placeholder="Mô tả quyền">
 							</div>
 						</div>
 						<div class="form-group row">
