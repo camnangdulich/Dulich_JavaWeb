@@ -61,6 +61,17 @@
 	                    </a>
 	                </div>
             	</c:forEach>
+            	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
+                    <a href="#">
+                        <div class="img">
+                        	<img src="files/tinhthanh/Tất cả.jpg" class="img-responsive" style="width:100%" alt="Xem thêm tỉnh thành">
+                        </div>
+                        <div class="info">
+                            <h3>Xem thêm</h3>
+                            <p>Xem thêm các tỉnh thành ở Việt Nam</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -83,64 +94,23 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane in active" id="tinmoi">
                     <div class="modal-body tt-bv">
-                    	<!-- Features Section -->
-					    <div class="row">
-					        <div class="col-lg-8">
-					            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
-					            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
-					                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
-					            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
-					                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
-					                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
-					                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
-					                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
-					                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
-					            </p>
-					            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
-					        </div>
-					        <div class="col-lg-4">
-					            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-					        </div>
-					    </div>
-					    <hr>
-					    <div class="row">
-					        <div class="col-lg-8">
-					            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
-					            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
-					                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
-					            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
-					                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
-					                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
-					                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
-					                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
-					                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
-					            </p>
-					            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
-					        </div>
-					        <div class="col-lg-4">
-					            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-					        </div>
-					    </div>
-					    <hr>
-					    <div class="row">
-					        <div class="col-lg-8">
-					            <h5>Đi rồi trở lại homestay đẹp chất ngất Đà Lạt bình yên như nhà của mình</h5>
-					            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: <a href="#">Admin</a>
-					                - <i class="fa fa-fw fa-clock-o ft-lh"></i>2 giờ trước</span>
-					            <p class="p-fx">Để nhắc về cái tình của Đà Lạt thì có nói cả đời cũng không hết được mất. 
-					                Đà Lạt đã luôn nổi tiếng với những không cảnh thơ mộng, 
-					                dễ dàng làm tan chảy mọi con tim mạnh mẽ nhất thì khi có sự xuất hiện thêm
-					                của loạt những homestay được đầu tư, thiết kế công phu, đẹp dịu dàng và ấm cúng...
-					                càng là lí do níu chân của mọi du khách. Và Second house chính là 1 trong những
-					                homestay điển hình như vậy mà mình thực sự muốn giới thiệu với các bạn trong bài viết này!
-					            </p>
-					            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">1453 lượt xem</span>
-					        </div>
-					        <div class="col-lg-4">
-					            <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-					        </div>
-					    </div>
-					    <hr>
+	                    <c:forEach var="ttm" items="${lsttintucmoi}">
+		                    <!-- Features Section -->
+						    <div class="row">
+						        <div class="col-lg-8">
+						            <h5>${ttm.tieude}</h5>
+						            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: 
+						            <a href="#">${ttm.taikhoan.hodem} ${ttm.taikhoan.ten}</a>
+						                - <i class="fa fa-fw fa-clock-o ft-lh"></i>${ttm.thoigian}</span>
+						            <p class="p-fx">${ttm.tomtat}</p>
+						            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">${ttm.luotxem} lượt xem</span>
+						        </div>
+						        <div class="col-lg-4">
+						            <img class="img-fluid rounded" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
+						        </div>
+						    </div>
+						    <hr>
+	                    </c:forEach>
 					    <div class="row">
 					        <div class="col-md-12 text-center"> 
 					            <button class="btn btn-success">Xem thêm tin tức</button>
@@ -151,7 +121,23 @@
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="xemnhieu">
                     <div class="modal-body tt-bv">
-                        Nội dung xem nhieu
+                        <c:forEach var="txn" items="${lsttinxemnhieu}">
+		                    <!-- Features Section -->
+						    <div class="row">
+						        <div class="col-lg-8">
+						            <h5>${txn.tieude}</h5>
+						            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: 
+						            <a href="#">${txn.taikhoan.hodem} ${txn.taikhoan.ten}</a>
+						                - <i class="fa fa-fw fa-clock-o ft-lh"></i>${txn.thoigian}</span>
+						            <p class="p-fx">${txn.tomtat}</p>
+						            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">${txn.luotxem} lượt xem</span>
+						        </div>
+						        <div class="col-lg-4">
+						            <img class="img-fluid rounded" src="files/tintuc/${txn.hinhanh}" alt="${txn.hinhanh}">
+						        </div>
+						    </div>
+						    <hr>
+	                    </c:forEach>
                     </div>
                 </div>
             </div>

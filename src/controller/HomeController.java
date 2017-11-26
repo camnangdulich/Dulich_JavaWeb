@@ -26,9 +26,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import entities.Danhgia;
 import entities.Quyen;
 import entities.Taikhoan;
 import entities.Tinhthanh;
+import entities.Tintuc;
+import entities.Tour;
 import entities.Trangthai;
 import model.EnDeCryption;
 
@@ -45,14 +48,15 @@ public class HomeController {
     SessionFactory factory;
     @Autowired
     ServletContext context;
-
+    
+    @SuppressWarnings("unchecked")
     @RequestMapping("index")
     public String index(ModelMap model, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
         model.addAttribute("title", "Cẩm nang du lịch");
         
 		Session session = factory.getCurrentSession();
-		int tthSize = 3, ttmSize = 6, ttxnSize = 5, dgksSize = 5, tourSize = 5;
+		int tthSize = 7, ttmSize = 8, ttxnSize = 8, dgksSize = 8, tourSize = 8;
 
 		// Lấy thông tin tỉnh thành
 		String hql_tth = "from Tinhthanh";
@@ -74,20 +78,32 @@ public class HomeController {
 		String hql_tour = "from Tour ORDER BY luotxem DESC";
 		Query query_tour = session.createQuery(hql_tour);
 
-//		query.setFirstResult(pageSize * (page - 1));
-//		query.setMaxResults(pageSize);
-//
-//		querya.setFirstResult(pageSizea * (page - 1));
-//		querya.setMaxResults(pageSizea);
-//
-//		@SuppressWarnings("unchecked")
-//		List<sanpham> list = query.list();
-//
-//		@SuppressWarnings("unchecked")
-//		List<loaisanpham> lista = querya.list();
+		query_tth.setFirstResult(tthSize * (page - 1));
+		query_tth.setMaxResults(tthSize);
 
-//		model.addAttribute("splistmoi", list);
-//		model.addAttribute("lsplistmoi", lista);
+		query_ttm.setFirstResult(ttmSize * (page - 1));
+		query_ttm.setMaxResults(ttmSize);
+		
+		query_ttxn.setFirstResult(ttxnSize * (page - 1));
+		query_ttxn.setMaxResults(ttxnSize);
+		
+		query_dgks.setFirstResult(dgksSize * (page - 1));
+		query_dgks.setMaxResults(dgksSize);
+		
+		query_tour.setFirstResult(tourSize * (page - 1));
+		query_tour.setMaxResults(tourSize);
+
+		List<Tinhthanh> lsttinhthanh = query_tth.list();
+		List<Tintuc> lsttintucmoi = query_ttm.list();
+		List<Tintuc> lsttinxemnhieu = query_ttxn.list();
+		List<Danhgia> lstdanhgiakhachsan = query_dgks.list();
+		List<Tour> lsttournoibat = query_tour.list();
+
+		model.addAttribute("lsttinhthanh", lsttinhthanh);
+		model.addAttribute("lsttintucmoi", lsttintucmoi);
+		model.addAttribute("lsttinxemnhieu", lsttinxemnhieu);
+		model.addAttribute("lstdanhgiakhachsan", lstdanhgiakhachsan);
+		model.addAttribute("lsttournoibat", lsttournoibat);
 
         return "home/index";
     }
@@ -241,4 +257,5 @@ public class HomeController {
         model.addAttribute("title", "Phản hồi");
         return "home/phanhoi";
     }
+    
 }

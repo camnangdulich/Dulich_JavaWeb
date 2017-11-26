@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
     <!-- Breadcrumbs -->
     <ol class="breadcrumb" style="margin-top: 20px;">
@@ -26,7 +28,7 @@
                 <h5 class="card-header">Thông tin cá nhân</h5>
                 <div class="card-body">
                     <div class="col-md-12">
-                        <form>
+                        <form action="mailer/repwd_mailer.html" method="post">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Họ và tên</label>
                                 <div class="col-sm-9">
@@ -36,7 +38,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" placeholder="Nhập email của bạn">
+                                    <input name="email" type="email" class="form-control" placeholder="Nhập email của bạn">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -44,8 +46,9 @@
                                 <div class="col-sm-9">
                                     <textarea class="form-control" rows="5">Ý kiếm phản hồi</textarea>
                                 </div>
+                                ${message}
                             </div>
-                            <button class="btn btn-success" style="float: right;">Gửi phản hồi</button>
+                            <button type="submit" class="btn btn-success" style="float: right;">Gửi phản hồi</button>
                         </form>
                     </div>
                 </div>
