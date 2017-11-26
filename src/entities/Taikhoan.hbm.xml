@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2017 12:25:05 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="entities.Taikhoan" table="taikhoan" catalog="db_dulich" optimistic-lock="version">
+        <id name="idtaikhoan" type="java.lang.Integer">
+            <column name="idtaikhoan" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="quyen" class="entities.Quyen" fetch="select">
+            <column name="idquyen" not-null="true" />
+        </many-to-one>
+        <many-to-one name="trangthai" class="entities.Trangthai" fetch="select">
+            <column name="idtrangthai" not-null="true" />
+        </many-to-one>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="matkhau" type="string">
+            <column name="matkhau" length="100" not-null="true" />
+        </property>
+        <property name="hodem" type="string">
+            <column name="hodem" length="50" />
+        </property>
+        <property name="ten" type="string">
+            <column name="ten" length="50" />
+        </property>
+        <property name="sodienthoai" type="string">
+            <column name="sodienthoai" length="11" not-null="true" unique="true" />
+        </property>
+        <property name="diachi" type="string">
+            <column name="diachi" length="250" />
+        </property>
+        <property name="avatar" type="string">
+            <column name="avatar" length="250" />
+        </property>
+        <property name="ngaytao" type="timestamp">
+            <column name="ngaytao" length="19" />
+        </property>
+        <property name="slugurl" type="string">
+            <column name="slugurl" length="100" unique="true" />
+        </property>
+        <property name="khoamatkhau" type="string">
+            <column name="khoamatkhau" length="250" unique="true" />
+        </property>
+        <set name="tintucs" table="tintuc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtaikhoan" not-null="true" />
+            </key>
+            <one-to-many class="entities.Tintuc" />
+        </set>
+        <set name="khachsans" table="khachsan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtaikhoan" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="entities.Khachsan" />
+        </set>
+        <set name="phanhois" table="phanhoi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtaikhoan" />
+            </key>
+            <one-to-many class="entities.Phanhoi" />
+        </set>
+        <set name="datphongs" table="datphong" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtaikhoan" />
+            </key>
+            <one-to-many class="entities.Datphong" />
+        </set>
+        <set name="dattours" table="dattour" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtaikhoan" />
+            </key>
+            <one-to-many class="entities.Dattour" />
+        </set>
+        <set name="congties" table="congty" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtaikhoan" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="entities.Congty" />
+        </set>
+        <set name="danhgias" table="danhgia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtaikhoan" not-null="true" />
+            </key>
+            <one-to-many class="entities.Danhgia" />
+        </set>
+    </class>
+</hibernate-mapping>

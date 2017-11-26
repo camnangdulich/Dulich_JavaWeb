@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2017 12:25:05 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="entities.Datphong" table="datphong" catalog="db_dulich" optimistic-lock="version">
+        <id name="iddatphong" type="java.lang.Integer">
+            <column name="iddatphong" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="loaiphong" class="entities.Loaiphong" fetch="select">
+            <column name="idloaiphong" not-null="true" />
+        </many-to-one>
+        <many-to-one name="taikhoan" class="entities.Taikhoan" fetch="select">
+            <column name="idtaikhoan" />
+        </many-to-one>
+        <many-to-one name="trangthai" class="entities.Trangthai" fetch="select">
+            <column name="idtrangthai" not-null="true" />
+        </many-to-one>
+        <property name="ngaynhanphong" type="date">
+            <column name="ngaynhanphong" length="10" not-null="true" />
+        </property>
+        <property name="ngaytraphong" type="date">
+            <column name="ngaytraphong" length="10" not-null="true" />
+        </property>
+        <property name="soluongphong" type="int">
+            <column name="soluongphong" not-null="true" />
+        </property>
+        <property name="hodem" type="string">
+            <column name="hodem" length="50" not-null="true" />
+        </property>
+        <property name="ten" type="string">
+            <column name="ten" length="50" not-null="true" />
+        </property>
+        <property name="sodienthoai" type="string">
+            <column name="sodienthoai" length="11" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" />
+        </property>
+        <property name="slugurl" type="string">
+            <column name="slugurl" length="100" unique="true" />
+        </property>
+    </class>
+</hibernate-mapping>

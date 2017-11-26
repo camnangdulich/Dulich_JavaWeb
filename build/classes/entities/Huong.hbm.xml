@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2017 12:25:05 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="entities.Huong" table="huong" catalog="db_dulich" optimistic-lock="version">
+        <id name="idhuong" type="java.lang.Integer">
+            <column name="idhuong" />
+            <generator class="identity" />
+        </id>
+        <property name="tenhuong" type="string">
+            <column name="tenhuong" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="mota" type="string">
+            <column name="mota" length="65535" />
+        </property>
+        <set name="loaiphongs" table="loaiphong" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="huong" />
+            </key>
+            <one-to-many class="entities.Loaiphong" />
+        </set>
+    </class>
+</hibernate-mapping>

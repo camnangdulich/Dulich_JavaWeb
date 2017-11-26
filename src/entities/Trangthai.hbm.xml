@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2017 12:25:05 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="entities.Trangthai" table="trangthai" catalog="db_dulich" optimistic-lock="version">
+        <id name="idtrangthai" type="java.lang.Integer">
+            <column name="idtrangthai" />
+            <generator class="identity" />
+        </id>
+        <property name="trangthai" type="string">
+            <column name="trangthai" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="mota" type="string">
+            <column name="mota" length="65535" />
+        </property>
+        <set name="tintucs" table="tintuc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtrangthai" not-null="true" />
+            </key>
+            <one-to-many class="entities.Tintuc" />
+        </set>
+        <set name="tours" table="tour" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtrangthai" not-null="true" />
+            </key>
+            <one-to-many class="entities.Tour" />
+        </set>
+        <set name="congties" table="congty" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtrangthai" not-null="true" />
+            </key>
+            <one-to-many class="entities.Congty" />
+        </set>
+        <set name="datphongs" table="datphong" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtrangthai" not-null="true" />
+            </key>
+            <one-to-many class="entities.Datphong" />
+        </set>
+        <set name="khachsans" table="khachsan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtrangthai" not-null="true" />
+            </key>
+            <one-to-many class="entities.Khachsan" />
+        </set>
+        <set name="taikhoans" table="taikhoan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtrangthai" not-null="true" />
+            </key>
+            <one-to-many class="entities.Taikhoan" />
+        </set>
+        <set name="dattours" table="dattour" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtrangthai" not-null="true" />
+            </key>
+            <one-to-many class="entities.Dattour" />
+        </set>
+    </class>
+</hibernate-mapping>

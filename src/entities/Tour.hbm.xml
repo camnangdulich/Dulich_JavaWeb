@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2017 12:25:05 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="entities.Tour" table="tour" catalog="db_dulich" optimistic-lock="version">
+        <id name="idtour" type="java.lang.Integer">
+            <column name="idtour" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="congty" class="entities.Congty" fetch="select">
+            <column name="idcongty" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tinhthanh" class="entities.Tinhthanh" fetch="select">
+            <column name="diemden" not-null="true" />
+        </many-to-one>
+        <many-to-one name="trangthai" class="entities.Trangthai" fetch="select">
+            <column name="idtrangthai" not-null="true" />
+        </many-to-one>
+        <property name="tentour" type="string">
+            <column name="tentour" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="mota" type="string">
+            <column name="mota" length="65535" />
+        </property>
+        <property name="gia" type="int">
+            <column name="gia" not-null="true" />
+        </property>
+        <property name="diemdi" type="string">
+            <column name="diemdi" length="100" not-null="true" />
+        </property>
+        <property name="giokhoihanh" type="timestamp">
+            <column name="giokhoihanh" length="19" not-null="true" />
+        </property>
+        <property name="lichtrinh" type="string">
+            <column name="lichtrinh" length="65535" not-null="true" />
+        </property>
+        <property name="luuy" type="string">
+            <column name="luuy" length="65535" />
+        </property>
+        <property name="slugurl" type="string">
+            <column name="slugurl" length="100" unique="true" />
+        </property>
+        <property name="luotxem" type="int">
+            <column name="luotxem" not-null="true" />
+        </property>
+        <set name="dattours" table="dattour" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtour" not-null="true" />
+            </key>
+            <one-to-many class="entities.Dattour" />
+        </set>
+    </class>
+</hibernate-mapping>
