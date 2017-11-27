@@ -568,21 +568,22 @@ public class AdminController {
 	// ------------------------------------------------------------------
 	
 	// Xóa tài khoản
-//	@RequestMapping("xtaikhoan/{id}")
-//	public String xtaikhoan(ModelMap model, @PathVariable("id") int idxoa) {
-//		Session session = factory.openSession();
-//		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idxoa);
-//		Transaction t = session.beginTransaction();
-//		try {
-//			session.delete(tk);
-//			t.commit();
-//		} catch (Exception e) {
-//			t.rollback();
-//		} finally {
-//			session.close();
-//		}
-//		return "redirect:/admin/dstaikhoan.html";
-//	}
+	@RequestMapping("xtaikhoan/{id}")
+	public String xtaikhoan(ModelMap model, @PathVariable("id") int idxoa) {
+		Session session = factory.openSession();
+		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idxoa);
+		Transaction t = session.beginTransaction();
+		try {
+			session.delete(tk);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return "redirect:/admin/dstaikhoan.html";
+	}
+	
 //	//Xóa quyền
 	@RequestMapping("xloaibv/{id}")
 	public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
@@ -593,16 +594,39 @@ public class AdminController {
         query.setParameter("idlt", idxoa);
 		List<Chitiettin> lstcct = query.list();
 		if(lstcct.size() == 0){
-			System.out.println("khong co id chi tiet de xoa");
+			System.out.println("Xoa loai tin khong co chi tiet tin");
+			Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
+			try {
+				session.delete(lt);
+				t.commit();
+				System.out.println("Xoa loai tin khong co chi tiet tin (Thanh cong)");
+			} catch (Exception e) {
+				t.rollback();
+				System.out.println("Xoa loai tin khong co chi tiet tin (That bai)");
+			} finally {
+				session.close();
+			}
 		} else {
-//				String hqlxctt = "delete from Chitiettin where idloaitin= :idlt";
-//				Query queryxcct = session.createQuery(hqlxctt);
-//				System.out.println("idd"  + idxoa);
-//				queryxcct.setParameter("idlt", idxoa);
-//				t.commit();
-			session.delete(lstcct);
-			t.commit();
-				System.out.println("Xóa chi tiết thành công");
+				String hqlxctt = "delete Chitiettin where idloaitin= :idlt";
+				Query queryxcct = session.createQuery(hqlxctt);
+				System.out.println("idd"  + idxoa);
+				queryxcct.setParameter("idlt", idxoa);
+				for(int x = 0; x < lstcct.size(); x++){
+					session.delete(lstcct.get(x));
+					System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+				}
+				Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
+				try {
+					session.delete(lt);
+					t.commit();
+					System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+				} catch (Exception e) {
+					t.rollback();
+					System.out.println("Xoa loai tin co chi tiet tin (That bai)");
+				} finally {
+					session.close();
+				}
+				System.out.println("Xóa thành công");
 			
 		}
 		
