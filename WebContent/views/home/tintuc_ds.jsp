@@ -174,7 +174,7 @@
 
             <!-- Danh mục tin tức -->
             <div class="card mb-4">
-                <h5 class="card-header">Danh mục tin tức</h5>
+                <h5 class="card-header" style="border: none;">Danh mục tin tức</h5>
                 <div class="list-group" id="dmtt">
 		            <a href="about.html" class="list-group-item">About</a>
 		            <a href="services.html" class="list-group-item">Services</a>

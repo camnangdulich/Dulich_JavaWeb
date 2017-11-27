@@ -30,16 +30,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import entities.Congty;
-import entities.Datphong;
-import entities.Dichvu;
 import entities.Huong;
 import entities.Khachsan;
-import entities.Loaiphong;
-import entities.Loaitin;
 import entities.Quyen;
 import entities.Taikhoan;
-import entities.Tinhthanh;
 import entities.Tintuc;
 import entities.Tour;
 import entities.Trangthai;

@@ -211,102 +211,20 @@
     <h3 class="h3-fx">Tour du lịch nổi bật</h3>
     <hr>
     <div class="row">
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                    </h5>
-                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                    </h5>
-                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                    </h5>
-                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                    </h5>
-                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                    </h5>
-                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                    </h5>
-                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                    </h5>
-                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                    </h5>
-                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
-                </div>
-            </div>
-        </div>
+	    <c:forEach var="tur" items="${lsttournoibat}">
+	            <div class="col-lg-3 col-sm-6 portfolio-item">
+	            <div class="card h-80">
+	                <a href="#"><img class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
+	                <div class="card-body">
+	                    <h5 class="card-title">
+	                        <a href="#">${tur.tentour}</a>
+	                    </h5>
+	                    <p style="font-size: 13px;" class="card-text">${tur.diemdi} <i class="fa fa-long-arrow-right"></i> ${tur.tinhthanh.tinhthanh}</p>
+	                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
+	                </div>
+	            </div>
+	        </div>
+	    </c:forEach>
     </div>
     <hr>
     <div class="row">

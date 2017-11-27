@@ -23,11 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import entities.Danhgia;
+import entities.Loaitin;
 import entities.Quyen;
 import entities.Taikhoan;
 import entities.Tinhthanh;
@@ -118,6 +120,16 @@ public class HomeController {
 		return lsttournoibat;
 	}
 	
+	// Lấy tất cả loại tin tức
+	@ModelAttribute("loaitinlst")
+	public List<Loaitin> loaitinlst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Loaitin";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Loaitin> list = query.list();
+		return list;
+	}
 	
 	
 	
@@ -236,6 +248,34 @@ public class HomeController {
 		}
 		return "home/index";
 	}
+	
+	
+	// Danh sách tin tức
+	@RequestMapping("danh-sach-tin-tuc/{id}")
+	public String staikhoan(ModelMap model, @PathVariable("id") Integer idlt) {
+		model.addAttribute("title", "Danh sách tin tức" + idlt);
+		Session session = factory.getCurrentSession();
+		Loaitin lt = (Loaitin) session.get(Loaitin.class, idlt);
+		model.addAttribute("dslt", lt);
+		return "home/tintuc_ds";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
     @RequestMapping("tinhthanh")
     public String tinhthanh(ModelMap model) {
@@ -243,11 +283,6 @@ public class HomeController {
         return "home/tinhthanh";
     }
 
-    @RequestMapping("tintucds")
-    public String tintucds(ModelMap model) {
-        model.addAttribute("title", "Danh sách tin tức");
-        return "home/tintuc_ds";
-    }
 
     @RequestMapping("tintucct")
     public String tintucct(ModelMap model) {
