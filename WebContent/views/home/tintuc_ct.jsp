@@ -14,23 +14,20 @@
         <!-- Chi tiết bài viết -->
         <div class="col-lg-8 tt-bv">
             <!-- Preview Image -->
-            <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+            <img class="img-fluid rounded" src="files/tintuc/${cttt.hinhanh}" alt="${cttt.hinhanh}">
             <hr>
             <!-- Date/Time -->
-            <p>Posted on January 1, 2017 at 12:00 PM</p>
+            <p><i class="fa fa-fw fa-share-alt ft-lh"></i> Được chia sẻ bởi: ${cttt.taikhoan.hodem} ${cttt.taikhoan.ten} - 
+            <i class="fa fa-fw fa-clock-o ft-lh"></i> ${cttt.thoigian}</p>
             <hr>
             <!-- Post Content -->
-            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste</h4>
+            <h4>${cttt.tieude}</h4>
             <blockquote class="blockquote">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <p style="font-size: 16px; font-style: italic; font-weight: 500;">${cttt.tomtat}</p>
             </blockquote>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-            <img class="" src="http://placehold.it/900x300" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+            <div>${cttt.noidung}
+            	<p>${cttt.nguon}</p>
+            </div>
             <hr>
             <div class="card mb-4">
                 <div class="card-body">
