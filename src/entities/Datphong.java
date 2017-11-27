@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -21,7 +21,7 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "datphong", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "slugurl") )
+@Table(name = "datphong", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "slug") )
 public class Datphong implements java.io.Serializable {
 
 	private Integer iddatphong;
@@ -35,7 +35,7 @@ public class Datphong implements java.io.Serializable {
 	private String ten;
 	private String sodienthoai;
 	private String email;
-	private String slugurl;
+	private String slug;
 
 	public Datphong() {
 	}
@@ -54,7 +54,7 @@ public class Datphong implements java.io.Serializable {
 	}
 
 	public Datphong(Loaiphong loaiphong, Taikhoan taikhoan, Trangthai trangthai, Date ngaynhanphong, Date ngaytraphong,
-			int soluongphong, String hodem, String ten, String sodienthoai, String email, String slugurl) {
+			int soluongphong, String hodem, String ten, String sodienthoai, String email, String slug) {
 		this.loaiphong = loaiphong;
 		this.taikhoan = taikhoan;
 		this.trangthai = trangthai;
@@ -65,7 +65,7 @@ public class Datphong implements java.io.Serializable {
 		this.ten = ten;
 		this.sodienthoai = sodienthoai;
 		this.email = email;
-		this.slugurl = slugurl;
+		this.slug = slug;
 	}
 
 	@Id
@@ -175,13 +175,13 @@ public class Datphong implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "slugurl", unique = true, length = 100)
-	public String getSlugurl() {
-		return this.slugurl;
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setSlugurl(String slugurl) {
-		this.slugurl = slugurl;
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 }

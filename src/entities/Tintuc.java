@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -26,29 +26,27 @@ import javax.persistence.UniqueConstraint;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "tintuc", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tieude"),
-		@UniqueConstraint(columnNames = "slugurl") })
+		@UniqueConstraint(columnNames = "slug") })
 public class Tintuc implements java.io.Serializable {
 
 	private Integer idtintuc;
 	private Taikhoan taikhoan;
-	private Trangthai trangthai;
 	private String hinhanh;
 	private String tieude;
 	private String tomtat;
 	private String noidung;
 	private Date thoigian;
 	private String nguon;
-	private String slugurl;
+	private String slug;
 	private int luotxem;
 	private Set<Loaitin> loaitins = new HashSet<Loaitin>(0);
 
 	public Tintuc() {
 	}
 
-	public Tintuc(Taikhoan taikhoan, Trangthai trangthai, String hinhanh, String tieude, String tomtat, String noidung,
-			Date thoigian, String nguon, int luotxem) {
+	public Tintuc(Taikhoan taikhoan, String hinhanh, String tieude, String tomtat, String noidung, Date thoigian,
+			String nguon, int luotxem) {
 		this.taikhoan = taikhoan;
-		this.trangthai = trangthai;
 		this.hinhanh = hinhanh;
 		this.tieude = tieude;
 		this.tomtat = tomtat;
@@ -58,17 +56,16 @@ public class Tintuc implements java.io.Serializable {
 		this.luotxem = luotxem;
 	}
 
-	public Tintuc(Taikhoan taikhoan, Trangthai trangthai, String hinhanh, String tieude, String tomtat, String noidung,
-			Date thoigian, String nguon, String slugurl, int luotxem, Set<Loaitin> loaitins) {
+	public Tintuc(Taikhoan taikhoan, String hinhanh, String tieude, String tomtat, String noidung, Date thoigian,
+			String nguon, String slug, int luotxem, Set<Loaitin> loaitins) {
 		this.taikhoan = taikhoan;
-		this.trangthai = trangthai;
 		this.hinhanh = hinhanh;
 		this.tieude = tieude;
 		this.tomtat = tomtat;
 		this.noidung = noidung;
 		this.thoigian = thoigian;
 		this.nguon = nguon;
-		this.slugurl = slugurl;
+		this.slug = slug;
 		this.luotxem = luotxem;
 		this.loaitins = loaitins;
 	}
@@ -93,16 +90,6 @@ public class Tintuc implements java.io.Serializable {
 
 	public void setTaikhoan(Taikhoan taikhoan) {
 		this.taikhoan = taikhoan;
-	}
-
-	@ManyToOne()
-	@JoinColumn(name = "idtrangthai", nullable = false)
-	public Trangthai getTrangthai() {
-		return this.trangthai;
-	}
-
-	public void setTrangthai(Trangthai trangthai) {
-		this.trangthai = trangthai;
 	}
 
 	@Column(name = "hinhanh", nullable = false, length = 250)
@@ -160,13 +147,13 @@ public class Tintuc implements java.io.Serializable {
 		this.nguon = nguon;
 	}
 
-	@Column(name = "slugurl", unique = true, length = 250)
-	public String getSlugurl() {
-		return this.slugurl;
+	@Column(name = "slug", unique = true, length = 250)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setSlugurl(String slugurl) {
-		this.slugurl = slugurl;
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@Column(name = "luotxem", nullable = false)

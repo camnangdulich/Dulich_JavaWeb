@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -22,7 +22,8 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "loaiphong", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "tenloai") )
+@Table(name = "loaiphong", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tenloai"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Loaiphong implements java.io.Serializable {
 
 	private Integer idloaiphong;
@@ -32,16 +33,11 @@ public class Loaiphong implements java.io.Serializable {
 	private int themgiuong;
 	private String hinhanh;
 	private int gia;
+	private String slug;
 	private Set<Datphong> datphongs = new HashSet<Datphong>(0);
 	private Set<Khachsan> khachsans = new HashSet<Khachsan>(0);
 
 	public Loaiphong() {
-	}
-
-	public Loaiphong(String tenloai, String hinhanh, int gia) {
-		this.tenloai = tenloai;
-		this.hinhanh = hinhanh;
-		this.gia = gia;
 	}
 	
 	public Loaiphong(String tenloai, String mota, int themgiuong, Huong huong, String hinhanh, int gia ) {
@@ -53,7 +49,13 @@ public class Loaiphong implements java.io.Serializable {
 		this.gia = gia;
 	}
 
-	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong, String hinhanh, int gia,
+	public Loaiphong(String tenloai, String hinhanh, int gia) {
+		this.tenloai = tenloai;
+		this.hinhanh = hinhanh;
+		this.gia = gia;
+	}
+
+	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong, String hinhanh, int gia, String slug,
 			Set<Datphong> datphongs, Set<Khachsan> khachsans) {
 		this.huong = huong;
 		this.tenloai = tenloai;
@@ -61,6 +63,7 @@ public class Loaiphong implements java.io.Serializable {
 		this.themgiuong = themgiuong;
 		this.hinhanh = hinhanh;
 		this.gia = gia;
+		this.slug = slug;
 		this.datphongs = datphongs;
 		this.khachsans = khachsans;
 	}
@@ -130,6 +133,15 @@ public class Loaiphong implements java.io.Serializable {
 
 	public void setGia(int gia) {
 		this.gia = gia;
+	}
+
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@OneToMany( mappedBy = "loaiphong")

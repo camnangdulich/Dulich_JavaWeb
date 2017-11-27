@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,15 +19,14 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "trangthai", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "trangthai") )
+@Table(name = "trangthai", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "trangthai"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Trangthai implements java.io.Serializable {
 
 	private Integer idtrangthai;
 	private String trangthai;
 	private String mota;
-	private Set<Tintuc> tintucs = new HashSet<Tintuc>(0);
-	private Set<Tour> tours = new HashSet<Tour>(0);
-	private Set<Congty> congties = new HashSet<Congty>(0);
+	private String slug;
 	private Set<Datphong> datphongs = new HashSet<Datphong>(0);
 	private Set<Khachsan> khachsans = new HashSet<Khachsan>(0);
 	private Set<Taikhoan> taikhoans = new HashSet<Taikhoan>(0);
@@ -40,13 +39,11 @@ public class Trangthai implements java.io.Serializable {
 		this.trangthai = trangthai;
 	}
 
-	public Trangthai(String trangthai, String mota, Set<Tintuc> tintucs, Set<Tour> tours, Set<Congty> congties,
-			Set<Datphong> datphongs, Set<Khachsan> khachsans, Set<Taikhoan> taikhoans, Set<Dattour> dattours) {
+	public Trangthai(String trangthai, String mota, String slug, Set<Datphong> datphongs, Set<Khachsan> khachsans,
+			Set<Taikhoan> taikhoans, Set<Dattour> dattours) {
 		this.trangthai = trangthai;
 		this.mota = mota;
-		this.tintucs = tintucs;
-		this.tours = tours;
-		this.congties = congties;
+		this.slug = slug;
 		this.datphongs = datphongs;
 		this.khachsans = khachsans;
 		this.taikhoans = taikhoans;
@@ -83,31 +80,13 @@ public class Trangthai implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	@OneToMany( mappedBy = "trangthai")
-	public Set<Tintuc> getTintucs() {
-		return this.tintucs;
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setTintucs(Set<Tintuc> tintucs) {
-		this.tintucs = tintucs;
-	}
-
-	@OneToMany( mappedBy = "trangthai")
-	public Set<Tour> getTours() {
-		return this.tours;
-	}
-
-	public void setTours(Set<Tour> tours) {
-		this.tours = tours;
-	}
-
-	@OneToMany( mappedBy = "trangthai")
-	public Set<Congty> getCongties() {
-		return this.congties;
-	}
-
-	public void setCongties(Set<Congty> congties) {
-		this.congties = congties;
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@OneToMany( mappedBy = "trangthai")

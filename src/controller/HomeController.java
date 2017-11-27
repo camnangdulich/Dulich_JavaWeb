@@ -22,6 +22,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,62 +50,94 @@ public class HomeController {
     @Autowired
     ServletContext context;
     
-    @SuppressWarnings("unchecked")
+	// --------------------- Home Index Show ----------------------------
+	// ------------------------------------------------------------------
+    
+	// Lấy thông tin tỉnh thành
+	@ModelAttribute("lsttinhthanh")
+	public List<Tinhthanh> lsttinhthanh(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int tthSize = 7;
+		String hql_tth = "from Tinhthanh";
+		Query query_tth = session.createQuery(hql_tth);
+		query_tth.setMaxResults(tthSize);
+		@SuppressWarnings("unchecked")
+		List<Tinhthanh> lsttinhthanh = query_tth.list();
+		return lsttinhthanh;
+	}
+	
+	// Lấy thông tin tin tức mới nhất
+	@ModelAttribute("lsttintucmoi")
+	public List<Tintuc> lsttintucmoi(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int ttmSize = 8;
+		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";
+		Query query_ttm = session.createQuery(hql_ttm);
+		query_ttm.setMaxResults(ttmSize);
+		@SuppressWarnings("unchecked")
+		List<Tintuc> lsttintucmoi = query_ttm.list();
+		return lsttintucmoi;
+	}
+	
+	// Lấy tin tức có lượt xem nhiều nhất
+	@ModelAttribute("lsttinxemnhieu")
+	public List<Tintuc> lsttinxemnhieu(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int ttxnSize = 8;
+		String hql_ttxn = "from Tintuc ORDER BY luotxem DESC";
+		Query query_ttxn = session.createQuery(hql_ttxn);
+		query_ttxn.setMaxResults(ttxnSize);
+		@SuppressWarnings("unchecked")
+		List<Tintuc> lsttinxemnhieu = query_ttxn.list();
+		return lsttinxemnhieu;
+	}
+	
+	// Lấy đánh giá khách sạn có sao nhiều nhất
+	@ModelAttribute("lstdanhgiakhachsan")
+	public List<Danhgia> lstdanhgiakhachsan(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int dgksSize = 8;
+		String hql_dgks = "from Danhgia ORDER BY star DESC";
+		Query query_dgks = session.createQuery(hql_dgks);
+		query_dgks.setMaxResults(dgksSize);
+		@SuppressWarnings("unchecked")
+		List<Danhgia> lstdanhgiakhachsan = query_dgks.list();
+		return lstdanhgiakhachsan;
+	}
+	
+	// Lấy tour có lượt xem nhiều nhất
+	@ModelAttribute("lsttournoibat")
+	public List<Tour> lsttournoibat(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int tourSize = 8;
+		String hql_tour = "from Tour ORDER BY luotxem DESC";
+		Query query_tour = session.createQuery(hql_tour);
+		query_tour.setMaxResults(tourSize);
+		@SuppressWarnings("unchecked")
+		List<Tour> lsttournoibat = query_tour.list();
+		return lsttournoibat;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// --------------------- PAGE Controller ----------------------------
+	// ------------------------------------------------------------------
+    
     @RequestMapping("index")
     public String index(ModelMap model, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
         model.addAttribute("title", "Cẩm nang du lịch");
-        
-		Session session = factory.getCurrentSession();
-		int tthSize = 7, ttmSize = 8, ttxnSize = 8, dgksSize = 8, tourSize = 8;
-
-		// Lấy thông tin tỉnh thành
-		String hql_tth = "from Tinhthanh";
-		Query query_tth = session.createQuery(hql_tth);
-
-		// Lấy thông tin tin tức mới nhất
-		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";
-		Query query_ttm = session.createQuery(hql_ttm);
-		
-		// Lấy tin tức có lượt xem nhiều nhất
-		String hql_ttxn = "from Tintuc ORDER BY luotxem DESC";
-		Query query_ttxn = session.createQuery(hql_ttxn);
-		
-		// Lấy đánh giá khách sạn có sao nhiều nhất
-		String hql_dgks = "from Danhgia ORDER BY star DESC";
-		Query query_dgks = session.createQuery(hql_dgks);
-		
-		// Lấy tour có lượt xem nhiều nhất
-		String hql_tour = "from Tour ORDER BY luotxem DESC";
-		Query query_tour = session.createQuery(hql_tour);
-
-		query_tth.setFirstResult(tthSize * (page - 1));
-		query_tth.setMaxResults(tthSize);
-
-		query_ttm.setFirstResult(ttmSize * (page - 1));
-		query_ttm.setMaxResults(ttmSize);
-		
-		query_ttxn.setFirstResult(ttxnSize * (page - 1));
-		query_ttxn.setMaxResults(ttxnSize);
-		
-		query_dgks.setFirstResult(dgksSize * (page - 1));
-		query_dgks.setMaxResults(dgksSize);
-		
-		query_tour.setFirstResult(tourSize * (page - 1));
-		query_tour.setMaxResults(tourSize);
-
-		List<Tinhthanh> lsttinhthanh = query_tth.list();
-		List<Tintuc> lsttintucmoi = query_ttm.list();
-		List<Tintuc> lsttinxemnhieu = query_ttxn.list();
-		List<Danhgia> lstdanhgiakhachsan = query_dgks.list();
-		List<Tour> lsttournoibat = query_tour.list();
-
-		model.addAttribute("lsttinhthanh", lsttinhthanh);
-		model.addAttribute("lsttintucmoi", lsttintucmoi);
-		model.addAttribute("lsttinxemnhieu", lsttinxemnhieu);
-		model.addAttribute("lstdanhgiakhachsan", lstdanhgiakhachsan);
-		model.addAttribute("lsttournoibat", lsttournoibat);
-
         return "home/index";
     }
 

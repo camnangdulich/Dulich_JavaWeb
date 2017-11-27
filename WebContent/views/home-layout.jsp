@@ -21,9 +21,12 @@
         <link href="css/modern-business.css" rel="stylesheet">
         <!-- Validation -->
         <script src="lib/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-latest.js"></script>
+		<script type="text/javascript" src="js/jquery.shorten.1.0.js"></script>
         <script src="lib/jquery.mockjax.js"></script>
 		<script src="lib/jquery.form.js"></script>
 		<script src="dist/jquery.validate.js"></script>
+		
 		<!-- Validation custom -->
 		<script src="js/validate_check.js"></script>
     </head>

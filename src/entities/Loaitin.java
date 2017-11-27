@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,12 +19,14 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "loaitin", catalog = "db_dulich", uniqueConstraints = @UniqueConstraint(columnNames = "loaitin") )
+@Table(name = "loaitin", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "loaitin"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Loaitin implements java.io.Serializable {
 
 	private Integer idloaitin;
 	private String loaitin;
 	private String mota;
+	private String slug;
 	private Set<Tintuc> tintucs = new HashSet<Tintuc>(0);
 
 	public Loaitin() {
@@ -39,9 +41,10 @@ public class Loaitin implements java.io.Serializable {
 		this.loaitin = loaitin;
 	}
 
-	public Loaitin(String loaitin, String mota, Set<Tintuc> tintucs) {
+	public Loaitin(String loaitin, String mota, String slug, Set<Tintuc> tintucs) {
 		this.loaitin = loaitin;
 		this.mota = mota;
+		this.slug = slug;
 		this.tintucs = tintucs;
 	}
 
@@ -73,6 +76,15 @@ public class Loaitin implements java.io.Serializable {
 
 	public void setMota(String mota) {
 		this.mota = mota;
+	}
+
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@ManyToMany( mappedBy = "loaitins")

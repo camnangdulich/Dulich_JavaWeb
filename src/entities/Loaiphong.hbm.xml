@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 27, 2017 12:25:05 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Loaiphong" table="loaiphong" catalog="db_dulich" optimistic-lock="version">
         <id name="idloaiphong" type="java.lang.Integer">
@@ -25,6 +25,9 @@
         </property>
         <property name="gia" type="int">
             <column name="gia" not-null="true" />
+        </property>
+        <property name="slug" type="string">
+            <column name="slug" length="100" unique="true" />
         </property>
         <set name="datphongs" table="datphong" inverse="true" lazy="true" fetch="select">
             <key>

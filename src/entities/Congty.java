@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -26,19 +26,18 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "congty", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "email"),
 		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "tencongty"),
-		@UniqueConstraint(columnNames = "idtaikhoan"), @UniqueConstraint(columnNames = "slugurl") })
+		@UniqueConstraint(columnNames = "idtaikhoan"), @UniqueConstraint(columnNames = "slug") })
 public class Congty implements java.io.Serializable {
 
 	private Integer idcongty;
 	private Taikhoan taikhoan;
-	private Trangthai trangthai;
 	private String tencongty;
 	private String diachi;
 	private String mota;
 	private String email;
 	private String sodienthoai;
 	private Date ngaytao;
-	private String slugurl;
+	private String slug;
 	private Set<Tour> tours = new HashSet<Tour>(0);
 
 	public Congty() {
@@ -55,27 +54,24 @@ public class Congty implements java.io.Serializable {
 		this.ngaytao = ngaytao;
 	}
 
-	public Congty(Taikhoan taikhoan, Trangthai trangthai, String tencongty, String diachi, String email,
-			String sodienthoai) {
+	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String email, String sodienthoai) {
 		this.taikhoan = taikhoan;
-		this.trangthai = trangthai;
 		this.tencongty = tencongty;
 		this.diachi = diachi;
 		this.email = email;
 		this.sodienthoai = sodienthoai;
 	}
 
-	public Congty(Taikhoan taikhoan, Trangthai trangthai, String tencongty, String diachi, String mota, String email,
-			String sodienthoai, Date ngaytao, String slugurl, Set<Tour> tours) {
+	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String email, String sodienthoai,
+			Date ngaytao, String slug, Set<Tour> tours) {
 		this.taikhoan = taikhoan;
-		this.trangthai = trangthai;
 		this.tencongty = tencongty;
 		this.diachi = diachi;
 		this.mota = mota;
 		this.email = email;
 		this.sodienthoai = sodienthoai;
 		this.ngaytao = ngaytao;
-		this.slugurl = slugurl;
+		this.slug = slug;
 		this.tours = tours;
 	}
 
@@ -99,16 +95,6 @@ public class Congty implements java.io.Serializable {
 
 	public void setTaikhoan(Taikhoan taikhoan) {
 		this.taikhoan = taikhoan;
-	}
-
-	@ManyToOne()
-	@JoinColumn(name = "idtrangthai", nullable = false)
-	public Trangthai getTrangthai() {
-		return this.trangthai;
-	}
-
-	public void setTrangthai(Trangthai trangthai) {
-		this.trangthai = trangthai;
 	}
 
 	@Column(name = "tencongty", unique = true, nullable = false, length = 100)
@@ -166,16 +152,16 @@ public class Congty implements java.io.Serializable {
 		this.ngaytao = ngaytao;
 	}
 
-	@Column(name = "slugurl", unique = true, length = 100)
-	public String getSlugurl() {
-		return this.slugurl;
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setSlugurl(String slugurl) {
-		this.slugurl = slugurl;
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
-	@OneToMany( mappedBy = "congty")
+	@OneToMany(mappedBy = "congty")
 	public Set<Tour> getTours() {
 		return this.tours;
 	}

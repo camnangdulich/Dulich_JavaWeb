@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -20,31 +20,31 @@ import javax.persistence.UniqueConstraint;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "dichvu", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tendichvu"),
-		@UniqueConstraint(columnNames = "slugurl") })
+		@UniqueConstraint(columnNames = "slug") })
 public class Dichvu implements java.io.Serializable {
 
 	private Integer iddichvu;
 	private String tendichvu;
 	private String mota;
-	private String slugurl;
+	private String slug;
 	private Set<Khachsan> khachsans = new HashSet<Khachsan>(0);
 
 	public Dichvu() {
 	}
 
+	public Dichvu(String tendichvu) {
+		this.tendichvu = tendichvu;
+	}
+	
 	public Dichvu(String tendichvu, String mota) {
 		this.tendichvu = tendichvu;
 		this.mota = mota;
 	}
-	
-	public Dichvu(String tendichvu) {
-		this.tendichvu = tendichvu;
-	}
 
-	public Dichvu(String tendichvu, String mota, String slugurl, Set<Khachsan> khachsans) {
+	public Dichvu(String tendichvu, String mota, String slug, Set<Khachsan> khachsans) {
 		this.tendichvu = tendichvu;
 		this.mota = mota;
-		this.slugurl = slugurl;
+		this.slug = slug;
 		this.khachsans = khachsans;
 	}
 
@@ -78,13 +78,13 @@ public class Dichvu implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	@Column(name = "slugurl", unique = true, length = 100)
-	public String getSlugurl() {
-		return this.slugurl;
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setSlugurl(String slugurl) {
-		this.slugurl = slugurl;
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@ManyToMany( mappedBy = "dichvus")

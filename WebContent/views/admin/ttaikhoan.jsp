@@ -73,13 +73,13 @@
 				                    //console.log(result);
 				                    if(result == "true"){
 				                    	//alert('email ton tai');
-				                    	setTimeout(function(){ alert("Hello"); }, 3000);
+				                    	//setTimeout(function(){ alert("Hello"); }, 3000);
 				                    	$('#loieml').text("email ton tai");
 				                    	
 				                    }else {
 				                    	//alert('email chua ton tai');
 				                    	//$('#loieml').text("email chua ton tai");
-				                    	$( "#ttaikhoan" ).submit();
+				                    	//$( "#ttaikhoan" ).submit();
 				                    }
 				                },
 				                error : function(e) {

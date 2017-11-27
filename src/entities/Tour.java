@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -25,13 +25,12 @@ import javax.persistence.UniqueConstraint;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "tour", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tentour"),
-		@UniqueConstraint(columnNames = "slugurl") })
+		@UniqueConstraint(columnNames = "slug") })
 public class Tour implements java.io.Serializable {
 
 	private Integer idtour;
 	private Congty congty;
 	private Tinhthanh tinhthanh;
-	private Trangthai trangthai;
 	private String tentour;
 	private String mota;
 	private int gia;
@@ -39,32 +38,32 @@ public class Tour implements java.io.Serializable {
 	private Date giokhoihanh;
 	private String lichtrinh;
 	private String luuy;
-	private String slugurl;
+	private String slug;
 	private int luotxem;
+	private String hinhtour;
 	private Set<Dattour> dattours = new HashSet<Dattour>(0);
 
 	public Tour() {
 	}
 
-	public Tour(Congty congty, Tinhthanh tinhthanh, Trangthai trangthai, String tentour, int gia, String diemdi,
-			Date giokhoihanh, String lichtrinh, int luotxem) {
+	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, int gia, String diemdi, Date giokhoihanh,
+			String lichtrinh, int luotxem, String hinhtour) {
 		this.congty = congty;
 		this.tinhthanh = tinhthanh;
-		this.trangthai = trangthai;
 		this.tentour = tentour;
 		this.gia = gia;
 		this.diemdi = diemdi;
 		this.giokhoihanh = giokhoihanh;
 		this.lichtrinh = lichtrinh;
 		this.luotxem = luotxem;
+		this.hinhtour = hinhtour;
 	}
 
-	public Tour(Congty congty, Tinhthanh tinhthanh, Trangthai trangthai, String tentour, String mota, int gia,
-			String diemdi, Date giokhoihanh, String lichtrinh, String luuy, String slugurl, int luotxem,
+	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, String mota, int gia, String diemdi,
+			Date giokhoihanh, String lichtrinh, String luuy, String slug, int luotxem, String hinhtour,
 			Set<Dattour> dattours) {
 		this.congty = congty;
 		this.tinhthanh = tinhthanh;
-		this.trangthai = trangthai;
 		this.tentour = tentour;
 		this.mota = mota;
 		this.gia = gia;
@@ -72,8 +71,9 @@ public class Tour implements java.io.Serializable {
 		this.giokhoihanh = giokhoihanh;
 		this.lichtrinh = lichtrinh;
 		this.luuy = luuy;
-		this.slugurl = slugurl;
+		this.slug = slug;
 		this.luotxem = luotxem;
+		this.hinhtour = hinhtour;
 		this.dattours = dattours;
 	}
 
@@ -107,16 +107,6 @@ public class Tour implements java.io.Serializable {
 
 	public void setTinhthanh(Tinhthanh tinhthanh) {
 		this.tinhthanh = tinhthanh;
-	}
-
-	@ManyToOne()
-	@JoinColumn(name = "idtrangthai", nullable = false)
-	public Trangthai getTrangthai() {
-		return this.trangthai;
-	}
-
-	public void setTrangthai(Trangthai trangthai) {
-		this.trangthai = trangthai;
 	}
 
 	@Column(name = "tentour", unique = true, nullable = false, length = 100)
@@ -183,13 +173,13 @@ public class Tour implements java.io.Serializable {
 		this.luuy = luuy;
 	}
 
-	@Column(name = "slugurl", unique = true, length = 100)
-	public String getSlugurl() {
-		return this.slugurl;
+	@Column(name = "slug", unique = true, length = 100)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setSlugurl(String slugurl) {
-		this.slugurl = slugurl;
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@Column(name = "luotxem", nullable = false)
@@ -199,6 +189,15 @@ public class Tour implements java.io.Serializable {
 
 	public void setLuotxem(int luotxem) {
 		this.luotxem = luotxem;
+	}
+
+	@Column(name = "hinhtour", nullable = false, length = 250)
+	public String getHinhtour() {
+		return this.hinhtour;
+	}
+
+	public void setHinhtour(String hinhtour) {
+		this.hinhtour = hinhtour;
 	}
 
 	@OneToMany( mappedBy = "tour")

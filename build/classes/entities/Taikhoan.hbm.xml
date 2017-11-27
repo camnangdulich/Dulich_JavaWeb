@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 27, 2017 12:25:05 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Taikhoan" table="taikhoan" catalog="db_dulich" optimistic-lock="version">
         <id name="idtaikhoan" type="java.lang.Integer">
@@ -38,11 +38,11 @@
         <property name="ngaytao" type="timestamp">
             <column name="ngaytao" length="19" />
         </property>
-        <property name="slugurl" type="string">
-            <column name="slugurl" length="100" unique="true" />
+        <property name="sluglink" type="string">
+            <column name="sluglink" length="100" unique="true" />
         </property>
-        <property name="khoamatkhau" type="string">
-            <column name="khoamatkhau" length="250" unique="true" />
+        <property name="keypass" type="string">
+            <column name="keypass" length="250" unique="true" />
         </property>
         <set name="tintucs" table="tintuc" inverse="true" lazy="true" fetch="select">
             <key>

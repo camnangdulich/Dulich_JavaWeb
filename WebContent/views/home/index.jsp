@@ -151,135 +151,54 @@
     <h3 class="h3-fx">Khách sạn tốt nhất</h3>
     <hr>
     <div class="row">
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">88 Hilltop Hostel & Villa</a>
-                    </h5>
-                    <p class="p-fx" class="card-text">Trần Hưng Đạo, Khu Phố 7, Thị Trấn Dương Đông</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">88 Hilltop Hostel & Villa</a>
-                    </h5>
-                    <p class="p-fx" class="card-text">Trần Hưng Đạo, Khu Phố 7, Thị Trấn Dương Đông</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">88 Hilltop Hostel & Villa</a>
-                    </h5>
-                    <p class="p-fx" class="card-text">Trần Hưng Đạo, Khu Phố 7, Thị Trấn Dương Đông</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">88 Hilltop Hostel & Villa</a>
-                    </h5>
-                    <p class="p-fx" class="card-text">Trần Hưng Đạo, Khu Phố 7, Thị Trấn Dương Đông</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">88 Hilltop Hostel & Villa</a>
-                    </h5>
-                    <p class="p-fx" class="card-text">Trần Hưng Đạo, Khu Phố 7, Thị Trấn Dương Đông</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">88 Hilltop Hostel & Villa</a>
-                    </h5>
-                    <p class="p-fx" class="card-text">Trần Hưng Đạo, Khu Phố 7, Thị Trấn Dương Đông</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">88 Hilltop Hostel & Villa</a>
-                    </h5>
-                    <p class="p-fx" class="card-text">Trần Hưng Đạo, Khu Phố 7, Thị Trấn Dương Đông</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 portfolio-item">
-            <div class="card h-80">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="#">88 Hilltop Hostel & Villa</a>
-                    </h5>
-                    <p class="p-fx" class="card-text">Trần Hưng Đạo, Khu Phố 7, Thị Trấn Dương Đông</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-        </div>
+    	<c:forEach var="kstn" items="${lstdanhgiakhachsan}">
+	        <div class="col-lg-3 col-sm-6 portfolio-item">
+	        	<div class="card h-80">
+	                <a href="#"><img class="card-img-top" src="files/khachsan/${kstn.khachsan.hinhanh}" alt="${kstn.khachsan.hinhanh}"></a>
+	                <div class="card-body">
+	                    <h6 class="card-title">
+	                        <a href="#">${kstn.khachsan.tenkhachsan}</a>
+	                    </h6>
+	                    <p class="p-fx" class="card-text" style="font-size: 14px; margin-bottom: 5px;">${kstn.khachsan.diachi}</p>
+	                    <c:choose>
+	                    	<c:when test="${kstn.star == 5}">
+	                    		<span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+	                    	</c:when>
+	                    	<c:when test="${kstn.star == 4}">
+	                    		<span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+	                    	</c:when>
+	                    	<c:when test="${kstn.star == 3}">
+	                    		<span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+	                    	</c:when>
+	                    	<c:when test="${kstn.star == 2}">
+	                    		<span class="fa fa-star checked"></span>
+			                    <span class="fa fa-star checked"></span>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<span class="fa fa-star checked"></span>
+	                    	</c:otherwise>
+	                    </c:choose>
+	                </div>
+	            </div>
+	        </div>
+         </c:forEach>
     </div>
+   	<script type="text/javascript">
+		$(".card-title").shorten({
+		    "showChars" : 60,
+		    "moreText"  : "",
+		    "lessText"  : "",
+		});
+	</script>
     <hr>
     <div class="row">
         <div class="col-md-12 text-center"> 

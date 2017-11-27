@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -28,7 +28,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "khachsan", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "tenkhachsan"),
 		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "idtaikhoan"),
-		@UniqueConstraint(columnNames = "slugurl") })
+		@UniqueConstraint(columnNames = "slug") })
 public class Khachsan implements java.io.Serializable {
 
 	private Integer idkhachsan;
@@ -40,7 +40,7 @@ public class Khachsan implements java.io.Serializable {
 	private String sodienthoai;
 	private String diachi;
 	private Date ngaydang;
-	private String slugurl;
+	private String slug;
 	private Set<Dichvu> dichvus = new HashSet<Dichvu>(0);
 	private Set<Danhgia> danhgias = new HashSet<Danhgia>(0);
 	private Set<Loaiphong> loaiphongs = new HashSet<Loaiphong>(0);
@@ -61,8 +61,8 @@ public class Khachsan implements java.io.Serializable {
 	}
 
 	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
-			String sodienthoai, String diachi, Date ngaydang, String slugurl, Set<Dichvu> dichvus,
-			Set<Danhgia> danhgias, Set<Loaiphong> loaiphongs) {
+			String sodienthoai, String diachi, Date ngaydang, String slug, Set<Dichvu> dichvus, Set<Danhgia> danhgias,
+			Set<Loaiphong> loaiphongs) {
 		this.taikhoan = taikhoan;
 		this.tinhthanh = tinhthanh;
 		this.trangthai = trangthai;
@@ -71,7 +71,7 @@ public class Khachsan implements java.io.Serializable {
 		this.sodienthoai = sodienthoai;
 		this.diachi = diachi;
 		this.ngaydang = ngaydang;
-		this.slugurl = slugurl;
+		this.slug = slug;
 		this.dichvus = dichvus;
 		this.danhgias = danhgias;
 		this.loaiphongs = loaiphongs;
@@ -165,13 +165,13 @@ public class Khachsan implements java.io.Serializable {
 		this.ngaydang = ngaydang;
 	}
 
-	@Column(name = "slugurl", unique = true, length = 45)
-	public String getSlugurl() {
-		return this.slugurl;
+	@Column(name = "slug", unique = true, length = 45)
+	public String getSlug() {
+		return this.slug;
 	}
 
-	public void setSlugurl(String slugurl) {
-		this.slugurl = slugurl;
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	@ManyToMany()

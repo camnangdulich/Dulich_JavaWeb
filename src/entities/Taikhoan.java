@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 12:25:04 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -25,8 +25,8 @@ import javax.persistence.UniqueConstraint;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "taikhoan", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "email"),
-		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "slugurl"),
-		@UniqueConstraint(columnNames = "khoamatkhau") })
+		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "sluglink"),
+		@UniqueConstraint(columnNames = "keypass") })
 public class Taikhoan implements java.io.Serializable {
 
 	private Integer idtaikhoan;
@@ -40,8 +40,8 @@ public class Taikhoan implements java.io.Serializable {
 	private String diachi;
 	private String avatar;
 	private Date ngaytao;
-	private String slugurl;
-	private String khoamatkhau;
+	private String sluglink;
+	private String keypass;
 	private Set<Tintuc> tintucs = new HashSet<Tintuc>(0);
 	private Set<Khachsan> khachsans = new HashSet<Khachsan>(0);
 	private Set<Phanhoi> phanhois = new HashSet<Phanhoi>(0);
@@ -53,14 +53,7 @@ public class Taikhoan implements java.io.Serializable {
 	public Taikhoan() {
 	}
 
-	public Taikhoan(Quyen quyen, Trangthai trangthai, String email, String matkhau, String sodienthoai) {
-		this.quyen = quyen;
-		this.trangthai = trangthai;
-		this.email = email;
-		this.matkhau = matkhau;
-		this.sodienthoai = sodienthoai;
-	}
-	
+
 	public Taikhoan(String email, String matkhau, String sodienthoai, String avatar, Date ngaytao, Quyen quyen, Trangthai trangthai) {
 		this.email = email;
 		this.matkhau = matkhau;
@@ -70,9 +63,17 @@ public class Taikhoan implements java.io.Serializable {
 		this.quyen = quyen;
 		this.trangthai = trangthai;
 	}
+	
+	public Taikhoan(Quyen quyen, Trangthai trangthai, String email, String matkhau, String sodienthoai) {
+		this.quyen = quyen;
+		this.trangthai = trangthai;
+		this.email = email;
+		this.matkhau = matkhau;
+		this.sodienthoai = sodienthoai;
+	}
 
 	public Taikhoan(Quyen quyen, Trangthai trangthai, String email, String matkhau, String hodem, String ten,
-			String sodienthoai, String diachi, String avatar, Date ngaytao, String slugurl, String khoamatkhau,
+			String sodienthoai, String diachi, String avatar, Date ngaytao, String sluglink, String keypass,
 			Set<Tintuc> tintucs, Set<Khachsan> khachsans, Set<Phanhoi> phanhois, Set<Datphong> datphongs,
 			Set<Dattour> dattours, Set<Congty> congties, Set<Danhgia> danhgias) {
 		this.quyen = quyen;
@@ -85,8 +86,8 @@ public class Taikhoan implements java.io.Serializable {
 		this.diachi = diachi;
 		this.avatar = avatar;
 		this.ngaytao = ngaytao;
-		this.slugurl = slugurl;
-		this.khoamatkhau = khoamatkhau;
+		this.sluglink = sluglink;
+		this.keypass = keypass;
 		this.tintucs = tintucs;
 		this.khachsans = khachsans;
 		this.phanhois = phanhois;
@@ -201,25 +202,25 @@ public class Taikhoan implements java.io.Serializable {
 		this.ngaytao = ngaytao;
 	}
 
-	@Column(name = "slugurl", unique = true, length = 100)
-	public String getSlugurl() {
-		return this.slugurl;
+	@Column(name = "sluglink", unique = true, length = 100)
+	public String getSluglink() {
+		return this.sluglink;
 	}
 
-	public void setSlugurl(String slugurl) {
-		this.slugurl = slugurl;
+	public void setSluglink(String sluglink) {
+		this.sluglink = sluglink;
 	}
 
-	@Column(name = "khoamatkhau", unique = true, length = 250)
-	public String getKhoamatkhau() {
-		return this.khoamatkhau;
+	@Column(name = "keypass", unique = true, length = 250)
+	public String getKeypass() {
+		return this.keypass;
 	}
 
-	public void setKhoamatkhau(String khoamatkhau) {
-		this.khoamatkhau = khoamatkhau;
+	public void setKeypass(String keypass) {
+		this.keypass = keypass;
 	}
 
-	@OneToMany( mappedBy = "taikhoan")
+	@OneToMany(mappedBy = "taikhoan")
 	public Set<Tintuc> getTintucs() {
 		return this.tintucs;
 	}
@@ -228,7 +229,7 @@ public class Taikhoan implements java.io.Serializable {
 		this.tintucs = tintucs;
 	}
 
-	@OneToMany( mappedBy = "taikhoan")
+	@OneToMany(mappedBy = "taikhoan")
 	public Set<Khachsan> getKhachsans() {
 		return this.khachsans;
 	}
@@ -237,7 +238,7 @@ public class Taikhoan implements java.io.Serializable {
 		this.khachsans = khachsans;
 	}
 
-	@OneToMany( mappedBy = "taikhoan")
+	@OneToMany(mappedBy = "taikhoan")
 	public Set<Phanhoi> getPhanhois() {
 		return this.phanhois;
 	}
@@ -246,7 +247,7 @@ public class Taikhoan implements java.io.Serializable {
 		this.phanhois = phanhois;
 	}
 
-	@OneToMany( mappedBy = "taikhoan")
+	@OneToMany(mappedBy = "taikhoan")
 	public Set<Datphong> getDatphongs() {
 		return this.datphongs;
 	}
@@ -255,7 +256,7 @@ public class Taikhoan implements java.io.Serializable {
 		this.datphongs = datphongs;
 	}
 
-	@OneToMany( mappedBy = "taikhoan")
+	@OneToMany(mappedBy = "taikhoan")
 	public Set<Dattour> getDattours() {
 		return this.dattours;
 	}
@@ -264,7 +265,7 @@ public class Taikhoan implements java.io.Serializable {
 		this.dattours = dattours;
 	}
 
-	@OneToMany( mappedBy = "taikhoan")
+	@OneToMany(mappedBy = "taikhoan")
 	public Set<Congty> getCongties() {
 		return this.congties;
 	}
@@ -273,7 +274,7 @@ public class Taikhoan implements java.io.Serializable {
 		this.congties = congties;
 	}
 
-	@OneToMany( mappedBy = "taikhoan")
+	@OneToMany(mappedBy = "taikhoan")
 	public Set<Danhgia> getDanhgias() {
 		return this.danhgias;
 	}
