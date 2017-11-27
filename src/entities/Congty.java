@@ -43,9 +43,10 @@ public class Congty implements java.io.Serializable {
 	public Congty() {
 	}
 	
-	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String email, String sodienthoai,
+	public Congty(Taikhoan taikhoan,Trangthai trangthai, String tencongty, String diachi, String mota, String email, String sodienthoai,
 			Date ngaytao) {
 		this.taikhoan = taikhoan;
+		this.trangthai = trangthai;
 		this.tencongty = tencongty;
 		this.diachi = diachi;
 		this.mota = mota;

@@ -26,6 +26,17 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Trạng thái </label>
+                            <div class="col-sm-10" id="label-validation">
+                                <select name="trangthai" class="form-control" >
+                                	<option selected="selected" hidden value="${com.trangthai.idtrangthai}">${com.trangthai.trangthai}></option>
+                                	<c:forEach var="trang" items="${tranglist}">
+                                    	<option value="${trang.idtrangthai}">${trang.trangthai}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Tên công ty</label>
 							<div class="col-sm-10">

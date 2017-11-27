@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import entities.Congty;
 import entities.Datphong;
+import entities.Dattour;
 import entities.Dichvu;
 import entities.Huong;
 import entities.Khachsan;
@@ -49,17 +50,6 @@ public class Huycontroller {
 	// --------------------- ModelAttribute -----------------------------
 		// ------------------------------------------------------------------
 		
-		// Lấy tất cả thông tin tài khoản
-		@ModelAttribute("tklist")
-		public List<Taikhoan> gettk(ModelMap model) {
-			Session session = factory.getCurrentSession();
-			String hql = "from Taikhoan";
-			Query query = session.createQuery(hql);
-			@SuppressWarnings("unchecked")
-			List<Taikhoan> list = query.list();
-			return list;
-		}
-		
 		// Lấy tất cả thông tin quyền
 		@ModelAttribute("qlist")
 		public List<Quyen> getq(ModelMap model) {
@@ -71,16 +61,6 @@ public class Huycontroller {
 			return list;
 		}
 		
-		// Lấy tất cả thông tin bài viết (Bảng Tintuc)
-		@ModelAttribute("bvlist")
-		public List<Tintuc> getbv(ModelMap model) {
-			Session session = factory.getCurrentSession();
-			String hql = "from Tintuc";
-			Query query = session.createQuery(hql);
-			@SuppressWarnings("unchecked")
-			List<Tintuc> list = query.list();
-			return list;
-		}
 		
 		// Lấy tất cả thông tin loại bài viết
 		@ModelAttribute("lbvlist")
@@ -112,17 +92,6 @@ public class Huycontroller {
 			Query query = session.createQuery(hql);
 			@SuppressWarnings("unchecked")
 			List<Trangthai> list = query.list();
-			return list;
-		}
-		
-		// Lấy tất cả thông tin tinh thanh
-		@ModelAttribute("tthlist")
-		public List<Tinhthanh> gettth(ModelMap model) {
-			Session session = factory.getCurrentSession();
-			String hql = "from Tinhthanh";
-			Query query = session.createQuery(hql);
-			@SuppressWarnings("unchecked")
-			List<Tinhthanh> list = query.list();
 			return list;
 		}
 		
@@ -168,26 +137,7 @@ public class Huycontroller {
 			List<Congty> list = query.list();
 			return list;
 		}
-		// Lấy thông tin Tour
-		@ModelAttribute("tulist")
-		public List<Tour> gettu(ModelMap model) {
-			Session session = factory.getCurrentSession();
-			String hql = "from Tour";
-			Query query = session.createQuery(hql);
-			@SuppressWarnings("unchecked")
-			List<Tour> list = query.list();
-			return list;
-		}
-		//Lấy tất cả thông tin hướng
-		@ModelAttribute("hulist")
-		public List<Huong> geth(ModelMap model) {
-			Session session = factory.getCurrentSession();
-			String hql = "from Huong";
-			Query query = session.createQuery(hql);
-			@SuppressWarnings("unchecked")
-			List<Huong> list = query.list();
-			return list;
-		}
+
 		//Lấy tất thông tin đặt phòng
 		@ModelAttribute("dlist")
 		public List<Datphong> getd(ModelMap model) {
@@ -199,6 +149,28 @@ public class Huycontroller {
 			return list;
 		}
 		
+		//Lấy tất cả trạng  thái
+		@ModelAttribute("tranglist")
+		public List<Trangthai> gettrang(ModelMap model) {
+			Session session = factory.getCurrentSession();
+			String hql = "from Trangthai";
+			Query query = session.createQuery(hql);
+			@SuppressWarnings("unchecked")
+			List<Trangthai> list = query.list();
+			return list;
+		}
+		
+		//Lấy tất cả danh sách đặt tour
+		@ModelAttribute("datlist")
+		public List<Dattour> getdt(ModelMap model) {
+			Session session = factory.getCurrentSession();
+			String hql = "from Dattour";
+			Query query = session.createQuery(hql);
+			@SuppressWarnings("unchecked")
+			List<Dattour> list = query.list();
+			System.out.println(list);
+			return list;
+		}
 		
 		
 		
@@ -207,11 +179,68 @@ public class Huycontroller {
 		
 		
 		
+		// --------------------- PAGE Controller ----------------------------
+		// ------------------------------------------------------------------
+		
+
+		
+
+		
+		// Trang danh sách quyền
+		@RequestMapping("dsquyen")
+		public String dsquyen(ModelMap model) {
+			model.addAttribute("title", "Danh sách quyền");
+			return "admin/dsquyen";
+		}
+		// Trang loại bài viết
+		@RequestMapping("dsloaibv")
+		public String dsloaibv(ModelMap model) {
+			model.addAttribute("title", "Danh loại bài viết");
+			return "admin/dsloaibv";
+		}
+		
+		// Trang loại phòng
+		@RequestMapping("dsloaiphong")
+		public String dsloaiphong(ModelMap model) {
+			model.addAttribute("title", "Danh loại phòng");
+			return "admin/dsloaiphong";
+		}
+		
+		// Quản lý tỉnh thành 
+		@RequestMapping("dstinhthanh")
+		public String dstinhthanh(ModelMap model) {
+			model.addAttribute("title", "Danh sách tỉnh thành");
+			return "admin/dstinhthanh";
+		}
+		
+		// Trang quản lý công ty
+		@RequestMapping("dscongty")
+		public String dscongty(ModelMap model) {
+			model.addAttribute("title", "Danh sách công ty");
+			return "admin/dscongty";
+		}
+		
+		// Trang danh sách dịch vụ
+		@RequestMapping("dsdichvu")
+		public String dsdichvu(ModelMap model) {
+			model.addAttribute("title", "Danh sách dịch vụ");
+			return "admin/dsdichvu";
+		}
+		
+		//Trang danh sách đặt phòng
+		@RequestMapping("dsdatphong")
+		public String dsdatphong(ModelMap model) {
+			model.addAttribute("title", "Danh sách đặt phòng");
+			return "admin/dsdatphong";
+		}
 		
 		
-		
-		
-		
+		//Trang danh sách đặt tour
+		@RequestMapping("dsdattour")
+		public String dsdattour(ModelMap model) {
+			model.addAttribute("title", "Danh sách đặt phòng");
+			return "admin/dsdattour";
+		}
 		
 		
 		
@@ -226,7 +255,42 @@ public class Huycontroller {
 	
 	// --------------------- ADD Controller -----------------------------
 	// ------------------------------------------------------------------
-	
+//	//Đặt phòng 
+//		@RequestMapping("datphong")
+//		public String datphong(ModelMap model) {
+//			model.addAttribute("title", "Thêm công ty mới");
+//			return "home/datphong";
+//		}
+//		
+//		@RequestMapping(value = "datphong", method = RequestMethod.POST)
+//		public String datphong(ModelMap model,
+//				@RequestParam("loaiphong") Integer loaiphong,
+//				@RequestParam("ngaynhanphong") Date ngaynhanphong,
+//				@RequestParam("ngaytraphong") Date ngaytraphong,
+//				@RequestParam("soluong") Integer soluong,
+//				@RequestParam("hodem") String hodem,
+//				@RequestParam("sodienthoai") String sodienthoai,
+//				@RequestParam("email") String email){
+//
+//			Session session = factory.openSession();
+//			Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
+//			Trangthai trang = (Trangthai) session.get(Trangthai.class, trangthai);
+//			Date ngaytao = new Date();
+//			Congty c = new Congty(tk, trang, tencongty, diachi, mota, email, sodienthoai, ngaytao);
+//			Transaction t = session.beginTransaction();
+//			try {
+//				session.save(c);
+//				t.commit();
+//				model.addAttribute("message", "Đặt phòng thành công!");
+//				return "home/datphong";
+//			} catch (Exception e) {
+//				t.rollback();
+//				model.addAttribute("message", "Đặt phòng thất bại!");
+//			} finally {
+//				session.close();
+//			}
+//			return "home/datphong";
+//		}
 	// Thêm quyền mới
 	@RequestMapping("tquyen")
 	public String tquyen(ModelMap model) {
@@ -414,6 +478,7 @@ public class Huycontroller {
 	@RequestMapping(value = "tcongty", method = RequestMethod.POST)
 	public String tcongty(ModelMap model,
 			@RequestParam("taikhoan") Integer taikhoan,
+			@RequestParam("trangthai") Integer trangthai,
 			@RequestParam("tencongty") String tencongty,
 			@RequestParam("diachi") String diachi,
 			@RequestParam("mota") String mota,
@@ -422,8 +487,9 @@ public class Huycontroller {
 
 		Session session = factory.openSession();
 		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
+		Trangthai trang = (Trangthai) session.get(Trangthai.class, trangthai);
 		Date ngaytao = new Date();
-		Congty c = new Congty(tk, tencongty, diachi, mota, email, sodienthoai, ngaytao);
+		Congty c = new Congty(tk, trang, tencongty, diachi, mota, email, sodienthoai, ngaytao);
 		Transaction t = session.beginTransaction();
 		try {
 			session.save(c);
@@ -687,6 +753,7 @@ public class Huycontroller {
 		public String scongty(ModelMap model,
 				@RequestParam("idcongty") Integer idcongty,
 				@RequestParam("taikhoan") Integer taikhoan,
+				@RequestParam("trangthai") Integer trangthai,
 				@RequestParam("tencongty") String tencongty,
 				@RequestParam("diachi") String diachi,
 				@RequestParam("mota") String mota,
@@ -697,7 +764,9 @@ public class Huycontroller {
 			Transaction t = session.beginTransaction();
 			Congty c = (Congty) session.get(Congty.class, idcongty);
 			Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
+			Trangthai trang = (Trangthai) session.get(Trangthai.class, trangthai);
 			c.setTaikhoan(tk);
+			c.setTrangthai(trang);
 			c.setTencongty(tencongty);
 			c.setDiachi(diachi);
 			c.setMota(mota);
