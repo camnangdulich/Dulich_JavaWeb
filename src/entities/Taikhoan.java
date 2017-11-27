@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 11:23:30 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 2:56:12 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -52,14 +52,6 @@ public class Taikhoan implements java.io.Serializable {
 
 	public Taikhoan() {
 	}
-
-	public Taikhoan(Quyen quyen, Trangthai trangthai, String email, String matkhau, String sodienthoai) {
-		this.quyen = quyen;
-		this.trangthai = trangthai;
-		this.email = email;
-		this.matkhau = matkhau;
-		this.sodienthoai = sodienthoai;
-	}
 	
 	public Taikhoan(String email, String matkhau, String sodienthoai, String avatar, Date ngaytao, Quyen quyen, Trangthai trangthai) {
 		this.email = email;
@@ -69,6 +61,14 @@ public class Taikhoan implements java.io.Serializable {
 		this.ngaytao = ngaytao;
 		this.quyen = quyen;
 		this.trangthai = trangthai;
+	}
+
+	public Taikhoan(Quyen quyen, Trangthai trangthai, String email, String matkhau, String sodienthoai) {
+		this.quyen = quyen;
+		this.trangthai = trangthai;
+		this.email = email;
+		this.matkhau = matkhau;
+		this.sodienthoai = sodienthoai;
 	}
 
 	public Taikhoan(Quyen quyen, Trangthai trangthai, String email, String matkhau, String hodem, String ten,

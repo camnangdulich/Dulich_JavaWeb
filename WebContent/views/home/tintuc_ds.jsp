@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
     <!-- Breadcrumbs -->
     <ol class="breadcrumb" style="margin-top: 20px;">
@@ -11,150 +13,33 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text" class="p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        </div>
-                        <div class="card-footer text-muted sp-ttm">
-                            Posted on January 1, 2017 by
-                            <a href="#">Start Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Pagination -->
+
+			<div class="row">
+				<c:forEach var="dst" items="${loaitinlst}">
+					<div class="col-md-6">
+						<!-- Blog Post -->
+						<div class="card mb-4">
+							<img class="card-img-top" src="http://placehold.it/750x300"
+								alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title">${dst.}</h5>
+								<p class="card-text" class="p-fx">Lorem ipsum dolor sit
+									amet, consectetur adipisicing elit. Reiciendis aliquid atque,
+									nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita
+									corporis animi vero voluptate voluptatibus possimus, veniam
+									magni quis!</p>
+							</div>
+							<div class="card-footer text-muted sp-ttm">
+								Posted on January 1, 2017 by <a href="#">Start Bootstrap</a>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+
+
+			<!-- Pagination -->
             <ul class="pagination justify-content-center mb-4">
                 <li class="page-item">
                     <a class="page-link" href="#">&larr; Older</a>

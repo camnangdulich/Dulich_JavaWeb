@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import entities.Chitiettin;
 import entities.Danhgia;
 import entities.Loaitin;
 import entities.Quyen;
@@ -251,14 +252,17 @@ public class HomeController {
 	
 	
 	// Danh sách tin tức
-	@RequestMapping("danh-sach-tin-tuc/{id}")
-	public String staikhoan(ModelMap model, @PathVariable("id") Integer idlt) {
-		model.addAttribute("title", "Danh sách tin tức" + idlt);
-		Session session = factory.getCurrentSession();
-		Loaitin lt = (Loaitin) session.get(Loaitin.class, idlt);
-		model.addAttribute("dslt", lt);
-		return "home/tintuc_ds";
-	}
+//	@RequestMapping("danh-sach-tin-tuc/{id}")
+//	public String staikhoan(ModelMap model, @PathVariable("id") Integer idlt) {
+//		model.addAttribute("title", "Danh sách tin tức");
+//		Session session = factory.getCurrentSession();
+//		//Loaitin lt = (Loaitin) session.get(Loaitin.class, idlt);
+//		Chitiettin ctt = (Chitiettin) session.get(Chitiettin.class, idlt);
+//		//Tintuc a = lt.getTintucs();
+//		//System.out.println(a);
+//		model.addAttribute("dslt", ctt);
+//		return "home/tintuc_ds";
+//	}
 	
 	
 	

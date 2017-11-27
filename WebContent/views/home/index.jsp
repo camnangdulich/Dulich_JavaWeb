@@ -216,11 +216,11 @@
 	            <div class="card h-80">
 	                <a href="#"><img class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
 	                <div class="card-body">
-	                    <h5 class="card-title">
+	                    <h6 class="card-title">
 	                        <a href="#">${tur.tentour}</a>
-	                    </h5>
+	                    </h6>
 	                    <p style="font-size: 13px;" class="card-text">${tur.diemdi} <i class="fa fa-long-arrow-right"></i> ${tur.tinhthanh.tinhthanh}</p>
-	                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>
+	                    <h5 style="color: green;"><i class="fa fa-money"></i> ${String.format("%,d", tur.gia)}  VNĐ</h5>
 	                </div>
 	            </div>
 	        </div>

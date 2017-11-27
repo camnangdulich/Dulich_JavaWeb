@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 27, 2017 11:23:30 AM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Nov 27, 2017 2:56:12 PM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Khachsan" table="khachsan" catalog="db_dulich" optimistic-lock="version">
         <id name="idkhachsan" type="java.lang.Integer">
@@ -35,13 +35,11 @@
         <property name="slug" type="string">
             <column name="slug" length="45" unique="true" />
         </property>
-        <set name="dichvus" table="chitietdichvu" inverse="false" lazy="true" fetch="select">
+        <set name="chitietdichvus" table="chitietdichvu" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idkhachsan" not-null="true" />
             </key>
-            <many-to-many entity-name="entities.Dichvu">
-                <column name="iddichvu" not-null="true" />
-            </many-to-many>
+            <one-to-many class="entities.Chitietdichvu" />
         </set>
         <set name="danhgias" table="danhgia" inverse="true" lazy="true" fetch="select">
             <key>
@@ -49,13 +47,11 @@
             </key>
             <one-to-many class="entities.Danhgia" />
         </set>
-        <set name="loaiphongs" table="chitietloaiphong" inverse="false" lazy="true" fetch="select">
+        <set name="chitietloaiphongs" table="chitietloaiphong" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idkhachsan" not-null="true" />
             </key>
-            <many-to-many entity-name="entities.Loaiphong">
-                <column name="idloaiphong" not-null="true" />
-            </many-to-many>
+            <one-to-many class="entities.Chitietloaiphong" />
         </set>
     </class>
 </hibernate-mapping>

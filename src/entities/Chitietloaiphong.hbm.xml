@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2017 2:56:12 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="entities.Chitietloaiphong" table="chitietloaiphong" catalog="db_dulich" optimistic-lock="version">
+        <id name="idchitietloaiphong" type="java.lang.Integer">
+            <column name="idchitietloaiphong" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="khachsan" class="entities.Khachsan" fetch="select">
+            <column name="idkhachsan" not-null="true" />
+        </many-to-one>
+        <many-to-one name="loaiphong" class="entities.Loaiphong" fetch="select">
+            <column name="idloaiphong" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
