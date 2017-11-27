@@ -368,11 +368,11 @@ public class HomeController {
         return "home/khachsan";
     }
 
-    @RequestMapping("datphong")
-    public String datphong(ModelMap model) {
-        model.addAttribute("title", "Đặt phòng");
-        return "home/datphong";
-    }
+//    @RequestMapping("datphong")
+//    public String datphong(ModelMap model) {
+//        model.addAttribute("title", "Đặt phòng");
+//        return "home/datphong";
+//    }
 
     @RequestMapping("tttaikhoan")
     public String tttaikhoan(ModelMap model) {
@@ -391,5 +391,8 @@ public class HomeController {
         model.addAttribute("title", "Phản hồi");
         return "home/phanhoi";
     }
+    
+    
+    
     
 }

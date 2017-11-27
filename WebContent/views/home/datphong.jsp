@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
 	<!-- Breadcrumbs -->
 	<ol class="breadcrumb" style="margin-top: 20px;">
@@ -14,10 +16,13 @@
 				<div class="card-body">
 					<form class="form-horizontal">
 						<div class="form-group row">
-							<label class="col-4 col-form-label">Loại phòng</label>
-							<div class="col-4 col-form-label">
-								<select name="huong" class="form-control">
-									<option selected="selected"></option>
+							<label class="col-4 col-form-label">Loại phòng zz</label>
+							<div class="col-8">
+								<select name="loaiphong" class="form-control">
+									<option selected="selected" disabled="disabled">-- Chọn loại phòng --</option>
+									<c:forEach var="lp" items="${loaiplist}">
+										<option value="">${lp.tenloai}</option>
+									</c:forEach>
 								</select>
 							</div>
 						</div>
@@ -63,13 +68,6 @@
 								<input class="form-control" type="email" value="">
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-4 col-form-label">Ghi chú</label>
-							<div class="col-8">
-								<textarea class="form-control" rows="4" value=""></textarea>
-							</div>
-						</div>
-						<hr>
 						<div class="col-md-12">
 							<div class="form-check">
 								<label class="custom-control custom-checkbox"> <input

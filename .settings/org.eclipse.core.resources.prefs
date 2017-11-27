@@ -2,5 +2,6 @@ eclipse.preferences.version=1
 encoding//WebContent/views/admin/dskhachsan.jsp=UTF-8
 encoding//src/controller/AdminController.java=UTF-8
 encoding//src/controller/HomeController.java=UTF-8
+encoding//src/controller/HuyHomeController.java=UTF-8
 encoding//src/controller/Huycontroller.java=UTF-8
 encoding//src/controller/MailerController.java=UTF-8
