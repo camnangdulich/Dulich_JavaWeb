@@ -20,7 +20,7 @@
                             <div class="col-sm-10" id="label-validation">
                                 <select name="quyen" class="form-control">
                                 	<option selected="selected" disabled>-- Chọn quyền --</option>
-                                	<c:forEach var="q" items="${qlist}">
+                                	<c:forEach var="q" items="${quyenlist}">
                                     	<option value="${q.idquyen}">${q.quyen}</option>
                                     </c:forEach>
                                 </select>
