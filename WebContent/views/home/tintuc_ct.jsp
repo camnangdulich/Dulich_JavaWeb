@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
     <!-- Breadcrumbs -->
     <ol class="breadcrumb" style="margin-top: 20px;">
@@ -98,49 +100,38 @@
 
         <!-- Sidebar -->
         <div class="col-md-4">
-
             <!-- Danh mục tin tức -->
             <div class="card mb-4">
-                <h5 class="card-header">Danh mục tin tức</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <ul>
-                            <li><a href="#">Loại tin 01</a></li>
-                            <li><a href="#">Loại tin 02</a></li>
-                            <li><a href="#">Loại tin 03</a></li>
-                            <li><a href="#">Loại tin 04</a></li>
-                            <li><a href="#">Loại tin 05</a></li>
-                            <li><a href="#">Loại tin 06</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <h5 class="card-header" style="border: none;">Danh mục tin tức</h5>
+                <div class="list-group" id="dmtt">
+                	<c:forEach var="dmtt" items="${loaitinlst}">
+                		<c:choose>
+				        	<c:when test="${dmtt.idloaitin == idloaitin}">
+				        		<a href="#" class="list-group-item active">${dmtt.loaitin}</a>
+				        	</c:when>
+				        	<c:otherwise>
+				        		<a href="#" class="list-group-item">${dmtt.loaitin}</a>
+				        	</c:otherwise>
+				        </c:choose>
+		            </c:forEach>
+          		</div>
             </div>
 
             <!-- Tin mới nhất -->
             <div class="card my-4">
                 <h5 class="card-header">Tin mới nhất</h5>
                 <div class="card-body">
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla?</p>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla?</p>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla?</p>
-                        </div>
-                    </div>
+	                <c:forEach var="ttm" items="${lstsibarttm}">
+	                	<div class="card mb-4">
+	                        <img style="border-radius: inherit;" class="card-img-top" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
+	                        <div class="card-body">
+	                            <h6 class="card-title">${ttm.tieude}</h6>
+	                            <div class="card-footer text-muted sp-ttm">
+									<i class="fa fa-fw fa-clock-o ft-lh"></i> ${ttm.thoigian}
+								</div>
+	                        </div>
+	                    </div>
+	                </c:forEach>
                 </div>
                 <ul class="pagination justify-content-center mb-4">
                     <li class="page-item">
@@ -153,27 +144,17 @@
             <div class="card my-4">
                 <h5 class="card-header">Xem nhiều nhất</h5>
                 <div class="card-body">
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla?</p>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla?</p>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla?</p>
-                        </div>
-                    </div>
+                    <c:forEach var="ttm" items="${lstsibarttxn}">
+	                	<div class="card mb-4">
+	                        <img style="border-radius: inherit;" class="card-img-top" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
+	                        <div class="card-body">
+	                            <h6 class="card-title">${ttm.tieude}</h6>
+	                            <div class="card-footer text-muted sp-ttm">
+									<i class="fa fa-fw fa-eye ft-lh"></i> ${ttm.luotxem} lượt xem
+								</div>
+	                        </div>
+	                    </div>
+	                </c:forEach>
                 </div>
                 <ul class="pagination justify-content-center mb-4">
                     <li class="page-item">
@@ -181,7 +162,6 @@
                     </li>
                 </ul>
             </div>
-
         </div>
 
     </div>

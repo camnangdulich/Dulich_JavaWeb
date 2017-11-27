@@ -6,7 +6,14 @@
     <head>
         <base href="${pageContext.servletContext.contextPath}/">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${title}</title>
+        <c:choose>
+        	<c:when test="${title == null}">
+        		<title>Cẩm nang du lịch zz</title>
+        	</c:when>
+        	<c:otherwise>
+        		<title>${title}</title>
+        	</c:otherwise>
+        </c:choose>
 		<!--Sweetalert.min-->
 		<script src="js/sweetalert.min.js" type="text/javascript"></script>
 		<!--Sweetalert css-->

@@ -82,6 +82,19 @@ public class HomeController {
 		return lsttintucmoi;
 	}
 	
+	// Lấy thông tin tin tức mới nhất SIBAR
+	@ModelAttribute("lstsibarttm")
+	public List<Tintuc> lstsibarttm(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int ttmSize = 3;
+		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";
+		Query query_ttm = session.createQuery(hql_ttm);
+		query_ttm.setMaxResults(ttmSize);
+		@SuppressWarnings("unchecked")
+		List<Tintuc> lstsibarttm = query_ttm.list();
+		return lstsibarttm;
+	}
+	
 	// Lấy tin tức có lượt xem nhiều nhất
 	@ModelAttribute("lsttinxemnhieu")
 	public List<Tintuc> lsttinxemnhieu(ModelMap model) {
@@ -93,6 +106,19 @@ public class HomeController {
 		@SuppressWarnings("unchecked")
 		List<Tintuc> lsttinxemnhieu = query_ttxn.list();
 		return lsttinxemnhieu;
+	}
+	
+	// Lấy tin tức có lượt xem nhiều nhất SIBAR
+	@ModelAttribute("lstsibarttxn")
+	public List<Tintuc> lstsibarttxn(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int ttxnSize = 3;
+		String hql_ttxn = "from Tintuc ORDER BY luotxem DESC";
+		Query query_ttxn = session.createQuery(hql_ttxn);
+		query_ttxn.setMaxResults(ttxnSize);
+		@SuppressWarnings("unchecked")
+		List<Tintuc> lstsibarttxn = query_ttxn.list();
+		return lstsibarttxn;
 	}
 	
 	// Lấy đánh giá khách sạn có sao nhiều nhất
@@ -252,17 +278,53 @@ public class HomeController {
 	
 	
 	// Danh sách tin tức
-//	@RequestMapping("danh-sach-tin-tuc/{id}")
-//	public String staikhoan(ModelMap model, @PathVariable("id") Integer idlt) {
-//		model.addAttribute("title", "Danh sách tin tức");
-//		Session session = factory.getCurrentSession();
-//		//Loaitin lt = (Loaitin) session.get(Loaitin.class, idlt);
-//		Chitiettin ctt = (Chitiettin) session.get(Chitiettin.class, idlt);
-//		//Tintuc a = lt.getTintucs();
-//		//System.out.println(a);
-//		model.addAttribute("dslt", ctt);
-//		return "home/tintuc_ds";
-//	}
+	@RequestMapping("tin-tuc/{id}")
+	public String dstintuc(ModelMap model, @PathVariable("id") Integer idlt, HttpSession httpsession,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+		
+		Session session = factory.getCurrentSession();
+		int total = 0, pageSize = 10;
+		String hql = "from Chitiettin where idloaitin = :idlt";
+        Query query = session.createQuery(hql);
+        query.setParameter("idlt", idlt);
+        
+        total = query.list().size();
+		query.setFirstResult(pageSize * (page - 1));
+		query.setMaxResults(pageSize);
+		int pageCount = (total) / pageSize + (total % pageSize > 0 ? 1 : 0);
+		
+        @SuppressWarnings("unchecked")
+		List<Chitiettin> list = query.list();
+        
+        Loaitin lt = (Loaitin) session.get(Loaitin.class, idlt);
+        String tenloaitin = lt.getLoaitin();
+        
+        model.addAttribute("title", tenloaitin);
+		model.addAttribute("dslt", list);
+		model.addAttribute("idloaitin", idlt);
+		model.addAttribute("currentpage", page);
+		model.addAttribute("pagesize", pageSize);
+		model.addAttribute("pagecount", pageCount);
+		
+		return "home/tintuc_ds";
+	}
+	
+	
+	// Chi tiết tin tức
+	@RequestMapping("tin-tuc/bai-viet/{id}")
+	public String cttintuc(ModelMap model, @PathVariable("id") Integer idtt) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Tintuc where idtintuc = :idtt";
+        Query query = session.createQuery(hql);
+        query.setParameter("idtt", idtt);
+        Tintuc tt = (Tintuc) query.uniqueResult();
+        String tieude = tt.getTieude();
+        
+		model.addAttribute("cttt", tt);
+		model.addAttribute("title", tieude);
+		
+		return "home/tintuc_ct";
+	}
 	
 	
 	
