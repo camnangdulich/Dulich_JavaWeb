@@ -30,8 +30,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import entities.Chitiettin;
 import entities.Huong;
 import entities.Khachsan;
+import entities.Loaitin;
 import entities.Quyen;
 import entities.Taikhoan;
 import entities.Tintuc;
@@ -67,6 +69,27 @@ public class AdminController {
 		List<Taikhoan> list = query.list();
 		return list;
 	}
+	//Lấy tất cả loại bài viết(loại tin tức)
+	@ModelAttribute("loaibvlist")
+	public List<Loaitin> getlt(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Loaitin";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Loaitin> list = query.list();
+		return list;
+	}
+	//Lấy tất cả thông tin quyền
+	@ModelAttribute("quyenlist")
+	public List<Quyen> getq(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Quyen";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Quyen> list = query.list();
+		return list;
+	}
+	
 	
 	// Lấy tất cả thông tin bài viết (Bảng Tintuc)
 	@ModelAttribute("bvlist")
@@ -100,7 +123,16 @@ public class AdminController {
 		List<Tour> list = query.list();
 		return list;
 	}
-
+	//Lấy tất cả thông tin chi tiết bài viết
+	@ModelAttribute("ctbvlist")
+	public List<Chitiettin> getctbv(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Chitiettin";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Chitiettin> list = query.list();
+		return list;
+	}
 
 	
 	
@@ -536,20 +568,57 @@ public class AdminController {
 	// ------------------------------------------------------------------
 	
 	// Xóa tài khoản
-	@RequestMapping("xtaikhoan/{id}")
-	public String xtaikhoan(ModelMap model, @PathVariable("id") int idxoa) {
+//	@RequestMapping("xtaikhoan/{id}")
+//	public String xtaikhoan(ModelMap model, @PathVariable("id") int idxoa) {
+//		Session session = factory.openSession();
+//		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idxoa);
+//		Transaction t = session.beginTransaction();
+//		try {
+//			session.delete(tk);
+//			t.commit();
+//		} catch (Exception e) {
+//			t.rollback();
+//		} finally {
+//			session.close();
+//		}
+//		return "redirect:/admin/dstaikhoan.html";
+//	}
+//	//Xóa quyền
+	@RequestMapping("xloaibv/{id}")
+	public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
 		Session session = factory.openSession();
-		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idxoa);
 		Transaction t = session.beginTransaction();
-		try {
-			session.delete(tk);
+		String hql = "from Chitiettin where idloaitin=:idlt";
+        Query query = session.createQuery(hql);
+        query.setParameter("idlt", idxoa);
+		List<Chitiettin> lstcct = query.list();
+		if(lstcct.size() == 0){
+			System.out.println("khong co id chi tiet de xoa");
+		} else {
+//				String hqlxctt = "delete from Chitiettin where idloaitin= :idlt";
+//				Query queryxcct = session.createQuery(hqlxctt);
+//				System.out.println("idd"  + idxoa);
+//				queryxcct.setParameter("idlt", idxoa);
+//				t.commit();
+			session.delete(lstcct);
 			t.commit();
-		} catch (Exception e) {
-			t.rollback();
-		} finally {
-			session.close();
+				System.out.println("Xóa chi tiết thành công");
+			
 		}
-		return "redirect:/admin/dstaikhoan.html";
+		
+		
+		
+		
+		
+//		try {
+//			session.delete(tk);
+//			t.commit();
+//		} catch (Exception e) {
+//			t.rollback();
+//		} finally {
+//			session.close();
+//		}
+		return "redirect:/admin/dsquyen.html";
 	}
 	
 	

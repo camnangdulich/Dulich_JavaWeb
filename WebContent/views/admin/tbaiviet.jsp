@@ -28,16 +28,16 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                 <c:forEach var="a" items="${lbvlist}">
+                                 <c:forEach var="lbv" items="${loaibvlist}">
                                  	<c:choose>
-									    <c:when test="${a.idloaitin == 1}">
+									    <c:when test="${lbv.idloaitin == 1}">
 									    </c:when>
 									    <c:otherwise>
 			                                <div class="form-check form-check-inline">
 											  	<label class="custom-control custom-checkbox form-check-label">
-											        <input name="loaitin" type="checkbox" class="custom-control-input" value="${a.idloaitin}">
+											        <input name="loaitin" type="checkbox" class="custom-control-input" value="${lbv.idloaitin}">
 												  	<span class="custom-control-indicator"></span>
-												  	<span class="custom-control-description">${a.loaitin}</span>
+												  	<span class="custom-control-description">${lbv.loaitin}</span>
 												</label>
 											</div>
 									   </c:otherwise>

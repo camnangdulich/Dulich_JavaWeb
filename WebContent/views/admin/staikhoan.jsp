@@ -33,7 +33,7 @@
                             <div class="col-sm-10">
                                 <select name="quyen" class="form-control">
                                 	<option selected="selected" hidden value="${user.quyen.idquyen}">${user.quyen.quyen}</option>
-                                	<c:forEach var="q" items="${qlist}">
+                                	<c:forEach var="q" items="${quyenlist}">
                                     	<option value="${q.idquyen}">${q.quyen}</option>
                                     </c:forEach>
                                 </select>
