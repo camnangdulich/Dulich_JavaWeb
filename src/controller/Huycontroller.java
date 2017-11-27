@@ -277,41 +277,43 @@ public class Huycontroller {
 	// --------------------- ADD Controller -----------------------------
 	// ------------------------------------------------------------------
 //	//Đặt phòng 
-//		@RequestMapping("datphong")
-//		public String datphong(ModelMap model) {
-//			model.addAttribute("title", "Thêm công ty mới");
-//			return "home/datphong";
-//		}
-//		
-//		@RequestMapping(value = "datphong", method = RequestMethod.POST)
-//		public String datphong(ModelMap model,
-//				@RequestParam("loaiphong") Integer loaiphong,
-//				@RequestParam("ngaynhanphong") Date ngaynhanphong,
-//				@RequestParam("ngaytraphong") Date ngaytraphong,
-//				@RequestParam("soluong") Integer soluong,
-//				@RequestParam("hodem") String hodem,
-//				@RequestParam("sodienthoai") String sodienthoai,
-//				@RequestParam("email") String email){
-//
-//			Session session = factory.openSession();
-//			Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
-//			Trangthai trang = (Trangthai) session.get(Trangthai.class, trangthai);
-//			Date ngaytao = new Date();
-//			Congty c = new Congty(tk, trang, tencongty, diachi, mota, email, sodienthoai, ngaytao);
-//			Transaction t = session.beginTransaction();
-//			try {
-//				session.save(c);
-//				t.commit();
-//				model.addAttribute("message", "Đặt phòng thành công!");
-//				return "home/datphong";
-//			} catch (Exception e) {
-//				t.rollback();
-//				model.addAttribute("message", "Đặt phòng thất bại!");
-//			} finally {
-//				session.close();
-//			}
-//			return "home/datphong";
-//		}
+		@RequestMapping("datphong")
+		public String datphong(ModelMap model) {
+			model.addAttribute("title", "Thêm công ty mới");
+			return "home/datphong";
+		}
+		
+		@RequestMapping(value = "datphong", method = RequestMethod.POST)
+		public String datphong(ModelMap model,
+				@RequestParam("loaiphong") Integer loaiphong,
+				@RequestParam("trangthai") Integer trangthai,
+				@RequestParam("ngaynhanphong") Date ngaynhanphong,
+				@RequestParam("ngaytraphong") Date ngaytraphong,
+				@RequestParam("soluong") Integer soluong,
+				@RequestParam("hodem") String hodem,
+				@RequestParam("ten") String ten,
+				@RequestParam("sodienthoai") String sodienthoai,
+				@RequestParam("email") String email){
+
+			Session session = factory.openSession();
+			Trangthai trang = (Trangthai) session.get(Trangthai.class, trangthai);
+			Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, loaiphong);
+			Date ngaytao = new Date();
+			Datphong dp = new Datphong(lp, trang, ngaynhanphong, ngaytraphong, soluong, hodem, ten, sodienthoai, email);
+			Transaction t = session.beginTransaction();
+			try {
+				session.save(dp);
+				t.commit();
+				model.addAttribute("message", "Đặt phòng thành công!");
+				return "home/datphong";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Đặt phòng thất bại!");
+			} finally {
+				session.close();
+			}
+			return "home/datphong";
+		}
 	// Thêm quyền mới
 	@RequestMapping("tquyen")
 	public String tquyen(ModelMap model) {
