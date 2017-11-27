@@ -14,14 +14,14 @@
 			<div class="card my-4">
 				<h5 class="card-header">Thông tin liên hệ</h5>
 				<div class="card-body">
-					<form class="form-horizontal">
+					<form action="home/datphong.html" method="post" >
 						<div class="form-group row">
-							<label class="col-4 col-form-label">Loại phòng zz</label>
+							<label class="col-4 col-form-label">Loại phòng </label>
 							<div class="col-8">
 								<select name="loaiphong" class="form-control">
 									<option selected="selected" disabled="disabled">-- Chọn loại phòng --</option>
 									<c:forEach var="lp" items="${loaiplist}">
-										<option value="">${lp.tenloai}</option>
+										<option value="${lp.idloaiphong }">${lp.tenloai}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -29,43 +29,43 @@
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Ngày nhận phòng</label>
 							<div class="col-8">
-								<input class="form-control" type="date" value="">
+								<input name="ngaynhanphong" class="form-control" type="date" value="">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Ngày trả phòng</label>
 							<div class="col-8">
-								<input class="form-control" type="date" value="">
+								<input name= "ngaytraphong" class="form-control" type="date" value="">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Số lượng phòng</label>
 							<div class="col-8">
-								<input class="form-control" type="number" value="">
+								<input name="soluong" class="form-control" type="number" value="">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Họ đêm</label>
 							<div class="col-8">
-								<input class="form-control" type="text" value="">
+								<input name="hodem" class="form-control" type="text" value="">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Tên</label>
 							<div class="col-8">
-								<input class="form-control" type="text" value="">
+								<input name="ten" class="form-control" type="text" value="">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Số điện thoại</label>
 							<div class="col-8">
-								<input class="form-control" type="text" value="">
+								<input name="sodienthoai" class="form-control" type="text" value="">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Email</label>
 							<div class="col-8">
-								<input class="form-control" type="email" value="">
+								<input name="email" class="form-control" type="email" value="">
 							</div>
 						</div>
 						<div class="col-md-12">

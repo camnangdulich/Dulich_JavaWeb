@@ -1,5 +1,8 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -59,32 +62,39 @@ public class HuyHomeController {
  		@RequestMapping(value = "datphong", method = RequestMethod.POST)
  		public String datphong(ModelMap model,
  				@RequestParam("loaiphong") Integer loaiphong,
- 				@RequestParam("trangthai") Integer trangthai,
- 				@RequestParam("ngaynhanphong") Date ngaynhanphong,
- 				@RequestParam("ngaytraphong") Date ngaytraphong,
+ 				@RequestParam("ngaynhanphong") String ngaynhanphong,
+ 				@RequestParam("ngaytraphong") String ngaytraphong,
  				@RequestParam("soluong") Integer soluong,
  				@RequestParam("hodem") String hodem,
  				@RequestParam("ten") String ten,
  				@RequestParam("sodienthoai") String sodienthoai,
  				@RequestParam("email") String email){
-
- 			Session session = factory.openSession();
- 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
- 			Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, loaiphong);
- 			Date ngaytao = new Date();
- 			Datphong dp = new Datphong(lp, trang, ngaynhanphong, ngaytraphong, soluong, hodem, ten, sodienthoai, email);
- 			Transaction t = session.beginTransaction();
+ 			
+ 			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
  			try {
- 				session.save(dp);
- 				t.commit();
- 				model.addAttribute("message", "Đặt phòng thành công!");
- 				return "home/datphong";
- 			} catch (Exception e) {
- 				t.rollback();
- 				model.addAttribute("message", "Đặt phòng thất bại!");
- 			} finally {
- 				session.close();
+ 				Date ngaynhanDate = (Date)formatter.parse(ngaynhanphong);
+ 				Date ngaytraDate = (Date)formatter.parse(ngaytraphong);
+ 				Session session = factory.openSession();
+ 	 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
+ 	 			Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, loaiphong);
+ 	 			Date ngaytao = new Date();
+ 	 			Datphong dp = new Datphong(lp, trang, ngaynhanDate, ngaytraDate, soluong, hodem, ten, sodienthoai, email);
+ 	 			Transaction t = session.beginTransaction();
+ 	 			try {
+ 	 				session.save(dp);
+ 	 				t.commit();
+ 	 				model.addAttribute("message", "Đặt phòng thành công!");
+ 	 				return "home/datphong";
+ 	 			} catch (Exception e) {
+ 	 				t.rollback();
+ 	 				model.addAttribute("message", "Đặt phòng thất bại!");
+ 	 			} finally {
+ 	 				session.close();
+ 	 			}
+ 			} catch (ParseException e) {
+ 				e.printStackTrace();
  			}
+ 			
  			return "home/datphong";
  		}
 }
