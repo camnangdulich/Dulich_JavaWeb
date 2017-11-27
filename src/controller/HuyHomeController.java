@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import entities.Datphong;
+import entities.Dattour;
 import entities.Loaiphong;
+import entities.Tour;
 import entities.Trangthai;
 
 @Transactional
@@ -47,6 +49,16 @@ public class HuyHomeController {
  			Query query = session.createQuery(hql);
  			@SuppressWarnings("unchecked")
  			List<Loaiphong> list = query.list();
+ 			return list;
+ 		}
+ 		//Lấy tất cả thông tin tour
+ 		@ModelAttribute("tourlist")
+ 		public List<Tour> gett(ModelMap model) {
+ 			Session session = factory.getCurrentSession();
+ 			String hql = "from Tour";
+ 			Query query = session.createQuery(hql);
+ 			@SuppressWarnings("unchecked")
+ 			List<Tour> list = query.list();
  			return list;
  		}
     
@@ -97,6 +109,53 @@ public class HuyHomeController {
  			
  			return "home/datphong";
  		}
+ 		
+ 		
+ 		
+ 		
+ 		//Đặt tour
+ 		@RequestMapping("dattour")
+ 		public String dattour(ModelMap model) {
+ 			model.addAttribute("title", "Đặt tour");
+ 			return "home/dattour";
+ 		}
+ 		
+// 		@RequestMapping(value = "dattour", method = RequestMethod.POST)
+// 		public String dattour(ModelMap model,
+// 				@RequestParam("tour") Integer tour,
+// 				@RequestParam("hodem") String hodem,
+// 				@RequestParam("ten") String ten,
+// 				@RequestParam("songuoi") Integer songuoi,
+// 				@RequestParam("sodienthoai") String sodienthoai,
+// 				@RequestParam("email") String email,
+// 				@RequestParam("yeucau") String yeucau){
+ 			
+// 			System.out.println("tour" +tour);
+// 			System.out.println("hodem" +hodem);
+// 			System.out.println("ten" +ten);
+// 			System.out.println("songuoi" +songuoi);
+// 			System.out.println("sodienthoai" +sodienthoai);
+// 			System.out.println("email" +email);
+// 			System.out.println("yeucau" +yeucau);
+// 				Session session = factory.openSession();
+// 	 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
+// 	 			Tour tuor = (Tour) session.get(Tour.class, tour);
+// 	 			Dattour dt = new Dattour(tuor,  hodem, ten, songuoi, sodienthoai, email, yeucau);
+// 	 			Transaction t = session.beginTransaction();
+// 	 			try {
+// 	 				session.save(dt);
+// 	 				t.commit();
+// 	 				model.addAttribute("message", "Đặt tour thành công!");
+// 	 				return "home/dattour";
+// 	 			} catch (Exception e) {
+// 	 				t.rollback();
+// 	 				model.addAttribute("message", "Đặt tour thất bại!");
+// 	 			} finally {
+// 	 				session.close();
+// 	 			}
+// 			
+// 			return "home/dattour";
+// 		}
 }
 
 

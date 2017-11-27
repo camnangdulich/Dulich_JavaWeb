@@ -642,7 +642,7 @@ public class AdminController {
 //		} finally {
 //			session.close();
 //		}
-		return "redirect:/admin/dsquyen.html";
+		return "redirect:/admin/dsloaibv.html";
 	}
 	
 	
