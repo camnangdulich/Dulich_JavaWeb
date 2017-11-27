@@ -20,19 +20,8 @@
                             <div class="col-sm-10" id="label-validation">
                                 <select name="taikhoan" class="form-control" >
                                 	<option selected="selected" hidden value="${com.taikhoan.idtaikhoan}">${com.taikhoan.email}></option>
-                                	<c:forEach var="tk" items="${tklist}">
+                                	<c:forEach var="tk" items="${tailist}">
                                     	<option value="${tk.idtaikhoan}">${tk.email}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Trạng thái </label>
-                            <div class="col-sm-10" id="label-validation">
-                                <select name="trangthai" class="form-control" >
-                                	<option selected="selected" hidden value="${com.trangthai.idtrangthai}">${com.trangthai.trangthai}></option>
-                                	<c:forEach var="trang" items="${tranglist}">
-                                    	<option value="${trang.idtrangthai}">${trang.trangthai}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -40,7 +29,7 @@
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Tên công ty</label>
 							<div class="col-sm-10">
-								<input name="tencongty" type="text" class="form-control"
+								<input name="tencongty"  type="text" class="form-control"
 									placeholder="Nhập tên công ty" value = "${com.tencongty }">
 							</div>
 						</div>

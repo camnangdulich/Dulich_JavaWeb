@@ -21,7 +21,7 @@
                                     <input name="hinhanh" id="my_file" type="file" class="custom-file-input" onchange="onFileSelected(event)">
                                 </label>
                                 <a onclick="document.getElementById('my_file').click();" style="cursor: pointer;">
-                                	<img id="myimage" src="files/tinhthanh/av1.png" style="max-width: 120px; max-height: 120px;">
+                                	<img id="myimage" src="files/tinhthanh/An Giang.jpg" style="max-width: 120px; max-height: 120px;">
                                 </a>
                             </div>
                         </div>

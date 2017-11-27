@@ -39,7 +39,7 @@ public class Loaiphong implements java.io.Serializable {
 	public Loaiphong() {
 	}
 	
-	public Loaiphong(String tenloai, String mota, int themgiuong, Huong huong, String hinhanh, int gia ) {
+	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong, String hinhanh, int gia ) {
 		this.tenloai = tenloai;
 		this.mota = mota;
 		this.themgiuong = themgiuong;

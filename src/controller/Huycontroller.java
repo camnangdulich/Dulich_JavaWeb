@@ -50,6 +50,17 @@ public class Huycontroller {
 	// --------------------- ModelAttribute -----------------------------
 		// ------------------------------------------------------------------
 		
+	// Lấy tất cả thông tin tài khoản
+		@ModelAttribute("tailist")
+		public List<Taikhoan> gettk(ModelMap model) {
+			Session session = factory.getCurrentSession();
+			String hql = "from Taikhoan";
+			Query query = session.createQuery(hql);
+			@SuppressWarnings("unchecked")
+			List<Taikhoan> list = query.list();
+			return list;
+		}
+		
 		// Lấy tất cả thông tin quyền
 		@ModelAttribute("qlist")
 		public List<Quyen> getq(ModelMap model) {
@@ -346,68 +357,68 @@ public class Huycontroller {
 		return "admin/tloaiphong";
 	}
 	
-//	@RequestMapping(value = "tloaiphong", method = RequestMethod.POST)
-//	public String tloaiphong(ModelMap model,
-//			@RequestParam("huong") Integer idhuong,
-//			@RequestParam("tenloai") String tenloai,
-//			@RequestParam("mota") String mota,
-//			@RequestParam("themgiuong") Boolean themgiuong,
-//			@RequestParam("hinhanh") MultipartFile hinhanh,
-//			@RequestParam("gia") Integer gia) {
-//
-//		Session session = factory.openSession();
-//		Transaction t = session.beginTransaction();
-//		Huong huong = (Huong) session.get(Huong.class, idhuong);
-//		
-//		// Tạo đường dẫn lưu hình ảnh
-//		String photoPath = "";
-//		if(hinhanh.getOriginalFilename().equals("")){
-//			photoPath = context.getRealPath("/files/phong/Deluxe room.jpg");
-//		} else {
-//			photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
-//		}
-//		// Lưu hình ảnh
-//		try {
-//			hinhanh.transferTo(new File(photoPath));
-//		} catch (IllegalStateException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		
-//		if(hinhanh.getOriginalFilename().equals("")){
-//			Loaiphong lp = new Loaiphong(huong, tenloai, mota, themgiuong, "Deluxe room.jpg", gia);
-//			try {
-//				session.save(lp);
-//				t.commit();
-//				model.addAttribute("message", "Thêm loại phòng thành công!");
-//				return "admin/tloaiphong";
-//			} catch (Exception e) {
-//				t.rollback();
-//				model.addAttribute("message", "Thêm loại phòng thất bại!");
-//			} finally {
-//				session.close();
-//			}
-//
-//		} else {
-//			Loaiphong lp = new Loaiphong(huong, tenloai, mota, themgiuong, hinhanh.getOriginalFilename(), gia);
-//			try {
-//				session.save(lp);
-//				t.commit();
-//				model.addAttribute("message", "Thêm loại phòng thành công!");
-//				return "admin/tloaiphong";
-//			} catch (Exception e) {
-//				t.rollback();
-//				model.addAttribute("message", "Thêm loại phòng thất bại!");
-//			} finally {
-//				session.close();
-//			}
-//
-//		}
-//		return "admin/tloaiphong";
-//	}
+	@RequestMapping(value = "tloaiphong", method = RequestMethod.POST)
+	public String tloaiphong(ModelMap model,
+			@RequestParam("huong") Integer idhuong,
+			@RequestParam("tenloai") String tenloai,
+			@RequestParam("mota") String mota,
+			@RequestParam("themgiuong") Integer themgiuong,
+			@RequestParam("hinhanh") MultipartFile hinhanh,
+			@RequestParam("gia") Integer gia) {
+
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Huong huong = (Huong) session.get(Huong.class, idhuong);
+		
+		// Tạo đường dẫn lưu hình ảnh
+		String photoPath = "";
+		if(hinhanh.getOriginalFilename().equals("")){
+			photoPath = context.getRealPath("/files/phong/Deluxe room.jpg");
+		} else {
+			photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
+		}
+		// Lưu hình ảnh
+		try {
+			hinhanh.transferTo(new File(photoPath));
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(hinhanh.getOriginalFilename().equals("")){
+			Loaiphong lp = new Loaiphong(huong, tenloai, mota, themgiuong, "Deluxe room.jpg", gia);
+			try {
+				session.save(lp);
+				t.commit();
+				model.addAttribute("message", "Thêm loại phòng thành công!");
+				return "admin/tloaiphong";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Thêm loại phòng thất bại!");
+			} finally {
+				session.close();
+			}
+
+		} else {
+			Loaiphong lp = new Loaiphong(huong, tenloai, mota, themgiuong, hinhanh.getOriginalFilename(), gia);
+			try {
+				session.save(lp);
+				t.commit();
+				model.addAttribute("message", "Thêm loại phòng thành công!");
+				return "admin/tloaiphong";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Thêm loại phòng thất bại!");
+			} finally {
+				session.close();
+			}
+
+		}
+		return "admin/tloaiphong";
+	}
 	
 	
 	
@@ -429,7 +440,7 @@ public class Huycontroller {
 		// Tao duong dan luu hinh anh
 		String photoPath = "";
 		if(hinhanh.getOriginalFilename().equals("")){
-			photoPath = context.getRealPath("/files/tinhthanh/av1.png");
+			photoPath = context.getRealPath("/files/tinhthanh/An Giang.jpg");
 		} else {
 			photoPath = context.getRealPath("/files/tinhthanh/" + hinhanh.getOriginalFilename());
 		}
@@ -445,7 +456,7 @@ public class Huycontroller {
 			e1.printStackTrace();
 		}
 		if(hinhanh.getOriginalFilename().equals("")){
-			Tinhthanh tinh = new Tinhthanh("av1.png", tentinh, mota);
+			Tinhthanh tinh = new Tinhthanh("An Giang.jpg", tentinh, mota);
 			try {
 				session.save(tinh);
 				t.commit();
@@ -485,35 +496,33 @@ public class Huycontroller {
 		return "admin/tcongty";
 	}
 	
-//	@RequestMapping(value = "tcongty", method = RequestMethod.POST)
-//	public String tcongty(ModelMap model,
-//			@RequestParam("taikhoan") Integer taikhoan,
-//			@RequestParam("trangthai") Integer trangthai,
-//			@RequestParam("tencongty") String tencongty,
-//			@RequestParam("diachi") String diachi,
-//			@RequestParam("mota") String mota,
-//			@RequestParam("email") String email,
-//			@RequestParam("sodienthoai") String sodienthoai){
-//
-//		Session session = factory.openSession();
-//		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
-//		Trangthai trang = (Trangthai) session.get(Trangthai.class, trangthai);
-//		Date ngaytao = new Date();
-//		Congty c = new Congty(tk, trang, tencongty, diachi, mota, email, sodienthoai, ngaytao);
-//		Transaction t = session.beginTransaction();
-//		try {
-//			session.save(c);
-//			t.commit();
-//			model.addAttribute("message", "Thêm công ty thành công!");
-//			return "admin/tcongty";
-//		} catch (Exception e) {
-//			t.rollback();
-//			model.addAttribute("message", "Thêm công ty thất bại!");
-//		} finally {
-//			session.close();
-//		}
-//		return "admin/tcongty";
-//	}
+	@RequestMapping(value = "tcongty", method = RequestMethod.POST)
+	public String tcongty(ModelMap model,
+			@RequestParam("taikhoan") Integer taikhoan,
+			@RequestParam("tencongty") String tencongty,
+			@RequestParam("diachi") String diachi,
+			@RequestParam("mota") String mota,
+			@RequestParam("email") String email,
+			@RequestParam("sodienthoai") String sodienthoai){
+
+		Session session = factory.openSession();
+		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
+		Date ngaytao = new Date();
+		Congty c = new Congty(tk, tencongty, diachi, mota, email, sodienthoai, ngaytao);
+		Transaction t = session.beginTransaction();
+		try {
+			session.save(c);
+			t.commit();
+			model.addAttribute("message", "Thêm công ty thành công!");
+			return "admin/tcongty";
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Thêm công ty thất bại!");
+		} finally {
+			session.close();
+		}
+		return "admin/tcongty";
+	}
 	// ------------------------------------------------------------------
 	
 	
@@ -692,107 +701,103 @@ public class Huycontroller {
 			return "admin/sloaiphong";
 		}
 		
-//		@RequestMapping(value = "sloaiphong", method = RequestMethod.POST )
-//		public String sloaiphong(ModelMap model,
-//				@RequestParam("idlp") Integer idlp,
-//				@RequestParam("tenloai") String tenloai,
-//				@RequestParam("mota") String mota,
-//				@RequestParam("themgiuong") Boolean themgiuong,
-//				@RequestParam("huong") Integer idhuong,
-//				@RequestParam("hinhanh") MultipartFile hinhanh,
-//				@RequestParam("gia") Integer gia){
-//			
-//			Session session = factory.openSession();
-//			Transaction t = session.beginTransaction();
-//			String photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
-//			Huong hg = (Huong) session.get(Huong.class, idhuong);
-//			Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idlp);
-//			
-//			lp.setTenloai(tenloai);;
-//			lp.setMota(mota);
-//			lp.setThemgiuong(themgiuong);;
-//			lp.setGia(gia);
-//			lp.setHuong(hg);
-//			try {
-//				if(hinhanh.getOriginalFilename().equals("")){
-//					session.update(lp);
-//					t.commit();
-//					model.addAttribute("message", "Chỉnh sửa loại phòng thành công !");
-//					System.out.println("Thành công không thêm ảnh");
-//					return "redirect:/admin/sloaiphong/"+idlp+".html";
-//				}else{
-//					hinhanh.transferTo(new File(photoPath));
-//					lp.setHinhanh(hinhanh.getOriginalFilename());
-//					session.update(lp);
-//					t.commit();
-//					model.addAttribute("message", "Chỉnh sửa loại phòng thành công !");
-//					System.out.println("Thành công có ảnh");
-//					return "redirect:/admin/sloaiphong/"+idlp+".html";
-//				}
-//			} 
-//			catch (Exception e) {
-//				t.rollback();
-//				model.addAttribute("message", "Chỉnh sửa loại phòng thất bại !" + e.getMessage());
-//				System.out.println("that bai");
-//				return "redirect:/admin/tintuc/"+idlp+".html";
-//			}
-//			finally {
-//				session.close();
-//			}
-//		}
+		@RequestMapping(value = "sloaiphong", method = RequestMethod.POST )
+		public String sloaiphong(ModelMap model,
+				@RequestParam("idlp") Integer idlp,
+				@RequestParam("tenloai") String tenloai,
+				@RequestParam("mota") String mota,
+				@RequestParam("themgiuong") Integer themgiuong,
+				@RequestParam("huong") Integer idhuong,
+				@RequestParam("hinhanh") MultipartFile hinhanh,
+				@RequestParam("gia") Integer gia){
+			
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			String photoPath = context.getRealPath("/files/phong/" + hinhanh.getOriginalFilename());
+			Huong hg = (Huong) session.get(Huong.class, idhuong);
+			Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idlp);
+			
+			lp.setTenloai(tenloai);;
+			lp.setMota(mota);
+			lp.setThemgiuong(themgiuong);;
+			lp.setGia(gia);
+			lp.setHuong(hg);
+			try {
+				if(hinhanh.getOriginalFilename().equals("")){
+					session.update(lp);
+					t.commit();
+					model.addAttribute("message", "Chỉnh sửa loại phòng thành công !");
+					System.out.println("Thành công không thêm ảnh");
+					return "redirect:/admin/sloaiphong/"+idlp+".html";
+				}else{
+					hinhanh.transferTo(new File(photoPath));
+					lp.setHinhanh(hinhanh.getOriginalFilename());
+					session.update(lp);
+					t.commit();
+					model.addAttribute("message", "Chỉnh sửa loại phòng thành công !");
+					System.out.println("Thành công có ảnh");
+					return "redirect:/admin/sloaiphong/"+idlp+".html";
+				}
+			} 
+			catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Chỉnh sửa loại phòng thất bại !" + e.getMessage());
+				System.out.println("that bai");
+				return "redirect:/admin/tintuc/"+idlp+".html";
+			}
+			finally {
+				session.close();
+			}
+		}
 		
 		
 		
 		
 		//Sua thông tin công ty
-//		@RequestMapping("scongty/{id}")
-//		public String scongty(ModelMap model, @PathVariable("id") Integer idcongty) {
-//			model.addAttribute("title", "Sửa thông tin");
-//			Session session = factory.getCurrentSession();
-//			Congty c = (Congty) session.get(Congty.class, idcongty);
-//			
-//			model.addAttribute("com", c);
-//			return "admin/scongty";
-//		}
-//		
-//		@RequestMapping(value = "scongty", method = RequestMethod.POST )
-//		public String scongty(ModelMap model,
-//				@RequestParam("idcongty") Integer idcongty,
-//				@RequestParam("taikhoan") Integer taikhoan,
-//				@RequestParam("trangthai") Integer trangthai,
-//				@RequestParam("tencongty") String tencongty,
-//				@RequestParam("diachi") String diachi,
-//				@RequestParam("mota") String mota,
-//				@RequestParam("email") String email,
-//				@RequestParam("sodienthoai") String sodienthoai){
-//			
-//			Session session = factory.openSession();
-//			Transaction t = session.beginTransaction();
-//			Congty c = (Congty) session.get(Congty.class, idcongty);
-//			Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
-//			Trangthai trang = (Trangthai) session.get(Trangthai.class, trangthai);
-//			c.setTaikhoan(tk);
-//			c.setTrangthai(trang);
-//			c.setTencongty(tencongty);
-//			c.setDiachi(diachi);
-//			c.setMota(mota);
-//			c.setEmail(email);
-//			c.setSodienthoai(sodienthoai);
-//			
-//			try {
-//				session.update(c);
-//				t.commit();
-//				model.addAttribute("message", "Chỉnh sửa thông tin thành công!");
-//				return "redirect:/admin/scongty/"+idcongty+".html";
-//			} catch (Exception e) {
-//				t.rollback();
-//				model.addAttribute("message", "Chỉnh thông tin thất bại !" + e.getMessage());
-//				System.out.println("Thất bại");
-//				return "redirect:/admin/tintuc/"+idcongty+".html";
-//			}finally {
-//				session.close();
-//			}
-//		}
+		@RequestMapping("scongty/{id}")
+		public String scongty(ModelMap model, @PathVariable("id") Integer idcongty) {
+			model.addAttribute("title", "Sửa thông tin");
+			Session session = factory.getCurrentSession();
+			Congty c = (Congty) session.get(Congty.class, idcongty);
+			
+			model.addAttribute("com", c);
+			return "admin/scongty";
+		}
+		
+		@RequestMapping(value = "scongty", method = RequestMethod.POST )
+		public String scongty(ModelMap model,
+				@RequestParam("idcongty") Integer idcongty,
+				@RequestParam("taikhoan") Integer taikhoan,
+				@RequestParam("tencongty") String tencongty,
+				@RequestParam("diachi") String diachi,
+				@RequestParam("mota") String mota,
+				@RequestParam("email") String email,
+				@RequestParam("sodienthoai") String sodienthoai){
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			Congty c = (Congty) session.get(Congty.class, idcongty);
+			Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
+			c.setTaikhoan(tk);
+			c.setTencongty(tencongty);
+			c.setDiachi(diachi);
+			c.setMota(mota);
+			c.setEmail(email);
+			c.setSodienthoai(sodienthoai);
+			
+			try {
+				session.update(c);
+				t.commit();
+				model.addAttribute("message", "Chỉnh sửa thông tin thành công!");
+				return "redirect:/admin/scongty/"+idcongty+".html";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Chỉnh thông tin thất bại !" + e.getMessage());
+				System.out.println("Thất bại");
+				return "redirect:/admin/tintuc/"+idcongty+".html";
+			}finally {
+				session.close();
+			}
+		}
 		
 		
 		
