@@ -46,7 +46,7 @@
                             <tr>
                             	<td style="width: 50px;"><img src="files/phong/${lp.hinhanh}" width="150px"></td>
                                 <td >${lp.tenloai}</td>
-                                <td >${lp.mota.substring(0,50)}...</td>
+                                <td >${lp.mota.substring(0,25)}...</td>
                                 <td>${lp.themgiuong}</td>
                                 <td>${lp.huong.tenhuong}</td>
                                 <td>${lp.gia}</td>

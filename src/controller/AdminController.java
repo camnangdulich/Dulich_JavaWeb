@@ -100,16 +100,7 @@ public class AdminController {
 		List<Tour> list = query.list();
 		return list;
 	}
-	//Lấy tất cả thông tin hướng
-	@ModelAttribute("hulist")
-	public List<Huong> geth(ModelMap model) {
-		Session session = factory.getCurrentSession();
-		String hql = "from Huong";
-		Query query = session.createQuery(hql);
-		@SuppressWarnings("unchecked")
-		List<Huong> list = query.list();
-		return list;
-	}
+
 
 	
 	

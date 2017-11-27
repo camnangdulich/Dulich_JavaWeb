@@ -35,6 +35,10 @@ public class Dichvu implements java.io.Serializable {
 	public Dichvu(String tendichvu) {
 		this.tendichvu = tendichvu;
 	}
+	public Dichvu(String tendichvu, String mota) {
+		this.tendichvu = tendichvu;
+		this.mota = mota;
+	}
 
 	public Dichvu(String tendichvu, String mota, String slug, Set<Khachsan> khachsans) {
 		this.tendichvu = tendichvu;
