@@ -42,6 +42,14 @@ public class Loaiphong implements java.io.Serializable {
 		this.hinhanh = hinhanh;
 		this.gia = gia;
 	}
+	public Loaiphong(Huong huong, String tenloai, String mota, Boolean themgiuong, String hinhanh, int gia) {
+		this.huong = huong;
+		this.tenloai = tenloai;
+		this.mota = mota;
+		this.themgiuong = themgiuong;
+		this.hinhanh = hinhanh;
+		this.gia = gia;
+	}
 
 	public Loaiphong(Huong huong, String tenloai, String mota, Boolean themgiuong, String hinhanh, int gia, String slug,
 			Set<Datphong> datphongs, Set<Chitietloaiphong> chitietloaiphongs) {
