@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 11:23:30 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -30,11 +30,6 @@ public class Loaitin implements java.io.Serializable {
 	private Set<Tintuc> tintucs = new HashSet<Tintuc>(0);
 
 	public Loaitin() {
-	}
-	
-	public Loaitin(String loaitin, String mota) {
-		this.loaitin = loaitin;
-		this.mota = mota;
 	}
 
 	public Loaitin(String loaitin) {

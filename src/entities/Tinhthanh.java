@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 11:23:30 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -32,12 +32,6 @@ public class Tinhthanh implements java.io.Serializable {
 	private Set<Tour> tours = new HashSet<Tour>(0);
 
 	public Tinhthanh() {
-	}
-	
-	public Tinhthanh(String hinhanh, String tinhthanh, String mota) {
-		this.hinhanh = hinhanh;
-		this.tinhthanh = tinhthanh;
-		this.mota = mota;
 	}
 
 	public Tinhthanh(String hinhanh, String tinhthanh) {

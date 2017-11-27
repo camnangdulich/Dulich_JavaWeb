@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 11:23:30 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -41,17 +41,6 @@ public class Congty implements java.io.Serializable {
 	private Set<Tour> tours = new HashSet<Tour>(0);
 
 	public Congty() {
-	}
-	
-	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String email, String sodienthoai,
-			Date ngaytao) {
-		this.taikhoan = taikhoan;
-		this.tencongty = tencongty;
-		this.diachi = diachi;
-		this.mota = mota;
-		this.email = email;
-		this.sodienthoai = sodienthoai;
-		this.ngaytao = ngaytao;
 	}
 
 	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String email, String sodienthoai) {
@@ -161,7 +150,7 @@ public class Congty implements java.io.Serializable {
 		this.slug = slug;
 	}
 
-	@OneToMany(mappedBy = "congty")
+	@OneToMany( mappedBy = "congty")
 	public Set<Tour> getTours() {
 		return this.tours;
 	}

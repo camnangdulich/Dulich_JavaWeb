@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 10:05:43 AM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 27, 2017 11:23:30 AM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -30,7 +30,7 @@ public class Loaiphong implements java.io.Serializable {
 	private Huong huong;
 	private String tenloai;
 	private String mota;
-	private int themgiuong;
+	private Boolean themgiuong;
 	private String hinhanh;
 	private int gia;
 	private String slug;
@@ -39,15 +39,6 @@ public class Loaiphong implements java.io.Serializable {
 
 	public Loaiphong() {
 	}
-	
-	public Loaiphong(String tenloai, String mota, int themgiuong, Huong huong, String hinhanh, int gia ) {
-		this.tenloai = tenloai;
-		this.mota = mota;
-		this.themgiuong = themgiuong;
-		this.huong = huong;
-		this.hinhanh = hinhanh;
-		this.gia = gia;
-	}
 
 	public Loaiphong(String tenloai, String hinhanh, int gia) {
 		this.tenloai = tenloai;
@@ -55,7 +46,7 @@ public class Loaiphong implements java.io.Serializable {
 		this.gia = gia;
 	}
 
-	public Loaiphong(Huong huong, String tenloai, String mota, int themgiuong, String hinhanh, int gia, String slug,
+	public Loaiphong(Huong huong, String tenloai, String mota, Boolean themgiuong, String hinhanh, int gia, String slug,
 			Set<Datphong> datphongs, Set<Khachsan> khachsans) {
 		this.huong = huong;
 		this.tenloai = tenloai;
@@ -109,11 +100,11 @@ public class Loaiphong implements java.io.Serializable {
 	}
 
 	@Column(name = "themgiuong")
-	public int getThemgiuong() {
+	public Boolean getThemgiuong() {
 		return this.themgiuong;
 	}
 
-	public void setThemgiuong(int themgiuong) {
+	public void setThemgiuong(Boolean themgiuong) {
 		this.themgiuong = themgiuong;
 	}
 
