@@ -49,8 +49,8 @@
 			if (content.length > config.showChars) {
 				var c = content.substr(0, config.showChars);
 				var h = content.substr(config.showChars, content.length - config.showChars);
-				//var html = c + '<span class="moreellipses"> </span><span class="morecontent"><span>' + h + '</span> <a href="#" class="morelink">' + config.ellipsesText + '' + config.moreText + '</a></span>';
-				var html = c + '<span class="moreellipses"> </span><span class="morecontent"><span>' + h + '</span> <small class="morelink">' + config.ellipsesText + '' + config.moreText + '</small></span>';
+				var html = c + '<span class="moreellipses"> </span><span class="morecontent"><span>' + h + '</span> <a href="#" class="morelink">' + config.ellipsesText + '' + config.moreText + '</a></span>';
+				//var html = c + '<span class="moreellipses"> </span><span class="morecontent"><span>' + h + '</span> <small class="morelink">' + config.ellipsesText + '' + config.moreText + '</small></span>';
 				$this.html(html);
 				$(".morecontent span").hide();
 			}

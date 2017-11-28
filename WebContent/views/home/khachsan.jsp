@@ -128,8 +128,59 @@
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="danhgia">
                     <div class="modal-body tt-bv">
-                        Nội dung đánh giá
-                    </div>
+						<form>
+							<div class="form-group">
+								<label>Email đánh giá</label> 
+								<input type=text class="form-control" disabled="disabled" value="Duongnxpk00662@fpt.edu.vn">
+							</div>
+							<div class="form-group">
+								<label for="exampleSelect1">Example select</label> 
+								<select class="form-control">
+									<option selected="selected" disabled="disabled">-- Chọn đánh giá --</option>
+									<option>Không hài lòng</option>
+									<option>Bình thường</option>
+									<option>Hài lòng</option>
+									<option>Rất hài lòng</option>
+									<option>Rất tốt</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="exampleTextarea">Example textarea</label>
+								<textarea class="form-control" id="exampleTextarea" rows="5"></textarea>
+							</div>
+							<button type="submit" class="btn btn-primary">Bình luận</button>
+						</form>
+						<hr>
+						<div class="card mb-4">
+			                <div class="card-body">
+			                    <h5>Các Tour đặc biệt</h5><hr>
+			                    <div class="row">
+				                    <c:forEach var="dg" items="${listdgks}">
+				                        <div class="col-lg-12 portfolio-item">
+				                            <div class="card h-80">
+				                                <div class="card-body">
+				                                	<div class="col-md-12 row">
+				                                	<div class="col-md-2" style="padding: 0px;">
+				                                		<a href="#">
+				                                		<img style="padding: 0px;" class="card-img-top" 
+				                                			src="files/avatar/${dg.taikhoan.avatar}" alt="${dg.taikhoan.avatar}">
+				                                		</a>
+				                                	</div>
+				                                	<div class="col-md-10">
+				                                	<h6 class="card-title">
+				                                        <a href="#">${dg.taikhoan.email}</a>
+				                                    </h6>
+				                                    <p style="font-size: 13px;" class="card-text"><${dg.noidung}</div>
+				                                    
+				                                    </div>
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </c:forEach>
+			                    </div>
+			                </div>
+			            </div>
+					</div>
                 </div>
             </div>
 

@@ -41,7 +41,7 @@
 				$(".p-fx").shorten({
 				    "showChars" : 100,
 				    "moreText"  : "...",
-				    "lessText"  : "",
+				    "lessText"  : " ...",
 				});
 				$(".rgtd").shorten({
 				    "showChars" : 60,

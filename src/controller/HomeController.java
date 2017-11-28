@@ -6,9 +6,6 @@
 package controller;
 
 import java.security.InvalidKeyException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -392,7 +389,7 @@ public class HomeController {
         String hqldg = "from Danhgia where idkhachsan = :idks";
         Query querydg = session.createQuery(hqldg);
         querydg.setParameter("idks", idks);
-        @SuppressWarnings({ "unchecked", "unused" })
+        @SuppressWarnings({ "unchecked" })
 		List<Danhgia> listdgks = querydg.list();
         
         
