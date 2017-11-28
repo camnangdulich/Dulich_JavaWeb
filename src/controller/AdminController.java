@@ -584,7 +584,7 @@ public class AdminController {
 		return "redirect:/admin/dstaikhoan.html";
 	}
 	
-//	//Xóa quyền
+//	//Xóa loai bài viết(loaitin)
 	@RequestMapping("xloaibv/{id}")
 	public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
 		Session session = factory.openSession();
@@ -642,7 +642,7 @@ public class AdminController {
 //		} finally {
 //			session.close();
 //		}
-		return "redirect:/admin/dsquyen.html";
+		return "redirect:/admin/dsloaibv.html";
 	}
 	
 	

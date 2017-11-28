@@ -2,6 +2,9 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +36,6 @@ import entities.Loaitin;
 import entities.Quyen;
 import entities.Taikhoan;
 import entities.Tinhthanh;
-import entities.Tintuc;
 import entities.Tour;
 import entities.Trangthai;
 
@@ -572,26 +574,35 @@ public class Huycontroller {
 //			@RequestParam("mota") String mota,
 //			@RequestParam("gia") Integer gia,
 //			@RequestParam("diemdi") String diemdi,
-//			@RequestParam("ngaykhoihanh") Date ngaykhoihanh,
+//			@RequestParam("ngaykhoihanh") String ngaykhoihanh,
 //			@RequestParam("lichtrinh") String lichtrinh,
 //			@RequestParam("luuy") String luuy) {
-//
-//		Session session = factory.openSession();
-//		Congty ct = (Congty) session.get(Congty.class, congty);
-//		Tinhthanh tt = (Tinhthanh) session.get(Congty.class, diemden);
-//		Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy);
-//		Transaction t = session.beginTransaction();
+//		
+//		
+//		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //		try {
-//			session.save(to);
-//			t.commit();
-//			model.addAttribute("message", "Thêm tour thành công!");
-//			return "admin/ttour";
-//		} catch (Exception e) {
-//			t.rollback();
-//			model.addAttribute("message", "Thêm tour thất bại!");
-//		} finally {
-//			session.close();
+//			Date ngaykhoihanhDate = (Date)formatter.parse(ngaykhoihanh);
+//			Session session = factory.openSession();
+//			Congty ct = (Congty) session.get(Congty.class, congty);
+//			Tinhthanh tt = (Tinhthanh) session.get(Congty.class, diemden);
+//			Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanhDate, lichtrinh, luuy);
+//			Transaction t = session.beginTransaction();
+//			try {
+//				session.save(to);
+//				t.commit();
+//				model.addAttribute("message", "Thêm tour thành công!");
+//				return "admin/ttour";
+//			} catch (Exception e) {
+//				t.rollback();
+//				model.addAttribute("message", "Thêm tour thất bại!");
+//			} finally {
+//				session.close();
+//			}
+//		} catch (ParseException e) {
+//			e.printStackTrace();
 //		}
+//
+//		
 //		return "admin/ttour";
 //	}
 	

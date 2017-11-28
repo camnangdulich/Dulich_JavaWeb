@@ -5,7 +5,7 @@
 	<!-- Breadcrumbs -->
 	<ol class="breadcrumb" style="margin-top: 20px;">
 		<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-		<li class="breadcrumb-item active">Đặt phòng</li>
+		<li class="breadcrumb-item active">Đặt tour</li>
 	</ol>
 
 	<div class="row">
@@ -14,34 +14,22 @@
 			<div class="card my-4">
 				<h5 class="card-header">Thông tin liên hệ</h5>
 				<div class="card-body">
-					<form action="home/datphong.html" method="post" >
+					<form action="home/dattour.html" method="post" >
 						<div class="form-group row">
-							<label class="col-4 col-form-label">Loại phòng </label>
+							<label class="col-4 col-form-label">Tên tour </label>
 							<div class="col-8">
-								<select name="loaiphong" class="form-control">
-									<option selected="selected" disabled="disabled">-- Chọn loại phòng --</option>
-									<c:forEach var="lp" items="${loaiplist}">
-										<option value="${lp.idloaiphong }">${lp.tenloai}</option>
+								<select name="tour" class="form-control">
+									<option selected="selected" disabled="disabled">-- Chọn Tour --</option>
+									<c:forEach var="tu" items="${tourlist}">
+										<option value="${tu.idtour }">${tu.tentour}</option>
 									</c:forEach>
 								</select>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-4 col-form-label">Ngày nhận phòng</label>
+							<label class="col-4 col-form-label">Số người</label>
 							<div class="col-8">
-								<input name="ngaynhanphong" class="form-control" type="date" value="">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-4 col-form-label">Ngày trả phòng</label>
-							<div class="col-8">
-								<input name= "ngaytraphong" class="form-control" type="date" value="">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-4 col-form-label">Số lượng phòng</label>
-							<div class="col-8">
-								<input name="soluong" class="form-control" type="number" value="">
+								<input name="songuoi" class="form-control" type="number" value="">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -68,19 +56,25 @@
 								<input name="email" class="form-control" type="email" value="">
 							</div>
 						</div>
+						<div class="form-group row">
+							<label class="col-4 col-form-label">Yêu cầu</label>
+							<div class="col-8">
+								<input name="yeucau" class="form-control" type="text" value="">
+							</div>
+						</div>
 						<div class="col-md-12">
 							<div class="form-check">
 								<label class="custom-control custom-checkbox"> <input
 									type="checkbox" class="custom-control-input"> <span
 									class="custom-control-indicator"></span> <span
 									class="custom-control-description">Tôi đã đọc và chấp
-										nhận các chính sách của khách sạn, điều khoản, điều kiện và
+										nhận các chính sách của công ty, điều khoản, điều kiện và
 										chính sách quyền riêng tư</span>
 								</label>
 							</div>
 							<div class="col-md-12 text-center">
 								<button class="btn btn-success" style="width: 200px;">Đặt
-									phòng</button>
+									Tour</button>
 							</div>
 						</div>
 					</form>
@@ -91,7 +85,7 @@
 		<!-- Thông tin phòng -->
 		<div class="col-lg-6">
 			<div class="card my-4">
-				<h5 class="card-header">Thông tin phòng</h5>
+				<h5 class="card-header">Thông tin tour</h5>
 				<div class="card-body">
 					<div class="col-md-12">
 						<div class="row">
