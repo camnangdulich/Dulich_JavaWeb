@@ -15,6 +15,19 @@
 					<form action="admin/ttour.html" method="post" id="themtour"
 						enctype="multipart/form-data">
 						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Hình ảnh</label>
+							<div class="col-sm-10">
+								<label class="custom-file" style="display: none;"> <input
+									name="hinhanh" id="my_file" type="file"
+									class="custom-file-input" onchange="onFileSelected(event)">
+								</label> <a onclick="document.getElementById('my_file').click();"
+									style="cursor: pointer;"> <img id="myimage"
+									src="files/tour/tour1.jpg"
+									style="max-width: 120px; max-height: 120px;">
+								</a>
+							</div>
+						</div>
+						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Công ty</label>
 							<div class="col-sm-10" label-validation>
 								<select name="congty" class="form-control">
@@ -26,7 +39,7 @@
 								</select>
 							</div>
 						</div>
-					<div class="form-group row">
+						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Điểm đi</label>
 							<div class="col-sm-10" id="label-validation">
 								<input name="diemdi" type="text" class="form-control"
@@ -37,8 +50,9 @@
 							<label class="col-sm-2 col-form-label">Điểm đến</label>
 							<div class="col-sm-10" label-validation>
 								<select name="diemden" class="form-control">
-									<option selected="selected" disabled>-- Chọn điểm đến --</option>
-									<c:forEach var="tt" items="${tthlist}">
+									<option selected="selected" disabled>-- Chọn điểm đến
+										--</option>
+									<c:forEach var="tt" items="${ttlist}">
 										<option value="${tt.idtinhthanh}">${tt.tinhthanh}</option>
 									</c:forEach>
 								</select>

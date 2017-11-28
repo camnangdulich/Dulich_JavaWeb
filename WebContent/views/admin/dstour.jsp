@@ -52,7 +52,7 @@
                     <tbody>
                         <c:forEach var="tu" items="${tulist}">
                             <tr>
-                                <td>${tu.idtour}</td>
+                                <td style="width: 50px;"><img src="files/tour/${tu.hinhtour}" width="150px"></td>
                                 <td>${tu.tentour}</td>
                                 <td>${tu.mota}</td>
                                 <td>${tu.gia}</td>

@@ -560,51 +560,86 @@ public class Huycontroller {
 	
 	
 	//Thêm tour du lịch
-//	@RequestMapping("ttour")
-//	public String ttour(ModelMap model) {
-//		model.addAttribute("title", "Thêm tour du lịch mới");
-//		return "admin/ttour";
-//	}
-//	
-//	@RequestMapping(value = "ttour", method = RequestMethod.POST)
-//	public String ttour(ModelMap model,
-//			@RequestParam("congty") Integer congty,
-//			@RequestParam("diemden") Integer diemden,
-//			@RequestParam("tentour") String tentour,
-//			@RequestParam("mota") String mota,
-//			@RequestParam("gia") Integer gia,
-//			@RequestParam("diemdi") String diemdi,
-//			@RequestParam("ngaykhoihanh") String ngaykhoihanh,
-//			@RequestParam("lichtrinh") String lichtrinh,
-//			@RequestParam("luuy") String luuy) {
-//		
-//		
-//		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//		try {
-//			Date ngaykhoihanhDate = (Date)formatter.parse(ngaykhoihanh);
-//			Session session = factory.openSession();
-//			Congty ct = (Congty) session.get(Congty.class, congty);
-//			Tinhthanh tt = (Tinhthanh) session.get(Congty.class, diemden);
-//			Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanhDate, lichtrinh, luuy);
-//			Transaction t = session.beginTransaction();
-//			try {
-//				session.save(to);
-//				t.commit();
-//				model.addAttribute("message", "Thêm tour thành công!");
-//				return "admin/ttour";
-//			} catch (Exception e) {
-//				t.rollback();
-//				model.addAttribute("message", "Thêm tour thất bại!");
-//			} finally {
-//				session.close();
-//			}
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//
-//		
-//		return "admin/ttour";
-//	}
+	@RequestMapping("ttour")
+	public String ttour(ModelMap model) {
+		model.addAttribute("title", "Thêm tour du lịch mới");
+		return "admin/ttour";
+	}
+	
+	@RequestMapping(value = "ttour", method = RequestMethod.POST)
+	public String ttour(ModelMap model,
+			@RequestParam("congty") Integer congty,
+			@RequestParam("diemden") Integer diemden,
+			@RequestParam("tentour") String tentour,
+			@RequestParam("mota") String mota,
+			@RequestParam("gia") Integer gia,
+			@RequestParam("diemdi") String diemdi,
+			@RequestParam("ngaykhoihanh") String ngaykhoihanh,
+			@RequestParam("lichtrinh") String lichtrinh,
+			@RequestParam("luuy") String luuy,
+			@RequestParam("hinhanh") MultipartFile hinhtour) {
+		
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date ngaydate = (Date)formatter.parse(ngaykhoihanh);
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			Congty ct = (Congty) session.get(Congty.class, congty);
+			Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
+			// Tạo đường dẫn lưu hình ảnh
+			String photoPath = "";
+			if(hinhtour.getOriginalFilename().equals("")){
+				photoPath = context.getRealPath("/files/tour/tour1.jpg");
+			} else {
+				photoPath = context.getRealPath("/files/tour/" + hinhtour.getOriginalFilename());
+			}
+			// Lưu hình ảnh
+			try {
+				hinhtour.transferTo(new File(photoPath));
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			if(hinhtour.getOriginalFilename().equals("")){
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaydate, lichtrinh, luuy, 0, "tour1.jpg");
+				try {
+					session.save(to);
+					t.commit();
+					model.addAttribute("message", "Thêm tour thành công!");
+					return "admin/ttour";
+				} catch (Exception e) {
+					t.rollback();
+					model.addAttribute("message", "Thêm tour thất bại!");
+				} finally {
+					session.close();
+				}
+
+			} else {
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaydate, lichtrinh, luuy, 0, "tour1.jpg");
+				try {
+					session.save(to);
+					t.commit();
+					model.addAttribute("message", "Thêm tour thành công!");
+					return "admin/ttour";
+				} catch (Exception e) {
+					t.rollback();
+					model.addAttribute("message", "Thêm tour thất bại!");
+				} finally {
+					session.close();
+				}
+
+			}
+		
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return "admin/ttour";
+}
 	
 	
 	
