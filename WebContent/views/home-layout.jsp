@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <c:choose>
         	<c:when test="${title == null}">
-        		<title>Cẩm nang du lịch zz</title>
+        		<title>Cẩm nang du lịch</title>
         	</c:when>
         	<c:otherwise>
         		<title>${title}</title>

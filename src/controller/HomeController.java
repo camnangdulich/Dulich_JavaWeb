@@ -6,6 +6,9 @@
 package controller;
 
 import java.security.InvalidKeyException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import entities.Chitiettin;
 import entities.Danhgia;
+import entities.Khachsan;
+import entities.Loaiphong;
 import entities.Loaitin;
 import entities.Quyen;
 import entities.Taikhoan;
@@ -80,6 +85,19 @@ public class HomeController {
 		@SuppressWarnings("unchecked")
 		List<Tintuc> lsttintucmoi = query_ttm.list();
 		return lsttintucmoi;
+	}
+	
+	// Lấy thông tin tin liên quan
+	@ModelAttribute("lsttinlienquan")
+	public List<Tintuc> lsttinlienquan(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int ttmSize = 5;
+		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";
+		Query query_ttm = session.createQuery(hql_ttm);
+		query_ttm.setMaxResults(ttmSize);
+		@SuppressWarnings("unchecked")
+		List<Tintuc> lsttinlienquan = query_ttm.list();
+		return lsttinlienquan;
 	}
 	
 	// Lấy thông tin tin tức mới nhất SIBAR
@@ -147,6 +165,19 @@ public class HomeController {
 		return lsttournoibat;
 	}
 	
+	// Lấy tour đặc biệt
+	@ModelAttribute("lsttourdacbiet")
+	public List<Tour> lsttourdacbiet(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int tourSize = 6;
+		String hql_tour = "from Tour ORDER BY luotxem DESC";
+		Query query_tour = session.createQuery(hql_tour);
+		query_tour.setMaxResults(tourSize);
+		@SuppressWarnings("unchecked")
+		List<Tour> lsttourdacbiet = query_tour.list();
+		return lsttourdacbiet;
+	}
+	
 	// Lấy tất cả loại tin tức
 	@ModelAttribute("loaitinlst")
 	public List<Loaitin> loaitinlst(ModelMap model) {
@@ -155,6 +186,17 @@ public class HomeController {
 		Query query = session.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Loaitin> list = query.list();
+		return list;
+	}
+	
+	// Lấy tất cả loại phòng
+	@ModelAttribute("loaiphonglst")
+	public List<Loaiphong> loaiphonglst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Loaiphong";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Loaiphong> list = query.list();
 		return list;
 	}
 	
@@ -328,6 +370,42 @@ public class HomeController {
 	
 	
 	
+	// Chi tiết khách sạn
+	@RequestMapping("khach-san/{id}")
+	public String ctkhachsan(ModelMap model, @PathVariable("id") Integer idks) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Khachsan where idkhachsan = :idks";
+        Query query = session.createQuery(hql);
+        query.setParameter("idks", idks);
+        Khachsan ks = (Khachsan) query.uniqueResult();
+        String tenkhachsan = ks.getTenkhachsan();
+        Integer idtt = ks.getTinhthanh().getIdtinhthanh();
+        
+        String hqlkstkv = "from Khachsan where idtinhthanh = :idtt";
+        Query querykstkv = session.createQuery(hqlkstkv);
+        querykstkv.setParameter("idtt", idtt);
+        querykstkv.setMaxResults(5);
+        @SuppressWarnings("unchecked")
+		List<Khachsan> listks = querykstkv.list();
+        
+        // Lấy đánh giá khách sạn
+        String hqldg = "from Danhgia where idkhachsan = :idks";
+        Query querydg = session.createQuery(hqldg);
+        querydg.setParameter("idks", idks);
+        @SuppressWarnings({ "unchecked", "unused" })
+		List<Danhgia> listdgks = querydg.list();
+        
+        
+        model.addAttribute("listdgks", listdgks);
+        model.addAttribute("lstkhachsan", listks);
+		model.addAttribute("ctks", ks);
+		model.addAttribute("title", tenkhachsan);
+		
+		return "home/khachsan";
+	}
+	
+	
+	
 	
 	
 	
@@ -347,13 +425,6 @@ public class HomeController {
     public String tinhthanh(ModelMap model) {
         model.addAttribute("title", "Tỉnh thành");
         return "home/tinhthanh";
-    }
-
-
-    @RequestMapping("tintucct")
-    public String tintucct(ModelMap model) {
-        model.addAttribute("title", "Chi tiết tin tức");
-        return "home/tintuc_ct";
     }
 
     @RequestMapping("tour")

@@ -26,74 +26,38 @@
                 <p style="font-size: 16px; font-style: italic; font-weight: 500;">${cttt.tomtat}</p>
             </blockquote>
             <div>${cttt.noidung}
-            	<p>${cttt.nguon}</p>
+            	<p style=" margin-top: 1rem; font-size: small; font-style: italic; text-align: right; padding-right: 1rem; color: crimson; ">
+            	Nguồn: ${cttt.nguon}</p>
             </div>
             <hr>
             <div class="card mb-4">
                 <div class="card-body">
                     <h4>Tin liên quan</h4><hr>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <a href="#">
-                                <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-                            </a>
-                        </div>
-                        <div class="col-lg-7">
-                            <h5 class="card-title">Post Title Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
-                            <p class="card-text p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <a href="#">
-                                <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-                            </a>
-                        </div>
-                        <div class="col-lg-7">
-                            <h5 class="card-title">Post Title Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
-                            <p class="card-text p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <a href="#">
-                                <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-                            </a>
-                        </div>
-                        <div class="col-lg-7">
-                            <h5 class="card-title">Post Title Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
-                            <p class="card-text p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <a href="#">
-                                <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-                            </a>
-                        </div>
-                        <div class="col-lg-7">
-                            <h5 class="card-title">Post Title Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
-                            <p class="card-text p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <a href="#">
-                                <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-                            </a>
-                        </div>
-                        <div class="col-lg-7">
-                            <h5 class="card-title">Post Title Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
-                            <p class="card-text p-fx">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                        </div>
-                    </div>
+                    <c:forEach var="tlq" items="${lsttinlienquan}">
+                    	<div class="row">
+	                        <div class="col-lg-5">
+	                            <a href="#">
+	                                <img class="img-fluid rounded" src="files/tintuc/${tlq.hinhanh}" alt="${tlq.hinhanh}">
+	                            </a>
+	                        </div>
+	                        <div class="col-lg-7">
+	                            <h5 class="card-title">${tlq.tieude}</h5>
+	                            <p class="card-text p-fx">${tlq.tomtat}</p>
+	                            <a class="" href="#">Xem thêm →</a>
+	                        </div>
+	                    </div>
+	                    <hr>
+                    </c:forEach>
                 </div>
             </div>
         </div>
+       	<script type="text/javascript">
+			$(".card-text").shorten({
+			    "showChars" : 150,
+			    "moreText"  : "...",
+			    "lessText"  : "",
+			});
+		</script>
 
         <!-- Sidebar -->
         <div class="col-md-4">
