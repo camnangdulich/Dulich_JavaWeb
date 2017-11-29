@@ -1,13 +1,14 @@
 package entities;
-// Generated Nov 29, 2017 3:03:07 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 29, 2017 3:09:57 PM by Hibernate Tools 5.1.0.Alpha1
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -51,21 +52,6 @@ public class Tour implements java.io.Serializable {
 		this.diemdi = diemdi;
 		this.giokhoihanh = giokhoihanh;
 		this.lichtrinh = lichtrinh;
-		this.luotxem = luotxem;
-		this.hinhtour = hinhtour;
-	}
-	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, String mota, int gia, String diemdi,
-			Date giokhoihanh, String lichtrinh, String luuy, int luotxem, String hinhtour
-			) {
-		this.congty = congty;
-		this.tinhthanh = tinhthanh;
-		this.tentour = tentour;
-		this.mota = mota;
-		this.gia = gia;
-		this.diemdi = diemdi;
-		this.giokhoihanh = giokhoihanh;
-		this.lichtrinh = lichtrinh;
-		this.luuy = luuy;
 		this.luotxem = luotxem;
 		this.hinhtour = hinhtour;
 	}
@@ -210,7 +196,7 @@ public class Tour implements java.io.Serializable {
 		this.hinhtour = hinhtour;
 	}
 
-	@OneToMany(mappedBy = "tour")
+	@OneToMany( mappedBy = "tour")
 	public Set<Dattour> getDattours() {
 		return this.dattours;
 	}

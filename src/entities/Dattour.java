@@ -45,10 +45,9 @@ public class Dattour implements java.io.Serializable {
 		this.dienthoai = dienthoai;
 		this.email = email;
 	}
-	public Dattour(Tour tour,Trangthai trangthai, String hodem, String ten, int songuoi,
+	public Dattour(Tour tour, String hodem, String ten, int songuoi,
 			String dienthoai, String email, String yeucau) {
 		this.tour = tour;
-		this.trangthai = trangthai;
 		this.hodem = hodem;
 		this.ten = ten;
 		this.songuoi = songuoi;
