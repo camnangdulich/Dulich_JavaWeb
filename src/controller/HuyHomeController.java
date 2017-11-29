@@ -130,13 +130,7 @@ public class HuyHomeController {
  				@RequestParam("email") String email,
  				@RequestParam("yeucau") String yeucau){
  			
-// 			System.out.println("tour" +tour);
-// 			System.out.println("hodem" +hodem);
-// 			System.out.println("ten" +ten);
-// 			System.out.println("songuoi" +songuoi);
-// 			System.out.println("sodienthoai" +sodienthoai);
-// 			System.out.println("email" +email);
-// 			System.out.println("yeucau" +yeucau);
+
  				Session session = factory.openSession();
  	 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
  	 			Tour tuor = (Tour) session.get(Tour.class, tour);

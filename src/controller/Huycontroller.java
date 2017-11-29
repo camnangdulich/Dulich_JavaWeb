@@ -578,10 +578,10 @@ public class Huycontroller {
 			@RequestParam("lichtrinh") String lichtrinh,
 			@RequestParam("luuy") String luuy,
 			@RequestParam("hinhanh") MultipartFile hinhtour) {
-		
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			Date ngaydate = (Date)formatter.parse(ngaykhoihanh);
+//		
+//		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//		try {
+//			Date ngaydate = (Date)formatter.parse(ngaykhoihanh);
 			Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			Congty ct = (Congty) session.get(Congty.class, congty);
@@ -605,7 +605,7 @@ public class Huycontroller {
 			}
 			
 			if(hinhtour.getOriginalFilename().equals("")){
-				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaydate, lichtrinh, luuy, 0, "tour1.jpg");
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, "tour1.jpg");
 				try {
 					session.save(to);
 					t.commit();
@@ -619,7 +619,7 @@ public class Huycontroller {
 				}
 
 			} else {
-				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaydate, lichtrinh, luuy, 0, "tour1.jpg");
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, hinhtour.getOriginalFilename());
 				try {
 					session.save(to);
 					t.commit();
@@ -634,9 +634,9 @@ public class Huycontroller {
 
 			}
 		
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
 		
 		return "admin/ttour";
 }
@@ -940,7 +940,85 @@ public class Huycontroller {
 				session.close();
 			}
 		}
+		//Sửa thông tin tour
 		
+		@RequestMapping("suatour/{id}")
+		public String suatour(ModelMap model, @PathVariable("id") Integer idt) {
+			model.addAttribute("title", "Sửa tỉnh thành");
+			Session session = factory.getCurrentSession();
+			Tour tou = (Tour) session.get(Tour.class, idt);
+			model.addAttribute("tua", tou);
+			return "admin/suatour";
+		}
+		
+		@RequestMapping(value = "stour", method = RequestMethod.POST )
+		public String suatour(ModelMap model,
+				@RequestParam("idtour") Integer idtour,
+				@RequestParam("congty") Integer congty,
+				@RequestParam("diemden") Integer diemden,
+				@RequestParam("tentour") String tentour,
+				@RequestParam("mota") String mota,
+				@RequestParam("gia") Integer gia,
+				@RequestParam("diemdi") String diemdi,
+//				@RequestParam("ngaykhoihanh") String ngaykhoihanh,
+				@RequestParam("lichtrinh") String lichtrinh,
+				@RequestParam("luuy") String luuy,
+				@RequestParam("hinhanh") MultipartFile hinhanh) {
+			
+			
+			
+//			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//			try {
+//				Date khoihanhdate = (Date)formatter.parse(ngaykhoihanh);
+				Session session = factory.openSession();
+				Transaction t = session.beginTransaction();
+				Tour to = (Tour) session.get(Tour.class, idtour);
+				Congty ct = (Congty) session.get(Congty.class, congty);
+				Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
+				String photoPath = context.getRealPath("/files/tour/" + hinhanh.getOriginalFilename());
+				
+				to.setCongty(ct);
+				to.setTinhthanh(tt);
+				to.setTentour(tentour);
+				to.setMota(mota);
+				to.setGia(gia);
+				to.setDiemdi(diemdi);
+//				to.setGiokhoihanh(khoihanhdate);
+				to.setLichtrinh(lichtrinh);
+				to.setLuuy(luuy);
+				try {
+					if(hinhanh.getOriginalFilename().equals("")){
+						session.update(tt);
+						t.commit();
+						model.addAttribute("message", "Chỉnh sửa tour thành công !");
+						System.out.println("Thành công không thêm ảnh");
+						return "redirect:/admin/suatour/"+idtour+".html";
+					}else{
+						hinhanh.transferTo(new File(photoPath));
+						tt.setHinhanh(hinhanh.getOriginalFilename());
+						session.update(tt);
+						t.commit();
+						model.addAttribute("message", "Chỉnh sửa tour thành công !");
+						System.out.println("Thành công có thêm ảnh");
+						return "redirect:/admin/suatour/"+idtour+".html";
+					}
+				} 
+				catch (Exception e) {
+					t.rollback();
+					model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
+					System.out.println("that bai");
+					return "redirect:/admin/tintuc/"+idtour+".html";
+				}
+				finally {
+					session.close();
+				}
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//				return "redirect:/admin/tintuc/"+idtour+".html";
+//			}
+			
+			
+		}
 		
 		
 		
