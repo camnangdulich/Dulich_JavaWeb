@@ -32,9 +32,10 @@ public class Dichvu implements java.io.Serializable {
 	public Dichvu() {
 	}
 	
-	public Dichvu(String tendichvu, String mota) {
+	public Dichvu(String tendichvu, String mota, String slug) {
 		this.tendichvu = tendichvu;
 		this.mota = mota;
+		this.slug = slug;
 	}
 
 	public Dichvu(String tendichvu) {
