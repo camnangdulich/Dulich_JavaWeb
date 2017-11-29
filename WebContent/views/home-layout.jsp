@@ -249,8 +249,6 @@
                     <button id="btn-google" class="log_opid" style="background-color: #d34836; float: right;">
                         <i class="fa fa-google-plus"></i> Đăng nhập bằng Google+
                     </button>
-                    <button onclick="logoutFacebook()">Đăng xuất facebook</button>
-                    <button onclick="signOut()">Đăng xuất google</button>
                 </div>
 
                 <div class="container_log" style="background-color:#f1f1f1">
