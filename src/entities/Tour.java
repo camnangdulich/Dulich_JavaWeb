@@ -54,6 +54,21 @@ public class Tour implements java.io.Serializable {
 		this.luotxem = luotxem;
 		this.hinhtour = hinhtour;
 	}
+	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, String mota, int gia, String diemdi,
+			Date giokhoihanh, String lichtrinh, String luuy, int luotxem, String hinhtour
+			) {
+		this.congty = congty;
+		this.tinhthanh = tinhthanh;
+		this.tentour = tentour;
+		this.mota = mota;
+		this.gia = gia;
+		this.diemdi = diemdi;
+		this.giokhoihanh = giokhoihanh;
+		this.lichtrinh = lichtrinh;
+		this.luuy = luuy;
+		this.luotxem = luotxem;
+		this.hinhtour = hinhtour;
+	}
 
 	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, String mota, int gia, String diemdi,
 			String giokhoihanh, String lichtrinh, String luuy, String slug, int luotxem, String hinhtour,

@@ -560,51 +560,86 @@ public class Huycontroller {
 	
 	
 	//Thêm tour du lịch
-//	@RequestMapping("ttour")
-//	public String ttour(ModelMap model) {
-//		model.addAttribute("title", "Thêm tour du lịch mới");
-//		return "admin/ttour";
-//	}
-//	
-//	@RequestMapping(value = "ttour", method = RequestMethod.POST)
-//	public String ttour(ModelMap model,
-//			@RequestParam("congty") Integer congty,
-//			@RequestParam("diemden") Integer diemden,
-//			@RequestParam("tentour") String tentour,
-//			@RequestParam("mota") String mota,
-//			@RequestParam("gia") Integer gia,
-//			@RequestParam("diemdi") String diemdi,
-//			@RequestParam("ngaykhoihanh") String ngaykhoihanh,
-//			@RequestParam("lichtrinh") String lichtrinh,
-//			@RequestParam("luuy") String luuy) {
-//		
+	@RequestMapping("ttour")
+	public String ttour(ModelMap model) {
+		model.addAttribute("title", "Thêm tour du lịch mới");
+		return "admin/ttour";
+	}
+	
+	@RequestMapping(value = "ttour", method = RequestMethod.POST)
+	public String ttour(ModelMap model,
+			@RequestParam("congty") Integer congty,
+			@RequestParam("diemden") Integer diemden,
+			@RequestParam("tentour") String tentour,
+			@RequestParam("mota") String mota,
+			@RequestParam("gia") Integer gia,
+			@RequestParam("diemdi") String diemdi,
+			@RequestParam("ngaykhoihanh") String ngaykhoihanh,
+			@RequestParam("lichtrinh") String lichtrinh,
+			@RequestParam("luuy") String luuy,
+			@RequestParam("hinhanh") MultipartFile hinhtour) {
 //		
 //		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //		try {
-//			Date ngaykhoihanhDate = (Date)formatter.parse(ngaykhoihanh);
-//			Session session = factory.openSession();
-//			Congty ct = (Congty) session.get(Congty.class, congty);
-//			Tinhthanh tt = (Tinhthanh) session.get(Congty.class, diemden);
-//			Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanhDate, lichtrinh, luuy);
-//			Transaction t = session.beginTransaction();
-//			try {
-//				session.save(to);
-//				t.commit();
-//				model.addAttribute("message", "Thêm tour thành công!");
-//				return "admin/ttour";
-//			} catch (Exception e) {
-//				t.rollback();
-//				model.addAttribute("message", "Thêm tour thất bại!");
-//			} finally {
-//				session.close();
-//			}
+//			Date ngaydate = (Date)formatter.parse(ngaykhoihanh);
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			Congty ct = (Congty) session.get(Congty.class, congty);
+			Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
+			// Tạo đường dẫn lưu hình ảnh
+			String photoPath = "";
+			if(hinhtour.getOriginalFilename().equals("")){
+				photoPath = context.getRealPath("/files/tour/tour1.jpg");
+			} else {
+				photoPath = context.getRealPath("/files/tour/" + hinhtour.getOriginalFilename());
+			}
+			// Lưu hình ảnh
+			try {
+				hinhtour.transferTo(new File(photoPath));
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			if(hinhtour.getOriginalFilename().equals("")){
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, "tour1.jpg");
+				try {
+					session.save(to);
+					t.commit();
+					model.addAttribute("message", "Thêm tour thành công!");
+					return "admin/ttour";
+				} catch (Exception e) {
+					t.rollback();
+					model.addAttribute("message", "Thêm tour thất bại!");
+				} finally {
+					session.close();
+				}
+
+			} else {
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, hinhtour.getOriginalFilename());
+				try {
+					session.save(to);
+					t.commit();
+					model.addAttribute("message", "Thêm tour thành công!");
+					return "admin/ttour";
+				} catch (Exception e) {
+					t.rollback();
+					model.addAttribute("message", "Thêm tour thất bại!");
+				} finally {
+					session.close();
+				}
+
+			}
+		
 //		} catch (ParseException e) {
 //			e.printStackTrace();
 //		}
-//
-//		
-//		return "admin/ttour";
-//	}
+		
+		return "admin/ttour";
+}
 	
 	
 	
@@ -905,7 +940,85 @@ public class Huycontroller {
 				session.close();
 			}
 		}
+		//Sửa thông tin tour
 		
+		@RequestMapping("suatour/{id}")
+		public String suatour(ModelMap model, @PathVariable("id") Integer idt) {
+			model.addAttribute("title", "Sửa tỉnh thành");
+			Session session = factory.getCurrentSession();
+			Tour tou = (Tour) session.get(Tour.class, idt);
+			model.addAttribute("tua", tou);
+			return "admin/suatour";
+		}
+		
+		@RequestMapping(value = "stour", method = RequestMethod.POST )
+		public String suatour(ModelMap model,
+				@RequestParam("idtour") Integer idtour,
+				@RequestParam("congty") Integer congty,
+				@RequestParam("diemden") Integer diemden,
+				@RequestParam("tentour") String tentour,
+				@RequestParam("mota") String mota,
+				@RequestParam("gia") Integer gia,
+				@RequestParam("diemdi") String diemdi,
+//				@RequestParam("ngaykhoihanh") String ngaykhoihanh,
+				@RequestParam("lichtrinh") String lichtrinh,
+				@RequestParam("luuy") String luuy,
+				@RequestParam("hinhanh") MultipartFile hinhanh) {
+			
+			
+			
+//			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//			try {
+//				Date khoihanhdate = (Date)formatter.parse(ngaykhoihanh);
+				Session session = factory.openSession();
+				Transaction t = session.beginTransaction();
+				Tour to = (Tour) session.get(Tour.class, idtour);
+				Congty ct = (Congty) session.get(Congty.class, congty);
+				Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
+				String photoPath = context.getRealPath("/files/tour/" + hinhanh.getOriginalFilename());
+				
+				to.setCongty(ct);
+				to.setTinhthanh(tt);
+				to.setTentour(tentour);
+				to.setMota(mota);
+				to.setGia(gia);
+				to.setDiemdi(diemdi);
+//				to.setGiokhoihanh(khoihanhdate);
+				to.setLichtrinh(lichtrinh);
+				to.setLuuy(luuy);
+				try {
+					if(hinhanh.getOriginalFilename().equals("")){
+						session.update(tt);
+						t.commit();
+						model.addAttribute("message", "Chỉnh sửa tour thành công !");
+						System.out.println("Thành công không thêm ảnh");
+						return "redirect:/admin/suatour/"+idtour+".html";
+					}else{
+						hinhanh.transferTo(new File(photoPath));
+						tt.setHinhanh(hinhanh.getOriginalFilename());
+						session.update(tt);
+						t.commit();
+						model.addAttribute("message", "Chỉnh sửa tour thành công !");
+						System.out.println("Thành công có thêm ảnh");
+						return "redirect:/admin/suatour/"+idtour+".html";
+					}
+				} 
+				catch (Exception e) {
+					t.rollback();
+					model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
+					System.out.println("that bai");
+					return "redirect:/admin/tintuc/"+idtour+".html";
+				}
+				finally {
+					session.close();
+				}
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//				return "redirect:/admin/tintuc/"+idtour+".html";
+//			}
+			
+			
+		}
 		
 		
 		
