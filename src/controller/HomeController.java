@@ -450,6 +450,35 @@ public class HomeController {
 
 		return "home/tinhthanh";
 	}
+	
+	
+	// Danh sách tỉnh thành
+	@RequestMapping("tinh-thanh/danh-sach")
+	public String dstinhthanh(ModelMap model, HttpSession httpsession,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+		Session session = factory.getCurrentSession();
+		int total = 0, pageSize = 10;
+		String hql = "from Tinhthanh";
+		Query query = session.createQuery(hql);
+
+		total = query.list().size();
+		query.setFirstResult(pageSize * (page - 1));
+		query.setMaxResults(pageSize);
+		int pageCount = (total) / pageSize + (total % pageSize > 0 ? 1 : 0);
+
+		@SuppressWarnings("unchecked")
+		List<Tinhthanh> list = query.list();
+
+		model.addAttribute("tinhthanhds", list);
+		model.addAttribute("title", "Danh sách tỉnh thành");
+		model.addAttribute("currentpage", page);
+		model.addAttribute("pagesize", pageSize);
+		model.addAttribute("pagecount", pageCount);
+
+		return "home/tinhthanh_ds";
+	}
+	
+	
 
 	@RequestMapping("tttaikhoan")
 	public String tttaikhoan(ModelMap model) {
