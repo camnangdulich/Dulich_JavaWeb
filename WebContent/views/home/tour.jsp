@@ -1,33 +1,43 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
     <div class="row" style="margin-top: 20px;">
         <div class="col-lg-6">
             <div class="ih-item square effect9 right_to_left" style="width: 100%; height: 100%;">
                 <a href="#">
-                    <div class="img" ><img class="img-fluid rounded" src="http://placehold.it/750x300" alt=""></div>
+                    <div class="img" ><img class="img-fluid rounded" src="files/tour/${cttour.hinhtour}" alt=""></div>
                     <div class="info">
                         <div class="info-back">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
+                            <h3>${cttour.tentour}</h3>
+                            <p style="padding-bottom: 0;"><i class="fa fa-address-card" style="padding-right: 5px;"></i> Công ty cung cấp: ${cttour.congty.tencongty}</p>
+				            <p style="padding: 0;"><i class="fa fa-phone" style="padding-right: 5px;"></i> Số điện thoại : ${cttour.congty.sodienthoai}</p>
+				            <p style="padding: 0;"><i class="fa fa-fw fa-envelope" style="padding-right: 5px;"></i> Email công ty : ${cttour.congty.email}</p>
+            				<p style="padding: 0;"><i class="fa fa-map-marker" style="padding-right: 5px;"></i> Thuộc tỉnh thành : ${cttour.tinhthanh.tinhthanh}</p>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
         <div class="col-lg-6">
-            <h3 class="card-title">Tour du lịch</h3>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+            <h3 class="card-title">${cttour.tentour}</h3>
             <hr>
-            <p><i class="fa fa-money"></i> Giá 1 người: <span style="font-weight: bolder; color: green;">9.999.999 VNĐ</span></p>
-            <p><i class="fa fa-address-card"></i> Công ty cung cấp: <a href="#">Công ty du lịch</a></p>
+            <p><i class="fa fa-money"></i> Giá 1 người: <span style="font-weight: bolder; color: green;"> ${String.format("%,d", cttour.gia)} VNĐ</span></p>
+            <p><i class="fa fa-address-card"></i> Công ty cung cấp: ${cttour.congty.tencongty}</p>
+            <p><i class="fa fa-phone"></i> Số điện thoại : ${cttour.congty.sodienthoai}</p>
+            <p><i class="fa fa-fw fa-envelope"></i> Email công ty : ${cttour.congty.email}</p>
+			<p><i class="fa fa-map-marker"></i> Thuộc tỉnh thành : ${cttour.tinhthanh.tinhthanh}</p>
         </div>
     </div>
     <hr>
     <div class="row">
         <div class="col-md-8">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
+            	<li class="nav-item">
                     <a class="nav-link active" href="#lichtrinh" role="tab" data-toggle="tab">Lịch trình Tour</a>
+                </li>
+            	<li class="nav-item">
+                    <a class="nav-link" href="#kskhuvuc" role="tab" data-toggle="tab">Khách sạn trong khu vực</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#chitiet" role="tab" data-toggle="tab">Chi tiết</a>
@@ -38,54 +48,54 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#nhacungcap" role="tab" data-toggle="tab">Nhà cung cấp</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#kskhuvuc" role="tab" data-toggle="tab">Khách sạn trong khu vực</a>
-                </li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane in active" id="lichtrinh">
+            	<div role="tabpanel" class="tab-pane in active" id="lichtrinh">
                     <div class="modal-body tt-bv">
-                        <!-- Preview Image -->
-                        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+                    	${cttour.lichtrinh}
                         <hr>
-                        <!-- Date/Time -->
-                        <p>Posted on January 1, 2017 at 12:00 PM</p>
-                        <hr>
-                        <!-- Post Content -->
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste</h4>
-                        <blockquote class="blockquote">
-                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-                        <img class="" src="http://placehold.it/900x300" alt="">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
-                        <hr>
+                    </div>
+                </div>
+            	<div role="tabpanel" class="tab-pane fade" id="kskhuvuc">
+                    <div class="modal-body tt-bv">
+	                    <div class="row">
+		                    <c:forEach var="tur" items="${lstkhachsan}">
+		                        <div class="col-lg-4 col-sm-6 portfolio-item">
+		                            <div class="card h-80">
+		                                <a href="#"><img style="border-radius: 0; padding: 0;" class="card-img-top" 
+		                                src="files/khachsan/${tur.hinhanh}" alt="${tur.hinhanh}"></a>
+		                                <div class="card-body">
+		                                    <h6 class="card-title">
+		                                        <a href="#">${tur.tenkhachsan}</a>
+		                                    </h6>
+		                                    <p style="font-size: 13px;" class="card-text">${tur.diachi}</p>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </c:forEach>
+	                    </div>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="chitiet">
                     <div class="modal-body tt-bv">
-                        Nội dung chi tiết
+                        ${cttour.mota}
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="luuy">
                     <div class="modal-body tt-bv">
-                        Nội dung lưu ý
+                        ${cttour.luuy}
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="nhacungcap">
                     <div class="modal-body tt-bv">
-                        Nội dung nhà cung cấp
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="kskhuvuc">
-                    <div class="modal-body tt-bv">
-                        Nội dung khách sạn trong khu vực
+                    	<hr>
+                        <p><i class="fa fa-address-card"></i> Công ty cung cấp: ${cttour.congty.tencongty}</p>
+			            <p><i class="fa fa-phone"></i> Số điện thoại : ${cttour.congty.sodienthoai}</p>
+			            <p><i class="fa fa-fw fa-envelope"></i> Email công ty : ${cttour.congty.email}</p>
+						<p><i class="fa fa-map-marker"></i> Thuộc tỉnh thành : ${cttour.tinhthanh.tinhthanh}</p>
+						<hr>
                     </div>
                 </div>
             </div>
@@ -94,72 +104,19 @@
                 <div class="card-body">
                     <h4>Các Tour đặc biệt</h4><hr>
                     <div class="row">
-                        <div class="col-lg-4 col-sm-6 portfolio-item">
-                            <div class="card h-80">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                                    </h6>
-                                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6 portfolio-item">
-                            <div class="card h-80">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                                    </h6>
-                                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6 portfolio-item">
-                            <div class="card h-80">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                                    </h6>
-                                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6 portfolio-item">
-                            <div class="card h-80">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                                    </h6>
-                                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6 portfolio-item">
-                            <div class="card h-80">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                                    </h6>
-                                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6 portfolio-item">
-                            <div class="card h-80">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <a href="#">Tour du lịch ABC Hà Nội - TP.Hồ Chí Minh</a>
-                                    </h6>
-                                    <p style="font-size: 13px;" class="card-text">Hà Nội <i class="fa fa-long-arrow-right"></i> TP.Hồ Chí Minh</p>
-                                </div>
-                            </div>
-                        </div>
+	                    <c:forEach var="tur" items="${lsttourdacbiet}">
+	                        <div class="col-lg-4 col-sm-6 portfolio-item">
+	                            <div class="card h-80">
+	                                <a href="#"><img style="border-radius: 0;" class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
+	                                <div class="card-body">
+	                                    <h6 class="card-title">
+	                                        <a href="#">${tur.tentour}</a>
+	                                    </h6>
+	                                    <p style="font-size: 13px;" class="card-text">${tur.diemdi} <i class="fa fa-long-arrow-right"></i> ${tur.tinhthanh.tinhthanh}</p>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </c:forEach>
                     </div>
                 </div>
             </div>

@@ -75,11 +75,11 @@
 		                    	<c:forEach var="lp" items="${loaiphonglst}">
 		                    		<tr>
 		                                <td style="width: 190px;">
-	                                		<img src="files/phong/${lp.hinhanh}" alt="${lp.hinhanh}">
+	                                		<img style="padding: 0px;" src="files/phong/${lp.hinhanh}" alt="${lp.hinhanh}">
 		                                </td>
 		                                <td>${lp.tenloai}</td>
 		                                <td>${String.format("%,d", lp.gia)} VNĐ</td>
-		                                <td>
+		                                <td style="width: 10xp;">
 		                                	<button class="btn btn-success">Đặt phòng</button>
 										</td>
 		                            </tr>
@@ -109,7 +109,7 @@
 		                    	<c:forEach var="lp" items="${loaiphonglst}">
 		                    		<tr>
 		                                <td style="width: 190px;">
-	                                		<img src="files/phong/${lp.hinhanh}" alt="${lp.hinhanh}">
+	                                		<img style="padding: 0px;" src="files/phong/${lp.hinhanh}" alt="${lp.hinhanh}">
 		                                </td>
 		                                <td>${lp.tenloai}</td>
 		                                <td class="motakhachsan">${lp.mota}</td>
@@ -121,39 +121,42 @@
                     <script type="text/javascript">
 						$(".motakhachsan").shorten({
 						    "showChars" : 20,
-						    "moreText"  : " >>>",
-						    "lessText"  : " <<<",
+						    "moreText"  : " ...xem thêm",
+						    "lessText"  : " ...rút gọn",
 						});
 					</script>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="danhgia">
                     <div class="modal-body tt-bv">
-						<form>
-							<div class="form-group">
-								<label>Email đánh giá</label> 
-								<input type=text class="form-control" disabled="disabled" value="Duongnxpk00662@fpt.edu.vn">
-							</div>
-							<div class="form-group">
-								<label for="exampleSelect1">Example select</label> 
-								<select class="form-control">
-									<option selected="selected" disabled="disabled">-- Chọn đánh giá --</option>
-									<option>Không hài lòng</option>
-									<option>Bình thường</option>
-									<option>Hài lòng</option>
-									<option>Rất hài lòng</option>
-									<option>Rất tốt</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="exampleTextarea">Example textarea</label>
-								<textarea class="form-control" id="exampleTextarea" rows="5"></textarea>
-							</div>
-							<button type="submit" class="btn btn-primary">Bình luận</button>
-						</form>
+                    	<div class="card md-4">
+							<form class="card-body">
+								<div class="form-group form-inline" style="display: block;">
+									<label style="display: block; margin-bottom: 8px;">Họ và tên</label>
+									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Họ đệm">
+									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Tên">
+								</div>
+								<div class="form-group">
+									<label for="exampleSelect1">Đánh giá</label> 
+									<select class="form-control">
+										<option selected="selected" disabled="disabled">-- Chọn đánh giá --</option>
+										<option value="1">Không hài lòng</option>
+										<option value="2">Bình thường</option>
+										<option value="3">Hài lòng</option>
+										<option value="4">Rất hài lòng</option>
+										<option value="5">Rất tốt</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="exampleTextarea">Nội dung đánh giá</label>
+									<textarea class="form-control" id="exampleTextarea" rows="8"></textarea>
+								</div>
+								<button type="submit" class="btn btn-primary">Bình luận</button>
+							</form>
+						</div>
 						<hr>
 						<div class="card mb-4">
 			                <div class="card-body">
-			                    <h5>Các Tour đặc biệt</h5><hr>
+			                    <h5>Các bình luận cho khách sạn này</h5><hr>
 			                    <div class="row">
 				                    <c:forEach var="dg" items="${listdgks}">
 				                        <div class="col-lg-12 portfolio-item">
@@ -162,7 +165,7 @@
 				                                	<div class="col-md-12 row">
 				                                	<div class="col-md-2" style="padding: 0px;">
 				                                		<a href="#">
-				                                		<img style="padding: 0px;" class="card-img-top" 
+				                                		<img style="padding: 0px; border-radius: 0;" class="card-img-top" 
 				                                			src="files/avatar/${dg.taikhoan.avatar}" alt="${dg.taikhoan.avatar}">
 				                                		</a>
 				                                	</div>
@@ -170,7 +173,7 @@
 				                                	<h6 class="card-title">
 				                                        <a href="#">${dg.taikhoan.email}</a>
 				                                    </h6>
-				                                    <p style="font-size: 13px;" class="card-text"><${dg.noidung}</div>
+				                                    <p style="font-size: 13px;" class="card-text rgnd">${dg.noidung}</div>
 				                                    
 				                                    </div>
 				                                </div>
@@ -178,6 +181,13 @@
 				                        </div>
 				                    </c:forEach>
 			                    </div>
+			                    <script type="text/javascript">
+									$(".rgnd").shorten({
+									    "showChars" : 200,
+									    "moreText"  : " ...xem thêm",
+									    "lessText"  : " ...rút gọn",
+									});
+								</script>
 			                </div>
 			            </div>
 					</div>
@@ -191,7 +201,7 @@
 	                    <c:forEach var="tur" items="${lsttourdacbiet}">
 	                        <div class="col-lg-4 col-sm-6 portfolio-item">
 	                            <div class="card h-80">
-	                                <a href="#"><img class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
+	                                <a href="#"><img style="border-radius: 0;" class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
 	                                <div class="card-body">
 	                                    <h6 class="card-title">
 	                                        <a href="#">${tur.tentour}</a>
@@ -212,13 +222,12 @@
 	                <c:forEach var="ks" items="${lstkhachsan}">
 	                	<div class="portfolio-item">
 	                        <div class="card h-80">
-	                            <a href="#"><img class="card-img-top" src="files/khachsan/${ks.hinhanh}" alt="${ks.hinhanh}"></a>
+	                            <a href="#"><img style="border-radius: 0;" class="card-img-top" src="files/khachsan/${ks.hinhanh}" alt="${ks.hinhanh}"></a>
 	                            <div class="card-body">
 	                                <h5 class="card-title">
 	                                    <a href="#">${ks.tenkhachsan}</a>
 	                                </h5>
 	                                <p class="p-fx">${ks.diachi}</p>
-	                                <a onclick="loaiphongpp()" style="cursor: pointer; color: green;">Đăng nhập</a>
 	                            </div>
 	                        </div>
 	                    </div>

@@ -105,8 +105,27 @@
 						            <p class="p-fx">${ttm.tomtat}</p>
 						            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">${ttm.luotxem} lượt xem</span>
 						        </div>
-						        <div class="col-lg-4">
-						            <img class="img-fluid rounded" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
+						        <div class="col-lg-4 ih-item square effect7" style="padding: 0px;">
+						            <a href="#">
+										<div class="img">
+											<img class="img-fluid rounded" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
+										</div>
+										<div class="info">
+											<h3>Xem tiếp</h3>
+											<p style="padding-bottom: 0;">
+												<i class="fa fa-fw fa-share-alt" style="padding-right: 5px;"></i> 
+													Được chia sẻ bởi : ${ttm.taikhoan.hodem} ${ttm.taikhoan.ten}
+											</p>
+								            <p style="padding: 0;">
+								            	<i class="fa fa-clock-o" style="padding-right: 5px;"></i>
+								             	Thời gian : ${ttm.thoigian}
+								             </p>
+								            <p style="padding: 0;">
+								            	<i class="fa fa-fw fa-eye ft-lh" style="padding-right: 5px;"></i>
+								            	 Lượt xem : ${ttm.luotxem}
+								            </p>
+										</div>
+									</a>
 						        </div>
 						    </div>
 						    <hr>
@@ -132,8 +151,27 @@
 						            <p class="p-fx">${txn.tomtat}</p>
 						            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">${txn.luotxem} lượt xem</span>
 						        </div>
-						        <div class="col-lg-4">
-						            <img class="img-fluid rounded" src="files/tintuc/${txn.hinhanh}" alt="${txn.hinhanh}">
+						        <div class="col-lg-4 ih-item square effect7" style="padding: 0px;">
+						            <a href="#">
+										<div class="img">
+											<img class="img-fluid rounded" src="files/tintuc/${txn.hinhanh}" alt="${txn.hinhanh}">
+										</div>
+										<div class="info">
+											<h3>Xem tiếp</h3>
+											<p style="padding-bottom: 0;">
+												<i class="fa fa-fw fa-share-alt" style="padding-right: 5px;"></i> 
+													Được chia sẻ bởi : ${txn.taikhoan.hodem} ${txn.taikhoan.ten}
+											</p>
+								            <p style="padding: 0;">
+								            	<i class="fa fa-clock-o" style="padding-right: 5px;"></i>
+								             	Thời gian : ${txn.thoigian}
+								             </p>
+								            <p style="padding: 0;">
+								            	<i class="fa fa-fw fa-eye ft-lh" style="padding-right: 5px;"></i>
+								            	 Lượt xem : ${txn.luotxem}
+								            </p>
+										</div>
+									</a>
 						        </div>
 						    </div>
 						    <hr>

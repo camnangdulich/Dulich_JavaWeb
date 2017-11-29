@@ -5,6 +5,7 @@
 <html>
     <head>
         <base href="${pageContext.servletContext.contextPath}/">
+        <link rel="icon" href="files/home/minilogo.png">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <c:choose>
         	<c:when test="${title == null}">
@@ -36,13 +37,14 @@
 		
 		<!-- Validation custom -->
 		<script src="js/validate_check.js"></script>
+		<script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
 
     <body onload="alert_home_check('${message}')">
-        <!-- Navigation -->
+	<!-- Navigation -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="home/index.html">CẩmNangDuLịch</a>
+                <a class="navbar-brand" href="home/index.html"><img style="width: 130px;" src="files/home/logo.png"></a>
                 <select class="sl_tinhthanh" onchange="location = this.value;">
                     <option value="" disabled selected hidden>Chọn tỉnh thành...</option>
                     <option value="home/tinhthanh.html">Hồ Chí Minh</option>
@@ -176,7 +178,7 @@
                 <div class="row ft-fx">
                     <div class="col-md-3">
                         <h4>
-                            <a class="ft-logo" href="index.html">CẩmNangDuLịch</a>
+                            <a class="ft-logo" href="index.html"><img src="files/home/logo.png"></a>
                         </h4>
                         <i class="fa fa-fw fa-phone text-white"></i><span class="text-white">Hotline:</span>
                         <span class="text-white" style="font-size: larger;">0123456789</span>
@@ -241,12 +243,14 @@
 	                    <span>Chưa có tài khoản?</span><a onclick="registerpp()" style="cursor: pointer; color: green;"> Đăng ký ngay</a>
                     </form>
                     <hr>
-                    <button class="log_opid" style="background-color: #3a5a98;">
+                    <button id="btn-facebook" class="log_opid" style="background-color: #3a5a98;">
                         <i class="fa fa-facebook" style="padding-right: 5px;"></i> Đăng nhập bằng Facebook
                     </button>
-                    <button class="log_opid" style="background-color: #d34836; float: right;">
+                    <button id="btn-google" class="log_opid" style="background-color: #d34836; float: right;">
                         <i class="fa fa-google-plus"></i> Đăng nhập bằng Google+
                     </button>
+                    <button onclick="logoutFacebook()">Đăng xuất facebook</button>
+                    <button onclick="signOut()">Đăng xuất google</button>
                 </div>
 
                 <div class="container_log" style="background-color:#f1f1f1">
@@ -299,7 +303,7 @@
 
         <!-- Repass Popup -->
         <div id="repwd_pp" class="modal">
-            <form class="modal-content animate" action="#" method="get" id="repass_form">
+            <form class="modal-content animate" action="home/passkeymailer.html" method="post" id="repass_form">
                 <div class="container_log" style="padding-bottom: 0px;">
                     <h2 class="text-center">Lấy lại mật khẩu</h2>
                     <hr>
@@ -309,9 +313,16 @@
                     <span>Điền Email của bạn vào form phía dưới, chúng tôi sẽ gửi mật khẩu mới về email của bạn!</span>
                     <br>
                     <label class="label_log"><i class="fa fa-envelope"></i><b> Email</b></label>
-                    <input type="email" placeholder="Nhập email của bạn" name="email" class="input_log" autofocus>
+                    <input name="email"  type="email" placeholder="Nhập email của bạn" name="email" class="input_log" autofocus>
 
-                    <button type="submit" class="log"><i class="fa fa-paper-plane"></i> Gửi lại mật khẩu</button>
+                    <button id="btn-forgot" type="submit" class="log" disabled="disabled" hidden=""><i class="fa fa-paper-plane"></i> Gửi lại mật khẩu</button>
+                    <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Le1uDoUAAAAABM0IPZMlTwNs6QQaXE470V0betd"></div>
+                    <script>
+	                    function recaptchaCallback() {
+	                        $('#btn-forgot').removeAttr('disabled');
+	                        $('#btn-forgot').removeAttr('hidden');
+	                    };
+                    </script>
                 </div>
 
                 <div class="container_log" style="background-color:#f1f1f1">
@@ -320,7 +331,7 @@
                 </div>
             </form>
         </div>
-
+        <script src="js/openid-login.js" type="text/javascript"></script>
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/popper/popper.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

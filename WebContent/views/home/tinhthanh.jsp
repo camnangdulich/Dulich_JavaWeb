@@ -1,85 +1,33 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!-- Page Content -->
 <div class="container">
 
     <div class="tinhthanh" style="margin-top: 35px;">
         <div class="container-fluid bg-3 text-center">    
             <div class="row">
-                <div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
+            	<c:forEach var="tth" items="${lsttinhthanh}">
+	            	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
+	                    <a href="#">
+	                        <div class="img">
+	                        	<img src="files/tinhthanh/${tth.hinhanh}" class="img-responsive" style="width:100%" alt="${tth.tinhthanh}">
+	                        </div>
+	                        <div class="info">
+	                            <h3>${tth.tinhthanh}</h3>
+	                            <p>${tth.mota}</p>
+	                        </div>
+	                    </a>
+	                </div>
+            	</c:forEach>
+            	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
                     <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
+                        <div class="img">
+                        	<img src="files/tinhthanh/Tất cả.jpg" class="img-responsive" style="width:100%" alt="Xem thêm tỉnh thành">
                         </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
                         <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid bg-3 text-center">    
-            <div class="row">
-                <div class="col-sm-3 ih-item square effect13 bottom_to_top" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 bottom_to_top" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 bottom_to_top" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 ih-item square effect13 bottom_to_top" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
-                        <div class="img"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="info">
-                            <h3>Heading here</h3>
-                            <p>Description goes here</p>
+                            <h3>Xem thêm</h3>
+                            <p>Xem thêm các tỉnh thành ở Việt Nam</p>
                         </div>
                     </a>
                 </div>
@@ -88,7 +36,7 @@
     </div>
 
     <!-- Khách sạn tốt nhất -->
-    <h3 class="h3-fx">Khách sạn tốt nhất</h3>
+    <h3 class="h3-fx">Khách sạn tốt ở ${title}</h3>
     <hr>
     <div class="row">
         <div class="col-lg-3 col-sm-6 portfolio-item">
@@ -223,7 +171,7 @@
     <!-- /.row -->
 
     <!-- Tour du lịch nổi bật -->
-    <h3 class="h3-fx">Tour du lịch nổi bật</h3>
+    <h3 class="h3-fx">Tour du lịch nổi bật ở ${title}</h3>
     <hr>
     <div class="row">
         <div class="col-lg-3 col-sm-6 portfolio-item">
@@ -325,16 +273,6 @@
     </div>
     <hr>
 
-    <!-- Khám phá -->
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <p>Khám phá thêm nhiều địa điểm du lịch và khách sạn tốt nhất tại nhiều tỉnh thành khác nhau.<br>
-                Hãy bắt đầu khám phá ngay với CamNangDuLich ^^!</p>
-        </div>
-        <div class="col-md-4">
-            <a class="btn btn-lg btn-secondary btn-block" href="#">Khám phá ngay</a>
-        </div>
-    </div>
 
 </div>
 <!-- /.container -->

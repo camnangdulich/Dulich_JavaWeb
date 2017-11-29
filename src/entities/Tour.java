@@ -1,22 +1,18 @@
 package entities;
-// Generated Nov 27, 2017 3:24:45 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Nov 29, 2017 3:03:07 PM by Hibernate Tools 5.1.0.Alpha1
 
-import static javax.persistence.GenerationType.IDENTITY;
-
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -35,7 +31,7 @@ public class Tour implements java.io.Serializable {
 	private String mota;
 	private int gia;
 	private String diemdi;
-	private Date giokhoihanh;
+	private String giokhoihanh;
 	private String lichtrinh;
 	private String luuy;
 	private String slug;
@@ -46,7 +42,7 @@ public class Tour implements java.io.Serializable {
 	public Tour() {
 	}
 
-	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, int gia, String diemdi, Date giokhoihanh,
+	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, int gia, String diemdi, String giokhoihanh,
 			String lichtrinh, int luotxem, String hinhtour) {
 		this.congty = congty;
 		this.tinhthanh = tinhthanh;
@@ -60,7 +56,7 @@ public class Tour implements java.io.Serializable {
 	}
 
 	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, String mota, int gia, String diemdi,
-			Date giokhoihanh, String lichtrinh, String luuy, String slug, int luotxem, String hinhtour,
+			String giokhoihanh, String lichtrinh, String luuy, String slug, int luotxem, String hinhtour,
 			Set<Dattour> dattours) {
 		this.congty = congty;
 		this.tinhthanh = tinhthanh;
@@ -145,13 +141,12 @@ public class Tour implements java.io.Serializable {
 		this.diemdi = diemdi;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "giokhoihanh", nullable = false, length = 19)
-	public Date getGiokhoihanh() {
+	@Column(name = "giokhoihanh", nullable = false, length = 50)
+	public String getGiokhoihanh() {
 		return this.giokhoihanh;
 	}
 
-	public void setGiokhoihanh(Date giokhoihanh) {
+	public void setGiokhoihanh(String giokhoihanh) {
 		this.giokhoihanh = giokhoihanh;
 	}
 
