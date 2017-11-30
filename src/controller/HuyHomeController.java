@@ -26,6 +26,9 @@ import entities.Dattour;
 import entities.Loaiphong;
 import entities.Tour;
 import entities.Trangthai;
+import model.SlugsConverter;
+
+import model.SlugsConverter;
 
 @Transactional
 @Controller
@@ -88,9 +91,11 @@ public class HuyHomeController {
  				Date ngaytraDate = (Date)formatter.parse(ngaytraphong);
  				Session session = factory.openSession();
  	 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
+ 	 			String slugdatphong = "Bạn đã đặt"+ loaiphong;
  	 			Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, loaiphong);
  	 			Date ngaytao = new Date();
- 	 			Datphong dp = new Datphong(lp, trang, ngaynhanDate, ngaytraDate, soluong, hodem, ten, sodienthoai, email);
+ 	 			Datphong dp = new Datphong(lp, trang, ngaynhanDate, ngaytraDate, soluong, hodem, 
+ 	 					ten, sodienthoai, email, slugdatphong);
  	 			Transaction t = session.beginTransaction();
  	 			try {
  	 				session.save(dp);
@@ -114,15 +119,15 @@ public class HuyHomeController {
  		
  		
  		//Đặt tour
- 		@RequestMapping("dattour")
- 		public String dattour(ModelMap model) {
+ 		@RequestMapping("tour")
+ 		public String tour(ModelMap model) {
  			model.addAttribute("title", "Đặt tour");
- 			return "home/dattour";
+ 			return "home/tour";
  		}
  		
- 		@RequestMapping(value = "dattour", method = RequestMethod.POST)
- 		public String dattour(ModelMap model,
- 				@RequestParam("tour") Integer tour,
+ 		@RequestMapping(value = "tour", method = RequestMethod.POST)
+ 		public String tour(ModelMap model,
+ 				@RequestParam("tentour") Integer tentour,
  				@RequestParam("hodem") String hodem,
  				@RequestParam("ten") String ten,
  				@RequestParam("songuoi") Integer songuoi,
@@ -133,14 +138,14 @@ public class HuyHomeController {
 
  				Session session = factory.openSession();
  	 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
- 	 			Tour tuor = (Tour) session.get(Tour.class, tour);
- 	 			Dattour dt = new Dattour(tuor, trang,  hodem, ten, songuoi, sodienthoai, email, yeucau);
+ 	 			Tour tuor = (Tour) session.get(Tour.class, tentour);
+ 	 			Dattour dt = new Dattour(tuor, hodem, ten, songuoi, sodienthoai, email, yeucau);
  	 			Transaction t = session.beginTransaction();
  	 			try {
  	 				session.save(dt);
  	 				t.commit();
  	 				model.addAttribute("message", "Đặt tour thành công!");
- 	 				return "home/dattour";
+ 	 				return "home/tour";
  	 			} catch (Exception e) {
  	 				t.rollback();
  	 				model.addAttribute("message", "Đặt tour thất bại!");
@@ -148,7 +153,7 @@ public class HuyHomeController {
  	 				session.close();
  	 			}
  			
- 			return "home/dattour";
+ 			return "home/tour";
  		}
 }
 

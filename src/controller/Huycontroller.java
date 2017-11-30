@@ -39,6 +39,8 @@ import entities.Tinhthanh;
 import entities.Tour;
 import entities.Trangthai;
 
+import model.SlugsConverter;
+
 @Transactional
 @Controller
 @RequestMapping("/admin/")
@@ -51,7 +53,7 @@ public class Huycontroller {
 	
 	// --------------------- ModelAttribute -----------------------------
 		// ------------------------------------------------------------------
-		
+	
 	// Lấy tất cả thông tin tài khoản
 		@ModelAttribute("tailist")
 		public List<Taikhoan> gettk(ModelMap model) {
@@ -207,7 +209,12 @@ public class Huycontroller {
 		
 
 		
-
+		// Trang danh sách khách sạn
+		@RequestMapping("dskhachsan")
+		public String dskhachsan(ModelMap model) {
+			model.addAttribute("title", "Danh sách khách sạn");
+			return "admin/dskhachsan";
+		}
 		
 		// Trang danh sách quyền
 		@RequestMapping("dsquyen")
@@ -473,7 +480,8 @@ public class Huycontroller {
 		Session session = factory.openSession();
 		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
 		Date ngaytao = new Date();
-		Congty c = new Congty(tk, tencongty, diachi, mota, email, sodienthoai, ngaytao);
+		String slugcongty = SlugsConverter.toSlug(tencongty);
+		Congty c = new Congty(tk, tencongty, diachi, mota, email, sodienthoai, ngaytao, slugcongty);
 		Transaction t = session.beginTransaction();
 		try {
 			session.save(c);
@@ -504,7 +512,8 @@ public class Huycontroller {
 			@RequestParam("mota") String mota) {
 
 		Session session = factory.openSession();
-		Dichvu d = new Dichvu(tendichvu, mota);
+		String slugdichvu = SlugsConverter.toSlug(tendichvu);
+		Dichvu d = new Dichvu(tendichvu, mota, slugdichvu);
 		Transaction t = session.beginTransaction();
 		try {
 			session.save(d);
@@ -560,14 +569,14 @@ public class Huycontroller {
 	
 	
 	//Thêm tour du lịch
-	@RequestMapping("ttour")
-	public String ttour(ModelMap model) {
+	@RequestMapping("themtour")
+	public String themtour(ModelMap model) {
 		model.addAttribute("title", "Thêm tour du lịch mới");
-		return "admin/ttour";
+		return "admin/themtour";
 	}
 	
-	@RequestMapping(value = "ttour", method = RequestMethod.POST)
-	public String ttour(ModelMap model,
+	@RequestMapping(value = "themtour", method = RequestMethod.POST)
+	public String themtour(ModelMap model,
 			@RequestParam("congty") Integer congty,
 			@RequestParam("diemden") Integer diemden,
 			@RequestParam("tentour") String tentour,
@@ -578,12 +587,13 @@ public class Huycontroller {
 			@RequestParam("lichtrinh") String lichtrinh,
 			@RequestParam("luuy") String luuy,
 			@RequestParam("hinhanh") MultipartFile hinhtour) {
-//		
+		
 //		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //		try {
-//			Date ngaydate = (Date)formatter.parse(ngaykhoihanh);
+//			Date khoihanhdate = (Date)formatter.parse(ngaykhoihanh);
 			Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
+			String slugtour = SlugsConverter.toSlug(tentour);
 			Congty ct = (Congty) session.get(Congty.class, congty);
 			Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
 			// Tạo đường dẫn lưu hình ảnh
@@ -605,12 +615,13 @@ public class Huycontroller {
 			}
 			
 			if(hinhtour.getOriginalFilename().equals("")){
-				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, "tour1.jpg");
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, 
+						lichtrinh, luuy, 0, "tour1.jpg", slugtour);
 				try {
 					session.save(to);
 					t.commit();
 					model.addAttribute("message", "Thêm tour thành công!");
-					return "admin/ttour";
+					return "admin/themtour";
 				} catch (Exception e) {
 					t.rollback();
 					model.addAttribute("message", "Thêm tour thất bại!");
@@ -619,12 +630,13 @@ public class Huycontroller {
 				}
 
 			} else {
-				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, hinhtour.getOriginalFilename());
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, 
+						lichtrinh, luuy, 0, hinhtour.getOriginalFilename(), slugtour);
 				try {
 					session.save(to);
 					t.commit();
 					model.addAttribute("message", "Thêm tour thành công!");
-					return "admin/ttour";
+					return "admin/themtour";
 				} catch (Exception e) {
 					t.rollback();
 					model.addAttribute("message", "Thêm tour thất bại!");
@@ -638,8 +650,10 @@ public class Huycontroller {
 //			e.printStackTrace();
 //		}
 		
-		return "admin/ttour";
+		return "admin/themtour";
 }
+	
+	
 	
 	
 	
@@ -763,18 +777,18 @@ public class Huycontroller {
 		
 		
 		//Sua thông tin công ty
-		@RequestMapping("scongty/{id}")
-		public String scongty(ModelMap model, @PathVariable("id") Integer idcongty) {
+		@RequestMapping("suacongty/{id}")
+		public String suacongty(ModelMap model, @PathVariable("id") Integer idcongty) {
 			model.addAttribute("title", "Sửa thông tin");
 			Session session = factory.getCurrentSession();
 			Congty c = (Congty) session.get(Congty.class, idcongty);
 			
 			model.addAttribute("com", c);
-			return "admin/scongty";
+			return "admin/suacongty";
 		}
 		
-		@RequestMapping(value = "scongty", method = RequestMethod.POST )
-		public String scongty(ModelMap model,
+		@RequestMapping(value = "suacongty", method = RequestMethod.POST )
+		public String suacongty(ModelMap model,
 				@RequestParam("idcongty") Integer idcongty,
 				@RequestParam("taikhoan") Integer taikhoan,
 				@RequestParam("tencongty") String tencongty,
@@ -784,20 +798,19 @@ public class Huycontroller {
 				@RequestParam("sodienthoai") String sodienthoai){
 			Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
-			Congty c = (Congty) session.get(Congty.class, idcongty);
+			Congty ct = (Congty) session.get(Congty.class, idcongty);
 			Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
-			c.setTaikhoan(tk);
-			c.setTencongty(tencongty);
-			c.setDiachi(diachi);
-			c.setMota(mota);
-			c.setEmail(email);
-			c.setSodienthoai(sodienthoai);
-			
+			ct.setTaikhoan(tk);
+			ct.setTencongty(tencongty);
+			ct.setDiachi(diachi);
+			ct.setMota(mota);
+			ct.setEmail(email);
+			ct.setSodienthoai(sodienthoai);
 			try {
-				session.update(c);
+				session.update(ct);
 				t.commit();
 				model.addAttribute("message", "Chỉnh sửa thông tin thành công!");
-				return "redirect:/admin/scongty/"+idcongty+".html";
+				return "redirect:/admin/suacongty/"+idcongty+".html";
 			} catch (Exception e) {
 				t.rollback();
 				model.addAttribute("message", "Chỉnh thông tin thất bại !" + e.getMessage());
@@ -942,17 +955,17 @@ public class Huycontroller {
 		}
 		//Sửa thông tin tour
 		
-		@RequestMapping("suatour/{id}")
-		public String suatour(ModelMap model, @PathVariable("id") Integer idt) {
+		@RequestMapping("sutour/{id}")
+		public String sutour(ModelMap model, @PathVariable("id") Integer idt) {
 			model.addAttribute("title", "Sửa tỉnh thành");
 			Session session = factory.getCurrentSession();
 			Tour tou = (Tour) session.get(Tour.class, idt);
 			model.addAttribute("tua", tou);
-			return "admin/suatour";
+			return "admin/sutour";
 		}
 		
-		@RequestMapping(value = "stour", method = RequestMethod.POST )
-		public String suatour(ModelMap model,
+		@RequestMapping(value = "sutour", method = RequestMethod.POST )
+		public String sutour(ModelMap model,
 				@RequestParam("idtour") Integer idtour,
 				@RequestParam("congty") Integer congty,
 				@RequestParam("diemden") Integer diemden,
@@ -960,16 +973,13 @@ public class Huycontroller {
 				@RequestParam("mota") String mota,
 				@RequestParam("gia") Integer gia,
 				@RequestParam("diemdi") String diemdi,
-//				@RequestParam("ngaykhoihanh") String ngaykhoihanh,
+				@RequestParam("ngaykhoihanh") String ngaykhoihanh,
 				@RequestParam("lichtrinh") String lichtrinh,
 				@RequestParam("luuy") String luuy,
 				@RequestParam("hinhanh") MultipartFile hinhanh) {
 			
 			
 			
-//			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//			try {
-//				Date khoihanhdate = (Date)formatter.parse(ngaykhoihanh);
 				Session session = factory.openSession();
 				Transaction t = session.beginTransaction();
 				Tour to = (Tour) session.get(Tour.class, idtour);
@@ -983,7 +993,7 @@ public class Huycontroller {
 				to.setMota(mota);
 				to.setGia(gia);
 				to.setDiemdi(diemdi);
-//				to.setGiokhoihanh(khoihanhdate);
+				to.setGiokhoihanh(ngaykhoihanh);
 				to.setLichtrinh(lichtrinh);
 				to.setLuuy(luuy);
 				try {
@@ -992,7 +1002,7 @@ public class Huycontroller {
 						t.commit();
 						model.addAttribute("message", "Chỉnh sửa tour thành công !");
 						System.out.println("Thành công không thêm ảnh");
-						return "redirect:/admin/suatour/"+idtour+".html";
+						return "redirect:/admin/sutour/"+idtour+".html";
 					}else{
 						hinhanh.transferTo(new File(photoPath));
 						tt.setHinhanh(hinhanh.getOriginalFilename());
@@ -1000,7 +1010,7 @@ public class Huycontroller {
 						t.commit();
 						model.addAttribute("message", "Chỉnh sửa tour thành công !");
 						System.out.println("Thành công có thêm ảnh");
-						return "redirect:/admin/suatour/"+idtour+".html";
+						return "redirect:/admin/sutour/"+idtour+".html";
 					}
 				} 
 				catch (Exception e) {
@@ -1012,11 +1022,6 @@ public class Huycontroller {
 				finally {
 					session.close();
 				}
-//			} catch (ParseException e) {
-//				e.printStackTrace();
-//				return "redirect:/admin/tintuc/"+idtour+".html";
-//			}
-			
 			
 		}
 		

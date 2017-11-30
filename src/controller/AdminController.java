@@ -159,12 +159,6 @@ public class AdminController {
 		return "admin/dsbaiviet";
 	}
 	
-	// Trang danh sách khách sạn
-	@RequestMapping("dskhachsan")
-	public String dskhachsan(ModelMap model) {
-		model.addAttribute("title", "Danh sách khách sạn");
-		return "admin/dskhachsan";
-	}
 	
 	
 	

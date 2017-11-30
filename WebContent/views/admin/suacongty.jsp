@@ -12,14 +12,14 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-10 col-md-auto">
-					<form action="admin/scongty.html" method="post"
+					<form action="admin/suacongty.html" method="post"
 						enctype="multipart/form-data">
 						<input name="idcongty" type="hidden" value="${com.idcongty}">
 							<div class="form-group row">
                             <label class="col-sm-2 col-form-label">Tài khoản</label>
                             <div class="col-sm-10" id="label-validation">
                                 <select name="taikhoan" class="form-control" >
-                                	<option selected="selected" hidden value="${com.taikhoan.idtaikhoan}">${com.taikhoan.email}></option>
+                                	<option selected="selected" hidden value="${com.taikhoan.idtaikhoan}">${com.taikhoan.email}</option>
                                 	<c:forEach var="tk" items="${tailist}">
                                     	<option value="${tk.idtaikhoan}">${tk.email}</option>
                                     </c:forEach>
