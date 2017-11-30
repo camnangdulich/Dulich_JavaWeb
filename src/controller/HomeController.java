@@ -5,9 +5,12 @@
  */
 package controller;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
 import java.util.Date;
 import java.util.List;
+import java.util.Collections;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -28,11 +31,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.User;
+
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 
 import entities.Chitiettin;
 import entities.Danhgia;
@@ -152,7 +164,7 @@ public class HomeController {
 	public List<Danhgia> lstdanhgiakhachsan(ModelMap model) {
 		Session session = factory.getCurrentSession();
 		int dgksSize = 8;
-		String hql_dgks = "from Danhgia ORDER BY star DESC";
+		String hql_dgks = "from Danhgia group by idkhachsan having avg(star) >= 4 ORDER BY star DESC";
 		Query query_dgks = session.createQuery(hql_dgks);
 		query_dgks.setMaxResults(dgksSize);
 		@SuppressWarnings("unchecked")
@@ -364,6 +376,7 @@ public class HomeController {
 	@RequestMapping("khach-san/{id}")
 	public String ctkhachsan(ModelMap model, @PathVariable("id") Integer idks) {
 		Session session = factory.getCurrentSession();
+		//String hql = "from Khachsan where idkhachsan = :idks";
 		String hql = "from Khachsan where idkhachsan = :idks";
 		Query query = session.createQuery(hql);
 		query.setParameter("idks", idks);
@@ -457,7 +470,7 @@ public class HomeController {
 	public String dstinhthanh(ModelMap model, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		Session session = factory.getCurrentSession();
-		int total = 0, pageSize = 10;
+		int total = 0, pageSize = 12;
 		String hql = "from Tinhthanh";
 		Query query = session.createQuery(hql);
 
@@ -538,9 +551,11 @@ public class HomeController {
 	}
 
 	// Facebook login
-	@RequestMapping(value = "signin-facebook", method = RequestMethod.GET)
-	public String signinFacebook(@RequestBody String accessToken) {
-		System.out.println("THU ACE BOOK NEG : " + accessToken);
+	@RequestMapping(value = "signin-facebook", method = RequestMethod.POST)
+	public String signinFacebook(@RequestBody String accessToken, ModelMap model,
+			HttpSession httpSession, HttpServletRequest request,
+			HttpServletResponse response) throws InvalidKeyException {
+		System.out.println("Facebook TokenID : " + accessToken);
 		FacebookClient fbClient = new DefaultFacebookClient(accessToken);
 		User me = fbClient.fetchObject("me", User.class, Parameter.with("fields", "picture,first_name,last_name,gender,name,email"));
 
@@ -558,34 +573,164 @@ public class HomeController {
 		System.out.println("Facebook Hometown : " + me.getHometown());
 		System.out.println("Facebook Link : " + me.getLink());
 		System.out.println("Facebook Locale : " + me.getLocale());
-				
-//		Users user = null;
-//		try {
-//			user = usersService.findByUserName(me.getId());
-//			if (user == null) {
-//				user = new Users();
-//				user.setUserName(me.getId());
-//				user.setPassword(passwordEncoder.encode(randomAlphabetic(8)));
-//				user.setEmail(me.getEmail());
-//				user.setFirstName(me.getFirstName());
-//				user.setLastName(me.getLastName());
-//				user.setAvatar(me.getPicture().getUrl());
-//				user.setStatus("active");
-//				user.setCreatedDate(new Date());
-//				user.setLoggedInDate(new Date());
-//				user.setIsOnline((byte) 1);
-//				HashSet<Roles> roleses = new HashSet<>();
-//				roleses.add(rolesService.findByName("ROLE_FACEBOOK"));
-//				user.setRoleses(roleses);
-//				usersService.saveorupdate(user);
-//			}
-//			SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(me.getId(),
-//					null, Arrays.asList(new SimpleGrantedAuthority("ROLE_FACEBOOK"))));
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
+			
+		Taikhoan taikhoan = null;
+		Session session = factory.getCurrentSession();
+		String email = "fb" + me.getId() + "@mailcamnangdulich.com";
+		String hql = "from Taikhoan where email = :emailtk";
+		Query query = session.createQuery(hql);
+		query.setParameter("emailtk", email);
+		taikhoan = (Taikhoan) query.uniqueResult();
 		
-		return "success";
+		try {
+			if (taikhoan == null) {
+				// Ngày tạo
+				Date ngaytao = new Date();
+				System.out.println("Tai khoan chua dang ky --> Auto dang ky");
+				// Random mật khẩu mới
+				String matkhau = RandomString.randomString(20);
+				// Tạo key mã hóa mật khẩu
+				EnDeCryption cryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
+				// Mã hóa mật khẩu mới tạo
+				String matkhaumahoa = cryption.encoding(matkhau);
+				// Lấy quyền id = 6 ( Quyền Facebook )
+				Quyen quyen = (Quyen) session.get(Quyen.class, 6);
+				// Lấy trạng thái id = 1 ( Trạng thái tài khoản được kích hoạt )
+				Trangthai trt = (Trangthai) session.get(Trangthai.class, 1);
+				// Tạo mới tài khoản với thông tin người dùng
+				
+				String sdt = "Facebook ID : "+me.getId();
+				String hinhanh = me.getPicture().getUrl();
+				
+				taikhoan = new Taikhoan(email, matkhaumahoa, sdt, hinhanh, ngaytao, quyen, trt);
+				Transaction t = session.beginTransaction();
+				try {
+					session.save(taikhoan);
+					t.commit();
+					System.out.println("Facebook Register Compelete");
+					model.addAttribute("message", "Đăng ký thành công !");
+					return "home/tttaikhoan";
+				} catch (Exception e) {
+					System.out.println("Facebook Register Failse");
+					t.rollback();
+					model.addAttribute("message", "Đăng ký thất bại !");
+					model.addAttribute("login_check", 0);
+				} finally {
+					session.close();
+				}
+			}
+			System.out.println("Tai khoan da dang ky --> Auto dang nhap");
+			System.out.println(taikhoan.getEmail());
+			httpSession.setAttribute("loguser", taikhoan); // Auto login
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+		return "home/index";
 	}
+	
+	
+	private static final HttpTransport TRANSPORT = new NetHttpTransport();
+    private static final JsonFactory JSON_FACTORY = new JacksonFactory();
+	
+	@RequestMapping(value = "signin-google", method = RequestMethod.POST)
+    public String String(@RequestBody String idtoken, ModelMap model,
+			HttpSession httpSession, HttpServletRequest request,
+			HttpServletResponse response) {
+        System.out.println("Google TokenID :" + idtoken);
+
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(TRANSPORT, JSON_FACTORY).setAudience(Collections
+                        .singletonList("988534781661-a1ikie8ng4g7mapq54gphs97jehv4jg3.apps.googleusercontent.com")).build();
+        GoogleIdToken idToken;
+        Taikhoan taikhoan = null;
+        try {
+            idToken = verifier.verify(idtoken);
+            if (idToken != null) {
+                Payload payload = idToken.getPayload();
+
+                // Print user identifier
+                String userId = payload.getSubject();
+                System.out.println("User ID: " + userId);
+
+                // Get profile information from payload
+                String email = payload.getEmail();
+                System.out.println("User Email: " + email);
+                boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+                
+                String name = (String) payload.get("name");
+                System.out.println("User Name: " + name);
+                
+                String pictureUrl = (String) payload.get("picture");
+                System.out.println("User pictureUrl: " + pictureUrl);
+                
+                String locale = (String) payload.get("locale");
+                System.out.println("User locale: " + locale);
+                
+                String familyName = (String) payload.get("family_name");
+                System.out.println("User familyName: " + familyName);
+                
+                String givenName = (String) payload.get("given_name");
+                System.out.println("User givenName: " + givenName);
+                
+                System.out.println("GOOOGLE NEF : " + givenName +"--"+ familyName);
+                
+        		Session session = factory.getCurrentSession();
+        		String hql = "from Taikhoan where email = :emailtk";
+        		Query query = session.createQuery(hql);
+        		query.setParameter("emailtk", email);
+        		taikhoan = (Taikhoan) query.uniqueResult();
+        		
+        		if (taikhoan == null) {
+        			// Ngày tạo
+        			Date ngaytao = new Date();
+        			System.out.println("Tai khoan chua dang ky --> Auto dang ky");
+        			// Random mật khẩu mới
+        			String matkhau = RandomString.randomString(20);
+        			// Tạo key mã hóa mật khẩu
+        			EnDeCryption cryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
+        			// Mã hóa mật khẩu mới tạo
+        			String matkhaumahoa = cryption.encoding(matkhau);
+        			// Lấy quyền id = 7 ( Quyền Google )
+        			Quyen quyen = (Quyen) session.get(Quyen.class, 7);
+        			// Lấy trạng thái id = 1 ( Trạng thái tài khoản được kích hoạt )
+        			Trangthai trt = (Trangthai) session.get(Trangthai.class, 1);
+        			// Tạo mới tài khoản với thông tin người dùng
+        			
+        			String sdt = "Google ID : " + userId;
+        			taikhoan = new Taikhoan(email, matkhaumahoa, sdt, pictureUrl, ngaytao, quyen, trt);
+        			Transaction t = session.beginTransaction();
+        			try {
+        				session.save(taikhoan);
+        				t.commit();
+        				System.out.println("Facebook Register Compelete");
+        				model.addAttribute("message", "Đăng ký thành công !");
+        				return "home/tttaikhoan";
+        			} catch (Exception e) {
+        				System.out.println("Facebook Register Failse");
+        				t.rollback();
+        				model.addAttribute("message", "Đăng ký thất bại !");
+        				model.addAttribute("login_check", 0);
+        			} finally {
+        				session.close();
+        			}
+        		}
+        		System.out.println("Tai khoan da dang ky --> Auto dang nhap");
+        		httpSession.setAttribute("loguser", taikhoan); // Auto login
+        		return "home/index";
+            } else {
+                System.out.println("Invalid ID token.");
+            }
+        } catch (IOException | GeneralSecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+
+        }
+        return "home/index";
+    }
+	
+	
+	
+	
+	
+	
 
 }

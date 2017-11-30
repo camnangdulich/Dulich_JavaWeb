@@ -11,6 +11,7 @@ function loginpp() {
 	document.getElementById('register_pp').style.display = 'none';
 	document.getElementById('login_pp').style.display = 'block';
 	document.getElementById('repwd_pp').style.display = 'none';
+	document.getElementById('taokhachsan_pp').style.display = 'none';
 };
 
 // Open register form
@@ -18,6 +19,7 @@ function registerpp() {
 	document.getElementById('register_pp').style.display = 'block';
 	document.getElementById('login_pp').style.display = 'none';
 	document.getElementById('repwd_pp').style.display = 'none';
+	document.getElementById('taokhachsan_pp').style.display = 'none';
 };
 
 // Open repass form
@@ -25,6 +27,15 @@ function repasspp() {
 	document.getElementById('register_pp').style.display = 'none';
 	document.getElementById('login_pp').style.display = 'none';
 	document.getElementById('repwd_pp').style.display = 'block';
+	document.getElementById('taokhachsan_pp').style.display = 'none';
+};
+
+//Open Tạo khách sạn form
+function taokhachsanpp() {
+	document.getElementById('register_pp').style.display = 'none';
+	document.getElementById('login_pp').style.display = 'none';
+	document.getElementById('repwd_pp').style.display = 'none';
+	document.getElementById('taokhachsan_pp').style.display = 'block';
 };
 
 // Close form
@@ -32,12 +43,14 @@ function closepp() {
 	document.getElementById('register_pp').style.display = 'none';
 	document.getElementById('login_pp').style.display = 'none';
 	document.getElementById('repwd_pp').style.display = 'none';
+	document.getElementById('taokhachsan_pp').style.display = 'none';
 };
 
 // Get the modal
 var modal_login = document.getElementById('login_pp');
 var modal_register = document.getElementById('register_pp');
 var modal_repwd = document.getElementById('repwd_pp');
+var modal_taokhachsan = document.getElementById('taokhachsan_pp');
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -49,6 +62,9 @@ window.onclick = function(event) {
 	}
 	if (event.target == modal_repwd) {
 		modal_repwd.style.display = "none";
+	}
+	if (event.target == modal_taokhachsan) {
+		modal_taokhachsan.style.display = "none";
 	}
 }
 

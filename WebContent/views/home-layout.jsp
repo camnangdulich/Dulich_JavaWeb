@@ -38,6 +38,9 @@
 		<!-- Validation custom -->
 		<script src="js/validate_check.js"></script>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
+		
+		<!-- Google API Client -->
+		<script src="https://apis.google.com/js/api:client.js"></script>
     </head>
 
     <body onload="alert_home_check('${message}')">
@@ -91,7 +94,7 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="#">Tạo khách sạn mới</a>
+		                                <a onclick="taokhachsanpp()" class="dropdown-item" style="cursor: pointer;">Tạo khách sạn mới</a>
 		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
@@ -270,15 +273,11 @@
                 </div>
 
                 <div class="container_log" style="padding-top: 0px;">
-                    <label class="label_log"><i class="fa fa-envelope"></i><b> Email</b></label>
                     <input type="email" placeholder="Nhập email cửa bạn" name="reg_email" class="input_log" autofocus required>
-
-                    <br><label class="label_log"><i class="fa fa-lock"></i><b> Mật khẩu</b></label>
                     <input type="password" placeholder="Nhập mật khẩu" name="reg_matkhau" class="input_log" required>
-                    
-                    <br><label class="label_log"><i class="fa fa-phone"></i><b> Số điện thoại</b></label>
                     <input type="text" placeholder="Nhập số điện thoại" name="reg_sdt" class="input_log" required>
-
+                    <input type="text" placeholder="Nhập họ đệm" name="hodem" class="input_log" required>
+                    <input type="text" placeholder="Nhập tên của bạn" name="ten" class="input_log" required>
                     <button type="submit" class="log"><i class="fa fa-sign-in"></i> Đăng ký</button>
                     <div class="form-check">
                         <label class="custom-control custom-checkbox">
@@ -311,7 +310,7 @@
                     <span>Điền Email của bạn vào form phía dưới, chúng tôi sẽ gửi mật khẩu mới về email của bạn!</span>
                     <br>
                     <label class="label_log"><i class="fa fa-envelope"></i><b> Email</b></label>
-                    <input name="email"  type="email" placeholder="Nhập email của bạn" name="email" class="input_log" autofocus>
+                    <input type="email" placeholder="Nhập email của bạn" name="email" class="input_log" autofocus>
 
                     <button id="btn-forgot" type="submit" class="log" disabled="disabled" hidden=""><i class="fa fa-paper-plane"></i> Gửi lại mật khẩu</button>
                     <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Le1uDoUAAAAABM0IPZMlTwNs6QQaXE470V0betd"></div>
@@ -329,6 +328,46 @@
                 </div>
             </form>
         </div>
+        
+        <!-- Thêm khách sạn Popup -->
+        <div id="taokhachsan_pp" class="modal">
+            <form class="modal-content animate" action="#" method="post" id="taokhachsan_form">
+                <div class="container_log" style="padding-bottom: 0px;">
+                    <h2 class="text-center">Tạo khách sạn của bạn</h2>
+                    <hr>
+                </div>
+
+                <div class="container_log" style="padding-top: 0px;">
+                    <span>Chọn hình ảnh khách sạn của bạn</span>
+                    <br>
+                    <input type="file" name="hinhanh" value="cont">
+                    <input type="text" placeholder="Nhập tên khách sạn của bạn" name="tenkhachsan" class="input_log" autofocus>
+                    <input type="text" placeholder="Nhập số diện thoại liên hệ" name="sodienthoai" class="input_log">
+                    <input type="text" placeholder="Nhập tỉnh thành" name="tenkhachsan" class="input_log">
+                    <select class="form-control" id="exampleSelect1">
+						<option selected="selected" disabled="disabled">-- Chọn tỉnh thành --</option>
+						<c:forEach var="tt" items="${lsttinhthanh}">
+							<option value="${tt.idtinhthanh}">${tt.tinhthanh}</option>
+						</c:forEach>
+					</select> 
+					<input type="text" placeholder="Nhập địa chỉ khách sạn" name="diachi" class="input_log">
+                    <button id="btn-forgot" type="submit" class="log" disabled="disabled" hidden=""><i class="fa fa-building-o"></i> Tạo khách sạn</button>
+                    <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Le1uDoUAAAAABM0IPZMlTwNs6QQaXE470V0betd"></div>
+                    <script>
+	                    function recaptchaCallbacktaokhachsan() {
+	                        $('#btn-forgot').removeAttr('disabled');
+	                        $('#btn-forgot').removeAttr('hidden');
+	                    };
+                    </script>
+                </div>
+
+                <div class="container_log" style="background-color:#f1f1f1">
+                    <button type="button" onclick="closepp()" class="cancelbtn log"><i class="fa fa-times"></i> Hủy</button>
+                    <span class="psw">Quay lại <a onclick="loginpp()" style="cursor: pointer; color: green;">Đăng nhập</a></span>
+                </div>
+            </form>
+        </div>
+        
         <script src="js/openid-login.js" type="text/javascript"></script>
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/popper/popper.min.js"></script>

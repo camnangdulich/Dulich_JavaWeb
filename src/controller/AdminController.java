@@ -539,18 +539,25 @@ public class AdminController {
 	
 	
 	// Sửa thông tin loại của bài viết
-//	@RequestMapping("sbaiviet/lbaiviet/{id}")
-//	public String slbvcbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
-//		model.addAttribute("title", "Sửa loại bài viết");
-//		Session session = factory.getCurrentSession();
-//		String hql = "from Chitiettin where idtintuc = :idbv";
-//        Query query = session.createQuery(hql);
-//        query.setParameter("idbv", idbv);
-//        @SuppressWarnings("unchecked")
-//		List<Chitiettin> list = query.list();
-//        model.addAttribute("loaitinbv", list);
-//		return "admin/slbvcbaiviet";
-//	}
+	@RequestMapping("sbaiviet/lbaiviet/{id}")
+	public String slbvcbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
+		model.addAttribute("title", "Sửa loại bài viết");
+		Session session = factory.getCurrentSession();
+		String hql = "from Chitiettin where idtintuc = :idbv";
+        Query query = session.createQuery(hql);
+        query.setParameter("idbv", idbv);
+        @SuppressWarnings("unchecked")
+		List<Chitiettin> list = query.list();
+        
+        String hqllbv = "from Loaitin";
+        Query querylbv = session.createQuery(hqllbv);
+        @SuppressWarnings("unchecked")
+		List<Loaitin> listlt = querylbv.list();
+        
+        model.addAttribute("loaitinbv", list);
+        model.addAttribute("lbvlist", listlt);
+		return "admin/slbvcbaiviet";
+	}
 	
 
 	
