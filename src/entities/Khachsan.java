@@ -57,6 +57,20 @@ public class Khachsan implements java.io.Serializable {
 		this.diachi = diachi;
 		this.ngaydang = ngaydang;
 	}
+	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
+			String sodienthoai, String diachi, Date ngaydang, Set<Chitietdichvu> chitietdichvus,
+			Set<Chitietloaiphong> chitietloaiphongs) {
+		this.taikhoan = taikhoan;
+		this.tinhthanh = tinhthanh;
+		this.trangthai = trangthai;
+		this.tenkhachsan = tenkhachsan;
+		this.hinhanh = hinhanh;
+		this.sodienthoai = sodienthoai;
+		this.diachi = diachi;
+		this.ngaydang = ngaydang;
+		this.chitietdichvus = chitietdichvus;
+		this.chitietloaiphongs = chitietloaiphongs;
+	}
 
 	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
 			String sodienthoai, String diachi, Date ngaydang, String slug, Set<Chitietdichvu> chitietdichvus,

@@ -23,14 +23,14 @@
                                     <input name="hinhanh" id="my_file" type="file" class="custom-file-input" onchange="onFileSelected(event)">
                                 </label>
                                 <a onclick="document.getElementById('my_file').click();" style="cursor: pointer;">
-                                	<img id="myimage" src="files/avatar/av1.png" style="max-height: 120px;">
+                                	<img id="myimage" src="files/khachsan/ks001.jpg" style="max-height: 120px;">
                                 </a>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Tên khách sạn</label>
                             <div class="col-sm-10">
-                                <input name="tenks" type="text" class="form-control" placeholder="Nhập Tên khách sạn">
+                                <input name="tenkhachsan" type="text" class="form-control" placeholder="Nhập Tên khách sạn">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -53,12 +53,43 @@
 								 </c:forEach>
 							</div>
                         </div>
+                          <div class="form-group row">
+                       	 <label class="col-sm-2 col-form-label">Loại phòng</label>
+                       	 	<div class="col-sm-10">
+                                 <c:forEach var="lp" items="${lplist}">
+                                 <c:choose>
+                                 	<c:when test="${lp.idloaiphong == 1}">
+                                 	</c:when>
+                                 	<c:otherwise>
+                                 		<div class="form-check form-check-inline">
+										  	<label class="custom-control custom-checkbox form-check-label">
+										        <input name="loaiphong" type="checkbox" class="custom-control-input" value="${dv.iddichvu}">
+											  	<span class="custom-control-indicator"></span>
+											  	<span class="custom-control-description">${lp.tenloai}</span>
+											</label>
+										</div>
+                                 	</c:otherwise>
+									</c:choose>
+								 </c:forEach>
+							</div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Tài khỏan</label>
+                            <div class="col-sm-10">
+                                <select name="taikhoan" class="form-control">
+                                	<option selected="selected" disabled>-- Chọn tài khoản --</option>
+                                	<c:forEach var="tk" items="${tailist}">
+                                    	<option value="${tk.idtaikhoan}">${tk.email}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Tỉnh thành</label>
                             <div class="col-sm-10">
                                 <select name="tinhthanh" class="form-control">
                                 	<option selected="selected" disabled>-- Chọn tỉnh thành --</option>
-                                	<c:forEach var="tth" items="${tthlist}">
+                                	<c:forEach var="tth" items="${ttlist}">
                                     	<option value="${tth.idtinhthanh}">${tth.tinhthanh}</option>
                                     </c:forEach>
                                 </select>
@@ -73,19 +104,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Số điện thoại</label>
                             <div class="col-sm-10">
-                                <input name="sdt" type="text" class="form-control" placeholder="Nhập số điện thoại">
+                                <input name="sodienthoai" type="text" class="form-control" placeholder="Nhập số điện thoại">
                                 <small class="form-text text-muted">${message}</small>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Trạng thái</label>
-                            <div class="col-sm-10">
-                                <select name="trangthai" class="form-control">
-                                	<option selected="selected" disabled>-- Chọn trạng thái --</option>
-                                	<c:forEach var="trt" items="${trtlist}">
-                                    	<option value="${trt.idtrangthai}">${trt.trangthai}</option>
-                                    </c:forEach>
-                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
