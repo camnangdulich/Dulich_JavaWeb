@@ -1,4 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-	response.sendRedirect("home/index.html");
+	response.sendRedirect("home/trang-chu.html");
 %>

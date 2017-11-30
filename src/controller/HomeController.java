@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -48,6 +47,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 import entities.Chitiettin;
 import entities.Danhgia;
+import entities.Dichvu;
 import entities.Khachsan;
 import entities.Loaiphong;
 import entities.Loaitin;
@@ -78,7 +78,7 @@ public class HomeController {
 	@Autowired
 	Mailer mailer;
 
-	// --------------------- Home Index Show ----------------------------
+	// --------------------- Home ModelAttribute ------------------------
 	// ------------------------------------------------------------------
 
 	// Lấy thông tin tỉnh thành
@@ -219,11 +219,33 @@ public class HomeController {
 		List<Loaiphong> list = query.list();
 		return list;
 	}
+	
+	// Lấy tất cả dịch vụ
+	@ModelAttribute("dichvulst")
+	public List<Dichvu> dichvulst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Dichvu";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Dichvu> list = query.list();
+		return list;
+	}
+	
+	// Lấy tất cả tỉnh thành
+	@ModelAttribute("tinhthanhlst")
+	public List<Tinhthanh> tinhthanhlst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Tinhthanh order by tinhthanh";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Tinhthanh> list = query.list();
+		return list;
+	}
 
 	// --------------------- PAGE Controller ----------------------------
 	// ------------------------------------------------------------------
 
-	@RequestMapping("index")
+	@RequestMapping("trang-chu")
 	public String index(ModelMap model, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		model.addAttribute("title", "Cẩm nang du lịch");
@@ -282,7 +304,7 @@ public class HomeController {
 	@RequestMapping("dangxuat")
 	public String dangxuat(HttpSession httpSession) {
 		httpSession.removeAttribute("loguser");
-		return "redirect:/home/index.html";
+		return "redirect:/home/trang-chu.html";
 	}
 
 	// Đăng ký (register form)
@@ -325,11 +347,17 @@ public class HomeController {
 	}
 
 	// Danh sách tin tức
-	@RequestMapping("tin-tuc/{id}")
-	public String dstintuc(ModelMap model, @PathVariable("id") Integer idlt, HttpSession httpsession,
+	@RequestMapping("tin-tuc/{slugloaitintuc}")
+	public String dstintuc(ModelMap model, @PathVariable("slugloaitintuc") String slugloaitintuc, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 
 		Session session = factory.getCurrentSession();
+		String hqllt = "from Loaitin where slug = :slugloaitintuc";
+		Query querylt = session.createQuery(hqllt);
+		querylt.setParameter("slugloaitintuc", slugloaitintuc);
+		Loaitin loaitin = (Loaitin) querylt.uniqueResult();
+		Integer idlt = loaitin.getIdloaitin();
+		
 		int total = 0, pageSize = 10;
 		String hql = "from Chitiettin where idloaitin = :idlt";
 		Query query = session.createQuery(hql);
@@ -357,12 +385,12 @@ public class HomeController {
 	}
 
 	// Chi tiết tin tức
-	@RequestMapping("tin-tuc/bai-viet/{id}")
-	public String cttintuc(ModelMap model, @PathVariable("id") Integer idtt) {
+	@RequestMapping("tin-tuc/bai-viet/{slugbaiviet}")
+	public String cttintuc(ModelMap model, @PathVariable("slugbaiviet") String slugbaiviet) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Tintuc where idtintuc = :idtt";
+		String hql = "from Tintuc where slug = :slugbaiviet";
 		Query query = session.createQuery(hql);
-		query.setParameter("idtt", idtt);
+		query.setParameter("slugbaiviet", slugbaiviet);
 		Tintuc tt = (Tintuc) query.uniqueResult();
 		String tieude = tt.getTieude();
 
@@ -434,14 +462,15 @@ public class HomeController {
 	
 
 	// Chi tiết tỉnh thành
-	@RequestMapping("tinh-thanh/{id}")
-	public String cttinhthanh(ModelMap model, @PathVariable("id") Integer idtth) {
+	@RequestMapping("tinh-thanh/{slugtinhthanh}")
+	public String cttinhthanh(ModelMap model, @PathVariable("slugtinhthanh") String slugtinhthanh) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Tinhthanh where idtinhthanh = :idtth";
+		String hql = "from Tinhthanh where slug = :slugtinhthanh";
 		Query query = session.createQuery(hql);
-		query.setParameter("idtth", idtth);
+		query.setParameter("slugtinhthanh", slugtinhthanh);
 		Tinhthanh tihthanh = (Tinhthanh) query.uniqueResult();
 		String tentinh = tihthanh.getTinhthanh();
+		Integer idtth = tihthanh.getIdtinhthanh();
 		
 		String hqlksttt = "from Khachsan where idtinhthanh = :idtt";
 		Query queryksttt = session.createQuery(hqlksttt);
@@ -493,24 +522,36 @@ public class HomeController {
 	
 	
 
-	@RequestMapping("tttaikhoan")
+	@RequestMapping("thong-tin-tai-khoan")
 	public String tttaikhoan(ModelMap model) {
 		model.addAttribute("title", "Thông tin tài khoản");
 		return "home/tttaikhoan";
 	}
 
-	@RequestMapping("gioithieu")
+	@RequestMapping("gioi-thieu")
 	public String gioithieu(ModelMap model) {
 		model.addAttribute("title", "Giới thiệu");
 		return "home/gioithieu";
 	}
 
-	@RequestMapping("phanhoi")
+	@RequestMapping("phan-hoi")
 	public String phanhoi(ModelMap model) {
 		model.addAttribute("title", "Phản hồi");
 		return "home/phanhoi";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// ------------------- Đăng nhập bằng mạng xã hội -------------------
+	// ------------------------------------------------------------------
 
+	// ------------------- Send Mail Lấy lại mật khẩu -------------------
 	@RequestMapping(value = "passkeymailer", method = RequestMethod.POST)
 	public String passkeymailer(ModelMap model, HttpServletRequest request, @RequestParam("email") String email)
 			throws InvalidKeyException {
@@ -549,13 +590,25 @@ public class HomeController {
 		}
 		return "home/index";
 	}
-
-	// Facebook login
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// ------------------- Đăng nhập bằng mạng xã hội -------------------
+	// ------------------------------------------------------------------
+	
+	// ------------------- Facebook Login -------------------------------
 	@RequestMapping(value = "signin-facebook", method = RequestMethod.POST)
 	public String signinFacebook(@RequestBody String accessToken, ModelMap model,
 			HttpSession httpSession, HttpServletRequest request,
 			HttpServletResponse response) throws InvalidKeyException {
 		System.out.println("Facebook TokenID : " + accessToken);
+		@SuppressWarnings("deprecation")
 		FacebookClient fbClient = new DefaultFacebookClient(accessToken);
 		User me = fbClient.fetchObject("me", User.class, Parameter.with("fields", "picture,first_name,last_name,gender,name,email"));
 
@@ -629,6 +682,8 @@ public class HomeController {
 	}
 	
 	
+	
+	// ------------------- Google Login -------------------------------
 	private static final HttpTransport TRANSPORT = new NetHttpTransport();
     private static final JsonFactory JSON_FACTORY = new JacksonFactory();
 	
@@ -654,7 +709,6 @@ public class HomeController {
                 // Get profile information from payload
                 String email = payload.getEmail();
                 System.out.println("User Email: " + email);
-                boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
                 
                 String name = (String) payload.get("name");
                 System.out.println("User Name: " + name);
@@ -727,10 +781,4 @@ public class HomeController {
         return "home/index";
     }
 	
-	
-	
-	
-	
-	
-
 }

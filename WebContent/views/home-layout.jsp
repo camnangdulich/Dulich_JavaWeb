@@ -47,12 +47,12 @@
 	<!-- Navigation -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="home/index.html"><img style="width: 130px;" src="files/home/logo.png"></a>
+                <a class="navbar-brand" href="home/trang-chu.html"><img style="width: 130px;" src="files/home/logo.png"></a>
                 <select class="sl_tinhthanh" onchange="location = this.value;">
-                    <option value="" disabled selected hidden>Chọn tỉnh thành...</option>
-                    <option value="home/tinhthanh.html">Hồ Chí Minh</option>
-                    <option value="home/tinhthanh.html">Hà Nội</option>
-                    <option value="home/tinhthanh.html">Buôn Mê Thuột</option>
+                	<option value="" disabled selected hidden>Chọn tỉnh thành...</option>
+                	<c:forEach var="tth" items="${tinhthanhlst}">
+                		<option value="home/tinh-thanh/${tth.slug}.html">${tth.tinhthanh}</option>
+                	</c:forEach>
                 </select>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -64,19 +64,16 @@
                                 Tin tức
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                                <a class="dropdown-item" href="home/tintucds.html">Danh sách tin tức</a>
-                                <a class="dropdown-item" href="home/tintucct.html">Chi tiết tin tức</a>
-                                <a class="dropdown-item" href="home/khachsan.html">Chi tiết khách sạn</a>
-                                <a class="dropdown-item" href="home/tour.html">Chi tiết tour</a>
-                                <a class="dropdown-item" href="home/datphong.html">Đặt phòng khách sạn</a>
-                                <a class="dropdown-item" href="home/tttaikhoan.html">Thông tin tài khoản</a>
+                            	<c:forEach var="ltt" items="${loaitinlst}">
+                            		<a class="dropdown-item" href="home/tin-tuc/${ltt.slug}.html">${ltt.loaitin}</a>
+                            	</c:forEach>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="home/gioithieu.html">Giới thiệu</a>
+                            <a class="nav-link" href="home/gioi-thieu.html">Giới thiệu</a>
                         </li>
                         <li class="nav-item" style="margin-right: 15px;">
-                            <a class="nav-link" href="home/phanhoi.html">Phản hồi</a>
+                            <a class="nav-link" href="home/phan-hoi.html">Phản hồi</a>
                         </li>
                         <li style="margin-right: 15px;">
                             <div class="input-group">
@@ -88,6 +85,32 @@
                         </li>
                         
                         <c:choose>
+                        	<c:when test="${loguser.quyen.idquyen == 7}">
+                        		<li class="nav-item dropdown">
+		                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                Xin chào: ${loguser.ten}
+		                            </a>
+		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            </div>
+		                            <li class="nav-item">
+			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
+			                        </li>
+		                        </li>
+                        	</c:when>
+                        	<c:when test="${loguser.quyen.idquyen == 6}">
+                        		<li class="nav-item dropdown">
+		                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                Xin chào: ${loguser.ten}
+		                            </a>
+		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            </div>
+		                            <li class="nav-item">
+			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
+			                        </li>
+		                        </li>
+                        	</c:when>
                         	<c:when test="${loguser.quyen.idquyen == 5}">
                         		<li class="nav-item dropdown">
 		                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -181,7 +204,7 @@
                 <div class="row ft-fx">
                     <div class="col-md-3">
                         <h4>
-                            <a class="ft-logo" href="index.html"><img src="files/home/logo.png"></a>
+                            <a class="ft-logo" href="home/trang-chu.html"><img src="files/home/logo.png"></a>
                         </h4>
                         <i class="fa fa-fw fa-phone text-white"></i><span class="text-white">Hotline:</span>
                         <span class="text-white" style="font-size: larger;">0123456789</span>
@@ -338,12 +361,26 @@
                 </div>
 
                 <div class="container_log" style="padding-top: 0px;">
-                    <span>Chọn hình ảnh khách sạn của bạn</span>
+                    <span>Chọn hình ảnh và dịch vụ khách sạn của bạn</span>
                     <br>
-                    <input type="file" name="hinhanh" value="cont">
+                    <input type="file" name="hinhanh" value="cont" style="
+					    width: 100%;
+					    padding: .5rem .75rem;
+					    margin: 8px 0;
+					    display: inline-block;
+					    border: 1px solid #ccc;
+					    box-sizing: border-box;">
+                    <c:forEach var="dv" items="${dichvulst}">
+                    	<div class="form-check form-check-inline">
+						  	<label class="custom-control custom-checkbox form-check-label">
+						        <input name="dichvu" type="checkbox" class="custom-control-input" value="${dv.iddichvu}">
+							  	<span class="custom-control-indicator"></span>
+							  	<span class="custom-control-description">${dv.tendichvu}</span>
+							</label>
+						</div>
+                    </c:forEach>
                     <input type="text" placeholder="Nhập tên khách sạn của bạn" name="tenkhachsan" class="input_log" autofocus>
-                    <input type="text" placeholder="Nhập số diện thoại liên hệ" name="sodienthoai" class="input_log">
-                    <input type="text" placeholder="Nhập tỉnh thành" name="tenkhachsan" class="input_log">
+                    <input type="text" placeholder="Nhập số điện thoại liên hệ" name="sodienthoai" class="input_log">
                     <select class="form-control" id="exampleSelect1">
 						<option selected="selected" disabled="disabled">-- Chọn tỉnh thành --</option>
 						<c:forEach var="tt" items="${lsttinhthanh}">
@@ -351,19 +388,12 @@
 						</c:forEach>
 					</select> 
 					<input type="text" placeholder="Nhập địa chỉ khách sạn" name="diachi" class="input_log">
-                    <button id="btn-forgot" type="submit" class="log" disabled="disabled" hidden=""><i class="fa fa-building-o"></i> Tạo khách sạn</button>
-                    <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Le1uDoUAAAAABM0IPZMlTwNs6QQaXE470V0betd"></div>
-                    <script>
-	                    function recaptchaCallbacktaokhachsan() {
-	                        $('#btn-forgot').removeAttr('disabled');
-	                        $('#btn-forgot').removeAttr('hidden');
-	                    };
-                    </script>
+                    <button id="btn-taokhachsan" type="submit" class="log"><i class="fa fa-building-o"></i> Tạo khách sạn</button>
                 </div>
 
                 <div class="container_log" style="background-color:#f1f1f1">
                     <button type="button" onclick="closepp()" class="cancelbtn log"><i class="fa fa-times"></i> Hủy</button>
-                    <span class="psw">Quay lại <a onclick="loginpp()" style="cursor: pointer; color: green;">Đăng nhập</a></span>
+                    <span class="psw">Camnangdulich sẽ xác minh khách sạn của bạn!</span>
                 </div>
             </form>
         </div>

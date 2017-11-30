@@ -3,11 +3,13 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    	<!--
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
+        -->
         <div class="carousel-inner" role="listbox">
             <!-- Slide One - Set the background image for this slide in the line below -->
             <div class="carousel-item active" style="background-image: url('./files/home/home1.jpg')">
@@ -50,7 +52,7 @@
             <div class="row">
             	<c:forEach var="tth" items="${lsttinhthanh}">
 	            	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-	                    <a href="#">
+	                    <a href="home/tinh-thanh/${tth.slug}.html">
 	                        <div class="img">
 	                        	<img src="files/tinhthanh/${tth.hinhanh}" class="img-responsive" style="width:100%" alt="${tth.tinhthanh}">
 	                        </div>
@@ -62,7 +64,7 @@
 	                </div>
             	</c:forEach>
             	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
+                    <a href="home/tinh-thanh/danh-sach.html">
                         <div class="img">
                         	<img src="files/tinhthanh/Tất cả.jpg" class="img-responsive" style="width:100%" alt="Xem thêm tỉnh thành">
                         </div>
@@ -279,7 +281,7 @@
                 Hãy bắt đầu khám phá ngay với CamNangDuLich ^^!</p>
         </div>
         <div class="col-md-4">
-            <a class="btn btn-lg btn-secondary btn-block" href="#">Khám phá ngay</a>
+            <a class="btn btn-lg btn-secondary btn-block" href="home/tinh-thanh/danh-sach.html">Khám phá ngay</a>
         </div>
     </div>
 
