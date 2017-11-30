@@ -41,7 +41,7 @@ public class Datphong implements java.io.Serializable {
 	}
 
 	public Datphong(Loaiphong loaiphong, Trangthai trangthai, Date ngaynhanphong, Date ngaytraphong, int soluongphong,
-			String hodem, String ten, String sodienthoai, String email) {
+			String hodem, String ten, String sodienthoai, String email, String slug) {
 		this.loaiphong = loaiphong;
 		this.trangthai = trangthai;
 		this.ngaynhanphong = ngaynhanphong;
@@ -51,6 +51,7 @@ public class Datphong implements java.io.Serializable {
 		this.ten = ten;
 		this.sodienthoai = sodienthoai;
 		this.email = email;
+		this.slug = slug;
 	}
 
 	public Datphong(Loaiphong loaiphong, Taikhoan taikhoan, Trangthai trangthai, Date ngaynhanphong, Date ngaytraphong,

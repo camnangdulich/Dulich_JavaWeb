@@ -126,7 +126,41 @@
             <div class="card my-4">
                 <h5 class="card-header">Đặt tour du lịch</h5>
                 <div class="card-body">
-                    <form class="" action="" method="">
+                <form action="home/tour.html" method="post" >
+						<div class="form-group">
+								<select name="tentour" class="form-control">
+									<option selected="selected" disabled="disabled">-- Chọn Tour --</option>
+									<c:forEach var="tu" items="${tourlist}">
+										<option value="${tu.idtour }">${tu.tentour}</option>
+									</c:forEach>
+								</select>
+						</div>
+						<div class="form-group">
+								<input name="hodem" class="form-control" type="text" placeholder="Nhập họ đệm" value="">
+						</div>
+						<div class="form-group">
+								<input name="ten" class="form-control" type="text" placeholder="Nhập tên" value="">
+						</div>
+						<div class="form-group">
+								<input name="songuoi" class="form-control" type="number" placeholder="Số người" value="">
+						</div>
+						<div class="form-group">
+								<input name="sodienthoai" class="form-control" type="text" placeholder="Nhập số điện thoại" value="">
+						</div>
+						<div class="form-group">
+								<input name="email" class="form-control" type="email" placeholder="Nhập email" value="">
+						</div>
+						<div class="form-group">
+								<input name="yeucau" class="form-control" type="text" placeholder="Nhập yêu cầu" value="">
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-12 text-center">
+								<button class="btn btn-success" style="width: 200px;">Đặt
+									Tour</button>
+							</div>
+						</div>
+					</form>
+                <!--   <form class="" action="" method="">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Nhập họ đệm">
                         </div>
@@ -146,7 +180,8 @@
                             <input type="text" class="form-control" placeholder="Nhập yêu cầu">
                         </div>
                         <button style="width: 100%" type="submit" class="btn btn-success">Đặt tour</button>
-                    </form>
+                    </form> -->
+                  
                 </div>
             </div>
         </div>

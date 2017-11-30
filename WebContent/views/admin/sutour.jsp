@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-10 col-md-auto">
-					<form action="admin/stour.html" method="post"
+					<form action="admin/sutour.html" method="post"
 						enctype="multipart/form-data" id="suatour">
 						<input name="idtour" type="hidden" value="${tua.idtour}">
 						<div class="form-group row">
@@ -32,67 +32,75 @@
 							<label class="col-sm-2 col-form-label">Công ty</label>
 							<div class="col-sm-10" label-validation>
 								<select name="congty" class="form-control">
-									<option selected="selected" disabled value="${tua.congty.idcongty}">
-									${tua.congty.tencongty}
-									<c:forEach var="ct" items="${ctlist}">
-										<option value="${ct.idcongty}">${ct.tencongty}</option>
-									</c:forEach>
+									<option selected="selected" disabled
+										value="${tua.congty.idcongty}">
+										${tua.congty.tencongty}
+										<c:forEach var="ct" items="${ctlist}">
+											<option value="${ct.idcongty}">${ct.tencongty}</option>
+										</c:forEach>
 								</select>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Điểm đi</label>
 							<div class="col-sm-10" id="label-validation">
-								<input name="diemdi" type="text" class="form-control" value ="${tua.diemdi }"
-									placeholder="điểm đi">
+								<input name="diemdi" type="text" class="form-control"
+									value="${tua.diemdi }" placeholder="điểm đi">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Điểm đến</label>
 							<div class="col-sm-10" label-validation>
 								<select name="diemden" class="form-control">
-									<option selected="selected" disabled value="${tua.tinhthanh.idtinhthanh}">
-									${tua.tinhthanh.tinhthanh}
-									<c:forEach var="tt" items="${ttlist}">
-										<option value="${tt.idtinhthanh}">${tt.tinhthanh}</option>
-									</c:forEach>
+									<option selected="selected" disabled
+										value="${tua.tinhthanh.idtinhthanh}">
+										${tua.tinhthanh.tinhthanh}
+										<c:forEach var="tt" items="${ttlist}">
+											<option value="${tt.idtinhthanh}">${tt.tinhthanh}</option>
+										</c:forEach>
 								</select>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Tên tour</label>
 							<div class="col-sm-10" id="label-validation">
-								<input name="tentour" type="text" class="form-control" value = "${tua.tentour}"
-									placeholder="Tên tour">
+								<input name="tentour" type="text" class="form-control"
+									value="${tua.tentour}" placeholder="Tên tour">
 							</div>
 						</div>
-					
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Ngày khở hành</label>
+							<div class="col-sm-10" id="label-validation">
+								<input name="ngaykhoihanh" type="text" class="form-control"
+									value="${tua.tentour}" placeholder="Ngày khở hành">
+							</div>
+						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Lịch trình</label>
 							<div class="col-sm-10" id="label-validation">
-								<input name="lichtrinh" type="text" class="form-control" value = "${tua.lichtrinh }"
-									placeholder="Lịch trình">
+								<input name="lichtrinh" type="text" class="form-control"
+									value="${tua.lichtrinh }" placeholder="Lịch trình">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Giá</label>
 							<div class="col-sm-10" id="label-validation">
-								<input name="gia" type="text" class="form-control" value = "${tua.gia }"
-									placeholder="Giá">
+								<input name="gia" type="text" class="form-control"
+									value="${tua.gia }" placeholder="Giá">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Lưu ý</label>
 							<div class="col-sm-10" id="label-validation">
-								<input name="luuy" type="text" class="form-control" value = "${tua.luuy}"
-									placeholder="Lưu ý">
+								<input name="luuy" type="text" class="form-control"
+									value="${tua.luuy}" placeholder="Lưu ý">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Mô tả</label>
 							<div class="col-sm-10" id="label-validation">
-								<input name="mota" type="text" class="form-control" value = "${tua.mota}"
-									placeholder="Mô tả tour">
+								<input name="mota" type="text" class="form-control"
+									value="${tua.mota}" placeholder="Mô tả tour">
 							</div>
 						</div>
 						<div class="form-group row">
