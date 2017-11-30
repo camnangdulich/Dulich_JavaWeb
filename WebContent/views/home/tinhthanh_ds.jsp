@@ -12,9 +12,7 @@
 	                    <a href="#">
 	                        <div class="img">
 	                        	<img src="files/tinhthanh/${tth.hinhanh}" class="img-responsive" style="width:100%" alt="${tth.tinhthanh}">
-	                        	<div class="card-footer sp-ttm">
-									<i class="fa fa-map-marker"></i> ${tth.tinhthanh}
-								</div>
+	                        	<div class="card-footer sp-ttm">${tth.tinhthanh}</div>
 	                        </div>
 	                        <div class="info">
 	                            <h3>${tth.tinhthanh}</h3>
@@ -25,7 +23,7 @@
             	</c:forEach>
             </div>
             <!-- Pagination -->
-			<ul class="pagination justify-content-center mb-4">
+			<ul class="pagination justify-content-center mb-4" style="margin-top: 25px;">
 				<c:if test="${currentpage > 1 }">
 					<li class="page-item">
 						<a class="page-link" href="home/danh-sach-tin-tuc/2.html?page=${currentpage - 1}">&larr; Trước</a>
