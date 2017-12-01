@@ -998,8 +998,10 @@ public class Huycontroller {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		Dichvu d = (Dichvu) session.get(Dichvu.class, iddichvu);
+		String slugtdv = SlugsConverter.toSlug(tendichvu);
 		d.setTendichvu(tendichvu);
 		d.setMota(mota);
+		d.setSlug(slugtdv);
 		try {
 			session.update(d);
 			t.commit();

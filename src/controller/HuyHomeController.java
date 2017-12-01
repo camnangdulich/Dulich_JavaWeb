@@ -146,10 +146,12 @@ public class HuyHomeController {
  	 			try {
  	 				session.save(dt);
  	 				t.commit();
+ 	 				System.out.println("Đặt tour thành công!");
  	 				model.addAttribute("message", "Đặt tour thành công!");
  	 				return "home/tour";
  	 			} catch (Exception e) {
  	 				t.rollback();
+ 	 				System.out.println("Đặt tour false!");
  	 				model.addAttribute("message", "Đặt tour thất bại!");
  	 			} finally {
  	 				session.close();
