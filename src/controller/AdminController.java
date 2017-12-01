@@ -30,11 +30,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import entities.Chitietdichvu;
+import entities.Chitietloaiphong;
 import entities.Chitiettin;
+import entities.Dichvu;
 import entities.Khachsan;
+import entities.Loaiphong;
 import entities.Loaitin;
 import entities.Quyen;
 import entities.Taikhoan;
+import entities.Tinhthanh;
 import entities.Tintuc;
 import entities.Tour;
 import entities.Trangthai;
@@ -132,6 +137,61 @@ public class AdminController {
 		List<Chitiettin> list = query.list();
 		return list;
 	}
+	
+	//Lấy tất cả thông tin chi tiết dịch vụ
+	@ModelAttribute("ctdvlist")
+	public List<Chitietdichvu> getctdv(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Chitietdichvu";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Chitietdichvu> list = query.list();
+		return list;
+	}
+	
+	//Lấy tất cả thông tin chi tiết loại phòng
+	@ModelAttribute("ctlplist")
+	public List<Chitietloaiphong> getctlp(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Chitietloaiphong";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Chitietloaiphong> list = query.list();
+		return list;
+	}
+	
+	// Lấy tất cả loại phòng
+	@ModelAttribute("loaiphonglst")
+	public List<Loaiphong> loaiphonglst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Loaiphong";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Loaiphong> list = query.list();
+		return list;
+	}
+	
+	// Lấy tất cả dịch vụ
+	@ModelAttribute("dichvulst")
+	public List<Dichvu> dichvulst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Dichvu";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Dichvu> list = query.list();
+		return list;
+	}
+	
+	// Lấy tất cả tỉnh thành
+	@ModelAttribute("tinhthanhlst")
+	public List<Tinhthanh> tinhthanhlst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Tinhthanh order by tinhthanh";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Tinhthanh> list = query.list();
+		return list;
+	}
 
 	
 	
@@ -139,7 +199,7 @@ public class AdminController {
 	// ------------------------------------------------------------------
 	
 	// Trang điều khiển
-	@RequestMapping("index")
+	@RequestMapping("dieu-khien")
 	public String index(ModelMap model) {
 		model.addAttribute("title", "Điều khiển");
 		return "admin/index";
@@ -159,8 +219,12 @@ public class AdminController {
 		return "admin/dsbaiviet";
 	}
 	
-	
-	
+	// Trang chi tiết khách sạn
+	@RequestMapping("thong-tin-khach-san")
+	public String thongtinkhachsan(ModelMap model) {
+		model.addAttribute("title", "Thông tin khách sạn");
+		return "admin/ttkhachsan";
+	}
 	
 	// Trang tour du lịch
 	@RequestMapping("dstour")
@@ -229,221 +293,71 @@ public class AdminController {
 	
 	
 	// Thêm bài viết mới (Tin tức mới)
-	@RequestMapping("tbaiviet")
+	@RequestMapping("them-bai-viet")
 	public String tbaiviet(ModelMap model) {
 		model.addAttribute("title", "Thêm bài viết mới");
 		return "admin/tbaiviet";
 	}
 	
-//	@SuppressWarnings("rawtypes")
-//	@RequestMapping(value = "tbaiviet", method = RequestMethod.POST)
-//	public String tbaiviet(ModelMap model,
-//			@RequestParam("hinhanh") MultipartFile image,
-//			@RequestParam("idtk") Integer idtk,
-//			@RequestParam("tieude") String tieude,
-//			@RequestParam("tomtat") String tomtat,
-//			@RequestParam("noidung") String noidung,
-//			@RequestParam("nguon") String nguon,
-//			@RequestParam("loaitin") List loaitin) {
-//
-//		// Tạo session
-//		Session session = factory.openSession();
-//		
-//		// Tạo đường dẫn hình ảnh lưu vào biến photoPath
-//		String photoPath = context.getRealPath("/files/tintuc/" + image.getOriginalFilename());
-//		
-//		// Lưu hình ảnh
-//		try {
-//			image.transferTo(new File(photoPath));
-//		} catch (IllegalStateException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//
-//		// Tạo ngày đăng bài viết mới
-//		Date ngaydang = new Date();
-//		
-//		// Lấy tài khoản theo idtk
-//		Taikhoan taikhoan = (Taikhoan) session.get(Taikhoan.class, idtk);
-//		
-//		// Tạo tin tức mới với các thông tin của tin tức
-//		Tintuc tintuc = new Tintuc(taikhoan, image.getOriginalFilename(), tieude, tomtat, noidung, ngaydang, nguon);
-//		
-//		// Khởi tạo Transaction
-//		Transaction t = session.beginTransaction();
-//		
-//		try {
-//			
-//			// Lưu tin tức vào session
-//			session.save(tintuc);
-//			
-//			// Lấy idtintuc mới tạo
-//			int idtintuc = tintuc.getIdtintuc();
-//			
-//			// Lấy tin tức theo idtintuc
-//			Tintuc tt = (Tintuc) session.get(Tintuc.class, idtintuc);
-//			
-//			// Lấy loại tin tức mới
-//			Loaitin ltm = (Loaitin) session.get(Loaitin.class, 1);
-//			
-//			// Lưu tin tức với loại tin mới
-//			Chitiettin cttm = new Chitiettin(ltm, tt);
-//			session.save(cttm);
-//			
-//			// Vòng lặp lấy lưu thông tin các loại tin tức
-//			for ( int x = 0; x < loaitin.size(); x++ ){
-//				
-//				// Lấy idloaitin của từng loại tin
-//				Object oj_idloaitin = loaitin.get(x);
-//				
-//				// Chuyển kiểu của từng idloaitin sang int
-//				int idloaitin = Integer.valueOf((String) oj_idloaitin);
-//				
-//				// Lấy loại tin theo idloaitin
-//				Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaitin);
-//				
-//				// Tạo mới Chitiettin với các thông tin cần lưu
-//				Chitiettin ctt = new Chitiettin(lt, tt);
-//				
-//				try {
-//					// Lưu Chitiettin vào session
-//					session.save(ctt);
-//				} catch (Exception e) {
-//					// Hủy tất cả thay đổi thực thi truy vấn
-//					t.rollback();
-//				}
-//			}
-//			
-//			// Thực thi lưu vào database với các session đã lưu
-//			t.commit();
-//			
-//			// Thông báo thực thi thành công
-//			System.out.println("Them thanh cong!");
-//			
-//			// Chuyển về trang thêm bài viết
-//			return "admin/tbaiviet";
-//			
-//		} catch (Exception e) {
-//			// Hủy tất cả thay đổi thực thi truy vấn
-//			t.rollback();
-//			// Thông báo thực thi thất bại (lỗi)
-//			model.addAttribute("message", "Thêm loại sản phẩm thất bại!");
-//		} finally {
-//			// Đóng session
-//			session.close();
-//		}
-//		
-//		// Chuyển về trang thêm bài viết
-//		return "admin/tbaiviet";
-//	}
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "tbaiviet", method = RequestMethod.POST)
+	public String tbaiviet(ModelMap model,
+			@RequestParam("hinhanh") MultipartFile image,
+			@RequestParam("idtk") Integer idtk,
+			@RequestParam("tieude") String tieude,
+			@RequestParam("tomtat") String tomtat,
+			@RequestParam("noidung") String noidung,
+			@RequestParam("nguon") String nguon,
+			@RequestParam("loaitin") List loaitin) {
+
+		Session session = factory.openSession();
+		String photoPath = context.getRealPath("/files/tintuc/" + image.getOriginalFilename());
+		try {
+			image.transferTo(new File(photoPath));
+		} catch (IllegalStateException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		Date ngaydang = new Date();
+		Taikhoan taikhoan = (Taikhoan) session.get(Taikhoan.class, idtk);
+		String slugtintuc = SlugsConverter.toSlug(tieude);
+		Tintuc tintuc = new Tintuc(taikhoan, image.getOriginalFilename(), tieude, tomtat, noidung, ngaydang, nguon, slugtintuc, 0);
+		Transaction t = session.beginTransaction();
+		try {
+			session.save(tintuc);
+			int idtintuc = tintuc.getIdtintuc();
+			Tintuc tt = (Tintuc) session.get(Tintuc.class, idtintuc);
+			Loaitin ltm = (Loaitin) session.get(Loaitin.class, 1);
+			Chitiettin cttm = new Chitiettin(ltm, tt);
+			session.save(cttm);
+			
+			for ( int x = 0; x < loaitin.size(); x++ ){
+				Object oj_idloaitin = loaitin.get(x);
+				int idloaitin = Integer.valueOf((String) oj_idloaitin);
+				Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaitin);
+				Chitiettin ctt = new Chitiettin(lt, tt);
+				try {
+					session.save(ctt);
+				} catch (Exception e) {
+					t.rollback();
+				}
+			}
+			t.commit();
+			System.out.println("Them thanh cong!");
+			return "admin/tbaiviet";
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Thêm loại sản phẩm thất bại!");
+		} finally {
+			session.close();
+		}
+		return "admin/tbaiviet";
+	}
 	// ------------------------------------------------------------------
 	
 	
-	// Thêm khách sạn mới
-//	@RequestMapping("tkhachsan")
-//	public String tkhachsan(ModelMap model) {
-//		model.addAttribute("title", "Thêm khách sạn");
-//		return "admin/tkhachsan";
-//	}
-//	
-//	@SuppressWarnings("rawtypes")
-//	@RequestMapping(value = "tkhachsan", method = RequestMethod.POST)
-//	public String tkhachsan(ModelMap model,
-//			@RequestParam("hinhanh") MultipartFile image,
-//			@RequestParam("idtk") Integer idtk,
-//			@RequestParam("tenks") String tenks,
-//			@RequestParam("dichvu") List dichvu,
-//			@RequestParam("tinhthanh") Integer idtinhthanh,
-//			@RequestParam("diachi") String diachi,
-//			@RequestParam("sdt") String sdt,
-//			@RequestParam("trangthai") Integer idtrangthai) {
-//
-//		Session session = factory.openSession();
-//		
-//		// Tạo đường dẫn hình ảnh lưu vào biến photoPath
-//		String photoPath = context.getRealPath("/files/khachsan/" + image.getOriginalFilename());
-//		
-//		// Lưu hình ảnh
-//		try {
-//			image.transferTo(new File(photoPath));
-//		} catch (IllegalStateException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//
-//		// Tạo ngày đăng khách sạn
-//		Date ngaydang = new Date();
-//		
-//		// Lấy tài khoản, tỉnh thành, trạng thái theo id
-//		Taikhoan taikhoan = (Taikhoan) session.get(Taikhoan.class, idtk);
-//		Tinhthanh tth = (Tinhthanh) session.get(Tinhthanh.class, idtinhthanh);
-//		Trangthai trt = (Trangthai) session.get(Trangthai.class, idtrangthai);
-//		
-//		// Tạo khách sạn mới với các thông tin của khách sạn
-//		Khachsan khs = new Khachsan(taikhoan, tth, trt, tenks, image.getOriginalFilename(), sdt, diachi, ngaydang);
-//		
-//		Transaction t = session.beginTransaction();
-//		
-//		try {
-//			
-//			// Lưu khách sạn vào session
-//			session.save(khs);
-//			
-//			// Lấy idkhachsan mới tạo
-//			int idkhachsan = khs.getIdkhachsan();
-//			
-//			// Lấy khách sạn và dịch vụ theo id
-//			Khachsan ks = (Khachsan) session.get(Khachsan.class, idkhachsan);
-//			Dichvu dv = (Dichvu) session.get(Dichvu.class, 1);
-//			
-//			// Lưu khách sạn với dịch vụ trên
-//			Chitietdichvu ctdv = new Chitietdichvu(dv, ks);
-//			session.save(ctdv);
-//			
-//			// Vòng lặp lấy lưu thông tin các loại dịch vụ khác
-//			for ( int x = 0; x < dichvu.size(); x++ ){
-//				
-//				// Lấy iddichvu của từng loại dịch vụ
-//				Object oj_iddichvu = dichvu.get(x);
-//				
-//				// Chuyển kiểu của từng iddichvu sang int
-//				int iddichvu = Integer.valueOf((String) oj_iddichvu);
-//				
-//				// Lấy dịch vụ theo iddichvu
-//				Dichvu dhv = (Dichvu) session.get(Dichvu.class, iddichvu);
-//				
-//				// Tạo mới Chitietdichvu với các thông tin cần lưu
-//				Chitietdichvu chtdv = new Chitietdichvu(dhv, ks);
-//				
-//				try {
-//					session.save(chtdv);
-//				} catch (Exception e) {
-//					t.rollback();
-//				}
-//			}
-//			t.commit();
-//			System.out.println("Them thanh cong!");
-//			return "admin/tkhachsan";
-//		} catch (Exception e) {
-//			t.rollback();
-//			System.out.println("Them that bai!");
-//		} finally {
-//			session.close();
-//		}
-//		return "admin/tkhachsan";
-//	}
-	// ------------------------------------------------------------------
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -592,6 +506,7 @@ public class AdminController {
 		String hql = "from Chitiettin where idloaitin=:idlt";
         Query query = session.createQuery(hql);
         query.setParameter("idlt", idxoa);
+		@SuppressWarnings("unchecked")
 		List<Chitiettin> lstcct = query.list();
 		if(lstcct.size() == 0){
 			System.out.println("Xoa loai tin khong co chi tiet tin");
@@ -629,11 +544,6 @@ public class AdminController {
 				System.out.println("Xóa thành công");
 			
 		}
-		
-		
-		
-		
-		
 //		try {
 //			session.delete(tk);
 //			t.commit();

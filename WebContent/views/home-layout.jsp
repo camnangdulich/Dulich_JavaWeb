@@ -415,7 +415,9 @@
                 </div>
             </form>
         </div>
+        <button onclick="topFunction()" id="ontopBtn" title="Go to top">&and;</button>
         
+        <script src="js/ontop.js" type="text/javascript"></script>
         <script src="js/openid-login.js" type="text/javascript"></script>
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/popper/popper.min.js"></script>

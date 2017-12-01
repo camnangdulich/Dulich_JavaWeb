@@ -48,6 +48,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 import entities.Chitiettin;
+import entities.Congty;
 import entities.Danhgia;
 import entities.Dichvu;
 import entities.Khachsan;
@@ -265,14 +266,29 @@ public class HomeController {
 
 		Session session = factory.getCurrentSession();
 		Taikhoan tk = null;
+		Khachsan ks = null;
+		Congty ct = null;
 		try {
+			// Kiểm tra thông tin tài khoản
 			String hql = "from Taikhoan where email = :emailtk";
 			Query query = session.createQuery(hql);
 			query.setParameter("emailtk", email);
 			tk = (Taikhoan) query.uniqueResult();
-			// Password encryption
 			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
 			String Matkhaumahoa = encryption.encoding(pwd);
+			Integer idtk = tk.getIdtaikhoan();
+			
+			// Kiểm tra thông tin khách sạn
+			String hqlks = "from Khachsan where idtaikhoan = :idtk";
+			Query queryks = session.createQuery(hqlks);
+			queryks.setParameter("idtk", idtk);
+			ks = (Khachsan) queryks.uniqueResult();
+			
+			// Kiểm tra thông tin công ty
+			String hqlct = "from Congty where idtaikhoan = :idtk";
+			Query queryct = session.createQuery(hqlct);
+			queryct.setParameter("idtk", idtk);
+			ct = (Congty) queryct.uniqueResult();
 
 			if (!tk.getMatkhau().equals(Matkhaumahoa)) {
 				System.out.println("dang nhap that bai");
@@ -291,6 +307,12 @@ public class HomeController {
 				return "home/index";
 			} else {
 				httpSession.setAttribute("loguser", tk);
+				if(ks != null){
+					httpSession.setAttribute("loguserks", ks);
+				}
+				if(ct != null){
+					httpSession.setAttribute("loguserct", ct);
+				}
 				System.out.println("dang nhap thanh cong");
 				model.addAttribute("title", "Cẩm nang du lịch");
 				model.addAttribute("message", "dang nhap thanh cong");

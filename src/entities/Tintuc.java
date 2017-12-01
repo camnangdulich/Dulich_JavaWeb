@@ -54,6 +54,19 @@ public class Tintuc implements java.io.Serializable {
 		this.nguon = nguon;
 		this.luotxem = luotxem;
 	}
+	
+	public Tintuc(Taikhoan taikhoan, String hinhanh, String tieude, String tomtat, String noidung, Date thoigian,
+			String nguon, String slug, int luotxem) {
+		this.taikhoan = taikhoan;
+		this.hinhanh = hinhanh;
+		this.tieude = tieude;
+		this.tomtat = tomtat;
+		this.noidung = noidung;
+		this.thoigian = thoigian;
+		this.nguon = nguon;
+		this.slug = slug;
+		this.luotxem = luotxem;
+	}
 
 	public Tintuc(Taikhoan taikhoan, String hinhanh, String tieude, String tomtat, String noidung, Date thoigian,
 			String nguon, String slug, int luotxem, Set<Chitiettin> chitiettins) {
