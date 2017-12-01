@@ -41,7 +41,79 @@ function alert_admin_check(message) {
 		});
 	}
 	
-	// Do something
-	// ...
+	//Thêm loại bài viết
+	if (message == 'them lbv thanh cong') {
+		swal({
+			title : "Thêm thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'ten loai da ton tai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
+			showConfirmButton : true
+		});
+	} else if (message == 'them lbv that bai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Thêm thất bại!",
+			showConfirmButton : true
+		});
+	}
+	//Sửa loại bài viết
+	if (message == 'them lbv thanh cong') {
+		swal({
+			title : "Thêm thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'ten loai da ton tai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
+			showConfirmButton : true
+		});
+	} else if (message == 'them lbv that bai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Thêm thất bại!",
+			showConfirmButton : true
+		});
+	}
+	
+	
+	//Thêm  tour
+	if (message == 'them tour thanh cong') {
+		swal({
+			title : "Thêm thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'ten tour da ton tai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
+			showConfirmButton : true
+		});
+	} else if (message == 'them tour that bai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Thêm thất bại!",
+			showConfirmButton : true
+		});
+	}
+		
+	
 	
 };
+

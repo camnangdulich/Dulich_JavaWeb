@@ -513,17 +513,18 @@ public class Huycontroller {
 			return "admin/tloaibv";
 		} else {
 			Session session = factory.openSession();
-			Loaitin lbv = new Loaitin(tenloaibv, mota);
+			String slugloaibv = SlugsConverter.toSlug(tenloaibv);
+			Loaitin lbv = new Loaitin(tenloaibv, mota, slugloaibv);
 			Transaction t = session.beginTransaction();
 			try {
 				session.save(lbv);
 				t.commit();
-				model.addAttribute("message", "them loai bai viet thanh cong");
+				model.addAttribute("message", "them lbv thanh cong");
 				model.addAttribute("title", "Thêm loại bài mới");
 				return "admin/tloaibv";
 			} catch (Exception e) {
 				t.rollback();
-				model.addAttribute("message", "them loai bai that bai");
+				model.addAttribute("message", "them lbv that bai");
 				model.addAttribute("title", "Thêm loại bài mới");
 			} finally {
 				session.close();
@@ -546,68 +547,66 @@ public class Huycontroller {
 			@RequestParam("ngaykhoihanh") String ngaykhoihanh, @RequestParam("lichtrinh") String lichtrinh,
 			@RequestParam("luuy") String luuy, @RequestParam("hinhanh") MultipartFile hinhtour) {
 
-		// DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		// try {
-		// Date khoihanhdate = (Date)formatter.parse(ngaykhoihanh);
-		Session session = factory.openSession();
-		Transaction t = session.beginTransaction();
-		String slugtour = SlugsConverter.toSlug(tentour);
-		Congty ct = (Congty) session.get(Congty.class, congty);
-		Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
-		// Tạo đường dẫn lưu hình ảnh
-		String photoPath = "";
-		if (hinhtour.getOriginalFilename().equals("")) {
-			photoPath = context.getRealPath("/files/tour/tour1.jpg");
+		if (kiemtratour(tentour)) {
+			model.addAttribute("message", "ten tour da ton tai");
+			model.addAttribute("title", "Thêm tour mới");
+			return "admin/themtour";
 		} else {
-			photoPath = context.getRealPath("/files/tour/" + hinhtour.getOriginalFilename());
-		}
-		// Lưu hình ảnh
-		try {
-			hinhtour.transferTo(new File(photoPath));
-		} catch (IllegalStateException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		if (hinhtour.getOriginalFilename().equals("")) {
-			Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, "tour1.jpg",
-					slugtour);
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			String slugtour = SlugsConverter.toSlug(tentour);
+			Congty ct = (Congty) session.get(Congty.class, congty);
+			Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
+			// Tạo đường dẫn lưu hình ảnh
+			String photoPath = "";
+			if (hinhtour.getOriginalFilename().equals("")) {
+				photoPath = context.getRealPath("/files/tour/tour1.jpg");
+			} else {
+				photoPath = context.getRealPath("/files/tour/" + hinhtour.getOriginalFilename());
+			}
+			// Lưu hình ảnh
 			try {
-				session.save(to);
-				t.commit();
-				model.addAttribute("message", "Thêm tour thành công!");
-				return "admin/themtour";
-			} catch (Exception e) {
-				t.rollback();
-				model.addAttribute("message", "Thêm tour thất bại!");
-			} finally {
-				session.close();
+				hinhtour.transferTo(new File(photoPath));
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
-		} else {
-			Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0,
-					hinhtour.getOriginalFilename(), slugtour);
-			try {
-				session.save(to);
-				t.commit();
-				model.addAttribute("message", "Thêm tour thành công!");
-				return "admin/themtour";
-			} catch (Exception e) {
-				t.rollback();
-				model.addAttribute("message", "Thêm tour thất bại!");
-			} finally {
-				session.close();
+			if (hinhtour.getOriginalFilename().equals("")) {
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, "tour1.jpg",
+						slugtour);
+				try {
+					session.save(to);
+					t.commit();
+					model.addAttribute("message", "them tour thanh cong");
+					return "admin/themtour";
+				} catch (Exception e) {
+					t.rollback();
+					model.addAttribute("message", "them tour that bai");
+				} finally {
+					session.close();
+				}
+
+			} else {
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0,
+						hinhtour.getOriginalFilename(), slugtour);
+				try {
+					session.save(to);
+					t.commit();
+					model.addAttribute("message", "them tour thanh cong");
+					return "admin/themtour";
+				} catch (Exception e) {
+					t.rollback();
+					model.addAttribute("message", "them tour that bai");
+				} finally {
+					session.close();
+				}
+
 			}
-
 		}
-
-		// } catch (ParseException e) {
-		// e.printStackTrace();
-		// }
-
 		return "admin/themtour";
 	}
 
@@ -1017,25 +1016,30 @@ public class Huycontroller {
 	@RequestMapping(value = "sloaibv", method = RequestMethod.POST)
 	public String sloaibv(ModelMap model, @RequestParam("idloaibv") Integer idloaibv,
 			@RequestParam("tenloai") String tenloaibv, @RequestParam("mota") String mota) {
-
-		Session session = factory.openSession();
-		Transaction t = session.beginTransaction();
-		Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaibv);
-		lt.setLoaitin(tenloaibv);
-		;
-		lt.setMota(mota);
-		try {
-			session.update(lt);
-			t.commit();
-			model.addAttribute("message", "Chỉnh sửa loại bài viết thành công !");
-			return "redirect:/admin/sloaibv/" + idloaibv + ".html";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Chỉnh sửa loại bài viết thất bại !" + e.getMessage());
-			System.out.println("Thất bại");
-			return "redirect:/admin/tintuc/" + idloaibv + ".html";
-		} finally {
-			session.close();
+		
+		if (kiemtraLBV(tenloaibv)) {
+			model.addAttribute("message", "ten loai da ton tai");
+			model.addAttribute("title", "Thêm loại bài viết mới");
+			return "admin/sloaibv";
+		} else {
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaibv);
+			lt.setLoaitin(tenloaibv);
+			lt.setMota(mota);
+			try {
+				session.update(lt);
+				t.commit();
+				model.addAttribute("message", "Chỉnh sửa loại bài viết thành công !");
+				return "redirect:/admin/sloaibv/" + idloaibv + ".html";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Chỉnh sửa loại bài viết thất bại !" + e.getMessage());
+				System.out.println("Thất bại");
+				return "redirect:/admin/tintuc/" + idloaibv + ".html";
+			} finally {
+				session.close();
+			}
 		}
 	}
 
@@ -1236,6 +1240,32 @@ public class Huycontroller {
 			List<Loaitin> lstloaibv = query.list();
 			t.commit();
 			if (lstloaibv.size() != 0) {
+				return kt;
+			} else {
+				return false;
+			}
+		} catch (Exception ex) {
+			if (!(t == null)) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return kt;
+	}
+	//Kiểm tra tên tour đã tồn tại
+	public boolean kiemtratour(String tour) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		boolean kt = true;
+		try {
+			String hql = "from Tour where tentour = :tourten";
+			Query query = session.createQuery(hql);
+			query.setParameter("tourten", tour);
+			@SuppressWarnings("unchecked")
+			List<Tour> lsttour = query.list();
+			t.commit();
+			if (lsttour.size() != 0) {
 				return kt;
 			} else {
 				return false;
