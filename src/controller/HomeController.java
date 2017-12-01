@@ -265,28 +265,19 @@ public class HomeController {
 
 		Session session = factory.getCurrentSession();
 		Taikhoan tk = null;
-		model.addAttribute("lockacc",1);
 		try {
 			String hql = "from Taikhoan where email = :emailtk";
 			Query query = session.createQuery(hql);
 			query.setParameter("emailtk", email);
 			tk = (Taikhoan) query.uniqueResult();
-			int i = lockacc;
-			System.out.println(i);
 			// Password encryption
 			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
 			String Matkhaumahoa = encryption.encoding(pwd);
 
 			if (!tk.getMatkhau().equals(Matkhaumahoa)) {
-				int j = i+1;
 				System.out.println("dang nhap that bai");
 				model.addAttribute("title", "Cẩm nang du lịch");
 				model.addAttribute("message", "dang nhap that bai");
-				model.addAttribute("lockacc",j);
-				System.out.println(j);
-				if(j >= 4){
-					System.out.println("Khoa tai khoan");
-				}
 				return "home/index";
 			} else if (tk.getTrangthai().getIdtrangthai() == 2) {
 				System.out.println("tai khoan chua kich hoat");
