@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 3:24:45 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Dec 1, 2017 6:59:07 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -30,6 +30,11 @@ public class Dichvu implements java.io.Serializable {
 	private Set<Chitietdichvu> chitietdichvus = new HashSet<Chitietdichvu>(0);
 
 	public Dichvu() {
+	}
+	
+	public Dichvu(String tendichvu, String mota) {
+		this.tendichvu = tendichvu;
+		this.mota = mota;
 	}
 	
 	public Dichvu(String tendichvu, String mota, String slug) {
@@ -88,7 +93,7 @@ public class Dichvu implements java.io.Serializable {
 		this.slug = slug;
 	}
 
-	@OneToMany( mappedBy = "dichvu")
+	@OneToMany(mappedBy = "dichvu")
 	public Set<Chitietdichvu> getChitietdichvus() {
 		return this.chitietdichvus;
 	}

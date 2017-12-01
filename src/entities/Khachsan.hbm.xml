@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 27, 2017 3:24:46 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<!-- Generated Dec 1, 2017 6:59:08 PM by Hibernate Tools 5.1.0.Alpha1 -->
 <hibernate-mapping>
     <class name="entities.Khachsan" table="khachsan" catalog="db_dulich" optimistic-lock="version">
         <id name="idkhachsan" type="java.lang.Integer">
@@ -34,6 +34,9 @@
         </property>
         <property name="slug" type="string">
             <column name="slug" length="45" unique="true" />
+        </property>
+        <property name="activekey" type="string">
+            <column name="activekey" length="250" />
         </property>
         <set name="chitietdichvus" table="chitietdichvu" inverse="true" lazy="true" fetch="select">
             <key>

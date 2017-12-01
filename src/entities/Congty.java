@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 3:24:45 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Dec 1, 2017 6:59:07 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -24,9 +24,9 @@ import javax.persistence.UniqueConstraint;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "congty", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "email"),
-		@UniqueConstraint(columnNames = "sodienthoai"), @UniqueConstraint(columnNames = "tencongty"),
-		@UniqueConstraint(columnNames = "idtaikhoan"), @UniqueConstraint(columnNames = "slug") })
+@Table(name = "congty", catalog = "db_dulich", uniqueConstraints = { @UniqueConstraint(columnNames = "sodienthoai"),
+		@UniqueConstraint(columnNames = "tencongty"), @UniqueConstraint(columnNames = "idtaikhoan"),
+		@UniqueConstraint(columnNames = "slug") })
 public class Congty implements java.io.Serializable {
 
 	private Integer idcongty;
@@ -34,7 +34,6 @@ public class Congty implements java.io.Serializable {
 	private String tencongty;
 	private String diachi;
 	private String mota;
-	private String email;
 	private String sodienthoai;
 	private Date ngaytao;
 	private String slug;
@@ -43,33 +42,40 @@ public class Congty implements java.io.Serializable {
 	public Congty() {
 	}
 	
-	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String email, String sodienthoai,
-			Date ngaytao, String slug) {
+	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String sodienthoai,
+			Date ngaytao) {
 		this.taikhoan = taikhoan;
 		this.tencongty = tencongty;
 		this.diachi = diachi;
 		this.mota = mota;
-		this.email = email;
+		this.sodienthoai = sodienthoai;
+		this.ngaytao = ngaytao;
+	}
+
+	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String sodienthoai) {
+		this.taikhoan = taikhoan;
+		this.tencongty = tencongty;
+		this.diachi = diachi;
+		this.sodienthoai = sodienthoai;
+	}
+	
+	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String sodienthoai, Date ngaytao,
+			String slug) {
+		this.taikhoan = taikhoan;
+		this.tencongty = tencongty;
+		this.diachi = diachi;
+		this.mota = mota;
 		this.sodienthoai = sodienthoai;
 		this.ngaytao = ngaytao;
 		this.slug = slug;
 	}
 
-	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String email, String sodienthoai) {
-		this.taikhoan = taikhoan;
-		this.tencongty = tencongty;
-		this.diachi = diachi;
-		this.email = email;
-		this.sodienthoai = sodienthoai;
-	}
-
-	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String email, String sodienthoai,
-			Date ngaytao, String slug, Set<Tour> tours) {
+	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String sodienthoai, Date ngaytao,
+			String slug, Set<Tour> tours) {
 		this.taikhoan = taikhoan;
 		this.tencongty = tencongty;
 		this.diachi = diachi;
 		this.mota = mota;
-		this.email = email;
 		this.sodienthoai = sodienthoai;
 		this.ngaytao = ngaytao;
 		this.slug = slug;
@@ -125,15 +131,6 @@ public class Congty implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	@Column(name = "email", unique = true, nullable = false, length = 100)
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	@Column(name = "sodienthoai", unique = true, nullable = false, length = 11)
 	public String getSodienthoai() {
 		return this.sodienthoai;
@@ -162,7 +159,7 @@ public class Congty implements java.io.Serializable {
 		this.slug = slug;
 	}
 
-	@OneToMany( mappedBy = "congty")
+	@OneToMany(mappedBy = "congty")
 	public Set<Tour> getTours() {
 		return this.tours;
 	}

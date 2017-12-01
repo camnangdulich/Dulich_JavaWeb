@@ -96,7 +96,6 @@ public class HuyHomeController {
  	 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
  	 			String slugdatphong = "Bạn đã đặt"+ loaiphong;
  	 			Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, loaiphong);
- 	 			Date ngaytao = new Date();
  	 			Datphong dp = new Datphong(lp, trang, ngaynhanDate, ngaytraDate, soluong, hodem, 
  	 					ten, sodienthoai, email, slugdatphong);
  	 			Transaction t = session.beginTransaction();
@@ -142,7 +141,7 @@ public class HuyHomeController {
  				Session session = factory.openSession();
  	 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
  	 			Tour tuor = (Tour) session.get(Tour.class, tentour);
- 	 			Dattour dt = new Dattour(tuor, hodem, ten, songuoi, sodienthoai, email, yeucau);
+ 	 			Dattour dt = new Dattour(tuor, trang, hodem, ten, songuoi, sodienthoai, email, yeucau);
  	 			Transaction t = session.beginTransaction();
  	 			try {
  	 				session.save(dt);

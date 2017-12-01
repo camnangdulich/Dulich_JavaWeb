@@ -629,10 +629,6 @@ public class HomeController {
 			System.out.println("Ban da co khach san ten : " +tenks+ "  Vui long cho xac minh");
 		}
 		
-		
-		
-		
-		
 		return "home/index";
 	}
 	
