@@ -705,8 +705,6 @@ public class Huycontroller {
 					try {
 						// Lưu Chitietdichvu vào session
 						session.save(ctdv);
-						t.commit();
-						model.addAttribute("message", "Thêm khách sạn thành công");
 					} catch (Exception e) {
 						// Hủy tất cả thay đổi thực thi truy vấn
 						t.rollback();
@@ -730,13 +728,12 @@ public class Huycontroller {
 					try {
 						// Lưu Chitietloaiphong vào session
 						session.save(ctloaip);
-						t.commit();
-						model.addAttribute("message", "Thêm khách sạn thành công");
 					} catch (Exception e) {
 						// Hủy tất cả thay đổi thực thi truy vấn
 						t.rollback();
 					}
 				}
+				t.commit();
 				return "admin/dskhachsan";
 
 			} catch (Exception e) {
@@ -796,7 +793,6 @@ public class Huycontroller {
 					try {
 						// Lưu Chitietdichvu vào session
 						session.save(ctdv);
-						t.commit();
 					} catch (Exception e) {
 						// Hủy tất cả thay đổi thực thi truy vấn
 						t.rollback();
@@ -820,12 +816,12 @@ public class Huycontroller {
 					try {
 						// Lưu Chitietloaiphong vào session
 						session.save(ctloaip);
-						t.commit();
 					} catch (Exception e) {
 						// Hủy tất cả thay đổi thực thi truy vấn
 						t.rollback();
 					}
 				}
+				t.commit();
 				return "admin/dskhachsan";
 
 			} catch (Exception e) {
