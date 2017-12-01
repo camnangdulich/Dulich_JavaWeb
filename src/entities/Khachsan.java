@@ -45,6 +45,19 @@ public class Khachsan implements java.io.Serializable {
 
 	public Khachsan() {
 	}
+	
+	public Khachsan(String tenkhachsan, String hinhanh, String sodienthoai, String diachi,Taikhoan taikhoan, Date ngaydang,
+			Tinhthanh tinhthanh, Trangthai trangthai, String slug) {
+		this.tenkhachsan = tenkhachsan;
+		this.hinhanh = hinhanh;
+		this.sodienthoai = sodienthoai;
+		this.diachi = diachi;
+		this.taikhoan = taikhoan;
+		this.ngaydang = ngaydang;
+		this.tinhthanh = tinhthanh;
+		this.trangthai = trangthai;
+		this.slug = slug;
+	}
 
 	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
 			String sodienthoai, String diachi, Date ngaydang) {

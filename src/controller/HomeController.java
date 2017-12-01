@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -57,9 +59,12 @@ import entities.Tinhthanh;
 import entities.Tintuc;
 import entities.Tour;
 import entities.Trangthai;
+import entities.Chitietdichvu;
+import entities.Chitietloaiphong;
 import model.EnDeCryption;
 import model.Mailer;
 import model.RandomString;
+import model.SlugsConverter;
 
 /**
  *
@@ -254,26 +259,34 @@ public class HomeController {
 
 	// Đăng nhập
 	@RequestMapping(value = "dangnhap", method = RequestMethod.POST)
-	public String dangnhap(ModelMap model, @RequestParam("login_email") String email,
+	public String dangnhap(ModelMap model, @RequestParam("login_email") String email, @RequestParam("lockacc") Integer lockacc,
 			@RequestParam("login_password") String pwd, HttpSession httpSession, HttpServletRequest request,
 			HttpServletResponse response) throws InvalidKeyException {
 
 		Session session = factory.getCurrentSession();
 		Taikhoan tk = null;
+		model.addAttribute("lockacc",1);
 		try {
 			String hql = "from Taikhoan where email = :emailtk";
 			Query query = session.createQuery(hql);
 			query.setParameter("emailtk", email);
 			tk = (Taikhoan) query.uniqueResult();
-
+			int i = lockacc;
+			System.out.println(i);
 			// Password encryption
 			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
 			String Matkhaumahoa = encryption.encoding(pwd);
 
 			if (!tk.getMatkhau().equals(Matkhaumahoa)) {
+				int j = i+1;
 				System.out.println("dang nhap that bai");
 				model.addAttribute("title", "Cẩm nang du lịch");
 				model.addAttribute("message", "dang nhap that bai");
+				model.addAttribute("lockacc",j);
+				System.out.println(j);
+				if(j >= 4){
+					System.out.println("Khoa tai khoan");
+				}
 				return "home/index";
 			} else if (tk.getTrangthai().getIdtrangthai() == 2) {
 				System.out.println("tai khoan chua kich hoat");
@@ -358,7 +371,7 @@ public class HomeController {
 		Loaitin loaitin = (Loaitin) querylt.uniqueResult();
 		Integer idlt = loaitin.getIdloaitin();
 		
-		int total = 0, pageSize = 10;
+		int total = 0, pageSize = 12;
 		String hql = "from Chitiettin where idloaitin = :idlt";
 		Query query = session.createQuery(hql);
 		query.setParameter("idlt", idlt);
@@ -519,6 +532,122 @@ public class HomeController {
 
 		return "home/tinhthanh_ds";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Tạo khách sạn mới
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "taokhachsan", method = RequestMethod.POST)
+	public String taokhachsan(ModelMap model,
+			@RequestParam("hinhanh") MultipartFile image,
+			@RequestParam("tenkhachsan") String tenkhachsan,
+			@RequestParam("sodienthoai") String sodienthoai,
+			@RequestParam("idtinhthanh") Integer idtinhthanh,
+			@RequestParam("diachi") String diachi,
+			@RequestParam("idtaikhoantao") Integer idtaikhoantao,
+			@RequestParam("lstdichvu") List lstdichvu,
+			@RequestParam("lstloaiphong") List lstloaiphong) {
+
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		
+		Khachsan ks = null;
+		String hql = "from Khachsan where idtaikhoan = :idtaikhoan";
+		Query query = session.createQuery(hql);
+		query.setParameter("idtaikhoan", idtaikhoantao);
+		ks = (Khachsan) query.uniqueResult();
+		
+		if(ks == null){
+			String photoPath = context.getRealPath("/files/khachsan/" + image.getOriginalFilename());
+			try {
+				image.transferTo(new File(photoPath));
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			Date ngaydang = new Date();
+			Taikhoan taikhoan = (Taikhoan) session.get(Taikhoan.class, idtaikhoantao);
+			Tinhthanh tinhthanh = (Tinhthanh) session.get(Tinhthanh.class, idtinhthanh);
+			Trangthai trangthai = (Trangthai) session.get(Trangthai.class, 2);
+			String slugkhachsan = SlugsConverter.toSlug(tenkhachsan);
+			
+			Khachsan khachsan = new Khachsan(tenkhachsan, image.getOriginalFilename(), sodienthoai, diachi, taikhoan, ngaydang, tinhthanh, trangthai, slugkhachsan);
+			
+			try {
+				session.save(khachsan);
+				int idkhachsan = khachsan.getIdkhachsan();
+				Khachsan khachsanmoitao = (Khachsan) session.get(Khachsan.class, idkhachsan);
+				
+				// Vòng lặp thêm dich vụ
+				for ( int x = 0; x < lstdichvu.size(); x++ ){
+					Object oj_iddichvu = lstdichvu.get(x);
+					int iddichvu = Integer.valueOf((String) oj_iddichvu);
+					Dichvu dv = (Dichvu) session.get(Dichvu.class, iddichvu);
+					Chitietdichvu ctdv = new Chitietdichvu(dv, khachsanmoitao);
+					try {
+						session.save(ctdv);
+					} catch (Exception e) {
+						t.rollback();
+					}
+				}
+				
+				// Vòng lặp thêm loại phòng
+				for ( int x = 0; x < lstloaiphong.size(); x++ ){
+					Object oj_idloaiphong = lstloaiphong.get(x);
+					int idloaiphong = Integer.valueOf((String) oj_idloaiphong);
+					Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idloaiphong);
+					Chitietloaiphong ctlp = new Chitietloaiphong(khachsanmoitao, lp);
+					try {
+						session.save(ctlp);
+					} catch (Exception e) {
+						t.rollback();
+					}
+				}
+				
+				t.commit();
+				System.out.println("Them thanh cong!");
+				return "home/index";
+			} catch (Exception e) {
+				t.rollback();
+				System.out.println("Them that bai!");
+			} finally {
+				session.close();
+			}
+		} else {
+			String tenks = ks.getTenkhachsan();
+			System.out.println("Ban da co khach san ten : " +tenks+ "  Vui long cho xac minh");
+		}
+		
+		
+		
+		
+		
+		return "home/index";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
