@@ -25,7 +25,7 @@
 
         <!-- Thông tin phòng -->
         <div class="col-lg-6">
-            <img class="img-fluid rounded" src="files/home/gioithieu.png" alt="" style="margin-top: 20px;">
+            <img class="img-fluid rounded" src="files/home/gioithieu.jpg" alt="" style="margin-top: 20px;">
         </div>
 
     </div>

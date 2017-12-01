@@ -1,5 +1,5 @@
 package entities;
-// Generated Nov 27, 2017 3:24:45 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Dec 1, 2017 6:59:07 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -41,7 +41,20 @@ public class Datphong implements java.io.Serializable {
 	}
 
 	public Datphong(Loaiphong loaiphong, Trangthai trangthai, Date ngaynhanphong, Date ngaytraphong, int soluongphong,
-			String hodem, String ten, String sodienthoai, String email, String slug) {
+			String hodem, String ten, String sodienthoai, String email) {
+		this.loaiphong = loaiphong;
+		this.trangthai = trangthai;
+		this.ngaynhanphong = ngaynhanphong;
+		this.ngaytraphong = ngaytraphong;
+		this.soluongphong = soluongphong;
+		this.hodem = hodem;
+		this.ten = ten;
+		this.sodienthoai = sodienthoai;
+		this.email = email;
+	}
+	
+	public Datphong(Loaiphong loaiphong, Trangthai trangthai, Date ngaynhanphong, Date ngaytraphong,
+			int soluongphong, String hodem, String ten, String sodienthoai, String email, String slug) {
 		this.loaiphong = loaiphong;
 		this.trangthai = trangthai;
 		this.ngaynhanphong = ngaynhanphong;

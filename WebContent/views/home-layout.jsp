@@ -35,6 +35,9 @@
 		<script src="lib/jquery.form.js"></script>
 		<script src="dist/jquery.validate.js"></script>
 		
+		 <!-- Alert check js-->
+	    <script src="js/alert-check.js" type="text/javascript"></script>
+		
 		<!-- Validation custom -->
 		<script src="js/validate_check.js"></script>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
@@ -259,6 +262,7 @@
 
                 <div class="container_log" style="padding-top: 0px;">
                 	<form action="home/dangnhap.html" method="post" id="login_form">
+                		<input name="lockacc" value="${lockacc}" hidden="">
 	                    <label class="label_log"><i class="fa fa-envelope"></i><b> Email</b></label>
 	                    <input type="email" placeholder="Nhập email của bạn" name="login_email" class="input_log" autofocus required>
 	
@@ -354,12 +358,13 @@
         
         <!-- Thêm khách sạn Popup -->
         <div id="taokhachsan_pp" class="modal">
-            <form class="modal-content animate" action="#" method="post" id="taokhachsan_form">
+            <form class="modal-content animate" action="home/taokhachsan.html" method="post" 
+            id="taokhachsan_form" enctype="multipart/form-data" style="width: 50%;">
                 <div class="container_log" style="padding-bottom: 0px;">
                     <h2 class="text-center">Tạo khách sạn của bạn</h2>
                     <hr>
                 </div>
-
+				<input name="idtaikhoantao" value="${loguser.idtaikhoan}" hidden="">
                 <div class="container_log" style="padding-top: 0px;">
                     <span>Chọn hình ảnh và dịch vụ khách sạn của bạn</span>
                     <br>
@@ -373,15 +378,28 @@
                     <c:forEach var="dv" items="${dichvulst}">
                     	<div class="form-check form-check-inline">
 						  	<label class="custom-control custom-checkbox form-check-label">
-						        <input name="dichvu" type="checkbox" class="custom-control-input" value="${dv.iddichvu}">
+						        <input name="lstdichvu" type="checkbox" class="custom-control-input" value="${dv.iddichvu}">
 							  	<span class="custom-control-indicator"></span>
 							  	<span class="custom-control-description">${dv.tendichvu}</span>
 							</label>
 						</div>
                     </c:forEach>
+                    <p style="margin-top: 15px;">Chọn các loại phòng của khách sạn 
+                    <a href="#" style="padding-left: 10px; font-size: smaller; font-style: italic;">( xem chi tiết loại phòng )</a></p>
+                    <hr>
+                    <c:forEach var="lp" items="${loaiphonglst}">
+                    	<div class="form-check form-check-inline">
+						  	<label class="custom-control custom-checkbox form-check-label">
+						        <input name="lstloaiphong" type="checkbox" class="custom-control-input" value="${lp.idloaiphong}">
+							  	<span class="custom-control-indicator"></span>
+							  	<span class="custom-control-description">${lp.tenloai}</span>
+							</label>
+						</div>
+                    </c:forEach>
+                    <hr>
                     <input type="text" placeholder="Nhập tên khách sạn của bạn" name="tenkhachsan" class="input_log" autofocus>
                     <input type="text" placeholder="Nhập số điện thoại liên hệ" name="sodienthoai" class="input_log">
-                    <select class="form-control" id="exampleSelect1">
+                    <select name="idtinhthanh" class="form-control" id="exampleSelect1">
 						<option selected="selected" disabled="disabled">-- Chọn tỉnh thành --</option>
 						<c:forEach var="tt" items="${lsttinhthanh}">
 							<option value="${tt.idtinhthanh}">${tt.tinhthanh}</option>
@@ -393,7 +411,7 @@
 
                 <div class="container_log" style="background-color:#f1f1f1">
                     <button type="button" onclick="closepp()" class="cancelbtn log"><i class="fa fa-times"></i> Hủy</button>
-                    <span class="psw">Camnangdulich sẽ xác minh khách sạn của bạn!</span>
+                    <span class="psw"><a href="home/gioi-thieu.html">Camnangdulich</a> sẽ xác minh khách sạn của bạn!</span>
                 </div>
             </form>
         </div>
@@ -403,7 +421,5 @@
         <script src="vendor/popper/popper.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <!-- End Bootstrap core JavaScript -->
-        <!-- Alert check js-->
-	    <script src="js/alert-check.js" type="text/javascript"></script>
     </body>
 </html>

@@ -444,14 +444,13 @@ public class Huycontroller {
 	@RequestMapping(value = "tcongty", method = RequestMethod.POST)
 	public String tcongty(ModelMap model, @RequestParam("taikhoan") Integer taikhoan,
 			@RequestParam("tencongty") String tencongty, @RequestParam("diachi") String diachi,
-			@RequestParam("mota") String mota, @RequestParam("email") String email,
-			@RequestParam("sodienthoai") String sodienthoai) {
+			@RequestParam("mota") String mota, @RequestParam("sodienthoai") String sodienthoai) {
 
 		Session session = factory.openSession();
 		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
 		Date ngaytao = new Date();
 		String slugcongty = SlugsConverter.toSlug(tencongty);
-		Congty c = new Congty(tk, tencongty, diachi, mota, email, sodienthoai, ngaytao, slugcongty);
+		Congty c = new Congty(tk, tencongty, diachi, mota, sodienthoai, ngaytao, slugcongty);
 		Transaction t = session.beginTransaction();
 		try {
 			session.save(c);
@@ -944,8 +943,7 @@ public class Huycontroller {
 	@RequestMapping(value = "suacongty", method = RequestMethod.POST)
 	public String suacongty(ModelMap model, @RequestParam("idcongty") Integer idcongty,
 			@RequestParam("taikhoan") Integer taikhoan, @RequestParam("tencongty") String tencongty,
-			@RequestParam("diachi") String diachi, @RequestParam("mota") String mota,
-			@RequestParam("email") String email, @RequestParam("sodienthoai") String sodienthoai) {
+			@RequestParam("diachi") String diachi, @RequestParam("mota") String mota, @RequestParam("sodienthoai") String sodienthoai) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		Congty ct = (Congty) session.get(Congty.class, idcongty);
@@ -954,7 +952,6 @@ public class Huycontroller {
 		ct.setTencongty(tencongty);
 		ct.setDiachi(diachi);
 		ct.setMota(mota);
-		ct.setEmail(email);
 		ct.setSodienthoai(sodienthoai);
 		try {
 			session.update(ct);
@@ -1122,7 +1119,7 @@ public class Huycontroller {
 		to.setMota(mota);
 		to.setGia(gia);
 		to.setDiemdi(diemdi);
-		to.setGiokhoihanh(ngaykhoihanh);
+		to.setThoigiankhoihanh(ngaykhoihanh);
 		to.setLichtrinh(lichtrinh);
 		to.setLuuy(luuy);
 		try {

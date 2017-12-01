@@ -100,15 +100,15 @@
 		                    <!-- Features Section -->
 						    <div class="row">
 						        <div class="col-lg-8">
-						            <h5>${ttm.tieude}</h5>
+						            <a href="home/tin-tuc/bai-viet/${ttm.slug}.html"><h5>${ttm.tieude}</h5></a>
 						            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: 
-						            <a href="#">${ttm.taikhoan.hodem} ${ttm.taikhoan.ten}</a>
+						            ${ttm.taikhoan.hodem} ${ttm.taikhoan.ten}
 						                - <i class="fa fa-fw fa-clock-o ft-lh"></i>${ttm.thoigian}</span>
 						            <p class="p-fx">${ttm.tomtat}</p>
 						            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">${ttm.luotxem} lượt xem</span>
 						        </div>
 						        <div class="col-lg-4 ih-item square effect7" style="padding: 0px;">
-						            <a href="#">
+						            <a href="home/tin-tuc/bai-viet/${ttm.slug}.html">
 										<div class="img">
 											<img class="img-fluid rounded" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
 										</div>
@@ -134,7 +134,7 @@
 	                    </c:forEach>
 					    <div class="row">
 					        <div class="col-md-12 text-center"> 
-					            <button class="btn btn-success">Xem thêm tin tức</button>
+					            <a href="home/tin-tuc/tin-moi.html"><button class="btn btn-success">Xem thêm tin tức</button></a>
 					        </div>
 					    </div>
 					    <!-- /.row -->
@@ -146,15 +146,15 @@
 		                    <!-- Features Section -->
 						    <div class="row">
 						        <div class="col-lg-8">
-						            <h5>${txn.tieude}</h5>
+						            <a href="home/tin-tuc/bai-viet/${txn.slug}.html"><h5>${txn.tieude}</h5></a>
 						            <i class="fa fa-fw fa-share-alt ft-lh"></i><span class="sp-ttm">Được chia sẻ bởi: 
-						            <a href="#">${txn.taikhoan.hodem} ${txn.taikhoan.ten}</a>
+						            ${txn.taikhoan.hodem} ${txn.taikhoan.ten}
 						                - <i class="fa fa-fw fa-clock-o ft-lh"></i>${txn.thoigian}</span>
 						            <p class="p-fx">${txn.tomtat}</p>
 						            <i class="fa fa-fw fa-eye ft-lh"></i><span class="sp-ttm">${txn.luotxem} lượt xem</span>
 						        </div>
 						        <div class="col-lg-4 ih-item square effect7" style="padding: 0px;">
-						            <a href="#">
+						            <a href="home/tin-tuc/bai-viet/${txn.slug}.html">
 										<div class="img">
 											<img class="img-fluid rounded" src="files/tintuc/${txn.hinhanh}" alt="${txn.hinhanh}">
 										</div>
