@@ -16,7 +16,7 @@ function alert_home_check(message) {
 // ----------------------------------------------------------------------------------------------------------
 
 function alert_admin_check(message) {
-
+//==================================Thêm=========================================
 	//Kiểm tra thêm quyền
 	if (message == 'them quyen thanh cong') {
 		swal({
@@ -64,29 +64,6 @@ function alert_admin_check(message) {
 			showConfirmButton : true
 		});
 	}
-	//Sửa loại bài viết
-	if (message == 'them lbv thanh cong') {
-		swal({
-			title : "Thêm thành công!",
-			type : "success",
-			timer : 1500,
-			showConfirmButton : false
-		});
-	} else if (message == 'ten loai da ton tai') {
-		swal({
-			title : "Thêm thất bại!",
-			type : "error",
-			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
-			showConfirmButton : true
-		});
-	} else if (message == 'them lbv that bai') {
-		swal({
-			title : "Thêm thất bại!",
-			type : "error",
-			text : "Thêm thất bại!",
-			showConfirmButton : true
-		});
-	}
 	
 	
 	//Thêm  tour
@@ -112,6 +89,53 @@ function alert_admin_check(message) {
 			showConfirmButton : true
 		});
 	}
+	//Thêm  tour
+	if (message == 'them dich vu thanh cong') {
+		swal({
+			title : "Thêm thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'dich vu da ton tai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
+			showConfirmButton : true
+		});
+	} else if (message == 'them dich vu that  bai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Thêm thất bại!",
+			showConfirmButton : true
+		});
+	}
+	//Thêm  công ty
+	if (message == 'them cong ty thanh cong') {
+		swal({
+			title : "Thêm thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'cong ty da ton tai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
+			showConfirmButton : true
+		});
+	} else if (message == 'them cong ty that bai') {
+		swal({
+			title : "Thêm thất bại!",
+			type : "error",
+			text : "Thêm thất bại!",
+			showConfirmButton : true
+		});
+	}
+		
 		
 	
 	

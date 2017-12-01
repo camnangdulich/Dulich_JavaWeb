@@ -172,5 +172,55 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	
+	
+	// ------------- Kiểm tra nhập sưa tour---------------------
+	// -------------------------------------------------------
+	$("#suatour").validate({
+		rules : {
+			tentour : 'required',
+			ngaykhoihanh : 'required',
+			lichtrinh : 'required',
+			gia : {
+				required : true,
+				digits : true
+			}
+		},
+		messages : {
+			tentour : 'Tên tour không được để trống',
+			ngaykhoihanh : 'Ngày khởi hành không được để trống',
+			lichtrinh : 'Vui lòng nhập lịch trình',
+			gia : {
+				required : 'Vui lòng nhập giá ',
+				digits : 'Giá phải là sô'
+			}
+		}
+	});
+	
+	// ------------- Kiểm tra nhập thêm công ty	---------------------
+	// -------------------------------------------------------
+	$("#themcongty").validate({
+		rules : {
+			tencongty : 'required',
+			diachi : 'required',
+			sodienthoai : {
+				required : true,
+				digits : true,
+				rangelength : [ 10, 11 ]
+			}
+		},
+		messages : {
+			tencongty : 'Vui long nhập tên công ty',
+			diachi : 'Vui lòng nhập địa chỉ',
+			sodienthoai : {
+				required : 'Vui lòng nhập số điện thoại ',
+				digits : 'Phải là số',
+				rangelength : "Số điện thoại phải gồm 10 hoặc 11 số"
+					
+			}
+		}
+	});
+	
 
 });

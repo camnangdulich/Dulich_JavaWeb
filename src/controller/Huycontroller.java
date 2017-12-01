@@ -446,6 +446,12 @@ public class Huycontroller {
 			@RequestParam("tencongty") String tencongty, @RequestParam("diachi") String diachi,
 			@RequestParam("mota") String mota, @RequestParam("sodienthoai") String sodienthoai) {
 
+		
+		if (kiemtracongty(tencongty)) {
+			model.addAttribute("message", "cong ty da ton tai");
+			model.addAttribute("title", "Thêm dịch vụ mới");
+			return "admin/tcongty";
+		} else {
 		Session session = factory.openSession();
 		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
 		Date ngaytao = new Date();
@@ -455,13 +461,14 @@ public class Huycontroller {
 		try {
 			session.save(c);
 			t.commit();
-			model.addAttribute("message", "Thêm công ty thành công!");
+			model.addAttribute("message", "them cong ty thanh cong");
 			return "admin/tcongty";
 		} catch (Exception e) {
 			t.rollback();
-			model.addAttribute("message", "Thêm công ty thất bại!");
+			model.addAttribute("message", "them cong ty that bai");
 		} finally {
 			session.close();
+		}
 		}
 		return "admin/tcongty";
 	}
@@ -478,20 +485,26 @@ public class Huycontroller {
 	public String tdichvu(ModelMap model, @RequestParam("tendichvu") String tendichvu,
 			@RequestParam("mota") String mota) {
 
-		Session session = factory.openSession();
-		String slugdichvu = SlugsConverter.toSlug(tendichvu);
-		Dichvu d = new Dichvu(tendichvu, mota, slugdichvu);
-		Transaction t = session.beginTransaction();
-		try {
-			session.save(d);
-			t.commit();
-			model.addAttribute("message", "Thêm dịch vụ thành công!");
+		if (kiemtradichvu(tendichvu)) {
+			model.addAttribute("message", "dich vu da ton tai");
+			model.addAttribute("title", "Thêm dịch vụ mới");
 			return "admin/tdichvu";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Thêm dịch vụ thất bại!");
-		} finally {
-			session.close();
+		} else {
+			Session session = factory.openSession();
+			String slugdichvu = SlugsConverter.toSlug(tendichvu);
+			Dichvu d = new Dichvu(tendichvu, mota, slugdichvu);
+			Transaction t = session.beginTransaction();
+			try {
+				session.save(d);
+				t.commit();
+				model.addAttribute("message", "them dich vu thanh cong");
+				return "admin/tdichvu";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "them dich vu that  bai");
+			} finally {
+				session.close();
+			}
 		}
 		return "admin/tdichvu";
 	}
@@ -1279,5 +1292,58 @@ public class Huycontroller {
 		}
 		return kt;
 	}
+	//Kiểm tra tên dịch vụ đã tồn tại
+	public boolean kiemtradichvu(String dichvu) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		boolean kt = true;
+		try {
+			String hql = "from Dichvu where tendichvu = :tendv";
+			Query query = session.createQuery(hql);
+			query.setParameter("tendv", dichvu);
+			@SuppressWarnings("unchecked")
+			List<Dichvu> lstdv = query.list();
+			t.commit();
+			if (lstdv.size() != 0) {
+				return kt;
+			} else {
+				return false;
+			}
+		} catch (Exception ex) {
+			if (!(t == null)) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return kt;
+	}
+	//Kiểm tra tên công ty đã tồn tại
+		public boolean kiemtracongty(String congty) {
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			boolean kt = true;
+			try {
+				String hql = "from Congty where tencongty = :tenct";
+				Query query = session.createQuery(hql);
+				query.setParameter("tenct", congty);
+				@SuppressWarnings("unchecked")
+				List<Congty> lstcongty = query.list();
+				t.commit();
+				if (lstcongty.size() != 0) {
+					return kt;
+				} else {
+					return false;
+				}
+			} catch (Exception ex) {
+				if (!(t == null)) {
+					t.rollback();
+				}
+			} finally {
+				session.close();
+			}
+			return kt;
+		}
+
 
 }

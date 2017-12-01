@@ -30,9 +30,9 @@
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Công ty</label>
-							<div class="col-sm-10" label-validation>
+							<div class="col-sm-10" id= "label-validation">
 								<select name="congty" class="form-control">
-									<option selected="selected" disabled
+									<option selected="selected" 
 										value="${tua.congty.idcongty}">
 										${tua.congty.tencongty}
 										<c:forEach var="ct" items="${ctlist}">
@@ -42,19 +42,18 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Điểm đi</label>
+							<label class="col-sm-2 col-form-label">Tên tour</label>
 							<div class="col-sm-10" id="label-validation">
-								<input name="diemdi" type="text" class="form-control"
-									value="${tua.diemdi }" placeholder="điểm đi">
+								<input name="tentour" type="text" class="form-control"
+									value="${tua.tentour}" placeholder="Tên tour">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Điểm đến</label>
-							<div class="col-sm-10" label-validation>
-								<select name="diemden" class="form-control">
-									<option selected="selected" disabled
-										value="${tua.tinhthanh.idtinhthanh}">
-										${tua.tinhthanh.tinhthanh}
+							<label class="col-sm-2 col-form-label">Điểm đi</label>
+							<div class="col-sm-10" id="label-validation">
+								<select name="diemdi" class="form-control">
+									<option selected="selected" >
+										${tua.diemdi}
 										<c:forEach var="tt" items="${ttlist}">
 											<option value="${tt.idtinhthanh}">${tt.tinhthanh}</option>
 										</c:forEach>
@@ -62,10 +61,16 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Tên tour</label>
-							<div class="col-sm-10" id="label-validation">
-								<input name="tentour" type="text" class="form-control"
-									value="${tua.tentour}" placeholder="Tên tour">
+							<label class="col-sm-2 col-form-label">Điểm đến</label>
+							<div class="col-sm-10" id= "label-validation">
+								<select name="diemden" class="form-control">
+									<option selected="selected" 
+										value="${tua.tinhthanh.idtinhthanh}">
+										${tua.tinhthanh.tinhthanh}
+										<c:forEach var="tt" items="${ttlist}">
+											<option value="${tt.idtinhthanh}">${tt.tinhthanh}</option>
+										</c:forEach>
+								</select>
 							</div>
 						</div>
 						<div class="form-group row">
