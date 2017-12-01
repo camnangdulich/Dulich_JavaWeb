@@ -1030,11 +1030,6 @@ public class Huycontroller {
 	public String sloaibv(ModelMap model, @RequestParam("idloaibv") Integer idloaibv,
 			@RequestParam("tenloai") String tenloaibv, @RequestParam("mota") String mota) {
 		
-		if (kiemtraLBV(tenloaibv)) {
-			model.addAttribute("message", "ten loai da ton tai");
-			model.addAttribute("title", "Thêm loại bài viết mới");
-			return "admin/sloaibv";
-		} else {
 			Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaibv);
@@ -1053,7 +1048,7 @@ public class Huycontroller {
 			} finally {
 				session.close();
 			}
-		}
+		
 	}
 
 	// Sửa thông tin tỉnh thành
@@ -1166,25 +1161,22 @@ public class Huycontroller {
 
 	}
 
-	// --------------------- CHECK Controller ---------------------------
-	// ------------------------------------------------------------------
-	// Tìm kiếm theo từ khóa
-	// @RequestMapping("timkiem")
-	// public String timkiem(ModelMap model,
-	// @RequestParam(value="q",defaultValue="") String q){
-	// Session session = factory.getCurrentSession();
-	// String hql = "select * from db_dulich.tinhthanh t, db_dulich.khachsan k,
-	// db_dulich.tour o " +
-	// "where t.idtinhthanh = k.idtinhthanh and t.idtinhthanh = o.diemden "+
-	// "and t.tinhthanh like '%=:key%' or k.tenkhachsan like '%=:key%' or
-	// o.tentour like '%=:key%'";
-	// Query query = session.createQuery(hql);
-	// query.setParameter("key", "thanh");
-	// @SuppressWarnings("unchecked")
-	// List<String> a =query.list();
-	// System.out.println("SEARCH :" +a);
-	// return null;
-	// }
+//	 --------------------- CHECK Controller ---------------------------
+//	 ------------------------------------------------------------------
+////	 Tìm kiếm theo từ khóa
+//	 @RequestMapping("timkiem")
+//	 public String timkiem(ModelMap model,
+//	 @RequestParam(value="q",defaultValue="") String q){
+//	 Session session = factory.getCurrentSession();
+//	 String hql = "select * from Tinhthanh where tinhthanh like '%=:key%'"; 
+//	 o.tentour like '%=:key%'";
+//	 Query query = session.createQuery(hql);
+//	 query.setParameter("key", "thanh");
+//	 @SuppressWarnings("unchecked")
+//	 List<String> a =query.list();
+//	 System.out.println("SEARCH :" +a);
+//	 return null;
+//	 }
 
 	// Kiểm tra email có tồn tại không
 	public boolean kiemtraEmail(String email) {

@@ -222,5 +222,30 @@ $(document).ready(function() {
 		}
 	});
 	
+	
+	// ------------- Kiểm tra nhập sửa công ty	---------------------
+	// -------------------------------------------------------
+	$("#scongty").validate({
+		rules : {
+			tencongty : 'required',
+			diachi : 'required',
+			sodienthoai : {
+				required : true,
+				digits : true,
+				rangelength : [ 10, 11 ]
+			}
+		},
+		messages : {
+			tencongty : 'Vui long nhập tên công ty',
+			diachi : 'Vui lòng nhập địa chỉ',
+			sodienthoai : {
+				required : 'Vui lòng nhập số điện thoại ',
+				digits : 'Phải là số',
+				rangelength : "Số điện thoại phải gồm 10 hoặc 11 số"
+					
+			}
+		}
+	});
+	
 
 });
