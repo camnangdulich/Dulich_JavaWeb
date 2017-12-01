@@ -10,7 +10,10 @@
         <li class="breadcrumb-item">
             <a href="admin/dieu-khien.html">Điều khiển</a>
         </li>
-        <li class="breadcrumb-item active">Sửa </li>
+        <li class="breadcrumb-item">
+        	<a href="admin/thong-tin-khach-san.html">Thông tin khách sạn</a>
+		</li>
+        <li class="breadcrumb-item active">Sửa dịch vụ</li>
     </ol>
     <div class="container">
 	    <div class="row">

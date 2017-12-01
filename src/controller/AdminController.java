@@ -206,20 +206,20 @@ public class AdminController {
 	}
 	
 	// Trang danh sách tài khoản
-	@RequestMapping("dstaikhoan")
+	@RequestMapping("danh-sach-tai-khoan")
 	public String taikhoands(ModelMap model) {
 		model.addAttribute("title", "Danh sách tài khoản");
 		return "admin/dstaikhoan";
 	}
 	
 	// Trang danh sách bài viết
-	@RequestMapping("dsbaiviet")
+	@RequestMapping("danh-sach-bai-viet")
 	public String dsbaiviet(ModelMap model) {
 		model.addAttribute("title", "Danh sách bài viết");
 		return "admin/dsbaiviet";
 	}
 	
-	// Trang chi tiết khách sạn
+	// Trang thông tin khách sạn
 	@RequestMapping("thong-tin-khach-san")
 	public String thongtinkhachsan(ModelMap model) {
 		model.addAttribute("title", "Thông tin khách sạn");
@@ -433,39 +433,104 @@ public class AdminController {
 
 	
 	
-	// Sửa thông tin bài viết
-	@RequestMapping("sbaiviet/{id}")
-	public String sbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
-		model.addAttribute("title", "Sửa bài viết");
-		Session session = factory.getCurrentSession();
-		Tintuc tt = (Tintuc) session.get(Tintuc.class, idbv);
-		model.addAttribute("baiviet", tt);
-		return "admin/sbaiviet";
+//	// Sửa thông tin bài viết
+//	@RequestMapping("sbaiviet/{id}")
+//	public String sbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
+//		model.addAttribute("title", "Sửa bài viết");
+//		Session session = factory.getCurrentSession();
+//		Tintuc tt = (Tintuc) session.get(Tintuc.class, idbv);
+//		model.addAttribute("baiviet", tt);
+//		return "admin/sbaiviet";
+//	}
+//	
+//	
+//	
+//	
+//	// Sửa thông tin loại của bài viết
+//	@RequestMapping("sbaiviet/lbaiviet/{id}")
+//	public String slbvcbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
+//		model.addAttribute("title", "Sửa loại bài viết");
+//		Session session = factory.getCurrentSession();
+//		String hql = "from Chitiettin where idtintuc = :idbv";
+//        Query query = session.createQuery(hql);
+//        query.setParameter("idbv", idbv);
+//        @SuppressWarnings("unchecked")
+//		List<Chitiettin> list = query.list();
+//        
+//        String hqllbv = "from Loaitin";
+//        Query querylbv = session.createQuery(hqllbv);
+//        @SuppressWarnings("unchecked")
+//		List<Loaitin> listlt = querylbv.list();
+//        
+//        model.addAttribute("loaitinbv", list);
+//        model.addAttribute("lbvlist", listlt);
+//		return "admin/slbvcbaiviet";
+//	}
+	
+	
+	
+	// Sửa thông tin dịch vụ của khách sạn
+	@RequestMapping("thong-tin-khach-san/sua-dich-vu")
+	public String suadichvukhachsan(ModelMap model) {
+		model.addAttribute("title", "Sửa dịch vụ khách sạn");
+		return "admin/sdvcttkhachsan";
 	}
+		
+//	@RequestMapping(value = "updatetk", method = RequestMethod.POST )
+//	public String staikhoan(ModelMap model,
+//			@RequestParam("idtk") Integer idtk,
+//			@RequestParam("quyen") Integer quyen,
+//			@RequestParam("email") String email,
+//			@RequestParam("matkhau") String matkhau,
+//			@RequestParam("sdt") String sdt,
+//			@RequestParam("hodem") String hodem,
+//			@RequestParam("ten") String ten,
+//			@RequestParam("diachi") String diachi,
+//			@RequestParam("avatar") MultipartFile image){
+//		
+//		Session session = factory.openSession();
+//		Transaction t = session.beginTransaction();
+//		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idtk);
+//		Quyen rl = (Quyen) session.get(Quyen.class, quyen);
+//		String photoPath = context.getRealPath("/files/" + image.getOriginalFilename());
+//		
+//		tk.setQuyen(rl);
+//		tk.setEmail(email);
+//		tk.setMatkhau(matkhau);
+//		tk.setSodienthoai(sdt);
+//		tk.setHodem(hodem);
+//		tk.setTen(ten);
+//		tk.setDiachi(diachi);
+//		
+//		try {
+//			if(image.getOriginalFilename().equals("")){
+//				session.update(tk);
+//				t.commit();
+//				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
+//				System.out.println("thanh cong khong them anh");
+//				return "redirect:/admin/staikhoan/"+idtk+".html";
+//			}else{
+//				image.transferTo(new File(photoPath));
+//				tk.setAvatar(image.getOriginalFilename());
+//				session.update(tk);
+//				t.commit();
+//				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
+//				System.out.println("thanh cong co them anh");
+//				return "redirect:/admin/staikhoan/"+idtk+".html";
+//			}
+//		} 
+//		catch (Exception e) {
+//			t.rollback();
+//			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
+//			System.out.println("that bai");
+//			return "redirect:/admin/tintuc/"+idtk+".html";
+//		}
+//		finally {
+//			session.close();
+//		}
+//	}
 	
 	
-	
-	
-	// Sửa thông tin loại của bài viết
-	@RequestMapping("sbaiviet/lbaiviet/{id}")
-	public String slbvcbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
-		model.addAttribute("title", "Sửa loại bài viết");
-		Session session = factory.getCurrentSession();
-		String hql = "from Chitiettin where idtintuc = :idbv";
-        Query query = session.createQuery(hql);
-        query.setParameter("idbv", idbv);
-        @SuppressWarnings("unchecked")
-		List<Chitiettin> list = query.list();
-        
-        String hqllbv = "from Loaitin";
-        Query querylbv = session.createQuery(hqllbv);
-        @SuppressWarnings("unchecked")
-		List<Loaitin> listlt = querylbv.list();
-        
-        model.addAttribute("loaitinbv", list);
-        model.addAttribute("lbvlist", listlt);
-		return "admin/slbvcbaiviet";
-	}
 	
 
 	

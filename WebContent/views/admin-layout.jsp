@@ -46,7 +46,7 @@
     	<c:when test="${loguser.quyen.idquyen == 1}">
     		<!-- Navigation-->
 	        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	            <a class="navbar-brand" href="admin/index.html">CamNangDuLich</a>
+	            <a class="navbar-brand" href="admin/index.html"><img src="files/home/logo.png"></a>
 	            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
 	                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                <span class="navbar-toggler-icon"></span>
@@ -769,7 +769,7 @@
     	<c:when test="${loguser.quyen.idquyen == 4}">
 	    	<!-- Navigation-->
 	        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	            <a class="navbar-brand" href="admin/index.html">CamNangDuLich</a>
+	            <a class="navbar-brand" href="admin/index.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
 	            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
 	                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                <span class="navbar-toggler-icon"></span>
