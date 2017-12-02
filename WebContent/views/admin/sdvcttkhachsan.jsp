@@ -71,10 +71,8 @@
 		                            		<tr>
 		                                   	 	<td>${a.dichvu.tendichvu}</td>
 			                                	<td>
-				                                	<a href="#" style="padding-right: 5px;">
-					                                	<i class="fa fa-pencil" title="Sửa quyền"></i> 
-					                                </a>
-					                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('1',2)">
+					                                <a style="color: red; cursor: pointer;" 
+					                                onclick="kiemtraxoactdv('${a.idchitietdichvu}')">
 					                                	<i class="fa fa-times" title="Xóa quyền"></i>
 					                                </a>
 												</td>

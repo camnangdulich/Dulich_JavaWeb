@@ -308,3 +308,30 @@ function kiemtraxoadatphong(iddatphong, Tenphongdat) {
 
 
 
+
+//===================KIỂM TRA XÓA CHI TIẾT DỊCH VỤ===============
+function kiemtraxoactdv(idchitietdv, tenctdichvu) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin chi tiết dịch vụ đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa chi tiết dịch vụ", "Các thông tin chi tiết dịch vụ sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xchitietdv/" + idchitietdv + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+
+
