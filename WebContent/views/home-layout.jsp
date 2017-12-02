@@ -35,9 +35,6 @@
 		<script src="lib/jquery.form.js"></script>
 		<script src="dist/jquery.validate.js"></script>
 		
-		 <!-- Alert check js-->
-	    <script src="js/alert-check.js" type="text/javascript"></script>
-		
 		<!-- Validation custom -->
 		<script src="js/validate_check.js"></script>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
@@ -419,6 +416,8 @@
         
         <script src="js/ontop.js" type="text/javascript"></script>
         <script src="js/openid-login.js" type="text/javascript"></script>
+        <!-- Alert check js-->
+	    <script src="js/alert-check.js" type="text/javascript"></script>
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/popper/popper.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
