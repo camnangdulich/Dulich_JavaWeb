@@ -1,5 +1,5 @@
 package entities;
-// Generated Dec 1, 2017 6:59:07 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Dec 2, 2017 7:44:26 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -42,19 +42,6 @@ public class Tour implements java.io.Serializable {
 
 	public Tour() {
 	}
-
-	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, int gia, String diemdi, String thoigiankhoihanh,
-			String lichtrinh, int luotxem, String hinhtour) {
-		this.congty = congty;
-		this.tinhthanh = tinhthanh;
-		this.tentour = tentour;
-		this.gia = gia;
-		this.diemdi = diemdi;
-		this.thoigiankhoihanh = thoigiankhoihanh;
-		this.lichtrinh = lichtrinh;
-		this.luotxem = luotxem;
-		this.hinhtour = hinhtour;
-	}
 	
 	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, String mota, int gia, String diemdi,
 			String thoigiankhoihanh, String lichtrinh, String luuy, int luotxem, String hinhtour, String slug) {
@@ -68,6 +55,19 @@ public class Tour implements java.io.Serializable {
 		this.lichtrinh = lichtrinh;
 		this.luuy = luuy;
 		this.slug = slug;
+		this.luotxem = luotxem;
+		this.hinhtour = hinhtour;
+	}
+
+	public Tour(Congty congty, Tinhthanh tinhthanh, String tentour, int gia, String diemdi, String thoigiankhoihanh,
+			String lichtrinh, int luotxem, String hinhtour) {
+		this.congty = congty;
+		this.tinhthanh = tinhthanh;
+		this.tentour = tentour;
+		this.gia = gia;
+		this.diemdi = diemdi;
+		this.thoigiankhoihanh = thoigiankhoihanh;
+		this.lichtrinh = lichtrinh;
 		this.luotxem = luotxem;
 		this.hinhtour = hinhtour;
 	}

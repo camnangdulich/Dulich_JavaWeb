@@ -1,5 +1,5 @@
 package entities;
-// Generated Dec 1, 2017 6:59:07 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Dec 2, 2017 7:44:26 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -34,17 +34,6 @@ public class Dattour implements java.io.Serializable {
 
 	public Dattour() {
 	}
-
-	public Dattour(Tour tour, Trangthai trangthai, String hodem, String ten, int songuoi, String dienthoai,
-			String email) {
-		this.tour = tour;
-		this.trangthai = trangthai;
-		this.hodem = hodem;
-		this.ten = ten;
-		this.songuoi = songuoi;
-		this.dienthoai = dienthoai;
-		this.email = email;
-	}
 	
 	public Dattour(Tour tour, Trangthai trangthai, String hodem, String ten, int songuoi,
 			String dienthoai, String email, String yeucau) {
@@ -56,6 +45,17 @@ public class Dattour implements java.io.Serializable {
 		this.dienthoai = dienthoai;
 		this.email = email;
 		this.yeucau = yeucau;
+	}
+
+	public Dattour(Tour tour, Trangthai trangthai, String hodem, String ten, int songuoi, String dienthoai,
+			String email) {
+		this.tour = tour;
+		this.trangthai = trangthai;
+		this.hodem = hodem;
+		this.ten = ten;
+		this.songuoi = songuoi;
+		this.dienthoai = dienthoai;
+		this.email = email;
 	}
 
 	public Dattour(Taikhoan taikhoan, Tour tour, Trangthai trangthai, String hodem, String ten, int songuoi,

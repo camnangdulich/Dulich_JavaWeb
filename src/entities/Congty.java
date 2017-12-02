@@ -1,5 +1,5 @@
 package entities;
-// Generated Dec 1, 2017 6:59:07 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Dec 2, 2017 7:44:26 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -42,6 +42,17 @@ public class Congty implements java.io.Serializable {
 	public Congty() {
 	}
 	
+	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String sodienthoai, Date ngaytao,
+			String slug) {
+		this.taikhoan = taikhoan;
+		this.tencongty = tencongty;
+		this.diachi = diachi;
+		this.mota = mota;
+		this.sodienthoai = sodienthoai;
+		this.ngaytao = ngaytao;
+		this.slug = slug;
+	}
+	
 	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String sodienthoai,
 			Date ngaytao) {
 		this.taikhoan = taikhoan;
@@ -57,17 +68,6 @@ public class Congty implements java.io.Serializable {
 		this.tencongty = tencongty;
 		this.diachi = diachi;
 		this.sodienthoai = sodienthoai;
-	}
-	
-	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String sodienthoai, Date ngaytao,
-			String slug) {
-		this.taikhoan = taikhoan;
-		this.tencongty = tencongty;
-		this.diachi = diachi;
-		this.mota = mota;
-		this.sodienthoai = sodienthoai;
-		this.ngaytao = ngaytao;
-		this.slug = slug;
 	}
 
 	public Congty(Taikhoan taikhoan, String tencongty, String diachi, String mota, String sodienthoai, Date ngaytao,

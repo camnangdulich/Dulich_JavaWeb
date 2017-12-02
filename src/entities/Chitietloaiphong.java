@@ -1,5 +1,5 @@
 package entities;
-// Generated Dec 1, 2017 6:59:07 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Dec 2, 2017 7:44:26 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 

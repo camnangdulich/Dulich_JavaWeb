@@ -1,5 +1,5 @@
 package entities;
-// Generated Dec 1, 2017 6:59:07 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated Dec 2, 2017 7:44:26 PM by Hibernate Tools 5.1.0.Alpha1
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -40,23 +40,12 @@ public class Khachsan implements java.io.Serializable {
 	private Date ngaydang;
 	private String slug;
 	private String activekey;
+	private Set<Datphong> datphongs = new HashSet<Datphong>(0);
 	private Set<Chitietdichvu> chitietdichvus = new HashSet<Chitietdichvu>(0);
 	private Set<Danhgia> danhgias = new HashSet<Danhgia>(0);
 	private Set<Chitietloaiphong> chitietloaiphongs = new HashSet<Chitietloaiphong>(0);
 
 	public Khachsan() {
-	}
-
-	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
-			String sodienthoai, String diachi, Date ngaydang) {
-		this.taikhoan = taikhoan;
-		this.tinhthanh = tinhthanh;
-		this.trangthai = trangthai;
-		this.tenkhachsan = tenkhachsan;
-		this.hinhanh = hinhanh;
-		this.sodienthoai = sodienthoai;
-		this.diachi = diachi;
-		this.ngaydang = ngaydang;
 	}
 	
 	public Khachsan(String tenkhachsan, String hinhanh, String sodienthoai, String diachi,Taikhoan taikhoan, Date ngaydang,
@@ -73,7 +62,19 @@ public class Khachsan implements java.io.Serializable {
 	}
 
 	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
-			String sodienthoai, String diachi, Date ngaydang, String slug, String activekey,
+			String sodienthoai, String diachi, Date ngaydang) {
+		this.taikhoan = taikhoan;
+		this.tinhthanh = tinhthanh;
+		this.trangthai = trangthai;
+		this.tenkhachsan = tenkhachsan;
+		this.hinhanh = hinhanh;
+		this.sodienthoai = sodienthoai;
+		this.diachi = diachi;
+		this.ngaydang = ngaydang;
+	}
+
+	public Khachsan(Taikhoan taikhoan, Tinhthanh tinhthanh, Trangthai trangthai, String tenkhachsan, String hinhanh,
+			String sodienthoai, String diachi, Date ngaydang, String slug, String activekey, Set<Datphong> datphongs,
 			Set<Chitietdichvu> chitietdichvus, Set<Danhgia> danhgias, Set<Chitietloaiphong> chitietloaiphongs) {
 		this.taikhoan = taikhoan;
 		this.tinhthanh = tinhthanh;
@@ -85,6 +86,7 @@ public class Khachsan implements java.io.Serializable {
 		this.ngaydang = ngaydang;
 		this.slug = slug;
 		this.activekey = activekey;
+		this.datphongs = datphongs;
 		this.chitietdichvus = chitietdichvus;
 		this.danhgias = danhgias;
 		this.chitietloaiphongs = chitietloaiphongs;
@@ -194,6 +196,15 @@ public class Khachsan implements java.io.Serializable {
 
 	public void setActivekey(String activekey) {
 		this.activekey = activekey;
+	}
+
+	@OneToMany(mappedBy = "khachsan")
+	public Set<Datphong> getDatphongs() {
+		return this.datphongs;
+	}
+
+	public void setDatphongs(Set<Datphong> datphongs) {
+		this.datphongs = datphongs;
 	}
 
 	@OneToMany(mappedBy = "khachsan")
