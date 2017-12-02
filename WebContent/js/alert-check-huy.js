@@ -89,7 +89,7 @@ function alert_admin_check(message) {
 			showConfirmButton : true
 		});
 	}
-	//Thêm  tour
+	//Thêm  dịch vụ
 	if (message == 'them dich vu thanh cong') {
 		swal({
 			title : "Thêm thành công!",
@@ -135,9 +135,41 @@ function alert_admin_check(message) {
 			showConfirmButton : true
 		});
 	}
-		
+	
+	
+	
 		
 	
 	
 };
+
+
+
+//================================DELETE=============================
+
+//Kiểm tra Xóa thông tin loại bài viết
+function kiemtraxoaloaibaiviet(idloaibaiviet, tenloaibaiviet) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin của loại bài viết " + tenloaibaiviet
+				+ " đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến loại bài viết " + tenloaibaiviet
+					+ " sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xloaibv/" + idloaibaiviet + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
 

@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import entities.Chitietdichvu;
 import entities.Chitietloaiphong;
+import entities.Chitiettin;
 import entities.Congty;
 import entities.Danhgia;
 import entities.Datphong;
@@ -198,6 +199,17 @@ public class Huycontroller {
 		Query query = session.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Huong> list = query.list();
+		return list;
+	}
+	
+	//	//Lấy tất cả thông tin chi tiết bài viết
+	@ModelAttribute("ctbvlist")
+	public List<Chitiettin> getctbv(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Chitiettin";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Chitiettin> list = query.list();
 		return list;
 	}
 
@@ -998,8 +1010,10 @@ public class Huycontroller {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		Dichvu d = (Dichvu) session.get(Dichvu.class, iddichvu);
+		String slugtdv = SlugsConverter.toSlug(tendichvu);
 		d.setTendichvu(tendichvu);
 		d.setMota(mota);
+		d.setSlug(slugtdv);
 		try {
 			session.update(d);
 			t.commit();
@@ -1337,5 +1351,61 @@ public class Huycontroller {
 			return kt;
 		}
 
+		
+		
+		
+		
+		//=============================DELETE=======================
+		
+		
+		
+		//Xóa loại bài viết
+		@RequestMapping("xloaibv/{id}")
+		public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			String hql = "from Chitiettin where idloaitin=:idlt";
+	        Query query = session.createQuery(hql);
+	        query.setParameter("idlt", idxoa);
+			@SuppressWarnings("unchecked")
+			List<Chitiettin> lstcct = query.list();
+			if(lstcct.size() == 0){
+				System.out.println("Xoa loai tin khong co chi tiet tin");
+				Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
+				try {
+					session.delete(lt);
+					t.commit();
+					System.out.println("Xoa loai tin khong co chi tiet tin (Thanh cong)");
+				} catch (Exception e) {
+					t.rollback();
+					System.out.println("Xoa loai tin khong co chi tiet tin (That bai)");
+				} finally {
+					session.close();
+				}
+			} else {
+					String hqlxctt = "delete Chitiettin where idloaitin= :idlt";
+					Query queryxcct = session.createQuery(hqlxctt);
+					System.out.println("idd"  + idxoa);
+					queryxcct.setParameter("idlt", idxoa);
+					for(int x = 0; x < lstcct.size(); x++){
+						session.delete(lstcct.get(x));
+						System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+					}
+					Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
+					try {
+						session.delete(lt);
+						t.commit();
+						System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+					} catch (Exception e) {
+						t.rollback();
+						System.out.println("Xoa loai tin co chi tiet tin (That bai)");
+					} finally {
+						session.close();
+					}
+					System.out.println("Xóa thành công");
+				
+			}
+			return "redirect:/admin/dsloaibv.html";
+		}
 
 }

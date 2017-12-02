@@ -688,7 +688,11 @@ public class AdminController {
 		return "redirect:/admin/dstaikhoan.html";
 	}
 	
+<<<<<<< HEAD
 	// Xóa loai bài viết(loaitin)
+=======
+	//Xóa loai bài viết(loaitin)
+>>>>>>> 05ff4cc9ecc94219640aa37871763cbd217ad376
 	@RequestMapping("xloaibv/{id}")
 	public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
 		Session session = factory.openSession();
@@ -734,7 +738,7 @@ public class AdminController {
 			System.out.println("Xóa thành công");
 		}
 //		try {
-//			session.delete(tk);
+//			session.delete(t);
 //			t.commit();
 //		} catch (Exception e) {
 //			t.rollback();

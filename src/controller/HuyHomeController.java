@@ -146,10 +146,12 @@ public class HuyHomeController {
  	 			try {
  	 				session.save(dt);
  	 				t.commit();
+ 	 				System.out.println("Đặt tour thành công!");
  	 				model.addAttribute("message", "Đặt tour thành công!");
  	 				return "home/tour";
  	 			} catch (Exception e) {
  	 				t.rollback();
+ 	 				System.out.println("Đặt tour false!");
  	 				model.addAttribute("message", "Đặt tour thất bại!");
  	 			} finally {
  	 				session.close();
@@ -183,6 +185,31 @@ public class HuyHomeController {
 //			}
 // 			return "home/timkiem";
 // 		}
+ 		
+ 		
+ 		
+////	 Tìm kiếm theo từ khóa
+ 		 public ArrayList<Khachsan> TimKiemKhachSan(String timkiem) {
+ 	        Session session = factory.openSession();
+ 	        Transaction tx = null;
+ 	        ArrayList<Khachsan> Listkhachsan = new ArrayList<>();
+ 	        try {
+ 	            tx = session.getTransaction();
+ 	            tx.begin();
+ 	            String strquery = "from Kháchan where tenkhachsan like '%"+timkiem+"%'";
+ 	            Query query = session.createQuery(strquery);
+ 	           Listkhachsan = (ArrayList<Khachsan>) query.list();
+ 	            tx.commit();
+ 	        } catch (Exception e) {
+ 	            if (tx != null) {
+ 	                tx.rollback();
+ 	            }
+ 	            System.out.println(e.toString());
+ 	        } finally {
+ 	            session.close();
+ 	        }
+ 	        return Listkhachsan;
+ 	    }
 
 }
 
