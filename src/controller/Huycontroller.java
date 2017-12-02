@@ -265,12 +265,6 @@ public class Huycontroller {
 		return "admin/dsdichvu";
 	}
 
-	// Trang danh sách đặt phòng
-	@RequestMapping("dsdatphong")
-	public String dsdatphong(ModelMap model) {
-		model.addAttribute("title", "Danh sách đặt phòng");
-		return "admin/dsdatphong";
-	}
 
 	// Trang danh sách đặt tour
 	@RequestMapping("dsdattour")
@@ -1466,7 +1460,7 @@ public class Huycontroller {
 		}
 		
 		
-		//Xóa đặt tour
+		//==========Xóa đặt tour====================
 		@RequestMapping("xdattour/{id}")
 		public String xdattour(ModelMap model, @PathVariable("id") int idxoa) {
 			Session session = factory.openSession();
@@ -1533,6 +1527,25 @@ public class Huycontroller {
 			}
 			return "redirect:/admin/dstour.html";
 		}
+		
+		
+		
+		//==========XÓA ĐẶT PHÒNG====================
+				@RequestMapping("xoadatphong/{id}")
+				public String xoadatphong(ModelMap model, @PathVariable("id") int idxoa) {
+					Session session = factory.openSession();
+					Datphong dp = (Datphong) session.get(Datphong.class, idxoa);
+					Transaction t = session.beginTransaction();
+					try {
+						session.delete(dp);
+						t.commit();
+					} catch (Exception e) {
+						t.rollback();
+					} finally {
+						session.close();
+					}
+					return "redirect:/admin/dsdatphong.html";
+				}
 		
 		
 		
