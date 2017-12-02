@@ -28,7 +28,7 @@
                             <th>Điểm đi</th>
                             <th>Điểm đến</th>
                             <th>Công ty</th>
-                            <th>Giờ khởi hành</th>
+                            <th>Thời gian</th>
                             <th>Lịch trình</th>
                             <th>Lưu ý</th>
                             <th style="width: 50px;"><i class="fa fa-cog"></i></th>
@@ -43,7 +43,7 @@
                             <th>Điểm đi</th>
                             <th>Điểm đến</th>
                             <th>Công ty</th>
-                            <th>Giờ khởi hành</th>
+                            <th>Thời gian</th>
                             <th>Lịch trình</th>
                             <th>Lưu ý</th>
                             <th></th>
@@ -59,15 +59,16 @@
                                 <td>${tu.diemdi}</td>
                                 <td>${tu.tinhthanh.tinhthanh}</td>
                                 <td>${tu.congty.tencongty}</td>
-                                <td>${tu.giokhoihanh}</td>
+                                <td>${tu.thoigiankhoihanh}</td>
                                 <td>${tu.lichtrinh}</td>
                                 <td>${tu.luuy}</td>
                                 <td>
                                 	<a href="#" style="padding-right: 5px;">
 	                                	<i class="fa fa-pencil" title="Sửa tỉnh thành"></i> 
 	                                </a>
-	                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('',2)">
-	                                	<i class="fa fa-times" title="Xóa xóa tỉnh thành"></i>
+	                                <a  style="color: red; cursor: pointer;" 
+	                                onclick="kiemtraxoat('${tu.idtour}','${tu.tentour }')">
+	                                	<i class="fa fa-times" title="Xóa Tour"></i>
 	                                </a>
 								</td>
                             </tr>

@@ -60,10 +60,11 @@
 									</td>
 									<td>
 										<a href="admin/staikhoan/${u.idtintuc}.html" style="padding-right: 5px;">
-											<i class="fa fa-pencil" title="Sửa tài khoản"></i>
+											<i class="fa fa-pencil" title="Sửa bài viết"></i>
 										</a>
-										<a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('${u.idtintuc}','${u.idtintuc}')">
-											<i class="fa fa-times" title="Xóa tài khoản"></i>
+										<a style="color: red; cursor: pointer;" 
+										onclick="kiemtraxoatintuc('${u.idtintuc}','${u.tieude}')">
+											<i class="fa fa-times" title="Xóa bài viết"></i>
 										</a>
 									</td>
 								</tr>

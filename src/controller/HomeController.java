@@ -91,10 +91,8 @@ public class HomeController {
 	@ModelAttribute("lsttinhthanh")
 	public List<Tinhthanh> lsttinhthanh(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int tthSize = 7;
 		String hql_tth = "from Tinhthanh";
 		Query query_tth = session.createQuery(hql_tth);
-		query_tth.setMaxResults(tthSize);
 		@SuppressWarnings("unchecked")
 		List<Tinhthanh> lsttinhthanh = query_tth.list();
 		return lsttinhthanh;
@@ -330,6 +328,8 @@ public class HomeController {
 	@RequestMapping("dangxuat")
 	public String dangxuat(HttpSession httpSession) {
 		httpSession.removeAttribute("loguser");
+		httpSession.removeAttribute("loguserks");
+		httpSession.removeAttribute("loguserct");
 		return "redirect:/home/trang-chu.html";
 	}
 

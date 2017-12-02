@@ -40,6 +40,7 @@ import entities.Loaitin;
 import entities.Quyen;
 import entities.Taikhoan;
 import entities.Tinhthanh;
+import entities.Tintuc;
 import entities.Tour;
 import entities.Trangthai;
 
@@ -187,7 +188,6 @@ public class Huycontroller {
 		Query query = session.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Dattour> list = query.list();
-		System.out.println(list);
 		return list;
 	}
 
@@ -1417,14 +1417,14 @@ public class Huycontroller {
 		
 		
 		
-		//=======Xóa dịch vụ========
+//		//=======Xóa dịch vụ========
 		
 		
 		@RequestMapping("xdichvu/{id}")
 		public String xdichvu(ModelMap model, @PathVariable("id") int idxoabv) {
 			Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
-			String hql = "from Dichvu where iddichvu=:iddv";
+			String hql = "from Chitietdichvu where iddichvu=:iddv";
 	        Query query = session.createQuery(hql);
 	        query.setParameter("iddv", idxoabv);
 			@SuppressWarnings("unchecked")
@@ -1482,5 +1482,60 @@ public class Huycontroller {
 			}
 			return "redirect:/admin/dsdattour.html";
 		}
+		
+		
+		
+		//==================Xóa Tour======================
+		@RequestMapping("xoatour/{id}")
+		public String xoatour(ModelMap model, @PathVariable("id") int idxoa) {
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			String hql = "from Dattour where idtour =:idtour";
+	        Query query = session.createQuery(hql);
+	        query.setParameter("idtour", idxoa);
+			@SuppressWarnings("unchecked")
+			List<Dattour> lstdt = query.list();
+			if(lstdt.size() == 0){
+				System.out.println("Xoa loai tin khong co chi tiet tin");
+				Tour tour = (Tour) session.get(Tour.class, idxoa);
+				try {
+					session.delete(tour);
+					t.commit();
+					System.out.println("Xoa loai tour khong co dat tour (Thanh cong)");
+				} catch (Exception e) {
+					t.rollback();
+					System.out.println("Xoa loai tour khong co dat tour (That bai)");
+				} finally {
+					session.close();
+				}
+			} else {
+					String hqldt = "delete Dattour where idtour =:idtour";
+					Query queryxcct = session.createQuery(hqldt);
+					System.out.println("idd"  + idxoa);
+					queryxcct.setParameter("idtour", idxoa);
+					for(int x = 0; x < lstdt.size(); x++){
+						session.delete(lstdt.get(x));
+						System.out.println("Xoa loai tour co dat tour (Thanh cong)");
+					}
+					Tour tour = (Tour) session.get(Tour.class, idxoa);
+					try {
+						session.delete(tour);
+						t.commit();
+						System.out.println("Xoa loai tour co dat tour (Thanh cong)");
+					} catch (Exception e) {
+						t.rollback();
+						System.out.println("Xoa loai tour co dat tour (That bai)");
+					} finally {
+						session.close();
+					}
+					System.out.println("Xóa thành công");
+				
+			}
+			return "redirect:/admin/dstour.html";
+		}
+		
+		
+		
+		
 
 }

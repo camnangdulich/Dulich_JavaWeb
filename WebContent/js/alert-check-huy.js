@@ -229,3 +229,57 @@ function kiemtraxoatour(idtour, tentour) {
 };
 
 
+
+//===================Kiểm tra xóa tour===============
+function kiemtraxoat(idloaitour, tenloaitour) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin của tour " + tenloaitour
+				+ " đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến tour " + tenloaitour
+					+ " sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xoatour/" + idloaitour + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+
+//===================Kiểm tra xóa Tin tức===============
+function kiemtraxoatintuc(idtintuc, tieudetintuc) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin của tour " + tieudetintuc
+				+ " đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến tour " + tieudetintuc
+					+ " sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xtintuc/" + idtintuc + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+

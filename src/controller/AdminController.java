@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import entities.Chitietdichvu;
 import entities.Chitietloaiphong;
 import entities.Chitiettin;
+import entities.Datphong;
 import entities.Dichvu;
 import entities.Khachsan;
 import entities.Loaiphong;
@@ -197,6 +198,16 @@ public class AdminController {
 		return list;
 	}
 	
+	// Lấy tất cả đơn đăt phòng
+	@ModelAttribute("dondatphonglst")
+	public List<Datphong> dondatphonglst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Datphong";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Datphong> list = query.list();
+		return list;
+	}
 	
 	
 	
@@ -237,7 +248,12 @@ public class AdminController {
 		return "admin/dstour";
 	}
 	
-	
+	// Trang danh sách đơn đặt phòng
+	@RequestMapping("danh-sach-don-dat-phong")
+	public String danhsachdondatphong(ModelMap model) {
+		model.addAttribute("title", "Danh sách đơn đặt phòng");
+		return "admin/dsdondatphong";
+	}
 	
 	
 	
@@ -255,7 +271,6 @@ public class AdminController {
 		model.addAttribute("title", "Thêm tài khoản mới");
 		return "admin/ttaikhoan";
 	}
-	
 	@RequestMapping(value = "ttaikhoan", method = RequestMethod.POST)
 	public String ttaikhoan(ModelMap model,
 			@RequestParam("quyen") Integer quyen,
@@ -311,7 +326,6 @@ public class AdminController {
 		model.addAttribute("title", "Thêm bài viết mới");
 		return "admin/tbaiviet";
 	}
-	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "tbaiviet", method = RequestMethod.POST)
 	public String tbaiviet(ModelMap model,
@@ -390,7 +404,6 @@ public class AdminController {
 		model.addAttribute("user", tk);
 		return "admin/staikhoan";
 	}
-	
 	@RequestMapping(value = "updatetk", method = RequestMethod.POST )
 	public String staikhoan(ModelMap model,
 			@RequestParam("idtk") Integer idtk,
@@ -459,30 +472,6 @@ public class AdminController {
 //		model.addAttribute("baiviet", tt);
 //		return "admin/sbaiviet";
 //	}
-//	
-//	
-//	
-//	
-//	// Sửa thông tin loại của bài viết
-//	@RequestMapping("sbaiviet/lbaiviet/{id}")
-//	public String slbvcbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
-//		model.addAttribute("title", "Sửa loại bài viết");
-//		Session session = factory.getCurrentSession();
-//		String hql = "from Chitiettin where idtintuc = :idbv";
-//        Query query = session.createQuery(hql);
-//        query.setParameter("idbv", idbv);
-//        @SuppressWarnings("unchecked")
-//		List<Chitiettin> list = query.list();
-//        
-//        String hqllbv = "from Loaitin";
-//        Query querylbv = session.createQuery(hqllbv);
-//        @SuppressWarnings("unchecked")
-//		List<Loaitin> listlt = querylbv.list();
-//        
-//        model.addAttribute("loaitinbv", list);
-//        model.addAttribute("lbvlist", listlt);
-//		return "admin/slbvcbaiviet";
-//	}
 	
 	
 	
@@ -494,7 +483,6 @@ public class AdminController {
 		model.addAttribute("title", "Thông tin khách sạn");
 		return "admin/ttkhachsan";
 	}
-	
 	// Sửa thông tin khách sạn
 	@RequestMapping(value = "thong-tin-khach-san", method = RequestMethod.POST )
 	public String suattks(ModelMap model, HttpSession httpSession, HttpServletRequest request,
@@ -546,26 +534,7 @@ public class AdminController {
 		}
 		return "admin/ttkhachsan";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// ------------------------------------------------------------------
 	
 	
 	
@@ -577,7 +546,6 @@ public class AdminController {
 		model.addAttribute("title", "Sửa dịch vụ khách sạn");
 		return "admin/sdvcttkhachsan";
 	}
-	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "thong-tin-khach-san/sua-dich-vu", method = RequestMethod.POST )
 	public String suadichvukhachsan(ModelMap model, HttpSession httpSession, HttpServletRequest request,
@@ -610,6 +578,7 @@ public class AdminController {
 		}
 		return "admin/sdvcttkhachsan";
 	}
+	// ------------------------------------------------------------------
 	
 	
 	
@@ -621,7 +590,6 @@ public class AdminController {
 		model.addAttribute("title", "Sửa loại phòng khách sạn");
 		return "admin/slpcttkhachsan";
 	}
-	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "thong-tin-khach-san/sua-loai-phong", method = RequestMethod.POST )
 	public String sualoaiphongkhachsan(ModelMap model, HttpSession httpSession, HttpServletRequest request,
@@ -654,6 +622,7 @@ public class AdminController {
 		}
 		return "admin/slpcttkhachsan";
 	}
+	// ------------------------------------------------------------------
 	
 	
 	
@@ -688,62 +657,59 @@ public class AdminController {
 		return "redirect:/admin/dstaikhoan.html";
 	}
 	
-//	// Xóa loai bài viết(loaitin)
-//	@RequestMapping("xloaibv/{id}")
-//	public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
-//		Session session = factory.openSession();
-//		Transaction t = session.beginTransaction();
-//		String hql = "from Chitiettin where idloaitin=:idlt";
-//        Query query = session.createQuery(hql);
-//        query.setParameter("idlt", idxoa);
-//		@SuppressWarnings("unchecked")
-//		List<Chitiettin> lstcct = query.list();
-//		if(lstcct.size() == 0){
-//			System.out.println("Xoa loai tin khong co chi tiet tin");
-//			Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
-//			try {
-//				session.delete(lt);
-//				t.commit();
-//				System.out.println("Xoa loai tin khong co chi tiet tin (Thanh cong)");
-//			} catch (Exception e) {
-//				t.rollback();
-//				System.out.println("Xoa loai tin khong co chi tiet tin (That bai)");
-//			} finally {
-//				session.close();
-//			}
-//		} else {
-//			String hqlxctt = "delete Chitiettin where idloaitin= :idlt";
-//			Query queryxcct = session.createQuery(hqlxctt);
-//			System.out.println("idd"  + idxoa);
-//			queryxcct.setParameter("idlt", idxoa);
-//			for(int x = 0; x < lstcct.size(); x++){
-//				session.delete(lstcct.get(x));
-//				System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
-//			}
-//			Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
-//			try {
-//				session.delete(lt);
-//				t.commit();
-//				System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
-//			} catch (Exception e) {
-//				t.rollback();
-//				System.out.println("Xoa loai tin co chi tiet tin (That bai)");
-//			} finally {
-//				session.close();
-//			}
-//			System.out.println("Xóa thành công");
-//		}
-////		try {
-////			session.delete(t);
-////			t.commit();
-////		} catch (Exception e) {
-////			t.rollback();
-////		} finally {
-////			session.close();
-////		}
-//		return "redirect:/admin/dsloaibv.html";
-//	}
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+>>>>>>> c15bc83c674599f70ba03d31ae7429032b6dcdfe
+	
+=======
+>>>>>>> c15bc83c674599f70ba03d31ae7429032b6dcdfe
+	
+	//==================XÓA TIN TỨC=================
+	
+	@RequestMapping("xtintuc/{id}")
+	public String xtintuc(ModelMap model, @PathVariable("id") int idxoa) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		String hql = "from Chitiettin where idtintuc =:idtt";
+        Query query = session.createQuery(hql);
+        query.setParameter("idtt", idxoa);
+		@SuppressWarnings("unchecked")
+		List<Chitiettin> lstctt = query.list();
+		if(lstctt.size() == 0){
+			Tintuc tt = (Tintuc) session.get(Tintuc.class, idxoa);
+			try {
+				session.delete(tt);
+				t.commit();
+			} catch (Exception e) {
+				t.rollback();
+			} finally {
+				session.close();
+			}
+		} else {
+				String hqltt = "delete Chitiettin where idtintuc =:idtt";
+				Query queryxcct = session.createQuery(hqltt);
+				queryxcct.setParameter("idtt", idxoa);
+				for(int x = 0; x < lstctt.size(); x++){
+					session.delete(lstctt.get(x));
+				}
+				Tintuc tt = (Tintuc) session.get(Tintuc.class, idxoa);
+				try {
+					session.delete(tt);
+					t.commit();
+				} catch (Exception e) {
+					t.rollback();
+				} finally {
+					session.close();
+				}
+			
+		}
+		return "redirect:/admin/danh-sach-bai-viet.html";
+	}	
+=======
+>>>>>>> c15bc83c674599f70ba03d31ae7429032b6dcdfe
 	
 	
 	
@@ -782,9 +748,6 @@ public class AdminController {
         }
         return kt;
     }
-	
-	
-	
 	
 	// Kiểm tra quyền có tồn tại không
 	public boolean kiemtraQuyen(String tenquyen) {
@@ -857,7 +820,6 @@ public class AdminController {
 		model.addAttribute("title", "Slug tool");
 		return "admin/slugtool";
 	}
-	
 	@RequestMapping(value = "slugtool", method = RequestMethod.POST)
 	public String slugtool(ModelMap model, @RequestParam("tukhoa") String tukhoa) {
 

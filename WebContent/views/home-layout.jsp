@@ -35,9 +35,6 @@
 		<script src="lib/jquery.form.js"></script>
 		<script src="dist/jquery.validate.js"></script>
 		
-		 <!-- Alert check js-->
-	    <script src="js/alert-check.js" type="text/javascript"></script>
-		
 		<!-- Validation custom -->
 		<script src="js/validate_check.js"></script>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
@@ -52,7 +49,7 @@
             <div class="container">
                 <a class="navbar-brand" href="home/trang-chu.html"><img style="width: 130px;" src="files/home/logo.png"></a>
                 <select class="sl_tinhthanh" onchange="location = this.value;">
-                	<option value="" disabled selected hidden>Chọn tỉnh thành...</option>
+                	<option value="" disabled selected hidden="">Chọn tỉnh thành...</option>
                 	<c:forEach var="tth" items="${tinhthanhlst}">
                 		<option value="home/tinh-thanh/${tth.slug}.html">${tth.tinhthanh}</option>
                 	</c:forEach>
@@ -148,7 +145,7 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="#">Quản lý tour du lịch</a>
+		                                <a class="dropdown-item" href="admin/dieu-khien.html">Quản lý tour du lịch</a>
 		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
@@ -419,6 +416,8 @@
         
         <script src="js/ontop.js" type="text/javascript"></script>
         <script src="js/openid-login.js" type="text/javascript"></script>
+        <!-- Alert check js-->
+	    <script src="js/alert-check.js" type="text/javascript"></script>
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/popper/popper.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
