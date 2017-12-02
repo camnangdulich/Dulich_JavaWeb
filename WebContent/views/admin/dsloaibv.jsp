@@ -45,8 +45,9 @@
                                 	<a href="#" style="padding-right: 5px;">
 	                                	<i class="fa fa-pencil" title="Sửa loại bài viết"></i> 
 	                                </a>
-	                                <a id="xloaibv" style="color: red; cursor: pointer;" onclick="kiemtraxoaloaibv'${lbv.idloaitin},${lbv.loaitin })">
-	                                	<i class="fa fa-times" title="Xóa loại bài viết"></i>
+	                               <a style="color: red; cursor: pointer;" 
+	                               onclick="kiemtraxoaloaibaiviet('${lbv.idloaitin}', '${lbv.loaitin}')">
+	                                	<i class="fa fa-times" title="Xóa tài khoản"></i>
 	                                </a>
 								</td>
                             </tr>

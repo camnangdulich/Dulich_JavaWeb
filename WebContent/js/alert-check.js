@@ -195,6 +195,7 @@ function kiemtraxoataikhoan(idtaikhoan, email) {
 		}
 	});
 };
+
 ////Kiểm tra Xóa thông tin loại bài viết
 //function kiemtraxoaloaibv(idloaitin, loaitin) {
 //	swal({
@@ -219,6 +220,7 @@ function kiemtraxoataikhoan(idtaikhoan, email) {
 //		}
 //	});
 //};
+
 // Kiểm tra Xóa thông tin khách sạn
 function kiemtraxoakhachsan() {
 	swal({

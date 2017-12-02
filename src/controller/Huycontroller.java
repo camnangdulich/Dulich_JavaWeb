@@ -1405,14 +1405,6 @@ public class Huycontroller {
 					System.out.println("Xóa thành công");
 				
 			}
-//			try {
-//				session.delete(t);
-//				t.commit();
-//			} catch (Exception e) {
-//				t.rollback();
-//			} finally {
-//				session.close();
-//			}
 			return "redirect:/admin/dsloaibv.html";
 		}
 

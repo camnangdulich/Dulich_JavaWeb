@@ -563,62 +563,62 @@ public class AdminController {
 		return "redirect:/admin/dstaikhoan.html";
 	}
 	
-//	//Xóa loai bài viết(loaitin)
-//	@RequestMapping("xloaibv/{id}")
-//	public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
-//		Session session = factory.openSession();
-//		Transaction t = session.beginTransaction();
-//		String hql = "from Chitiettin where idloaitin=:idlt";
-//        Query query = session.createQuery(hql);
-//        query.setParameter("idlt", idxoa);
-//		@SuppressWarnings("unchecked")
-//		List<Chitiettin> lstcct = query.list();
-//		if(lstcct.size() == 0){
-//			System.out.println("Xoa loai tin khong co chi tiet tin");
-//			Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
-//			try {
-//				session.delete(lt);
-//				t.commit();
-//				System.out.println("Xoa loai tin khong co chi tiet tin (Thanh cong)");
-//			} catch (Exception e) {
-//				t.rollback();
-//				System.out.println("Xoa loai tin khong co chi tiet tin (That bai)");
-//			} finally {
-//				session.close();
-//			}
-//		} else {
-//				String hqlxctt = "delete Chitiettin where idloaitin= :idlt";
-//				Query queryxcct = session.createQuery(hqlxctt);
-//				System.out.println("idd"  + idxoa);
-//				queryxcct.setParameter("idlt", idxoa);
-//				for(int x = 0; x < lstcct.size(); x++){
-//					session.delete(lstcct.get(x));
-//					System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
-//				}
-//				Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
-//				try {
-//					session.delete(lt);
-//					t.commit();
-//					System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
-//				} catch (Exception e) {
-//					t.rollback();
-//					System.out.println("Xoa loai tin co chi tiet tin (That bai)");
-//				} finally {
-//					session.close();
-//				}
-//				System.out.println("Xóa thành công");
-//			
+	//Xóa loai bài viết(loaitin)
+	@RequestMapping("xloaibv/{id}")
+	public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		String hql = "from Chitiettin where idloaitin=:idlt";
+        Query query = session.createQuery(hql);
+        query.setParameter("idlt", idxoa);
+		@SuppressWarnings("unchecked")
+		List<Chitiettin> lstcct = query.list();
+		if(lstcct.size() == 0){
+			System.out.println("Xoa loai tin khong co chi tiet tin");
+			Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
+			try {
+				session.delete(lt);
+				t.commit();
+				System.out.println("Xoa loai tin khong co chi tiet tin (Thanh cong)");
+			} catch (Exception e) {
+				t.rollback();
+				System.out.println("Xoa loai tin khong co chi tiet tin (That bai)");
+			} finally {
+				session.close();
+			}
+		} else {
+				String hqlxctt = "delete Chitiettin where idloaitin= :idlt";
+				Query queryxcct = session.createQuery(hqlxctt);
+				System.out.println("idd"  + idxoa);
+				queryxcct.setParameter("idlt", idxoa);
+				for(int x = 0; x < lstcct.size(); x++){
+					session.delete(lstcct.get(x));
+					System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+				}
+				Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
+				try {
+					session.delete(lt);
+					t.commit();
+					System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+				} catch (Exception e) {
+					t.rollback();
+					System.out.println("Xoa loai tin co chi tiet tin (That bai)");
+				} finally {
+					session.close();
+				}
+				System.out.println("Xóa thành công");
+			
+		}
+//		try {
+//			session.delete(t);
+//			t.commit();
+//		} catch (Exception e) {
+//			t.rollback();
+//		} finally {
+//			session.close();
 //		}
-////		try {
-////			session.delete(t);
-////			t.commit();
-////		} catch (Exception e) {
-////			t.rollback();
-////		} finally {
-////			session.close();
-////		}
-//		return "redirect:/admin/dsloaibv.html";
-//	}
+		return "redirect:/admin/dsloaibv.html";
+	}
 	
 	
 	
