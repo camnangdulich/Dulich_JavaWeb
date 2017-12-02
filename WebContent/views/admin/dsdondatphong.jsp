@@ -68,8 +68,9 @@
 									    </c:otherwise>
 									</c:choose>
 	                                <td>
-		                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('?',?)">
-		                                	<i class="fa fa-times" title="Xóa quyền"></i>
+		                                <a  style="color: red; cursor: pointer;" 
+		                                onclick="kiemtraxoadatphong('${dp.iddatphong}','${dp.ten}')">
+		                                	<i class="fa fa-times" title="Xóa đơn dặt phòng"></i>
 		                                </a>
 									</td>
                             	</c:if>
