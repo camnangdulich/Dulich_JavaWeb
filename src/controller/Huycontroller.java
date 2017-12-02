@@ -212,6 +212,16 @@ public class Huycontroller {
 		List<Chitiettin> list = query.list();
 		return list;
 	}
+//	//Lấy tất cả thông tin đánh giá
+	@ModelAttribute("dglist")
+	public List<Danhgia> getdg(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Danhgia";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Danhgia> list = query.list();
+		return list;
+	}
 
 	// --------------------- PAGE Controller ----------------------------
 	// ------------------------------------------------------------------
@@ -272,6 +282,22 @@ public class Huycontroller {
 		model.addAttribute("title", "Danh sách đặt phòng");
 		return "admin/dsdattour";
 	}
+	// Trang danh sách đánh giá
+		@RequestMapping("dsdanhgia")
+		public String dsdanhgia(ModelMap model) {
+			model.addAttribute("title", "Danh sách đặt phòng");
+			return "admin/dsdanhgia";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	//===========================THÊM====================
+	//=================================================
 
 	// Thêm quyền mới
 	@RequestMapping("tquyen")
@@ -1564,6 +1590,42 @@ public class Huycontroller {
 		}
 		return "redirect:/admin/thong-tin-khach-san/sua-dich-vu.html";
 	}
+	
+	//===================Xóa chi tiết dịch vụ ==================
+	@RequestMapping("xchitietlp/{id}")
+	public String xchitietlp(ModelMap model, @PathVariable("id") int idxoa) {
+		Session session = factory.openSession();
+		Chitietloaiphong ctlp = (Chitietloaiphong) session.get(Chitietloaiphong.class, idxoa);
+		Transaction t = session.beginTransaction();
+		try {
+			session.delete(ctlp);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return "redirect:/admin/thong-tin-khach-san/sua-loai-phong.html";
+	}
+	
+	//===================Xóa đánh giá ==================
+	@RequestMapping("xoadanhgia/{id}")
+	public String xoadanhgia(ModelMap model, @PathVariable("id") int idxoa) {
+		Session session = factory.openSession();
+		Danhgia dg = (Danhgia) session.get(Danhgia.class, idxoa);
+		Transaction t = session.beginTransaction();
+		try {
+			session.delete(dg);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return "redirect:/admin/dsdanhgia.html";
+	}
+		
+		
 		
 		
 		

@@ -71,11 +71,9 @@
 		                            		<tr>
 		                                   	 	<td>${a.loaiphong.tenloai}</td>
 			                                	<td>
-				                                	<a href="#" style="padding-right: 5px;">
-					                                	<i class="fa fa-pencil" title="Sửa quyền"></i> 
-					                                </a>
-					                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('1',2)">
-					                                	<i class="fa fa-times" title="Xóa quyền"></i>
+					                                <a style="color: red; cursor: pointer;" 
+					                                onclick="kiemtraxoalp('${a.idchitietloaiphong}')">
+					                                	<i class="fa fa-times" title="Xóa chi tiet loại phòng"></i>
 					                                </a>
 												</td>
 		                            		</tr>

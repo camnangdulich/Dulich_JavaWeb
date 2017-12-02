@@ -333,5 +333,54 @@ function kiemtraxoactdv(idchitietdv, tenctdichvu) {
 };
 
 
+//===================KIỂM TRA XÓA CHI TIẾT LOẠI PHÒNG===============
+function kiemtraxoalp(idchitietlp) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin chi tiết loại phòng đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa chi tiết loại phòng", "Các thông tin chi tiết loại phòng sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xchitietlp/" + idchitietlp + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+//===================KIỂM TRA XÓA CHI TIẾT LOẠI PHÒNG===============
+function kiemtraxoadanhgia(iddanhgia, tenkhachsan) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả dánh giá về khách sạn "+tenkhachsan+" đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa đánh giá", "Các thông tin đánh giá khách sạn "+tenkhachsan+" sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xoadanhgia/" + iddanhgia + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+
 
 
