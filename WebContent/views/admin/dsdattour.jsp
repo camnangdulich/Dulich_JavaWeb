@@ -50,12 +50,18 @@
                     <tbody>
                         <c:forEach var="dt" items="${datlist}">
                             <tr>
-                                <td>${dt.iddattour}</td>
+                                <td>${dt.taikhoan.email}</td>
+                                <td>${dt.hodem}</td>
+                                <td>${dt.ten}</td>
+                                <td>${dt.songuoi}</td>
+                                <td>${dt.dienthoai}</td>
+                                <td>${dt.email}</td>
+                                <td>${dt.yeucau}</td>
+                                <td>${dt.tour.tentour}</td>
+                                <td>${dt.trangthai.trangthai}</td>
                                 <td>
-                                	<a href="#" style="padding-right: 5px;">
-	                                	<i class="fa fa-pencil" title="Sửa đặt phòng"></i> 
-	                                </a>
-	                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('${u.email}',2)">
+	                                <a style="color: red; cursor: pointer;" 
+	                                onclick="kiemtraxoatour('${dt.iddattour}','${dt.email }')">
 	                                	<i class="fa fa-times" title="Xóa đặt phòng"></i>
 	                                </a>
 								</td>

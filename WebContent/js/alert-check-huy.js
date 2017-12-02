@@ -178,10 +178,10 @@ function kiemtraxoaloaibaiviet(idloaibaiviet, tenloaibaiviet) {
 
 
 //Kiểm tra Xóa thông tin dịch vụ
-function kiemtraxoadichvu(iddichvu, tendichvu) {
+function kiemtraxoadichvu(idloaidichvu, tenloaidichvu) {
 	swal({
 		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin của dịch vụ " + tendichvu
+		text : "Nếu bạn xóa, tất cả thông tin của dịch vụ " + tenloaidichvu
 				+ " đều sẽ bị xóa hết!",
 		type : "warning",
 		showCancelButton : true,
@@ -193,10 +193,36 @@ function kiemtraxoadichvu(iddichvu, tendichvu) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến loại bài viết " + tendichvu
+			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến loại bài viết " + tenloaidichvu
 					+ " sẽ bị xóa...", "success");
 			setTimeout(function() {
-				window.location = "admin/xoadichvu/" + iddichvu + ".html"; // Sửa đường dẫn xóa
+				window.location = "admin/xdichvu/" + idloaidichvu + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+//Kiểm tra Xóa thông tin tour
+function kiemtraxoatour(idtour, tentour) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin của tour " + tentour
+				+ " đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến tour " + tentour
+					+ " sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xdattour/" + idtour + ".html"; // Sửa đường dẫn xóa
 			}, 1500);
 		}
 	});

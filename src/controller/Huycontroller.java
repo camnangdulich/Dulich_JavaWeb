@@ -1417,20 +1417,22 @@ public class Huycontroller {
 		
 		
 		
-		//=======Xóa loại bài viết========
-		@RequestMapping("xoadichvu/{id}")
-		public String xoadichvu(ModelMap model, @PathVariable("id") int idxoa) {
+		//=======Xóa dịch vụ========
+		
+		
+		@RequestMapping("xdichvu/{id}")
+		public String xdichvu(ModelMap model, @PathVariable("id") int idxoabv) {
 			Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			String hql = "from Dichvu where iddichvu=:iddv";
 	        Query query = session.createQuery(hql);
-	        query.setParameter("iddv", idxoa);
+	        query.setParameter("iddv", idxoabv);
 			@SuppressWarnings("unchecked")
 			List<Chitietdichvu> lsctdv = query.list();
 			if(lsctdv.size() == 0){
-				Dichvu dv = (Dichvu) session.get(Dichvu.class, idxoa);
+				Dichvu dvu = (Dichvu) session.get(Dichvu.class, idxoabv);
 				try {
-					session.delete(dv);
+					session.delete(dvu);
 					t.commit();
 				} catch (Exception e) {
 					t.rollback();
@@ -1440,27 +1442,45 @@ public class Huycontroller {
 			} else {
 					String hqlxctdv = "delete Chitietdichvu where iddichvu= :iddv";
 					Query queryxctdv = session.createQuery(hqlxctdv);
-//					System.out.println("idd"  + idxoa);
-					queryxctdv.setParameter("iddv", idxoa);
+					System.out.println("idd"  + idxoabv);
+					queryxctdv.setParameter("iddv", idxoabv);
 					for(int x = 0; x < lsctdv.size(); x++){
 						session.delete(lsctdv.get(x));
-//						System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+						System.out.println("Xoa loai tin co chi tiet dv (Thanh cong)");
 					}
-					Dichvu dv = (Dichvu) session.get(Dichvu.class, idxoa);
+					Dichvu dvu = (Dichvu) session.get(Dichvu.class, idxoabv);
 					try {
-						session.delete(dv);
+						session.delete(dvu);
 						t.commit();
-//						System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+						System.out.println("Xoa loai tin co chi tiet dv (Thanh cong)");
 					} catch (Exception e) {
 						t.rollback();
-//						System.out.println("Xoa loai tin co chi tiet tin (That bai)");
+						System.out.println("Xoa loai tin co chi tiet dv (That bai)");
 					} finally {
 						session.close();
 					}
-//					System.out.println("Xóa thành công");
+					System.out.println("Xóa thành công");
 				
 			}
 			return "redirect:/admin/dsdichvu.html";
+		}
+		
+		
+		//Xóa đặt tour
+		@RequestMapping("xdattour/{id}")
+		public String xdattour(ModelMap model, @PathVariable("id") int idxoa) {
+			Session session = factory.openSession();
+			Dattour dt = (Dattour) session.get(Dattour.class, idxoa);
+			Transaction t = session.beginTransaction();
+			try {
+				session.delete(dt);
+				t.commit();
+			} catch (Exception e) {
+				t.rollback();
+			} finally {
+				session.close();
+			}
+			return "redirect:/admin/dsdattour.html";
 		}
 
 }
