@@ -7,7 +7,7 @@
     <div class="tinhthanh" style="margin-top: 35px;">
         <div class="container-fluid bg-3 text-center">    
             <div class="row">
-            	<c:forEach var="tth" items="${lsttinhthanh}">
+            	<c:forEach var="tth" items="${lsttinhthanh}" end="6">
 	            	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
 	                    <a href="#">
 	                        <div class="img">

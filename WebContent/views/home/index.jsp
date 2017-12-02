@@ -192,53 +192,49 @@
     <hr>
     <div class="row">
     	<c:forEach var="kstn" items="${lstdanhgiakhachsan}">
-	        <div class="col-lg-3 col-sm-6 portfolio-item">
-	        	<div class="card h-80">
-	                <a href="#"><img class="card-img-top" src="files/khachsan/${kstn.khachsan.hinhanh}" alt="${kstn.khachsan.hinhanh}"></a>
-	                <div class="card-body">
-	                    <h6 class="card-title">
-	                        <a href="#">${kstn.khachsan.tenkhachsan}</a>
-	                    </h6>
-	                    <p class="p-fx" class="card-text" style="font-size: 14px; margin-bottom: 5px;">${kstn.khachsan.diachi}</p>
-	                    <c:choose>
-	                    	<c:when test="${kstn.star == 5}">
-	                    		<span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-	                    	</c:when>
-	                    	<c:when test="${kstn.star == 4}">
-	                    		<span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-	                    	</c:when>
-	                    	<c:when test="${kstn.star == 3}">
-	                    		<span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-	                    	</c:when>
-	                    	<c:when test="${kstn.star == 2}">
-	                    		<span class="fa fa-star checked"></span>
-			                    <span class="fa fa-star checked"></span>
-	                    	</c:when>
-	                    	<c:otherwise>
-	                    		<span class="fa fa-star checked"></span>
-	                    	</c:otherwise>
-	                    </c:choose>
-	                </div>
-	            </div>
-	        </div>
+    		<c:if test="${kstn.khachsan.trangthai.idtrangthai == 1}">
+		        <div class="col-lg-3 col-sm-6 portfolio-item">
+		        	<div class="card h-80">
+		                <a href="home/khach-san/${kstn.khachsan.slug}.html"><img class="card-img-top" 
+		                src="files/khachsan/${kstn.khachsan.hinhanh}" alt="${kstn.khachsan.hinhanh}"></a>
+		                <div class="card-body">
+		                    <h6 class="card-title">
+		                        <a href="home/khach-san/${kstn.khachsan.slug}.html">${kstn.khachsan.tenkhachsan}</a>
+		                    </h6>
+		                    <p class="p-fx" class="card-text" style="font-size: 14px; margin-bottom: 5px;">${kstn.khachsan.diachi}</p>
+		                    <c:choose>
+		                    	<c:when test="${kstn.star == 5}">
+		                    		<span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+		                    	</c:when>
+		                    	<c:when test="${kstn.star == 4}">
+		                    		<span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+		                    	</c:when>
+		                    	<c:when test="${kstn.star == 3}">
+		                    		<span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+		                    	</c:when>
+		                    	<c:when test="${kstn.star == 2}">
+		                    		<span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star checked"></span>
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<span class="fa fa-star checked"></span>
+		                    	</c:otherwise>
+		                    </c:choose>
+		                </div>
+		            </div>
+		        </div>
+	        </c:if>
          </c:forEach>
     </div>
-   	<script type="text/javascript">
-		$(".card-title").shorten({
-		    "showChars" : 60,
-		    "moreText"  : "",
-		    "lessText"  : "",
-		});
-	</script>
     <hr>
     <div class="row">
         <div class="col-md-12 text-center"> 
@@ -254,10 +250,10 @@
 	    <c:forEach var="tur" items="${lsttournoibat}">
 	            <div class="col-lg-3 col-sm-6 portfolio-item">
 	            <div class="card h-80">
-	                <a href="#"><img class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
+	                <a href="home/tour/${tur.slug}.html"><img class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
 	                <div class="card-body">
 	                    <h6 class="card-title">
-	                        <a href="#">${tur.tentour}</a>
+	                        <a href="home/tour/${tur.slug}.html">${tur.tentour}</a>
 	                    </h6>
 	                    <p style="font-size: 13px;" class="card-text">${tur.diemdi} <i class="fa fa-long-arrow-right"></i> ${tur.tinhthanh.tinhthanh}</p>
 	                    <h5 style="color: green;"><i class="fa fa-money"></i> ${String.format("%,d", tur.gia)}  VNĐ</h5>

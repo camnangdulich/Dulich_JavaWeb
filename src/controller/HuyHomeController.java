@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import entities.Datphong;
 import entities.Dattour;
@@ -120,13 +121,7 @@ public class HuyHomeController {
  		
  		
  		
- 		//Đặt tour
- 		@RequestMapping("tour")
- 		public String tour(ModelMap model) {
- 			model.addAttribute("title", "Đặt tour");
- 			return "home/tour";
- 		}
- 		
+ 		// Đặt tour
  		@RequestMapping(value = "tour", method = RequestMethod.POST)
  		public String tour(ModelMap model,
  				@RequestParam("tentour") Integer tentour,
@@ -135,8 +130,7 @@ public class HuyHomeController {
  				@RequestParam("songuoi") Integer songuoi,
  				@RequestParam("sodienthoai") String sodienthoai,
  				@RequestParam("email") String email,
- 				@RequestParam("yeucau") String yeucau){
- 			
+ 				@RequestParam("yeucau") String yeucau, RedirectAttributes a){
 
  				Session session = factory.openSession();
  	 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);
@@ -148,16 +142,17 @@ public class HuyHomeController {
  	 				t.commit();
  	 				System.out.println("Đặt tour thành công!");
  	 				model.addAttribute("message", "Đặt tour thành công!");
- 	 				return "home/tour";
+ 	 				a.addFlashAttribute("message", "Đặt tour thannh cong");
+ 	 				return "redirect:/home/tour/"+tuor.getSlug()+".html";
  	 			} catch (Exception e) {
  	 				t.rollback();
  	 				System.out.println("Đặt tour false!");
- 	 				model.addAttribute("message", "Đặt tour thất bại!");
+ 	 				//model.addAttribute("message", "Đặt tour thất bại!");
+ 	 				a.addFlashAttribute("message", "Đặt tour thất bại!");
  	 			} finally {
  	 				session.close();
  	 			}
- 			
- 			return "home/tour";
+ 			return "redirect:/home/tour/"+tuor.getSlug()+".html";
  		}
  		
  		
