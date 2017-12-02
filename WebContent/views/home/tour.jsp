@@ -12,7 +12,7 @@
                             <h3>${cttour.tentour}</h3>
                             <p style="padding-bottom: 0;"><i class="fa fa-address-card" style="padding-right: 5px;"></i> Công ty cung cấp: ${cttour.congty.tencongty}</p>
 				            <p style="padding: 0;"><i class="fa fa-phone" style="padding-right: 5px;"></i> Số điện thoại : ${cttour.congty.sodienthoai}</p>
-				            <p style="padding: 0;"><i class="fa fa-fw fa-envelope" style="padding-right: 5px;"></i> Email công ty : ${cttour.congty.email}</p>
+				            <p style="padding: 0;"><i class="fa fa-fw fa-envelope" style="padding-right: 5px;"></i> Email công ty : ${cttour.congty.taikhoan.email}</p>
             				<p style="padding: 0;"><i class="fa fa-map-marker" style="padding-right: 5px;"></i> Thuộc tỉnh thành : ${cttour.tinhthanh.tinhthanh}</p>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
             <p><i class="fa fa-money"></i> Giá 1 người: <span style="font-weight: bolder; color: green;"> ${String.format("%,d", cttour.gia)} VNĐ</span></p>
             <p><i class="fa fa-address-card"></i> Công ty cung cấp: ${cttour.congty.tencongty}</p>
             <p><i class="fa fa-phone"></i> Số điện thoại : ${cttour.congty.sodienthoai}</p>
-            <p><i class="fa fa-fw fa-envelope"></i> Email công ty : ${cttour.congty.email}</p>
+            <p><i class="fa fa-fw fa-envelope"></i> Email công ty : ${cttour.congty.taikhoan.email}</p>
 			<p><i class="fa fa-map-marker"></i> Thuộc tỉnh thành : ${cttour.tinhthanh.tinhthanh}</p>
         </div>
     </div>
@@ -93,7 +93,7 @@
                     	<hr>
                         <p><i class="fa fa-address-card"></i> Công ty cung cấp: ${cttour.congty.tencongty}</p>
 			            <p><i class="fa fa-phone"></i> Số điện thoại : ${cttour.congty.sodienthoai}</p>
-			            <p><i class="fa fa-fw fa-envelope"></i> Email công ty : ${cttour.congty.email}</p>
+			            <p><i class="fa fa-fw fa-envelope"></i> Email công ty : ${cttour.congty.taikhoan.email}</p>
 						<p><i class="fa fa-map-marker"></i> Thuộc tỉnh thành : ${cttour.tinhthanh.tinhthanh}</p>
 						<hr>
                     </div>
@@ -127,61 +127,28 @@
                 <h5 class="card-header">Đặt tour du lịch</h5>
                 <div class="card-body">
                 <form action="home/tour.html" method="post" >
+						<input name="tentour" value="${cttour.idtour}" hidden="">
 						<div class="form-group">
-								<select name="tentour" class="form-control">
-									<option selected="selected" disabled="disabled">-- Chọn Tour --</option>
-									<c:forEach var="tu" items="${tourlist}">
-										<option value="${tu.idtour }">${tu.tentour}</option>
-									</c:forEach>
-								</select>
+							<input name="hodem" class="form-control" type="text" placeholder="Nhập họ đệm" value="${loguser.hodem}">
 						</div>
 						<div class="form-group">
-								<input name="hodem" class="form-control" type="text" placeholder="Nhập họ đệm" value="">
+							<input name="ten" class="form-control" type="text" placeholder="Nhập tên" value="${loguser.ten}">
 						</div>
 						<div class="form-group">
-								<input name="ten" class="form-control" type="text" placeholder="Nhập tên" value="">
+							<input name="songuoi" class="form-control" type="number" placeholder="Số người" value="">
 						</div>
 						<div class="form-group">
-								<input name="songuoi" class="form-control" type="number" placeholder="Số người" value="">
+							<input name="sodienthoai" class="form-control" type="text" placeholder="Nhập số điện thoại" value="${loguser.sodienthoai}">
 						</div>
 						<div class="form-group">
-								<input name="sodienthoai" class="form-control" type="text" placeholder="Nhập số điện thoại" value="">
+							<input name="email" class="form-control" type="email" placeholder="Nhập email" value="${loguser.email}">
 						</div>
 						<div class="form-group">
-								<input name="email" class="form-control" type="email" placeholder="Nhập email" value="">
+							<input name="yeucau" class="form-control" type="text" placeholder="Nhập yêu cầu" value="">
 						</div>
-						<div class="form-group">
-								<input name="yeucau" class="form-control" type="text" placeholder="Nhập yêu cầu" value="">
-						</div>
-						<div class="col-md-12">
-							<div class="col-md-12 text-center">
-								<button class="btn btn-success" style="width: 200px;">Đặt
-									Tour</button>
-							</div>
-						</div>
+						<p>thong bao: ${message }</p>
+						<button style="width: 100%" type="submit" class="btn btn-success">Đặt tour</button>
 					</form>
-                <!--   <form class="" action="" method="">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nhập họ đệm">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nhập tên">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" max="5" class="form-control" placeholder="Nhập số người">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" placeholder="Nhập số điện thoại">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Nhập email">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nhập yêu cầu">
-                        </div>
-                        <button style="width: 100%" type="submit" class="btn btn-success">Đặt tour</button>
-                    </form> -->
-                  
                 </div>
             </div>
         </div>

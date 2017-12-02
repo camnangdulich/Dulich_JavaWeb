@@ -403,7 +403,7 @@ public class HomeController {
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 
 		Session session = factory.getCurrentSession();
-		String hqllt = "from Loaitin where slug = :slugloaitintuc ORDER BY thoigian DESC";
+		String hqllt = "from Loaitin where slug = :slugloaitintuc";
 		Query querylt = session.createQuery(hqllt);
 		querylt.setParameter("slugloaitintuc", slugloaitintuc);
 		Loaitin loaitin = (Loaitin) querylt.uniqueResult();
@@ -460,16 +460,17 @@ public class HomeController {
 	
 	
 	// Chi tiết khách sạn
-	@RequestMapping("khach-san/{id}")
-	public String ctkhachsan(ModelMap model, @PathVariable("id") Integer idks) {
+	@RequestMapping("khach-san/{slugkhachsan}")
+	public String ctkhachsan(ModelMap model, @PathVariable("slugkhachsan") String slugkhachsan) {
 		Session session = factory.getCurrentSession();
 		//String hql = "from Khachsan where idkhachsan = :idks";
-		String hql = "from Khachsan where idkhachsan = :idks";
+		String hql = "from Khachsan where slug = :slugkhachsan";
 		Query query = session.createQuery(hql);
-		query.setParameter("idks", idks);
+		query.setParameter("slugkhachsan", slugkhachsan);
 		Khachsan ks = (Khachsan) query.uniqueResult();
 		String tenkhachsan = ks.getTenkhachsan();
 		Integer idtt = ks.getTinhthanh().getIdtinhthanh();
+		Integer idks = ks.getIdkhachsan();
 
 		String hqlkstkv = "from Khachsan where idtinhthanh = :idtt";
 		Query querykstkv = session.createQuery(hqlkstkv);
@@ -498,12 +499,12 @@ public class HomeController {
 	
 	
 	// Chi tiết tour
-	@RequestMapping("tour/{id}")
-	public String cttour(ModelMap model, @PathVariable("id") Integer idtour) {
+	@RequestMapping("tour/{slugtour}")
+	public String cttour(ModelMap model, @PathVariable("slugtour") String slugtour) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Tour where idtour = :idt";
+		String hql = "from Tour where slug = :slugtour";
 		Query query = session.createQuery(hql);
-		query.setParameter("idt", idtour);
+		query.setParameter("slugtour", slugtour);
 		Tour tour = (Tour) query.uniqueResult();
 		String tentour = tour.getTentour();
 		Integer idtt = tour.getTinhthanh().getIdtinhthanh();
