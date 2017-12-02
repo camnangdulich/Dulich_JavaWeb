@@ -246,6 +246,15 @@ public class HomeController {
 		return list;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// --------------------- PAGE Controller ----------------------------
 	// ------------------------------------------------------------------
 
@@ -256,6 +265,10 @@ public class HomeController {
 		return "home/index";
 	}
 
+	
+	
+	
+	
 	// Đăng nhập
 	@RequestMapping(value = "dangnhap", method = RequestMethod.POST)
 	public String dangnhap(ModelMap model, @RequestParam("login_email") String email, @RequestParam("lockacc") Integer lockacc,
@@ -324,6 +337,10 @@ public class HomeController {
 		return "home/index";
 	}
 
+	
+	
+	
+	
 	// Đăng xuất
 	@RequestMapping("dangxuat")
 	public String dangxuat(HttpSession httpSession) {
@@ -333,6 +350,10 @@ public class HomeController {
 		return "redirect:/home/trang-chu.html";
 	}
 
+	
+	
+	
+	
 	// Đăng ký (register form)
 	@RequestMapping(value = "dangky", method = RequestMethod.POST)
 	public String Register(ModelMap model, @RequestParam("reg_email") String email,
@@ -372,13 +393,17 @@ public class HomeController {
 		return "home/index";
 	}
 
+	
+	
+	
+	
 	// Danh sách tin tức
 	@RequestMapping("tin-tuc/{slugloaitintuc}")
 	public String dstintuc(ModelMap model, @PathVariable("slugloaitintuc") String slugloaitintuc, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 
 		Session session = factory.getCurrentSession();
-		String hqllt = "from Loaitin where slug = :slugloaitintuc";
+		String hqllt = "from Loaitin where slug = :slugloaitintuc ORDER BY thoigian DESC";
 		Query querylt = session.createQuery(hqllt);
 		querylt.setParameter("slugloaitintuc", slugloaitintuc);
 		Loaitin loaitin = (Loaitin) querylt.uniqueResult();
@@ -410,6 +435,10 @@ public class HomeController {
 		return "home/tintuc_ds";
 	}
 
+	
+	
+	
+	
 	// Chi tiết tin tức
 	@RequestMapping("tin-tuc/bai-viet/{slugbaiviet}")
 	public String cttintuc(ModelMap model, @PathVariable("slugbaiviet") String slugbaiviet) {
@@ -426,6 +455,10 @@ public class HomeController {
 		return "home/tintuc_ct";
 	}
 
+	
+	
+	
+	
 	// Chi tiết khách sạn
 	@RequestMapping("khach-san/{id}")
 	public String ctkhachsan(ModelMap model, @PathVariable("id") Integer idks) {
@@ -461,6 +494,9 @@ public class HomeController {
 	}
 	
 	
+	
+	
+	
 	// Chi tiết tour
 	@RequestMapping("tour/{id}")
 	public String cttour(ModelMap model, @PathVariable("id") Integer idtour) {
@@ -485,6 +521,9 @@ public class HomeController {
 
 		return "home/tour";
 	}
+	
+	
+	
 	
 
 	// Chi tiết tỉnh thành
@@ -518,6 +557,9 @@ public class HomeController {
 
 		return "home/tinhthanh";
 	}
+	
+	
+	
 	
 	
 	// Danh sách tỉnh thành
@@ -686,7 +728,8 @@ public class HomeController {
 	
 	
 	
-	// ------------------- Đăng nhập bằng mạng xã hội -------------------
+	
+	// ------------------- Send mail Controller -------------------------
 	// ------------------------------------------------------------------
 
 	// ------------------- Send Mail Lấy lại mật khẩu -------------------
@@ -728,6 +771,7 @@ public class HomeController {
 		}
 		return "home/index";
 	}
+	
 	
 	
 	
@@ -818,6 +862,8 @@ public class HomeController {
         }
 		return "home/index";
 	}
+	
+	
 	
 	
 	
@@ -912,11 +958,14 @@ public class HomeController {
                 System.out.println("Invalid ID token.");
             }
         } catch (IOException | GeneralSecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
 
         }
         return "home/index";
     }
+
+	
+	
+
 	
 }
