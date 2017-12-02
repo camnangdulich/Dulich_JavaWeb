@@ -13,25 +13,25 @@
         <li class="breadcrumb-item">
         	<a href="admin/thong-tin-khach-san.html">Thông tin khách sạn</a>
 		</li>
-        <li class="breadcrumb-item active">Sửa dịch vụ</li>
+        <li class="breadcrumb-item active">Sửa loại phòng</li>
     </ol>
     <div class="container">
 	    <div class="row">
 	    	<div class="col-md-4">
 		    	<div class="card mb-3">
 		    		<div class="card-header">
-			            <i class="fa fa-table"></i> Bảng dịch vụ
+			            <i class="fa fa-table"></i> Bảng loại phòng
 			        </div>
-		    		<form action="admin/thong-tin-khach-san/sua-dich-vu.html" method="post" style="padding-left: 20px; padding-top: 20px;">
+		    		<form action="admin/thong-tin-khach-san/sua-loai-phong.html" method="post" style="padding-left: 20px; padding-top: 20px;">
                     	<input name="idks" type="hidden" value="${loguserks.idkhachsan}">
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                 <c:forEach var="a" items="${dichvulst}">
+                                 <c:forEach var="a" items="${loaiphonglst}">
 	                                <div class="form-check form-check-inline">
 									  	<label class="custom-control custom-checkbox form-check-label">
-									        <input name="dichvu" type="checkbox" class="custom-control-input" value="${a.iddichvu}">
+									        <input name="loaiphong" type="checkbox" class="custom-control-input" value="${a.idloaiphong}">
 										  	<span class="custom-control-indicator"></span>
-										  	<span class="custom-control-description">${a.tendichvu}</span>
+										  	<span class="custom-control-description">${a.tenloai}</span>
 										</label>
 									</div><br>
 								 </c:forEach>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 offset-md-3">
-                                <button type="submit" class="btn btn-primary">Thêm dịch vụ</button>
+                                <button type="submit" class="btn btn-primary">Thêm loại phòng</button>
                             </div>
                         </div>
                     </form>
@@ -49,27 +49,27 @@
 	    	    <!-- Example DataTables Card-->
 			    <div class="card mb-3">
 			        <div class="card-header">
-			            <i class="fa fa-table"></i> Bảng dịch vụ trong khách sạn</div>
+			            <i class="fa fa-table"></i> Bảng loại phòng trong khách sạn</div>
 			        <div class="card-body">
 			            <div class="table-responsive">
 			                <table class="table table-bordered" id="dataTable">
 			                    <thead>
 			                        <tr>
-			                            <th>Tên dịch vụ</th>
+			                            <th>Tên loại phòng</th>
 			                            <th style="width: 50px;"><i class="fa fa-cog"></i></th>
 			                        </tr>
 			                    </thead>
 			                    <tfoot>
 			                        <tr>
-			                            <th>Tên dịch vụ</th>
+			                            <th>Tên loại phòng</th>
 			                            <th></th>
 			                        </tr>
 			                    </tfoot>
 			                    <tbody>
-			                    	<c:forEach var="a" items="${ctdvlist}">
+			                    	<c:forEach var="a" items="${ctlplist}">
 			                    		<c:if test="${a.khachsan.idkhachsan == loguserks.idkhachsan}" >
 		                            		<tr>
-		                                   	 	<td>${a.dichvu.tendichvu}</td>
+		                                   	 	<td>${a.loaiphong.tenloai}</td>
 			                                	<td>
 				                                	<a href="#" style="padding-right: 5px;">
 					                                	<i class="fa fa-pencil" title="Sửa quyền"></i> 

@@ -46,7 +46,7 @@
     	<c:when test="${loguser.quyen.idquyen == 1}">
     		<!-- Navigation-->
 	        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	            <a class="navbar-brand" href="admin/index.html"><img src="files/home/logo.png"></a>
+	            <a class="navbar-brand" href="admin/dieu-khien.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
 	            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
 	                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                <span class="navbar-toggler-icon"></span>
@@ -769,7 +769,7 @@
     	<c:when test="${loguser.quyen.idquyen == 4}">
 	    	<!-- Navigation-->
 	        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	            <a class="navbar-brand" href="admin/index.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
+	            <a class="navbar-brand" href="admin/dieu-khien.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
 	            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
 	                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                <span class="navbar-toggler-icon"></span>
@@ -777,19 +777,19 @@
 	            <div class="collapse navbar-collapse" id="navbarResponsive">
 	                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="admin/index.html">
+	                        <a class="nav-link" href="admin/dieu-khien.html">
 	                            <i class="fa fa-fw fa-dashboard"></i>
 	                            <span class="nav-link-text">Điều khiển</span>
 	                        </a>
 	                    </li>
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="#">
+	                        <a class="nav-link" href="admin/thong-tin-khach-san.html">
 	                            <i class="fa fa-fw fa-building"></i>
 	                            <span class="nav-link-text">Thông tin khách sạn</span>
 	                        </a>
 	                    </li>
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="#">
+	                        <a class="nav-link" href="admin/danh-sach-don-dat-phong.html">
 	                            <i class="fa fa-fw fa-file-text"></i>
 	                            <span class="nav-link-text">Danh sách đơn đặt phòng</span>
 	                        </a>

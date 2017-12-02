@@ -134,7 +134,7 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="#">Quản lý khách sạn</a>
+		                                <a class="dropdown-item" href="admin/dieu-khien.html">Quản lý khách sạn</a>
 		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
@@ -415,7 +415,7 @@
                 </div>
             </form>
         </div>
-        <button onclick="topFunction()" id="ontopBtn" title="Go to top">&and;</button>
+        <button onclick="topFunction()" id="ontopBtn" title="Go to top">^^</button>
         
         <script src="js/ontop.js" type="text/javascript"></script>
         <script src="js/openid-login.js" type="text/javascript"></script>

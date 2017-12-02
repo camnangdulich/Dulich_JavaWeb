@@ -12,7 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -73,7 +75,8 @@ public class AdminController {
 		List<Taikhoan> list = query.list();
 		return list;
 	}
-	//Lấy tất cả loại bài viết(loại tin tức)
+	
+	// Lấy tất cả loại bài viết(loại tin tức)
 	@ModelAttribute("loaibvlist")
 	public List<Loaitin> getlt(ModelMap model) {
 		Session session = factory.getCurrentSession();
@@ -83,7 +86,8 @@ public class AdminController {
 		List<Loaitin> list = query.list();
 		return list;
 	}
-	//Lấy tất cả thông tin quyền
+	
+	// Lấy tất cả thông tin quyền
 	@ModelAttribute("quyenlist")
 	public List<Quyen> getq(ModelMap model) {
 		Session session = factory.getCurrentSession();
@@ -93,7 +97,6 @@ public class AdminController {
 		List<Quyen> list = query.list();
 		return list;
 	}
-	
 	
 	// Lấy tất cả thông tin bài viết (Bảng Tintuc)
 	@ModelAttribute("bvlist")
@@ -127,7 +130,8 @@ public class AdminController {
 		List<Tour> list = query.list();
 		return list;
 	}
-	//Lấy tất cả thông tin chi tiết bài viết
+	
+	// Lấy tất cả thông tin chi tiết bài viết
 	@ModelAttribute("ctbvlist")
 	public List<Chitiettin> getctbv(ModelMap model) {
 		Session session = factory.getCurrentSession();
@@ -138,7 +142,7 @@ public class AdminController {
 		return list;
 	}
 	
-	//Lấy tất cả thông tin chi tiết dịch vụ
+	// Lấy tất cả thông tin chi tiết dịch vụ
 	@ModelAttribute("ctdvlist")
 	public List<Chitietdichvu> getctdv(ModelMap model) {
 		Session session = factory.getCurrentSession();
@@ -149,7 +153,7 @@ public class AdminController {
 		return list;
 	}
 	
-	//Lấy tất cả thông tin chi tiết loại phòng
+	// Lấy tất cả thông tin chi tiết loại phòng
 	@ModelAttribute("ctlplist")
 	public List<Chitietloaiphong> getctlp(ModelMap model) {
 		Session session = factory.getCurrentSession();
@@ -192,7 +196,14 @@ public class AdminController {
 		List<Tinhthanh> list = query.list();
 		return list;
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// --------------------- PAGE Controller ----------------------------
@@ -219,20 +230,20 @@ public class AdminController {
 		return "admin/dsbaiviet";
 	}
 	
-	// Trang thông tin khách sạn
-	@RequestMapping("thong-tin-khach-san")
-	public String thongtinkhachsan(ModelMap model) {
-		model.addAttribute("title", "Thông tin khách sạn");
-		return "admin/ttkhachsan";
-	}
-	
 	// Trang tour du lịch
 	@RequestMapping("dstour")
 	public String dstour(ModelMap model) {
 		model.addAttribute("title", "Danh sách tour");
 		return "admin/dstour";
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// --------------------- ADD Controller -----------------------------
@@ -289,6 +300,8 @@ public class AdminController {
 		return "admin/ttaikhoan";
 	}
 	// ------------------------------------------------------------------
+	
+	
 	
 	
 	
@@ -357,7 +370,9 @@ public class AdminController {
 	// ------------------------------------------------------------------
 	
 	
-
+	
+	
+	
 	
 	
 	
@@ -429,8 +444,10 @@ public class AdminController {
 			session.close();
 		}
 	}
-
-
+	// ------------------------------------------------------------------
+	
+	
+	
 	
 	
 //	// Sửa thông tin bài viết
@@ -469,66 +486,174 @@ public class AdminController {
 	
 	
 	
+	
+	
+	// Trang thông tin khách sạn
+	@RequestMapping("thong-tin-khach-san")
+	public String thongtinkhachsan(ModelMap model) {
+		model.addAttribute("title", "Thông tin khách sạn");
+		return "admin/ttkhachsan";
+	}
+	
+	// Sửa thông tin khách sạn
+	@RequestMapping(value = "thong-tin-khach-san", method = RequestMethod.POST )
+	public String suattks(ModelMap model, HttpSession httpSession, HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam("idks") Integer idks,
+			@RequestParam("tenkhachsan") String tenkhachsan,
+			@RequestParam("sodienthoai") String sodienthoai,
+			@RequestParam("tinhthanh") Integer idtinhthanh,
+			@RequestParam("diachi") String diachi,
+			@RequestParam("hinhanh") MultipartFile image){
+		
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Khachsan ks = (Khachsan) session.get(Khachsan.class, idks);
+		Tinhthanh tth = (Tinhthanh) session.get(Tinhthanh.class, idtinhthanh);
+		String photoPath = context.getRealPath("/files/khachsan/" + image.getOriginalFilename());
+		
+		ks.setTenkhachsan(tenkhachsan);
+		ks.setSodienthoai(sodienthoai);
+		ks.setTinhthanh(tth);
+		ks.setDiachi(diachi);
+		
+		try {
+			if(image.getOriginalFilename().equals("")){
+				session.update(ks);
+				t.commit();
+				httpSession.setAttribute("loguserks", ks);
+				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
+				System.out.println("thanh cong khong them anh");
+				return "admin/ttkhachsan";
+			}else{
+				image.transferTo(new File(photoPath));
+				ks.setHinhanh(image.getOriginalFilename());
+				session.update(ks);
+				t.commit();
+				httpSession.setAttribute("loguserks", ks);
+				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
+				System.out.println("thanh cong co them anh");
+				return "admin/ttkhachsan";
+			}
+		} 
+		catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
+			System.out.println("that bai");
+		}
+		finally {
+			session.close();
+		}
+		return "admin/ttkhachsan";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// Sửa thông tin dịch vụ của khách sạn
 	@RequestMapping("thong-tin-khach-san/sua-dich-vu")
 	public String suadichvukhachsan(ModelMap model) {
 		model.addAttribute("title", "Sửa dịch vụ khách sạn");
 		return "admin/sdvcttkhachsan";
 	}
-		
-//	@RequestMapping(value = "updatetk", method = RequestMethod.POST )
-//	public String staikhoan(ModelMap model,
-//			@RequestParam("idtk") Integer idtk,
-//			@RequestParam("quyen") Integer quyen,
-//			@RequestParam("email") String email,
-//			@RequestParam("matkhau") String matkhau,
-//			@RequestParam("sdt") String sdt,
-//			@RequestParam("hodem") String hodem,
-//			@RequestParam("ten") String ten,
-//			@RequestParam("diachi") String diachi,
-//			@RequestParam("avatar") MultipartFile image){
-//		
-//		Session session = factory.openSession();
-//		Transaction t = session.beginTransaction();
-//		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idtk);
-//		Quyen rl = (Quyen) session.get(Quyen.class, quyen);
-//		String photoPath = context.getRealPath("/files/" + image.getOriginalFilename());
-//		
-//		tk.setQuyen(rl);
-//		tk.setEmail(email);
-//		tk.setMatkhau(matkhau);
-//		tk.setSodienthoai(sdt);
-//		tk.setHodem(hodem);
-//		tk.setTen(ten);
-//		tk.setDiachi(diachi);
-//		
-//		try {
-//			if(image.getOriginalFilename().equals("")){
-//				session.update(tk);
-//				t.commit();
-//				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
-//				System.out.println("thanh cong khong them anh");
-//				return "redirect:/admin/staikhoan/"+idtk+".html";
-//			}else{
-//				image.transferTo(new File(photoPath));
-//				tk.setAvatar(image.getOriginalFilename());
-//				session.update(tk);
-//				t.commit();
-//				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
-//				System.out.println("thanh cong co them anh");
-//				return "redirect:/admin/staikhoan/"+idtk+".html";
-//			}
-//		} 
-//		catch (Exception e) {
-//			t.rollback();
-//			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
-//			System.out.println("that bai");
-//			return "redirect:/admin/tintuc/"+idtk+".html";
-//		}
-//		finally {
-//			session.close();
-//		}
-//	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "thong-tin-khach-san/sua-dich-vu", method = RequestMethod.POST )
+	public String suadichvukhachsan(ModelMap model, HttpSession httpSession, HttpServletRequest request,
+			HttpServletResponse response, @RequestParam("dichvu") List dichvu,
+			@RequestParam("idks") Integer idks){
+		Session session = factory.openSession();
+		Khachsan ks = (Khachsan) session.get(Khachsan.class, idks);
+		Transaction t = session.beginTransaction();
+		try {
+			
+			for ( int x = 0; x < dichvu.size(); x++ ){
+				Object oj_iddichvu = dichvu.get(x);
+				int iddichvu = Integer.valueOf((String) oj_iddichvu);
+				Dichvu dv = (Dichvu) session.get(Dichvu.class, iddichvu);
+				Chitietdichvu ctdv = new Chitietdichvu(dv, ks);
+				try {
+					session.save(ctdv);
+				} catch (Exception e) {
+					t.rollback();
+				}
+			}
+			t.commit();
+			System.out.println("Them thanh cong!");
+			return "admin/sdvcttkhachsan";
+		} catch (Exception e) {
+			t.rollback();
+			System.out.println("Them that bai!");
+		} finally {
+			session.close();
+		}
+		return "admin/sdvcttkhachsan";
+	}
+	
+	
+	
+	
+	
+	// Sửa thông tin loại phòng của khách sạn
+	@RequestMapping("thong-tin-khach-san/sua-loai-phong")
+	public String sualoaiphongkhachsan(ModelMap model) {
+		model.addAttribute("title", "Sửa loại phòng khách sạn");
+		return "admin/slpcttkhachsan";
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "thong-tin-khach-san/sua-loai-phong", method = RequestMethod.POST )
+	public String sualoaiphongkhachsan(ModelMap model, HttpSession httpSession, HttpServletRequest request,
+			HttpServletResponse response, @RequestParam("loaiphong") List loaiphong,
+			@RequestParam("idks") Integer idks){
+		Session session = factory.openSession();
+		Khachsan ks = (Khachsan) session.get(Khachsan.class, idks);
+		Transaction t = session.beginTransaction();
+		try {
+			
+			for ( int x = 0; x < loaiphong.size(); x++ ){
+				Object oj_idloaiphong = loaiphong.get(x);
+				int idloaiphong = Integer.valueOf((String) oj_idloaiphong);
+				Loaiphong lp = (Loaiphong) session.get(Loaiphong.class, idloaiphong);
+				Chitietloaiphong ctlp = new Chitietloaiphong(ks, lp);
+				try {
+					session.save(ctlp);
+				} catch (Exception e) {
+					t.rollback();
+				}
+			}
+			t.commit();
+			System.out.println("Them thanh cong!");
+			return "admin/slpcttkhachsan";
+		} catch (Exception e) {
+			t.rollback();
+			System.out.println("Them that bai!");
+		} finally {
+			session.close();
+		}
+		return "admin/slpcttkhachsan";
+	}
 	
 	
 	
@@ -563,7 +688,7 @@ public class AdminController {
 		return "redirect:/admin/dstaikhoan.html";
 	}
 	
-//	//Xóa loai bài viết(loaitin)
+	// Xóa loai bài viết(loaitin)
 	@RequestMapping("xloaibv/{id}")
 	public String xloaibv(ModelMap model, @PathVariable("id") int idxoa) {
 		Session session = factory.openSession();
@@ -587,27 +712,26 @@ public class AdminController {
 				session.close();
 			}
 		} else {
-				String hqlxctt = "delete Chitiettin where idloaitin= :idlt";
-				Query queryxcct = session.createQuery(hqlxctt);
-				System.out.println("idd"  + idxoa);
-				queryxcct.setParameter("idlt", idxoa);
-				for(int x = 0; x < lstcct.size(); x++){
-					session.delete(lstcct.get(x));
-					System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
-				}
-				Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
-				try {
-					session.delete(lt);
-					t.commit();
-					System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
-				} catch (Exception e) {
-					t.rollback();
-					System.out.println("Xoa loai tin co chi tiet tin (That bai)");
-				} finally {
-					session.close();
-				}
-				System.out.println("Xóa thành công");
-			
+			String hqlxctt = "delete Chitiettin where idloaitin= :idlt";
+			Query queryxcct = session.createQuery(hqlxctt);
+			System.out.println("idd"  + idxoa);
+			queryxcct.setParameter("idlt", idxoa);
+			for(int x = 0; x < lstcct.size(); x++){
+				session.delete(lstcct.get(x));
+				System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+			}
+			Loaitin lt = (Loaitin) session.get(Loaitin.class, idxoa);
+			try {
+				session.delete(lt);
+				t.commit();
+				System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+			} catch (Exception e) {
+				t.rollback();
+				System.out.println("Xoa loai tin co chi tiet tin (That bai)");
+			} finally {
+				session.close();
+			}
+			System.out.println("Xóa thành công");
 		}
 //		try {
 //			session.delete(tk);

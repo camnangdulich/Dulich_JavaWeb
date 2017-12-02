@@ -14,8 +14,8 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-md-auto">
-                    <form action="admin/tbaiviet.html" method="post" enctype="multipart/form-data">
-                    	<input name="idtk" type="hidden" value="1">
+                    <form action="admin/thong-tin-khach-san.html" method="post" enctype="multipart/form-data">
+                    	<input name="idks" type="hidden" value="${loguserks.idkhachsan}">
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label class="custom-file" style="display: none;">
@@ -35,7 +35,7 @@
 	                                   	 </c:if>
 	                                 </c:forEach>
 	                            </select>
-                                 <i class="fa fa-pencil"></i><a href="#" style="color: green;"> Chỉnh sửa dịch vụ</a>
+                                 <i class="fa fa-pencil"></i><a href="admin/thong-tin-khach-san/sua-dich-vu.html" style="color: green;"> Chỉnh sửa dịch vụ</a>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -47,7 +47,7 @@
 	                                   	 </c:if>
 	                                 </c:forEach>
 	                            </select>
-                                 <i class="fa fa-pencil"></i><a href="#" style="color: green;"> Chỉnh sửa loại phòng</a>
+                                 <i class="fa fa-pencil"></i><a href="admin/thong-tin-khach-san/sua-loai-phong.html" style="color: green;"> Chỉnh sửa loại phòng</a>
                             </div>
                         </div>
                         <div class="form-group row">

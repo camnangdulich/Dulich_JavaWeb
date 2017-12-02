@@ -765,8 +765,9 @@ public class HomeController {
 		System.out.println("Facebook Link : " + me.getLink());
 		System.out.println("Facebook Locale : " + me.getLocale());
 			
-		Taikhoan taikhoan = null;
 		Session session = factory.getCurrentSession();
+		Transaction t = session.beginTransaction();
+		Taikhoan taikhoan = null;
 		String email = "fb" + me.getId() + "@mailcamnangdulich.com";
 		String hql = "from Taikhoan where email = :emailtk";
 		Query query = session.createQuery(hql);
@@ -794,7 +795,6 @@ public class HomeController {
 				String hinhanh = me.getPicture().getUrl();
 				
 				taikhoan = new Taikhoan(email, matkhaumahoa, sdt, hinhanh, ngaytao, quyen, trt);
-				Transaction t = session.beginTransaction();
 				try {
 					session.save(taikhoan);
 					t.commit();
