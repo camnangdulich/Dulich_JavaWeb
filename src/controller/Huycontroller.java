@@ -1356,6 +1356,12 @@ public class Huycontroller {
 		
 		
 		//=============================DELETE=======================
+		//=============================DELETE=======================
+		//=============================DELETE=======================
+		//=============================DELETE=======================
+		//=============================DELETE=======================
+		//=============================DELETE=======================
+		
 		
 		
 		
@@ -1406,6 +1412,55 @@ public class Huycontroller {
 				
 			}
 			return "redirect:/admin/dsloaibv.html";
+		}
+		
+		
+		
+		
+		//=======Xóa loại bài viết========
+		@RequestMapping("xoadichvu/{id}")
+		public String xoadichvu(ModelMap model, @PathVariable("id") int idxoa) {
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			String hql = "from Dichvu where iddichvu=:iddv";
+	        Query query = session.createQuery(hql);
+	        query.setParameter("iddv", idxoa);
+			@SuppressWarnings("unchecked")
+			List<Chitietdichvu> lsctdv = query.list();
+			if(lsctdv.size() == 0){
+				Dichvu dv = (Dichvu) session.get(Dichvu.class, idxoa);
+				try {
+					session.delete(dv);
+					t.commit();
+				} catch (Exception e) {
+					t.rollback();
+				} finally {
+					session.close();
+				}
+			} else {
+					String hqlxctdv = "delete Chitietdichvu where iddichvu= :iddv";
+					Query queryxctdv = session.createQuery(hqlxctdv);
+//					System.out.println("idd"  + idxoa);
+					queryxctdv.setParameter("iddv", idxoa);
+					for(int x = 0; x < lsctdv.size(); x++){
+						session.delete(lsctdv.get(x));
+//						System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+					}
+					Dichvu dv = (Dichvu) session.get(Dichvu.class, idxoa);
+					try {
+						session.delete(dv);
+						t.commit();
+//						System.out.println("Xoa loai tin co chi tiet tin (Thanh cong)");
+					} catch (Exception e) {
+						t.rollback();
+//						System.out.println("Xoa loai tin co chi tiet tin (That bai)");
+					} finally {
+						session.close();
+					}
+//					System.out.println("Xóa thành công");
+				
+			}
+			return "redirect:/admin/dsdichvu.html";
 		}
 
 }

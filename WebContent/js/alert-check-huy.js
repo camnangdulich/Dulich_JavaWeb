@@ -146,6 +146,10 @@ function alert_admin_check(message) {
 
 
 //================================DELETE=============================
+//================================DELETE=============================
+//================================DELETE=============================
+//================================DELETE=============================
+
 
 //Kiểm tra Xóa thông tin loại bài viết
 function kiemtraxoaloaibaiviet(idloaibaiviet, tenloaibaiviet) {
@@ -167,6 +171,32 @@ function kiemtraxoaloaibaiviet(idloaibaiviet, tenloaibaiviet) {
 					+ " sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xloaibv/" + idloaibaiviet + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+//Kiểm tra Xóa thông tin dịch vụ
+function kiemtraxoadichvu(iddichvu, tendichvu) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin của dịch vụ " + tendichvu
+				+ " đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến loại bài viết " + tendichvu
+					+ " sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xoadichvu/" + iddichvu + ".html"; // Sửa đường dẫn xóa
 			}, 1500);
 		}
 	});

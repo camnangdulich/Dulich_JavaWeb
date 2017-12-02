@@ -45,8 +45,8 @@
                                 	<a href="#" style="padding-right: 5px;">
 	                                	<i class="fa fa-pencil" title="Sửa dịch vụ"></i> 
 	                                </a>
-	                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('${q.quyen}',2)">
-	                                	<i class="fa fa-times" title="Xóa quyền"></i>
+	                                <a style="color: red; cursor: pointer;" onclick="kiemtraxoadichvu('${dv.iddichvu}','${dv.tendichvu }')">
+	                                	<i class="fa fa-times" title="Xóa dịch vụ"></i>
 	                                </a>
 								</td>
                             </tr>
