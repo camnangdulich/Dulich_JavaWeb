@@ -660,6 +660,7 @@ public class AdminController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
 >>>>>>> c15bc83c674599f70ba03d31ae7429032b6dcdfe
@@ -708,6 +709,8 @@ public class AdminController {
 		}
 		return "redirect:/admin/danh-sach-bai-viet.html";
 	}	
+=======
+>>>>>>> c15bc83c674599f70ba03d31ae7429032b6dcdfe
 =======
 >>>>>>> c15bc83c674599f70ba03d31ae7429032b6dcdfe
 	
