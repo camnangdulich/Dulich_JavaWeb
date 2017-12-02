@@ -195,7 +195,30 @@ function kiemtraxoataikhoan(idtaikhoan, email) {
 		}
 	});
 };
-
+////Kiểm tra Xóa thông tin loại bài viết
+//function kiemtraxoaloaibv(idloaitin, loaitin) {
+//	swal({
+//		title : "Bạn chắc chắn muốn loại bài viết này không",
+//		text : "Nếu bạn xóa, tất cả thông tin của loại bài viết " + loaitin
+//				+ " đều sẽ bị xóa hết!",
+//		type : "warning",
+//		showCancelButton : true,
+//		confirmButtonColor : "#DD6B55",
+//		confirmButtonText : "Xóa bỏ!",
+//		cancelButtonText : "Hủy bỏ!",
+//		closeOnConfirm : false,
+//		closeOnCancel : true,
+//		showLoaderOnConfirm : true
+//	}, function(isConfirm) {
+//		if (isConfirm) {
+//			swal("Xóa loại bài viết!", "Tài khoản và các thông tin của " + loaitin
+//					+ " sẽ bị xóa...", "success");
+//			setTimeout(function() {
+//				window.location = "admin/xloaibv/" + idloaitin + ".html";
+//			}, 1500);
+//		}
+//	});
+//};
 // Kiểm tra Xóa thông tin khách sạn
 function kiemtraxoakhachsan() {
 	swal({
