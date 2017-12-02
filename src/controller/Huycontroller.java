@@ -187,7 +187,6 @@ public class Huycontroller {
 		Query query = session.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Dattour> list = query.list();
-		System.out.println(list);
 		return list;
 	}
 
