@@ -283,3 +283,55 @@ function kiemtraxoatintuc(idtintuc, tieudetintuc) {
 };
 
 
+//===================KIỂM TRA XÓA ĐẶT PHÒNG===============
+function kiemtraxoadatphong(iddatphong, Tenphongdat) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin của phong đã đặt đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa thông tin đặt phòng", "Loại phòng này và các thông tin liên quan đến đặt phòng sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xoadatphong/" + iddatphong + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+
+
+//===================KIỂM TRA XÓA CHI TIẾT DỊCH VỤ===============
+function kiemtraxoactdv(idchitietdv, tenctdichvu) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin chi tiết dịch vụ đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa chi tiết dịch vụ", "Các thông tin chi tiết dịch vụ sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xchitietdv/" + idchitietdv + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+
+
