@@ -599,7 +599,8 @@ public class AdminController {
 			return "admin/tquyen";
 		} else {
 			Session session = factory.openSession();
-			Quyen q = new Quyen(tenquyen, mota);
+			String slugquyen = SlugsConverter.toSlug(tenquyen);
+			Quyen q = new Quyen(tenquyen, mota, slugquyen);
 			Transaction t = session.beginTransaction();
 			try {
 				session.save(q);
@@ -632,6 +633,7 @@ public class AdminController {
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
+		String slugloaiphong = SlugsConverter.toSlug(tenloai);
 		Huong huong = (Huong) session.get(Huong.class, idhuong);
 
 		// Tạo đường dẫn lưu hình ảnh
@@ -651,7 +653,7 @@ public class AdminController {
 		}
 
 		if (hinhanh.getOriginalFilename().equals("")) {
-			Loaiphong lp = new Loaiphong(huong, tenloai, mota, themgiuong, "Deluxe room.jpg", gia);
+			Loaiphong lp = new Loaiphong(huong, tenloai, mota, themgiuong, "Deluxe room.jpg", gia,slugloaiphong);
 			try {
 				session.save(lp);
 				t.commit();
@@ -665,7 +667,7 @@ public class AdminController {
 			}
 
 		} else {
-			Loaiphong lp = new Loaiphong(huong, tenloai, mota, themgiuong, hinhanh.getOriginalFilename(), gia);
+			Loaiphong lp = new Loaiphong(huong, tenloai, mota, themgiuong, hinhanh.getOriginalFilename(), gia, slugloaiphong);
 			try {
 				session.save(lp);
 				t.commit();
@@ -1107,6 +1109,7 @@ public class AdminController {
 		Transaction t = session.beginTransaction();
 		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idtk);
 		Quyen rl = (Quyen) session.get(Quyen.class, quyen);
+		String slugtk = SlugsConverter.toSlug(email);
 		String photoPath = context.getRealPath("/files/" + image.getOriginalFilename());
 
 		tk.setQuyen(rl);
@@ -1116,6 +1119,7 @@ public class AdminController {
 		tk.setHodem(hodem);
 		tk.setTen(ten);
 		tk.setDiachi(diachi);
+		tk.setSluglink(slugtk);
 
 		try {
 			if (image.getOriginalFilename().equals("")) {
@@ -1143,6 +1147,58 @@ public class AdminController {
 		}
 	}
 
+	//Sửa bài viết
+	@RequestMapping("sbaiviet/{id}")
+	public String sbaiviet(ModelMap model, @PathVariable("id") Integer idbv) {
+		model.addAttribute("title", "Sửa bài viết");
+		Session session = factory.getCurrentSession();
+		Tintuc tintuc = (Tintuc) session.get(Tintuc.class, idbv);
+		model.addAttribute("sbv", tintuc);
+		return "admin/sbaiviet";
+	}
+	@RequestMapping(value = "sbaiviet", method = RequestMethod.POST)
+	public String sbaiviet(ModelMap model, @RequestParam("idbv") Integer idbv, @RequestParam("hinhanh") MultipartFile image,
+			 @RequestParam("tieude") String tieude,
+			@RequestParam("tomtat") String tomtat, @RequestParam("noidung") String noidung,
+			@RequestParam("nguon") String nguon) {
+
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Tintuc bv = (Tintuc) session.get(Tintuc.class, idbv);
+		String slugbv = SlugsConverter.toSlug(tieude);
+		String photoPath = context.getRealPath("/files/tintuc" + image.getOriginalFilename());
+
+		bv.setTieude(tieude);
+		bv.setTomtat(tomtat);
+		bv.setNoidung(noidung);
+		bv.setNguon(nguon);
+		bv.setSlug(slugbv);
+		try {
+			if (image.getOriginalFilename().equals("")) {
+				session.update(bv);
+				t.commit();
+				model.addAttribute("message", "Chỉnh sửa bài viết thành công !");
+				System.out.println("thanh cong khong them anh");
+				return "redirect:/admin/sbaiviet/" + idbv + ".html";
+			} else {
+				image.transferTo(new File(photoPath));
+				bv.setHinhanh(image.getOriginalFilename());
+				session.update(bv);
+				t.commit();
+				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
+				System.out.println("thanh cong co them anh");
+				return "redirect:/admin/sbaiviet/" + idbv + ".html";
+			}
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Chỉnh sửa bài viết thất bại !" + e.getMessage());
+			System.out.println("that bai");
+			return "redirect:/admin/tintuc/" + idbv + ".html";
+		} finally {
+			session.close();
+		}
+	}
+	
 	// Sửa thông tin công ty
 	@RequestMapping("thong-tin-cong-ty")
 	public String thongtincongty(ModelMap model) {
@@ -1199,6 +1255,7 @@ public class AdminController {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		Khachsan ks = (Khachsan) session.get(Khachsan.class, idks);
+		String slugks = SlugsConverter.toSlug(tenkhachsan);
 		Tinhthanh tth = (Tinhthanh) session.get(Tinhthanh.class, idtinhthanh);
 		String photoPath = context.getRealPath("/files/khachsan/" + image.getOriginalFilename());
 
@@ -1206,6 +1263,7 @@ public class AdminController {
 		ks.setSodienthoai(sodienthoai);
 		ks.setTinhthanh(tth);
 		ks.setDiachi(diachi);
+		ks.setSlug(slugks);
 
 		try {
 			if (image.getOriginalFilename().equals("")) {
@@ -1438,9 +1496,11 @@ public class AdminController {
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
+		String slugquyen = SlugsConverter.toSlug(tenquyen);
 		Quyen q = (Quyen) session.get(Quyen.class, idquyen);
 		q.setQuyen(tenquyen);
 		q.setMota(mota);
+		q.setSlug(slugquyen);
 		try {
 			session.update(q);
 			t.commit();
@@ -1512,7 +1572,7 @@ public class AdminController {
 		}
 	}
 
-	// Sua thông tin công ty
+	// Sua thông tin công ty (ADMIN)
 	@RequestMapping("suacongty/{id}")
 	public String suacongty(ModelMap model, @PathVariable("id") Integer idcongty) {
 		model.addAttribute("title", "Sửa thông tin");
@@ -1530,12 +1590,14 @@ public class AdminController {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		Congty ct = (Congty) session.get(Congty.class, idcongty);
+		String slugct = SlugsConverter.toSlug(tencongty);
 		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, taikhoan);
 		ct.setTaikhoan(tk);
 		ct.setTencongty(tencongty);
 		ct.setDiachi(diachi);
 		ct.setMota(mota);
 		ct.setSodienthoai(sodienthoai);
+		ct.setSlug(slugct);
 		try {
 			session.update(ct);
 			t.commit();
@@ -1603,9 +1665,11 @@ public class AdminController {
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
+		String slugtlbv = SlugsConverter.toSlug(tenloaibv);
 		Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaibv);
 		lt.setLoaitin(tenloaibv);
 		lt.setMota(mota);
+		lt.setSlug(slugtlbv);
 		try {
 			session.update(lt);
 			t.commit();

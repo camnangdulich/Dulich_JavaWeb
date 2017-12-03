@@ -247,5 +247,48 @@ $(document).ready(function() {
 		}
 	});
 	
+	
+	// ------------- Kiểm tra nhập thêm bài viết	---------------------
+	// -------------------------------------------------------
+	$("#thembaiviet").validate({
+		rules : {
+			loaitin : 'required',
+			tieude : 'required',
+			tomtat : 'required',
+			nguon : 'required',
+			noidung: 'required'
+		},
+		messages : {
+			loaitin : '',
+			tieude : 'Vui lòng nhập tiêu đề',
+			tomtat : 'Vui lòng nhập tóm tắt  nội dung',
+			nguon : 'Vui lòng nhập nguồn hoặc tên người viết bài',
+			noidung: 'Vui lòng nhập nội dung bài viết'
+		
+		}
+	});
+	
+	
+	// ------------- Kiểm tra sửa bài viết	---------------------
+	// -------------------------------------------------------
+	$("#suabaiviet").validate({
+		rules : {
+			loaitin : 'required',
+			tieude : 'required',
+			tomtat : 'required',
+			nguon : 'required',
+			noidung: 'required'
+		},
+		messages : {
+			loaitin : '',
+			tieude : 'Vui lòng nhập tiêu đề',
+			tomtat : 'Vui lòng nhập tóm tắt  nội dung',
+			nguon : 'Vui lòng nhập nguồn hoặc tên người viết bài',
+			noidung: 'Vui lòng nhập nội dung bài viết'
+		
+		}
+	});
+	
+	
 
 });

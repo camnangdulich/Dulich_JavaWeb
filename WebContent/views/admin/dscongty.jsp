@@ -24,7 +24,6 @@
                             <th>Tên công ty</th>
                             <th>Địa chỉ</th>
                             <th>Mô tả</th>
-                            <th>Email</th>
                             <th>Số điện thoại</th>
                             <th>Ngày tạo</th>
                             <th>Tài khoản</th>
@@ -36,7 +35,6 @@
                             <th>Tên công ty</th>
                             <th>Địa chỉ</th>
                             <th>Mô tả</th>
-                            <th>Email</th>
                             <th>Số điện thoại</th>
                             <th>Ngày tạo</th>
                             <th>Tài khoản</th>
@@ -49,7 +47,6 @@
                                 <td>${ct.tencongty}</td>
                                 <td>${ct.diachi}</td>
                                 <td>${ct.mota}</td>
-                                <td>${ct.email}</td>
                                 <td>${ct.sodienthoai}</td>
                                 <td>${ct.ngaytao}</td>
                                 <td>${ct.taikhoan.email}</td>

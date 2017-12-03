@@ -32,9 +32,10 @@ public class Quyen implements java.io.Serializable {
 	public Quyen() {
 	}
 	
-	public Quyen(String quyen, String mota) {
+	public Quyen(String quyen, String mota,  String slug) {
 		this.quyen = quyen;
 		this.mota = mota;
+		this.slug = slug;
 	}
 
 	public Quyen(String quyen) {

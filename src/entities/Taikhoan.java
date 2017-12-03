@@ -53,7 +53,8 @@ public class Taikhoan implements java.io.Serializable {
 	public Taikhoan() {
 	}
 	
-	public Taikhoan(String email, String matkhau, String sodienthoai, String avatar, Date ngaytao, Quyen quyen, Trangthai trangthai) {
+	public Taikhoan(String email, String matkhau, String sodienthoai, String avatar, Date ngaytao, Quyen quyen,
+			Trangthai trangthai) {
 		this.email = email;
 		this.matkhau = matkhau;
 		this.sodienthoai = sodienthoai;
