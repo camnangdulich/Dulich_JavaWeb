@@ -14,10 +14,10 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-md-auto">
-                    <form action="admin/tbaiviet.html" method="post" enctype="multipart/form-data">
+                    <form action="admin/tbaiviet.html" method="post" enctype="multipart/form-data" id= "thembaiviet">
                     	<input name="idtk" type="hidden" value="1">
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" id="label-validation">
                                 <label class="custom-file" style="display: none;">
                                     <input name="hinhanh" id="my_file" type="file" class="custom-file-input" onchange="onFileSelected(event)">
                                 </label>
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" >
                                  <c:forEach var="lbv" items="${loaibvlist}">
                                  	<c:choose>
 									    <c:when test="${lbv.idloaitin == 1}">
@@ -46,22 +46,22 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" id="label-validation">
                                 <input name="tieude" type="text" class="form-control" placeholder="Nhập tiêu đề">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" id="label-validation">
                                 <input name="tomtat" type="text" class="form-control" placeholder="Nhập tóm tắt">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" id="label-validation">
                                 <input name="nguon" type="text" class="form-control" placeholder="Nhập nguồn">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" id="label-validation">
                                 <div id="sample">
                                     <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
                                     <script type="text/javascript">
