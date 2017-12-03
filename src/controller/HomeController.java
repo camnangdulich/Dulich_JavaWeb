@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -245,6 +246,17 @@ public class HomeController {
 		List<Tinhthanh> list = query.list();
 		return list;
 	}
+	
+	// Lấy tất cả thông tin chi tiết loại phòng
+	@ModelAttribute("ctlplist")
+	public List<Chitietloaiphong> getctlp(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Chitietloaiphong";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Chitietloaiphong> list = query.list();
+		return list;
+	}
 
 	
 	
@@ -274,8 +286,9 @@ public class HomeController {
 	@RequestMapping(value = "dangnhap", method = RequestMethod.POST)
 	public String dangnhap(ModelMap model, @RequestParam("login_email") String email, @RequestParam("lockacc") Integer lockacc,
 			@RequestParam("login_password") String pwd, HttpSession httpSession, HttpServletRequest request,
-			HttpServletResponse response) throws InvalidKeyException {
+			HttpServletResponse response, RedirectAttributes redirectAttributes) throws InvalidKeyException {
 
+		String referer = request.getHeader("Referer");
 		Session session = factory.getCurrentSession();
 		Taikhoan tk = null;
 		Khachsan ks = null;
@@ -304,19 +317,22 @@ public class HomeController {
 
 			if (!tk.getMatkhau().equals(Matkhaumahoa)) {
 				System.out.println("dang nhap that bai");
-				model.addAttribute("title", "Cẩm nang du lịch");
-				model.addAttribute("message", "dang nhap that bai");
-				return "home/index";
+//				model.addAttribute("title", "Cẩm nang du lịch");
+//				model.addAttribute("message", "dang nhap that bai");
+				redirectAttributes.addFlashAttribute("message", "dang nhap that bai");
+				return "redirect:"+ referer;
 			} else if (tk.getTrangthai().getIdtrangthai() == 2) {
 				System.out.println("tai khoan chua kich hoat");
-				model.addAttribute("title", "Cẩm nang du lịch");
-				model.addAttribute("message", "tai khoan chua kich hoat");
-				return "home/index";
+//				model.addAttribute("title", "Cẩm nang du lịch");
+//				model.addAttribute("message", "tai khoan chua kich hoat");
+				redirectAttributes.addFlashAttribute("message", "tai khoan chua kich hoat");
+				return "redirect:"+ referer;
 			} else if (tk.getTrangthai().getIdtrangthai() == 3) {
 				System.out.println("tai khoan bi khoa");
-				model.addAttribute("title", "Cẩm nang du lịch");
-				model.addAttribute("message", "tai khoan bi khoa");
-				return "home/index";
+//				model.addAttribute("title", "Cẩm nang du lịch");
+//				model.addAttribute("message", "tai khoan bi khoa");
+				redirectAttributes.addFlashAttribute("message", "tai khoan bi khoa");
+				return "redirect:"+ referer;
 			} else {
 				httpSession.setAttribute("loguser", tk);
 				if(ks != null){
@@ -326,16 +342,18 @@ public class HomeController {
 					httpSession.setAttribute("loguserct", ct);
 				}
 				System.out.println("dang nhap thanh cong");
-				model.addAttribute("title", "Cẩm nang du lịch");
-				model.addAttribute("message", "dang nhap thanh cong");
+//				model.addAttribute("title", "Cẩm nang du lịch");
+//				model.addAttribute("message", "dang nhap thanh cong");
+				redirectAttributes.addFlashAttribute("message", "dang nhap thanh cong");
 			}
 		} catch (Exception e) {
 			System.out.println("dang nhap that bai");
-			model.addAttribute("title", "Cẩm nang du lịch");
-			model.addAttribute("message", "dang nhap that bai");
-			return "home/index";
+//			model.addAttribute("title", "Cẩm nang du lịch");
+//			model.addAttribute("message", "dang nhap that bai");
+			redirectAttributes.addFlashAttribute("message", "dang nhap that bai");
+			return "redirect:"+ referer;
 		}
-		return "home/index";
+		return "redirect:"+ referer;
 	}
 
 	
@@ -481,12 +499,19 @@ public class HomeController {
 		List<Khachsan> listks = querykstkv.list();
 
 		// Lấy đánh giá khách sạn
-		String hqldg = "from Danhgia where idkhachsan = :idks";
+		String hqldg = "from Danhgia where idkhachsan = :idks order by thoigian desc";
 		Query querydg = session.createQuery(hqldg);
 		querydg.setParameter("idks", idks);
 		@SuppressWarnings({ "unchecked" })
 		List<Danhgia> listdgks = querydg.list();
 		
+		// Lấy đánh giá khách sạn (*)
+		String hqldgs = "from Danhgia where idkhachsan = :idks group by idkhachsan";
+		Query querydgs = session.createQuery(hqldgs);
+		querydgs.setParameter("idks", idks);
+		Danhgia dgs = (Danhgia) querydgs.uniqueResult();
+		
+		model.addAttribute("dgs", dgs);
 		model.addAttribute("listdgks", listdgks);
 		model.addAttribute("lstkhachsan", listks);
 		model.addAttribute("ctks", ks);
@@ -626,10 +651,8 @@ public class HomeController {
 			try {
 				image.transferTo(new File(photoPath));
 			} catch (IllegalStateException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
@@ -689,6 +712,69 @@ public class HomeController {
 		return "home/index";
 	}
 	
+	
+	@RequestMapping(value = "danhgiakhachsan", method = RequestMethod.POST)
+	public String danhgiakhachsan(ModelMap model, 
+			HttpServletRequest request, RedirectAttributes redirectAttributes,
+			@RequestParam("idtaikhoan") Integer idtaikhoan,
+			@RequestParam("idkhachsan") Integer idkhachsan,
+			@RequestParam("star") Integer star,
+			@RequestParam("noidung") String noidung) {
+		String referer = request.getHeader("Referer");
+		Session session = factory.openSession();
+		Date thoigiandanhgia = new Date();
+		Khachsan khachsan = (Khachsan) session.get(Khachsan.class, idkhachsan);
+		Taikhoan taikhoan = (Taikhoan) session.get(Taikhoan.class, idtaikhoan);
+		Danhgia danhgia = new Danhgia(khachsan, taikhoan, star, noidung, thoigiandanhgia);
+		Transaction t = session.beginTransaction();
+		try {
+			session.save(danhgia);
+			t.commit();
+			redirectAttributes.addFlashAttribute("message", "danh gia thanh cong");
+			return "redirect:"+ referer;
+		} catch (Exception e) {
+			t.rollback();
+			redirectAttributes.addFlashAttribute("message", "danh gia that bai");
+		} finally {
+			session.close();
+		}
+		return "redirect:"+ referer;
+	}
+	
+	
+	
+	
+	// Trang đặt phòng
+	@RequestMapping("dat-phong")
+	public String datphong(ModelMap model, HttpSession httpsession,
+			@RequestParam("khachsan") String slugkhachsan,
+			@RequestParam("loaiphong") String slugloaiphong) {
+		
+		Session session = factory.getCurrentSession();
+		
+		String hqlks = "from Khachsan where slug = :slugkhachsan";
+		Query queryks = session.createQuery(hqlks);
+		queryks.setParameter("slugkhachsan", slugkhachsan);
+		Khachsan khachsan = (Khachsan) queryks.uniqueResult();
+		Integer idks = khachsan.getIdkhachsan();
+
+		String hqllp = "from Loaiphong where slug = :slugloaiphong";
+		Query querylp = session.createQuery(hqllp);
+		querylp.setParameter("slugloaiphong", slugloaiphong);
+		Loaiphong loaiphong = (Loaiphong) querylp.uniqueResult();
+		
+		String hqldgs = "from Danhgia where idkhachsan = :idks group by idkhachsan";
+		Query querydgs = session.createQuery(hqldgs);
+		querydgs.setParameter("idks", idks);
+		Danhgia dgs = (Danhgia) querydgs.uniqueResult();
+		
+		model.addAttribute("title", "Đặt phòng");
+		model.addAttribute("khachsan", khachsan);
+		model.addAttribute("loaiphong", loaiphong);
+		model.addAttribute("dgs", dgs);
+		
+		return "home/datphong";
+	}
 	
 	
 	

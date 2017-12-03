@@ -15,17 +15,7 @@
 				<h5 class="card-header">Thông tin liên hệ</h5>
 				<div class="card-body">
 					<form action="home/datphong.html" method="post" >
-						<div class="form-group row">
-							<label class="col-4 col-form-label">Loại phòng </label>
-							<div class="col-8">
-								<select name="loaiphong" class="form-control">
-									<option selected="selected" disabled="disabled">-- Chọn loại phòng --</option>
-									<c:forEach var="lp" items="${loaiplist}">
-										<option value="${lp.idloaiphong }">${lp.tenloai}</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
+						<input name="loaiphong" value="${loaiphong.idloaiphong}" hidden="">
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Ngày nhận phòng</label>
 							<div class="col-8">
@@ -41,46 +31,45 @@
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Số lượng phòng</label>
 							<div class="col-8">
-								<input name="soluong" class="form-control" type="number" value="">
+								<input name="soluong" class="form-control" type="number" value="" placeholder="Nhập số lượng phòng">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Họ đêm</label>
 							<div class="col-8">
-								<input name="hodem" class="form-control" type="text" value="">
+								<input name="hodem" class="form-control" type="text" value="${loguser.hodem}" placeholder="Nhập họ đệm">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Tên</label>
 							<div class="col-8">
-								<input name="ten" class="form-control" type="text" value="">
+								<input name="ten" class="form-control" type="text" value="${loguser.ten}" placeholder="Nhập tên">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Số điện thoại</label>
 							<div class="col-8">
-								<input name="sodienthoai" class="form-control" type="text" value="">
+								<input name="sodienthoai" class="form-control" type="text" value="${loguser.sodienthoai}" placeholder="Nhập số điện thoại">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Email</label>
 							<div class="col-8">
-								<input name="email" class="form-control" type="email" value="">
+								<input name="email" class="form-control" type="email" value="${loguser.email}" placeholder="Nhập địa chỉ email">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-check">
-								<label class="custom-control custom-checkbox"> <input
-									type="checkbox" class="custom-control-input"> <span
-									class="custom-control-indicator"></span> <span
-									class="custom-control-description">Tôi đã đọc và chấp
+								<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+									<span class="custom-control-indicator"></span>
+									<span class="custom-control-description">Tôi đã đọc và chấp
 										nhận các chính sách của khách sạn, điều khoản, điều kiện và
 										chính sách quyền riêng tư</span>
 								</label>
 							</div>
 							<div class="col-md-12 text-center">
-								<button class="btn btn-success" style="width: 200px;">Đặt
-									phòng</button>
+								<button class="btn btn-success" style="width: 200px;">Đặt phòng</button>
 							</div>
 						</div>
 					</form>
@@ -91,7 +80,7 @@
 		<!-- Thông tin phòng -->
 		<div class="col-lg-6">
 			<div class="card my-4">
-				<h5 class="card-header">Thông tin phòng</h5>
+				<h5 class="card-header">Thông tin khách sạn và phòng</h5>
 				<div class="card-body">
 					<div class="col-md-12">
 						<div class="row">
@@ -99,41 +88,64 @@
 								style="height: 100%; padding: 0;">
 								<a href="#">
 									<div class="img">
-										<img class="img-fluid rounded"
-											src="http://placehold.it/700x450" alt="">
+										<img class="img-fluid rounded" src="files/khachsan/${khachsan.hinhanh}" alt="">
 									</div>
 									<div class="info">
-										<h3>Heading here</h3>
-										<p>Description goes here</p>
+										<h3>${khachsan.tenkhachsan}</h3>
+										<p>${khachsan.diachi}</p>
 									</div>
 								</a>
 							</div>
 							<div class="col-md-6">
-								<h4 class="card-title">88 Hilltop Hostel & Villa</h4>
+								<h4 class="card-title">${khachsan.tenkhachsan}</h4>
 								<hr>
-								<span class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+								<c:choose>
+									<c:when test="${dgs.star == 5}">
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+									</c:when>
+									<c:when test="${dgs.star == 4}">
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+									</c:when>
+									<c:when test="${dgs.star == 3}">
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</c:when>
+									<c:when test="${dgs.star == 2}">
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</c:when>
+									<c:otherwise>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<hr>
-									<p>
-										<i class="fa fa-location-arrow"></i> Trần Hưng Đạo, Khu Phố 7,
-										Thị Trấn Dương Đông, TP. Phú Quốc
-									</p>
-									<p>
-										<i class="fa fa-phone"></i> 0123456789
-									</p>
-									<p>
-										<i class="fa fa-clock-o"></i> Mở cửa từ: 12:00 AM - 11:30 PM
-									</p>
-									<p class="p-fx">
-										Thiết kế đơn giản, thực tế và thanh lịch.<br> Nội thất
-										hiện đại, đầy đủ tiện nghi.<br> Đội ngũ phục vụ chu đáo,
-										tận tâm.
-									</p>
+									<p><i class="fa fa-location-arrow" style="padding-right: 5px;"></i> Địa chỉ : ${khachsan.diachi}</p>
+						            <p><i class="fa fa-phone" style="padding-right: 5px;"></i> Số điện thoại : ${khachsan.sodienthoai}</p>
+						            <p><i class="fa fa-map-marker" style="padding-right: 5px;"></i> Thuộc tỉnh thành : ${khachsan.tinhthanh.tinhthanh}</p>
+						            <hr>
+						            <p><i class="fa fa-bed" aria-hidden="true" style="padding-right: 5px;"></i> Loại phòng: ${loaiphong.tenloai}</p>
+						            <p><i class="fa fa-search" aria-hidden="true" style="padding-right: 5px;"></i> Chi tiết phòng: ${loaiphong.mota}</p>
 								</div>
 							</div>
 						</div>

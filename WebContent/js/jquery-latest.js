@@ -6810,7 +6810,7 @@ jQuery.cssHooks.marginRight = addGetHookIf( support.reliableMarginRight,
 		if ( computed ) {
 			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
 			// Work around by temporarily setting element display to inline-block
-			return jQuery.swap( elem, { "display": "inline-block" },
+			return jQuery.swap( elem, { "display": "" },
 				curCSS, [ elem, "marginRight" ] );
 		}
 	}
@@ -7156,7 +7156,7 @@ function defaultPrefilter( elem, props, opts ) {
 			// inline-level elements accept inline-block;
 			// block-level elements need to be inline with layout
 			if ( !support.inlineBlockNeedsLayout || defaultDisplay( elem.nodeName ) === "inline" ) {
-				style.display = "inline-block";
+				style.display = "";
 			} else {
 				style.zoom = 1;
 			}

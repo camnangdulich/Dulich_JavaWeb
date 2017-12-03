@@ -215,18 +215,28 @@
 				                    <span class="fa fa-star checked"></span>
 				                    <span class="fa fa-star checked"></span>
 				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star"></span>
 		                    	</c:when>
 		                    	<c:when test="${kstn.star == 3}">
 		                    		<span class="fa fa-star checked"></span>
 				                    <span class="fa fa-star checked"></span>
 				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star"></span>
+				                    <span class="fa fa-star"></span>
 		                    	</c:when>
 		                    	<c:when test="${kstn.star == 2}">
 		                    		<span class="fa fa-star checked"></span>
 				                    <span class="fa fa-star checked"></span>
+				                    <span class="fa fa-star"></span>
+				                    <span class="fa fa-star"></span>
+				                    <span class="fa fa-star"></span>
 		                    	</c:when>
 		                    	<c:otherwise>
 		                    		<span class="fa fa-star checked"></span>
+		                    		<span class="fa fa-star"></span>
+		                    		<span class="fa fa-star"></span>
+		                    		<span class="fa fa-star"></span>
+		                    		<span class="fa fa-star"></span>
 		                    	</c:otherwise>
 		                    </c:choose>
 		                </div>
