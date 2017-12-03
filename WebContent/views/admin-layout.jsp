@@ -557,12 +557,12 @@
 	                                <a href="admin/danh-sach-tour-du-lich.html"><i class="fa fa-fw fa-list"></i> Danh sách tour du lịch</a>
 	                            </li>
 	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm tour du lịch mới</a>
+	                                <a href="admin/them-tour-du-lich.html"><i class="fa fa-fw fa-plus"></i> Thêm tour du lịch mới</a>
 	                            </li>
 	                        </ul>
 	                    </li>
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="#">
+	                        <a class="nav-link" href="admin/danh-sach-don-dat-tour.html">
 	                            <i class="fa fa-fw fa-file-text"></i>
 	                            <span class="nav-link-text">Danh sách đơn đặt tour</span>
 	                        </a>
@@ -579,22 +579,35 @@
 	                    <li class="nav-item dropdown">
 	                        <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                            <i class="fa fa-fw fa-bell"></i>
-	                            <span class="indicator text-warning d-none d-lg-block">
-	                                <i class="fa fa-fw fa-circle"></i>
-	                            </span>
+	                            <c:forEach var="dp" items="${dondattourlst}" end="5" varStatus="loop">
+	                            	<c:if test="${dp.tour.congty.idcongty == loguserct.idcongty}">
+	                            		<c:if test="${dp.trangthai.idtrangthai == 2}">
+				                            <span class="indicator text-warning d-none d-lg-block">
+				                                <i class="fa fa-fw fa-circle"></i>
+				                            </span>
+	                            		</c:if>
+	                            	</c:if>
+	                            </c:forEach>
 	                        </a>
 	                        <div class="dropdown-menu" aria-labelledby="alertsDropdown">
 	                            <h6 class="dropdown-header">Thông báo:</h6>
 	                            <div class="dropdown-divider"></div>
-	                            <a class="dropdown-item" href="#">
-	                                <span class="text-success">
-	                                    <strong><i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-	                                </span>
-	                                <span class="small float-right text-muted">11:21 AM</span>
-	                                <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-	                            </a>
+	                            <c:forEach var="dp" items="${dondattourlst}" end="5" varStatus="loop">
+	                            	<c:if test="${dp.tour.congty.idcongty == loguserct.idcongty}">
+	                            		<c:if test="${dp.trangthai.idtrangthai == 2}">
+				                            <a class="dropdown-item" href="admin/danh-sach-don-dat-tour.html">
+				                                <span class="text-success">
+				                                    <strong>${dp.hodem} ${dp.ten}</strong>
+				                                </span>
+												<span class="small float-right" style="color: #f0ad4e;">${dp.trangthai.trangthai}</span>
+				                                <div class="dropdown-message small">Đơn đặt tour của ${dp.hodem} ${dp.ten} chưa được xác nhận</div>
+				                            </a>
+				                            <div class="dropdown-divider"></div>
+			                            </c:if>
+		                            </c:if>
+	                            </c:forEach>
 	                            <div class="dropdown-divider"></div>
-	                            <a class="dropdown-item small" href="#">View all alerts</a>
+	                            <a class="dropdown-item small" href="admin/danh-sach-don-dat-tour.html">Quản lý đơn đặt tour</a>
 	                        </div>
 	                    </li>
 	                    <li class="nav-item">
@@ -748,7 +761,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                            <a class="btn btn-primary" href="login.html">Đăng xuất</a>
+                            <a class="btn btn-primary" href="home/dangxuat.html">Đăng xuất</a>
                         </div>
                     </div>
                 </div>

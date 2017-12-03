@@ -213,6 +213,17 @@ public class AdminController {
 		List<Datphong> list = query.list();
 		return list;
 	}
+	
+	// Lấy tất cả đơn đăt tour
+	@ModelAttribute("dondattourlst")
+	public List<Dattour> dondattourlst(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Dattour";
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Dattour> list = query.list();
+		return list;
+	}
 
 	// Lấy tất cả thông tin loại bài viết
 	@ModelAttribute("lbvlist")
@@ -376,18 +387,18 @@ public class AdminController {
 		return "admin/dstour";
 	}
 
-	// Thông tin công ty
-	@RequestMapping("thong-tin-cong-ty")
-	public String thongtincongty(ModelMap model) {
-		model.addAttribute("title", "Thông tin công ty");
-		return "admin/ttcongty";
-	}
-
 	// Trang danh sách đơn đặt phòng
 	@RequestMapping("danh-sach-don-dat-phong")
 	public String danhsachdondatphong(ModelMap model) {
 		model.addAttribute("title", "Danh sách đơn đặt phòng");
 		return "admin/dsdondatphong";
+	}
+	
+	// Trang danh sách đơn đặt tour
+	@RequestMapping("danh-sach-don-dat-tour")
+	public String danhsachdondattour(ModelMap model) {
+		model.addAttribute("title", "Danh sách đơn đặt tour");
+		return "admin/dsdondattour";
 	}
 
 	// Trang danh sách khách sạn
@@ -839,21 +850,27 @@ public class AdminController {
 	}
 
 	// Thêm tour du lịch
-	@RequestMapping("themtour")
+	@RequestMapping("them-tour-du-lich")
 	public String themtour(ModelMap model) {
 		model.addAttribute("title", "Thêm tour du lịch mới");
 		return "admin/themtour";
 	}
-	@RequestMapping(value = "themtour", method = RequestMethod.POST)
-	public String themtour(ModelMap model, @RequestParam("congty") Integer congty,
-			@RequestParam("diemden") Integer diemden, @RequestParam("tentour") String tentour,
-			@RequestParam("mota") String mota, @RequestParam("gia") Integer gia, @RequestParam("diemdi") String diemdi,
-			@RequestParam("ngaykhoihanh") String ngaykhoihanh, @RequestParam("lichtrinh") String lichtrinh,
-			@RequestParam("luuy") String luuy, @RequestParam("hinhanh") MultipartFile hinhtour) {
+	@RequestMapping(value = "them-tour-du-lich", method = RequestMethod.POST)
+	public String themtour(ModelMap model,
+			@RequestParam("congty") Integer congty,
+			@RequestParam("diemden") Integer diemden,
+			@RequestParam("tentour") String tentour,
+			@RequestParam("mota") String mota,
+			@RequestParam("gia") Integer gia,
+			@RequestParam("diemdi") String diemdi,
+			@RequestParam("ngaykhoihanh") String ngaykhoihanh,
+			@RequestParam("lichtrinh") String lichtrinh,
+			@RequestParam("luuy") String luuy,
+			@RequestParam("hinhanh") MultipartFile hinhtour) {
 
 		if (kiemtratour(tentour)) {
 			model.addAttribute("message", "ten tour da ton tai");
-			model.addAttribute("title", "Thêm tour mới");
+			model.addAttribute("title", "Thêm tour du lịch mới");
 			return "admin/themtour";
 		} else {
 			Session session = factory.openSession();
@@ -863,46 +880,44 @@ public class AdminController {
 			Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
 			// Tạo đường dẫn lưu hình ảnh
 			String photoPath = "";
-			if (hinhtour.getOriginalFilename().equals("")) {
-				photoPath = context.getRealPath("/files/tour/tour1.jpg");
-			} else {
-				photoPath = context.getRealPath("/files/tour/" + hinhtour.getOriginalFilename());
-			}
-			// Lưu hình ảnh
-			try {
-				hinhtour.transferTo(new File(photoPath));
-			} catch (IllegalStateException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			photoPath = context.getRealPath("/files/tour/" + hinhtour.getOriginalFilename());
 
 			if (hinhtour.getOriginalFilename().equals("")) {
-				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, "tour1.jpg",
-						slugtour);
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, "default.jpg", slugtour);
 				try {
 					session.save(to);
 					t.commit();
 					model.addAttribute("message", "them tour thanh cong");
+					model.addAttribute("title", "Thêm tour du lịch mới");
 					return "admin/themtour";
 				} catch (Exception e) {
 					t.rollback();
 					model.addAttribute("message", "them tour that bai");
+					model.addAttribute("title", "Thêm tour du lịch mới");
 				} finally {
 					session.close();
 				}
 
 			} else {
-				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0,
-						hinhtour.getOriginalFilename(), slugtour);
+				// Lưu hình ảnh
+				try {
+					hinhtour.transferTo(new File(photoPath));
+				} catch (IllegalStateException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				Tour to = new Tour(ct, tt, tentour, mota, gia, diemdi, ngaykhoihanh, lichtrinh, luuy, 0, hinhtour.getOriginalFilename(), slugtour);
 				try {
 					session.save(to);
 					t.commit();
 					model.addAttribute("message", "them tour thanh cong");
+					model.addAttribute("title", "Thêm tour du lịch mới");
 					return "admin/themtour";
 				} catch (Exception e) {
 					t.rollback();
 					model.addAttribute("message", "them tour that bai");
+					model.addAttribute("title", "Thêm tour du lịch mới");
 				} finally {
 					session.close();
 				}
@@ -1128,6 +1143,46 @@ public class AdminController {
 		}
 	}
 
+	// Sửa thông tin công ty
+	@RequestMapping("thong-tin-cong-ty")
+	public String thongtincongty(ModelMap model) {
+		model.addAttribute("title", "Thông tin công ty");
+		return "admin/ttcongty";
+	}
+	@RequestMapping(value = "thong-tin-cong-ty", method = RequestMethod.POST)
+	public String thongtincongty(ModelMap model, HttpSession httpSession,
+			@RequestParam("idct") Integer idcongty,
+			@RequestParam("tencongty") String tencongty,
+			@RequestParam("diachi") String diachi, 
+			@RequestParam("mota") String mota,
+			@RequestParam("sodienthoai") String sodienthoai) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Congty ct = (Congty) session.get(Congty.class, idcongty);
+		String slugcongty = SlugsConverter.toSlug(tencongty);
+		ct.setTencongty(tencongty);
+		ct.setDiachi(diachi);
+		ct.setMota(mota);
+		ct.setSodienthoai(sodienthoai);
+		ct.setSlug(slugcongty);
+		try {
+			session.update(ct);
+			t.commit();
+			model.addAttribute("message", "Chỉnh sửa thông tin thành công!");
+			model.addAttribute("title", "Thông tin công ty");
+			httpSession.setAttribute("loguserct", ct);
+			return "admin/ttcongty";
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "Chỉnh thông tin thất bại !" + e.getMessage());
+			model.addAttribute("title", "Thông tin công ty");
+			System.out.println("Thất bại");
+		} finally {
+			session.close();
+		}
+		return "admin/ttcongty";
+	}
+	
 	// Sửa thông tin khách sạn
 	@RequestMapping("thong-tin-khach-san")
 	public String thongtinkhachsan(ModelMap model) {
@@ -1258,16 +1313,19 @@ public class AdminController {
 	}
 
 	// Sửa thông tin tour
-	@RequestMapping("sutour/{id}")
-	public String sutour(ModelMap model, @PathVariable("id") Integer idt) {
-		model.addAttribute("title", "Sửa tỉnh thành");
+	@RequestMapping("danh-sach-tour-du-lich/sua-tour/{slugtour}")
+	public String sutour(ModelMap model, @PathVariable("slugtour") String slugtour) {
+		model.addAttribute("title", "Sửa tour du lịch");
 		Session session = factory.getCurrentSession();
-		Tour tou = (Tour) session.get(Tour.class, idt);
-		model.addAttribute("tua", tou);
-		return "admin/sutour";
+		String hql = "from Tour where slug = :slugtour";
+		Query query = session.createQuery(hql);
+		query.setParameter("slugtour", slugtour);
+		Tour tour = (Tour) query.uniqueResult();
+		model.addAttribute("tua", tour);
+		return "admin/stour";
 	}
 	@RequestMapping(value = "sutour", method = RequestMethod.POST)
-	public String sutour(ModelMap model, @RequestParam("idtour") Integer idtour, @RequestParam("congty") Integer congty,
+	public String sutour(ModelMap model, @RequestParam("idtour") Integer idtour,
 			@RequestParam("diemden") Integer diemden, @RequestParam("tentour") String tentour,
 			@RequestParam("mota") String mota, @RequestParam("gia") Integer gia, @RequestParam("diemdi") String diemdi,
 			@RequestParam("ngaykhoihanh") String ngaykhoihanh, @RequestParam("lichtrinh") String lichtrinh,
@@ -1276,11 +1334,10 @@ public class AdminController {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		Tour to = (Tour) session.get(Tour.class, idtour);
-		Congty ct = (Congty) session.get(Congty.class, congty);
+		String slugtour = to.getSlug();
 		Tinhthanh tt = (Tinhthanh) session.get(Tinhthanh.class, diemden);
 		String photoPath = context.getRealPath("/files/tour/" + hinhanh.getOriginalFilename());
 
-		to.setCongty(ct);
 		to.setTinhthanh(tt);
 		to.setTentour(tentour);
 		to.setMota(mota);
@@ -1289,27 +1346,28 @@ public class AdminController {
 		to.setThoigiankhoihanh(ngaykhoihanh);
 		to.setLichtrinh(lichtrinh);
 		to.setLuuy(luuy);
+		
 		try {
 			if (hinhanh.getOriginalFilename().equals("")) {
 				session.update(tt);
 				t.commit();
 				model.addAttribute("message", "Chỉnh sửa tour thành công !");
 				System.out.println("Thành công không thêm ảnh");
-				return "redirect:/admin/sutour/" + idtour + ".html";
+				return "redirect:/admin/danh-sach-tour-du-lich/sua-tour/" + slugtour + ".html";
 			} else {
 				hinhanh.transferTo(new File(photoPath));
-				tt.setHinhanh(hinhanh.getOriginalFilename());
+				to.setHinhtour(hinhanh.getOriginalFilename());
 				session.update(tt);
 				t.commit();
 				model.addAttribute("message", "Chỉnh sửa tour thành công !");
 				System.out.println("Thành công có thêm ảnh");
-				return "redirect:/admin/sutour/" + idtour + ".html";
+				return "redirect:/admin/danh-sach-tour-du-lich/sua-tour/" + slugtour + ".html";
 			}
 		} catch (Exception e) {
 			t.rollback();
 			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
 			System.out.println("that bai");
-			return "redirect:/admin/tintuc/" + idtour + ".html";
+			return "redirect:/admin/danh-sach-tour-du-lich/sua-tour/" + slugtour + ".html";
 		} finally {
 			session.close();
 		}

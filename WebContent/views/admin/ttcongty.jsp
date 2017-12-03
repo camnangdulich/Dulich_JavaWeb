@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-md-auto">
-                    <form action="admin/thong-tin-khach-san.html" method="post" enctype="multipart/form-data">
+                    <form action="admin/thong-tin-cong-ty.html" method="post">
                     	<input name="idct" type="hidden" value="${loguserct.idcongty}">
                         <div class="form-group row">
                         	<label class="col-sm-2 col-form-label">Tên công ty</label>

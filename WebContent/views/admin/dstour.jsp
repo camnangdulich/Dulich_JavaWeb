@@ -21,48 +21,50 @@
                 <table class="table table-bordered" id="dataTable">
                     <thead>
                         <tr>
+                        	<th style="width: 20px">ID</th>
                             <th style="width: 50px;">Ảnh</th>
                             <th>Tên tour</th>
                             <th>Giá</th>
                             <th>Điểm đi</th>
                             <th>Điểm đến</th>
-                            <th>Công ty</th>
                             <th>Thời gian</th>
                             <th style="width: 20px;"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
+                        	<th>ID</th>
                         	<th>Ảnh</th>
                             <th>Tên tour</th>
                             <th>Giá</th>
                             <th>Điểm đi</th>
                             <th>Điểm đến</th>
-                            <th>Công ty</th>
                             <th>Thời gian</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <c:forEach var="tu" items="${tulist}">
-                            <tr>
-                                <td><img src="files/tour/${tu.hinhtour}" width="80px"></td>
-                                <td>${tu.tentour}</td>
-                                <td>${tu.gia}</td>
-                                <td>${tu.diemdi}</td>
-                                <td>${tu.tinhthanh.tinhthanh}</td>
-                                <td>${tu.congty.tencongty}</td>
-                                <td>${tu.thoigiankhoihanh}</td>
-                                <td>
-                                	<a href="#" style="padding-right: 5px;">
-	                                	<i class="fa fa-pencil" title="Sửa tỉnh thành"></i> 
-	                                </a>
-	                                <a  style="color: red; cursor: pointer;" 
-	                                onclick="kiemtraxoat('${tu.idtour}','${tu.tentour }')">
-	                                	<i class="fa fa-times" title="Xóa Tour"></i>
-	                                </a>
-								</td>
-                            </tr>
+                        	<c:if test="${tu.congty.idcongty == loguserct.idcongty}">
+	                        	<tr>
+	                        		<td>${tu.idtour}</td>
+	                                <td><img src="files/tour/${tu.hinhtour}" width="80px"></td>
+	                                <td>${tu.tentour}</td>
+	                                <td style="width: 150px;">${String.format("%,d", tu.gia)}  VNĐ</td>
+	                                <td style="width: 150px;">${tu.diemdi}</td>
+	                                <td style="width: 150px;">${tu.tinhthanh.tinhthanh}</td>
+	                                <td style="width: 200px;">${tu.thoigiankhoihanh}</td>
+	                                <td>
+	                                	<a href="admin/danh-sach-tour-du-lich/sua-tour/${tu.slug}.html" style="padding-right: 5px;">
+		                                	<i class="fa fa-pencil" title="Sửa Tour"></i> 
+		                                </a>
+		                                <a  style="color: red; cursor: pointer;" 
+		                                onclick="kiemtraxoat('${tu.idtour}','${tu.tentour }')">
+		                                	<i class="fa fa-times" title="Xóa Tour"></i>
+		                                </a>
+									</td>
+	                            </tr>
+                        	</c:if>
                         </c:forEach>
                     </tbody>
                 </table>
