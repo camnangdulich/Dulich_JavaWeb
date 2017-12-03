@@ -10,58 +10,49 @@
         <li class="breadcrumb-item">
             <a href="admin/index.html">Điều khiển</a>
         </li>
-        <li class="breadcrumb-item active">Danh sách Tỉnh Thành</li>
+        <li class="breadcrumb-item active">Danh sách tour du lịch</li>
     </ol>
     <!-- Example DataTables Card-->
     <div class="card mb-3">
         <div class="card-header">
-            <i class="fa fa-table"></i> Bảng dữ liệu tỉnh thành</div>
+            <i class="fa fa-table"></i> Bảng dữ liệu tour du lịch</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th style="width: 50px;">Ảnh</th>
                             <th>Tên tour</th>
-                            <th>Mô tả</th>
                             <th>Giá</th>
                             <th>Điểm đi</th>
                             <th>Điểm đến</th>
                             <th>Công ty</th>
                             <th>Thời gian</th>
-                            <th>Lịch trình</th>
-                            <th>Lưu ý</th>
-                            <th style="width: 50px;"><i class="fa fa-cog"></i></th>
+                            <th style="width: 20px;"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                        	<th>ID</th>
+                        	<th>Ảnh</th>
                             <th>Tên tour</th>
-                            <th>Mô tả</th>
                             <th>Giá</th>
                             <th>Điểm đi</th>
                             <th>Điểm đến</th>
                             <th>Công ty</th>
                             <th>Thời gian</th>
-                            <th>Lịch trình</th>
-                            <th>Lưu ý</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <c:forEach var="tu" items="${tulist}">
                             <tr>
-                                <td style="width: 50px;"><img src="files/tour/${tu.hinhtour}" width="150px"></td>
+                                <td><img src="files/tour/${tu.hinhtour}" width="80px"></td>
                                 <td>${tu.tentour}</td>
-                                <td>${tu.mota}</td>
                                 <td>${tu.gia}</td>
                                 <td>${tu.diemdi}</td>
                                 <td>${tu.tinhthanh.tinhthanh}</td>
                                 <td>${tu.congty.tencongty}</td>
                                 <td>${tu.thoigiankhoihanh}</td>
-                                <td>${tu.lichtrinh}</td>
-                                <td>${tu.luuy}</td>
                                 <td>
                                 	<a href="#" style="padding-right: 5px;">
 	                                	<i class="fa fa-pencil" title="Sửa tỉnh thành"></i> 

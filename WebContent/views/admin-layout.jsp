@@ -536,16 +536,30 @@
 	            <div class="collapse navbar-collapse" id="navbarResponsive">
 	                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="admin/index.html">
+	                        <a class="nav-link" href="admin/dieu-khien.html">
 	                            <i class="fa fa-fw fa-dashboard"></i>
 	                            <span class="nav-link-text">Điều khiển</span>
 	                        </a>
 	                    </li>
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="#">
+	                        <a class="nav-link" href="admin/thong-tin-cong-ty.html">
 	                            <i class="fa fa-fw fa-contao"></i>
 	                            <span class="nav-link-text">Thông tin công ty</span>
 	                        </a>
+	                    </li>
+	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qltour" data-parent="#exampleAccordion">
+	                            <i class="fa fa-fw fa-leaf"></i>
+	                            <span class="nav-link-text">Quản lý tour du lịch</span>
+	                        </a>
+	                        <ul class="sidenav-second-level collapse" id="qltour">
+	                            <li>
+	                                <a href="admin/danh-sach-tour-du-lich.html"><i class="fa fa-fw fa-list"></i> Danh sách tour du lịch</a>
+	                            </li>
+	                            <li>
+	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm tour du lịch mới</a>
+	                            </li>
+	                        </ul>
 	                    </li>
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link" href="#">
