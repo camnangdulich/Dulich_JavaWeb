@@ -262,6 +262,7 @@ public class HomeController {
 	public String index(ModelMap model, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		model.addAttribute("title", "Cẩm nang du lịch");
+		
 		return "home/index";
 	}
 

@@ -76,12 +76,16 @@
                             <a class="nav-link" href="home/phan-hoi.html">Phản hồi</a>
                         </li>
                         <li style="margin-right: 15px;">
+                        <form:form action="home/timkiem.html" method="get">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                            
+                                <input name="tukhoa" type="text" class="form-control" placeholder="Tìm kiếm...">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="button">Tìm!</button>
+                                    <button class="btn btn-secondary" type="submit">Tìm!</button>
                                 </span>
+                             
                             </div>
+                            </form:form>
                         </li>
                         
                         <c:choose>
