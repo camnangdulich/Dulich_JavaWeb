@@ -124,7 +124,7 @@ public class HuyHomeController {
  		// Đặt tour
  		@RequestMapping(value = "tour", method = RequestMethod.POST)
  		public String tour(ModelMap model,
- 				//Lấy thông tin tứ các input có name là 
+ 				//Lấy thông tin tứ các input 
  				@RequestParam("tentour") Integer tentour,
  				@RequestParam("hodem") String hodem,
  				@RequestParam("ten") String ten,
@@ -152,7 +152,7 @@ public class HuyHomeController {
  	 			} finally {
  	 				session.close();//Đóng session
  	 			}
- 			return "redirect:/home/tour/"+tuor.getSlug()+".html";//Trả về  cái trang tour
+ 			return "redirect:/home/tour/"+tuor.getSlug()+".html";//Trả về trang tour
  		}
  		
  		

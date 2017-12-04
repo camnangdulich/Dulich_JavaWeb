@@ -173,26 +173,27 @@ public class HomeController {
 	@ModelAttribute("lstdanhgiakhachsan")
 	public List<Danhgia> lstdanhgiakhachsan(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int dgksSize = 8;
+		int dgksSize = 8;//số lượng khách sạn có sao nhiều nhất
+		//Câu truy vấn lấy khách sạn có nhiều sao nhất 
 		String hql_dgks = "from Danhgia group by idkhachsan having avg(star) >= 3 ORDER BY star DESC";
-		Query query_dgks = session.createQuery(hql_dgks);
+		Query query_dgks = session.createQuery(hql_dgks);//THực hiện câu truy vấn 
 		query_dgks.setMaxResults(dgksSize);
 		@SuppressWarnings("unchecked")
-		List<Danhgia> lstdanhgiakhachsan = query_dgks.list();
-		return lstdanhgiakhachsan;
+		List<Danhgia> lstdanhgiakhachsan = query_dgks.list();//Tạo danh sách khách sạn có nhiều sao 
+		return lstdanhgiakhachsan;//Trả về danh sách khách sạn có nhiều sao nhất
 	}
 
 	// Lấy tour có lượt xem nhiều nhất
 	@ModelAttribute("lsttournoibat")
 	public List<Tour> lsttournoibat(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int tourSize = 8;
-		String hql_tour = "from Tour ORDER BY luotxem DESC";
-		Query query_tour = session.createQuery(hql_tour);
+		int tourSize = 8;//Tạo biến tourSize kiểu int để lấy 8 tour có lượt xem nhiều
+		String hql_tour = "from Tour ORDER BY luotxem DESC";//Câu truy vấn lấy tour có lượt xem nhiều
+		Query query_tour = session.createQuery(hql_tour);//Thực hiên câu truy vấn
 		query_tour.setMaxResults(tourSize);
 		@SuppressWarnings("unchecked")
-		List<Tour> lsttournoibat = query_tour.list();
-		return lsttournoibat;
+		List<Tour> lsttournoibat = query_tour.list();//Tạo danh sách tour có lượt xem nhiều 
+		return lsttournoibat;//Trả về danh sách tour có lượt xem nhiều
 	}
 
 	// Lấy tour đặc biệt
@@ -212,55 +213,55 @@ public class HomeController {
 	@ModelAttribute("loaitinlst")
 	public List<Loaitin> loaitinlst(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Loaitin";
-		Query query = session.createQuery(hql);
+		String hql = "from Loaitin";//Câu truy vấn lấy tất cả thông tin loại tin tức
+		Query query = session.createQuery(hql);//Thực hiện câu truy vấn 
 		@SuppressWarnings("unchecked")
-		List<Loaitin> list = query.list();
-		return list;
+		List<Loaitin> list = query.list();//Tạo danh sách loại tin tức 
+		return list;//Trả về danh sách loại tin tức
 	}
 
 	// Lấy tất cả loại phòng
 	@ModelAttribute("loaiphonglst")
 	public List<Loaiphong> loaiphonglst(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Loaiphong";
-		Query query = session.createQuery(hql);
+		String hql = "from Loaiphong";//Câu truy vấn lấy tất cả thông tin loại phòng
+		Query query = session.createQuery(hql);//Thực hiện câu truy vấn
 		@SuppressWarnings("unchecked")
-		List<Loaiphong> list = query.list();
-		return list;
+		List<Loaiphong> list = query.list();//Tạo danh sách loại phòng
+		return list;//Trả về danh sách loại phòng
 	}
 	
 	// Lấy tất cả dịch vụ
 	@ModelAttribute("dichvulst")
 	public List<Dichvu> dichvulst(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Dichvu";
-		Query query = session.createQuery(hql);
+		String hql = "from Dichvu";//Câu truy vấn lấy tất cả thông tin dịch vụ
+		Query query = session.createQuery(hql);//Thực hiện câu truy vấn
 		@SuppressWarnings("unchecked")
-		List<Dichvu> list = query.list();
-		return list;
+		List<Dichvu> list = query.list();//Tạo danh sách dịch vụ 
+		return list;// Trả về danh sách dịch vụ
 	}
 	
 	// Lấy tất cả tỉnh thành
 	@ModelAttribute("tinhthanhlst")
 	public List<Tinhthanh> tinhthanhlst(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Tinhthanh order by tinhthanh";
-		Query query = session.createQuery(hql);
+		String hql = "from Tinhthanh order by tinhthanh";//	Câu truy vấn lấy tỉnh thành
+		Query query = session.createQuery(hql);//Thực hiện câu truy vấn
 		@SuppressWarnings("unchecked")
-		List<Tinhthanh> list = query.list();
-		return list;
+		List<Tinhthanh> list = query.list();//Tạo danh sách tỉnh thành 
+		return list;//Trả về danh sách tỉnh thành
 	}
 	
 	// Lấy tất cả thông tin chi tiết loại phòng
 	@ModelAttribute("ctlplist")
 	public List<Chitietloaiphong> getctlp(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Chitietloaiphong";
-		Query query = session.createQuery(hql);
+		String hql = "from Chitietloaiphong";//Lấy thông tin chi tiết loại phòng 
+		Query query = session.createQuery(hql);//Thực hiện câu truy vấn
 		@SuppressWarnings("unchecked")
-		List<Chitietloaiphong> list = query.list();
-		return list;
+		List<Chitietloaiphong> list = query.list();//Tạo danh sách chi tiết loại phòng
+		return list;//Trả về danh sách chi tiết loại phòng 
 	}
 
 	
@@ -280,7 +281,7 @@ public class HomeController {
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		model.addAttribute("title", "Cẩm nang du lịch");
 		
-		return "home/index";
+		return "home/index";//Trả về trang chủ 
 	}
 
 	
@@ -289,19 +290,20 @@ public class HomeController {
 	
 	// Đăng nhập
 	@RequestMapping(value = "dangnhap", method = RequestMethod.POST)
+	//Lấy thông tin từ các input
 	public String dangnhap(ModelMap model, @RequestParam("login_email") String email, @RequestParam("lockacc") Integer lockacc,
 			@RequestParam("login_password") String pwd, HttpSession httpSession, HttpServletRequest request,
 			HttpServletResponse response, RedirectAttributes redirectAttributes) throws InvalidKeyException {
 
-		String referer = request.getHeader("Referer");
+		String referer = request.getHeader("Referer");//Đường dẫn trả về 
 		Session session = factory.getCurrentSession();
-		Taikhoan tk = null;
-		Khachsan ks = null;
-		Congty ct = null;
+		Taikhoan tk = null;//Tạo 1 tài khoản mới rỗng tên là tk
+		Khachsan ks = null;//Tạo 1 khách sạn mới rỗng tên là ks
+		Congty ct = null;//Tạo 1 công ty mới rỗng tên là ct
 		try {
 			// Kiểm tra thông tin tài khoản
-			String hql = "from Taikhoan where email = :emailtk";
-			Query query = session.createQuery(hql);
+			String hql = "from Taikhoan where email = :emailtk";//Câu truy vấn kiểm tra email
+			Query query = session.createQuery(hql);//thực hiện câu truy vấn
 			query.setParameter("emailtk", email);
 			tk = (Taikhoan) query.uniqueResult();
 			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
@@ -371,7 +373,7 @@ public class HomeController {
 		httpSession.removeAttribute("loguser");
 		httpSession.removeAttribute("loguserks");
 		httpSession.removeAttribute("loguserct");
-		return "redirect:/home/trang-chu.html";
+		return "redirect:/home/trang-chu.html";//Trả về trang chủ
 	}
 
 	
@@ -380,6 +382,7 @@ public class HomeController {
 	
 	// Đăng ký (register form)
 	@RequestMapping(value = "dangky", method = RequestMethod.POST)
+	//Lấy thông tin từ các input với các name
 	public String Register(ModelMap model, @RequestParam("reg_email") String email,
 			@RequestParam("reg_matkhau") String matkhau, @RequestParam("reg_sdt") String sdt)
 					throws InvalidKeyException {
@@ -414,7 +417,7 @@ public class HomeController {
 		} finally {
 			session.close();
 		}
-		return "home/index";
+		return "home/index";//Trả về trang index
 	}
 
 	
@@ -634,6 +637,7 @@ public class HomeController {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "taokhachsan", method = RequestMethod.POST)
 	public String taokhachsan(ModelMap model,
+			//Lấy thông tin từ các input với các name
 			@RequestParam("hinhanh") MultipartFile image,
 			@RequestParam("tenkhachsan") String tenkhachsan,
 			@RequestParam("sodienthoai") String sodienthoai,
@@ -646,12 +650,13 @@ public class HomeController {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		
-		Khachsan ks = null;
-		String hql = "from Khachsan where idtaikhoan = :idtaikhoan";
-		Query query = session.createQuery(hql);
+		Khachsan ks = null; //Tạo khách sạn mới rỗng có tên ks
+		String hql = "from Khachsan where idtaikhoan = :idtaikhoan";//Câu truy vấn kiểm tra tài khoản 
+		Query query = session.createQuery(hql);//Thực hiện câu truy vấn
 		query.setParameter("idtaikhoan", idtaikhoantao);
 		ks = (Khachsan) query.uniqueResult();
 		
+		//	Tạo đường dẫn lưu hình ảnh
 		if(ks == null){
 			String photoPath = context.getRealPath("/files/khachsan/" + image.getOriginalFilename());
 			try {
