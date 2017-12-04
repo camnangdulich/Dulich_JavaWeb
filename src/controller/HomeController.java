@@ -112,7 +112,7 @@ public class HomeController {
 		int ttmSize = 8;//Tạo biến int ttmSize lấy 8 tin mới nhất
 		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";//Câu truy vấn lấy tin tức mới nhất
 		Query query_ttm = session.createQuery(hql_ttm);//Chạy câu truy vấn 
-		query_ttm.setMaxResults(ttmSize);
+		query_ttm.setMaxResults(ttmSize);//Set giới hạn số lượng tin mới nhất
 		@SuppressWarnings("unchecked")
 		List<Tintuc> lsttintucmoi = query_ttm.list();//Tạo danh sách tin tức mới nhất có tên là lsttintucmoi
 		return lsttintucmoi;//Trả về danh sách các tin tức mới nhất
@@ -122,13 +122,14 @@ public class HomeController {
 	@ModelAttribute("lsttinlienquan")
 	public List<Tintuc> lsttinlienquan(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int ttmSize = 5;
+		int ttmSize = 5;// Biến kiểu int để lấy số lượng tin liên quan
+		//Câu truy vấn lấy tin liên quan theo tin mới nhất
 		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";
-		Query query_ttm = session.createQuery(hql_ttm);
-		query_ttm.setMaxResults(ttmSize);
+		Query query_ttm = session.createQuery(hql_ttm);// Thực hiện câu truy vấn
+		query_ttm.setMaxResults(ttmSize);// Sét giới hạn số lượng tin liên quan
 		@SuppressWarnings("unchecked")
-		List<Tintuc> lsttinlienquan = query_ttm.list();
-		return lsttinlienquan;
+		List<Tintuc> lsttinlienquan = query_ttm.list();//Tạo danh sách tin liên quan
+		return lsttinlienquan;// Trả về danh sách tin liên quan
 	}
 
 	// Lấy thông tin tin tức mới nhất SIBAR
@@ -138,7 +139,7 @@ public class HomeController {
 		int ttmSize = 3;//tạo biến in ttmSize = 3 để đổ vào SiBAR
 		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";//Lấy tin tức mới nhất SIBAR
 		Query query_ttm = session.createQuery(hql_ttm);//Thực hiện câu truy vấn
-		query_ttm.setMaxResults(ttmSize);
+		query_ttm.setMaxResults(ttmSize);// Set giới hạn tin tức mới nhất SIBAR
 		@SuppressWarnings("unchecked")
 		List<Tintuc> lstsibarttm = query_ttm.list();//Tạo danh sách tin tức mới SIBAR có tên lstsibarttm
 		return lstsibarttm;//Trả về danh sách tin tức mới SIBAR
@@ -148,37 +149,38 @@ public class HomeController {
 	@ModelAttribute("lsttinxemnhieu")
 	public List<Tintuc> lsttinxemnhieu(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int ttxnSize = 8;//Biến int ttxnSize giới hạn số lượng tin có lượt xem nhiều nhất 
-		String hql_ttxn = "from Tintuc tt ORDER BY tt.luotxem DESC";//Câu truy vấn lấy tin tức  có lượt xem nhiều nhất
-		Query query_ttxn = session.createQuery(hql_ttxn);//THực hiện câu truy vấn
-		query_ttxn.setMaxResults(ttxnSize);
+		int ttxnSize = 8;// Biến int ttxnSize giới hạn số lượng tin có lượt xem nhiều nhất 
+		String hql_ttxn = "from Tintuc tt ORDER BY tt.luotxem DESC";// Câu truy vấn lấy tin tức  có lượt xem nhiều nhất
+		Query query_ttxn = session.createQuery(hql_ttxn);// Thực hiện câu truy vấn
+		query_ttxn.setMaxResults(ttxnSize);// Set giới hạn tin có lượt xem nhiều nhất
 		@SuppressWarnings("unchecked")
-		List<Tintuc> lsttinxemnhieu = query_ttxn.list();//Tạ danh sách tin tức được xem nhiều nhất có tên lsttinxemnhieu
-		return lsttinxemnhieu;//Trả về danh sách tin tức có lượt xem nhiều nhất 
+		List<Tintuc> lsttinxemnhieu = query_ttxn.list();// Tạ danh sách tin tức được xem nhiều nhất có tên lsttinxemnhieu
+		return lsttinxemnhieu;// Trả về danh sách tin tức có lượt xem nhiều nhất 
 	}
 
 	// Lấy tin tức có lượt xem nhiều nhất SIBAR
 	@ModelAttribute("lstsibarttxn")
 	public List<Tintuc> lstsibarttxn(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int ttxnSize = 3;
+		int ttxnSize = 3;// Tạo biến có kiểu int giới hạn số lượng tin có nhiều lượt xem SIBAR
+		// Câu truy vấn lấy thông tin tin tức có lượt xem nhiều nhất
 		String hql_ttxn = "from Tintuc ORDER BY luotxem DESC";
-		Query query_ttxn = session.createQuery(hql_ttxn);
-		query_ttxn.setMaxResults(ttxnSize);
+		Query query_ttxn = session.createQuery(hql_ttxn);// Thực hiện câu truy vấn
+		query_ttxn.setMaxResults(ttxnSize);// Set giới hạn số tin có lượt xem nhiều nhất
 		@SuppressWarnings("unchecked")
-		List<Tintuc> lstsibarttxn = query_ttxn.list();
-		return lstsibarttxn;
+		List<Tintuc> lstsibarttxn = query_ttxn.list();// Tạo danh sách tin tức có lượt xem nhiều
+		return lstsibarttxn;// Trả về danh sách tin tức có lượt xem nhiều nhất
 	}
 
 	// Lấy đánh giá khách sạn có sao nhiều nhất
 	@ModelAttribute("lstdanhgiakhachsan")
 	public List<Danhgia> lstdanhgiakhachsan(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int dgksSize = 8;//số lượng khách sạn có sao nhiều nhất
+		int dgksSize = 8;//biến kiểu int số lượng khách sạn có sao nhiều nhất
 		//Câu truy vấn lấy khách sạn có nhiều sao nhất 
 		String hql_dgks = "from Danhgia group by idkhachsan having avg(star) >= 3 ORDER BY star DESC";
 		Query query_dgks = session.createQuery(hql_dgks);//THực hiện câu truy vấn 
-		query_dgks.setMaxResults(dgksSize);
+		query_dgks.setMaxResults(dgksSize);// Set sô lượng khách sạn có nhiều sao nhất
 		@SuppressWarnings("unchecked")
 		List<Danhgia> lstdanhgiakhachsan = query_dgks.list();//Tạo danh sách khách sạn có nhiều sao 
 		return lstdanhgiakhachsan;//Trả về danh sách khách sạn có nhiều sao nhất
@@ -191,7 +193,7 @@ public class HomeController {
 		int tourSize = 8;//Tạo biến tourSize kiểu int để lấy 8 tour có lượt xem nhiều
 		String hql_tour = "from Tour ORDER BY luotxem DESC";//Câu truy vấn lấy tour có lượt xem nhiều
 		Query query_tour = session.createQuery(hql_tour);//Thực hiên câu truy vấn
-		query_tour.setMaxResults(tourSize);
+		query_tour.setMaxResults(tourSize);//Set số lượng tour có lượt xem nhiều nhất
 		@SuppressWarnings("unchecked")
 		List<Tour> lsttournoibat = query_tour.list();//Tạo danh sách tour có lượt xem nhiều 
 		return lsttournoibat;//Trả về danh sách tour có lượt xem nhiều
@@ -201,13 +203,14 @@ public class HomeController {
 	@ModelAttribute("lsttourdacbiet")
 	public List<Tour> lsttourdacbiet(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int tourSize = 6;
+		int tourSize = 6;// Biến kiểu int số lượng tour đặc biệt
+		//Câu truy vấn lấy thông tin tour theo lượt xem
 		String hql_tour = "from Tour ORDER BY luotxem DESC";
-		Query query_tour = session.createQuery(hql_tour);
-		query_tour.setMaxResults(tourSize);
+		Query query_tour = session.createQuery(hql_tour);// Thực hiện câu truy vấn
+		query_tour.setMaxResults(tourSize);// Set số lượng tour đặc biệt
 		@SuppressWarnings("unchecked")
-		List<Tour> lsttourdacbiet = query_tour.list();
-		return lsttourdacbiet;
+		List<Tour> lsttourdacbiet = query_tour.list();// tạo danh sách tour đặc biệt
+		return lsttourdacbiet;// Trả về danh sách tour đặc biệt
 	}
 
 	// Lấy tất cả loại tin tức
@@ -270,7 +273,7 @@ public class HomeController {
 	public List<Loaiphong> getlp(ModelMap model) {
 		Session session = factory.getCurrentSession();
 		String hql = "from Loaiphong";// Câu truy vấn lấy thông tin loại phòng
-		Query query = session.createQuery(hql);
+		Query query = session.createQuery(hql);// Thực hiện câu truy vấn 
 		@SuppressWarnings("unchecked")
 		List<Loaiphong> list = query.list();// Tạo danh sách Loại phòng có tên list
 		return list; // Trả về danh sách loại phòng
@@ -281,7 +284,7 @@ public class HomeController {
 	public List<Tour> gett(ModelMap model) {
 		Session session = factory.getCurrentSession();
 		String hql = "from Tour";// Câu truy vấn lấy thông tin các tour
-		Query query = session.createQuery(hql);
+		Query query = session.createQuery(hql);// Thực hiện câu truy vấn
 		@SuppressWarnings("unchecked")
 		List<Tour> list = query.list();// Tạo danh sách tour có tên là list
 		return list;// Trả vê danh sách tour
@@ -329,8 +332,8 @@ public class HomeController {
 			Query query = session.createQuery(hql);//thực hiện câu truy vấn
 			query.setParameter("emailtk", email);
 			tk = (Taikhoan) query.uniqueResult();
-			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
-			String Matkhaumahoa = encryption.encoding(pwd);
+			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");// Tạo key mã hóa mật khẩu
+			String Matkhaumahoa = encryption.encoding(pwd);// Mã hóa mật khẩu vowis key ở trên 
 			Integer idtk = tk.getIdtaikhoan();
 			
 			// Kiểm tra thông tin khách sạn
@@ -345,43 +348,33 @@ public class HomeController {
 			queryct.setParameter("idtk", idtk);
 			ct = (Congty) queryct.uniqueResult();
 
-			if (!tk.getMatkhau().equals(Matkhaumahoa)) {
+			if (!tk.getMatkhau().equals(Matkhaumahoa)) {// Điều kiện khi nhập sai mật khẩu
 				System.out.println("dang nhap that bai");
-//				model.addAttribute("title", "Cẩm nang du lịch");
-//				model.addAttribute("message", "dang nhap that bai");
 				redirectAttributes.addFlashAttribute("message", "dang nhap that bai");
-				return "redirect:"+ referer;
-			} else if (tk.getTrangthai().getIdtrangthai() == 2) {
+				return "redirect:"+ referer;// Trả về trang đăng nhập
+			} else if (tk.getTrangthai().getIdtrangthai() == 2) { // Điều kiện khi id trang thái = 2
 				System.out.println("tai khoan chua kich hoat");
-//				model.addAttribute("title", "Cẩm nang du lịch");
-//				model.addAttribute("message", "tai khoan chua kich hoat");
 				redirectAttributes.addFlashAttribute("message", "tai khoan chua kich hoat");
-				return "redirect:"+ referer;
-			} else if (tk.getTrangthai().getIdtrangthai() == 3) {
+				return "redirect:"+ referer;//Trả về trang đăng nhập
+			} else if (tk.getTrangthai().getIdtrangthai() == 3) { // Điều kiện khi idgtrangthai= 3
 				System.out.println("tai khoan bi khoa");
-//				model.addAttribute("title", "Cẩm nang du lịch");
-//				model.addAttribute("message", "tai khoan bi khoa");
 				redirectAttributes.addFlashAttribute("message", "tai khoan bi khoa");
-				return "redirect:"+ referer;
+				return "redirect:"+ referer;//Trả về trang đăng nhập
 			} else {
-				httpSession.setAttribute("loguser", tk);
+				httpSession.setAttribute("loguser", tk);// Lưu tài khoản đăng nhập 
 				if(ks != null){
-					httpSession.setAttribute("loguserks", ks);
+					httpSession.setAttribute("loguserks", ks);// Lưu khách sạn của tài khoản đăng nhập
 				}
 				if(ct != null){
-					httpSession.setAttribute("loguserct", ct);
+					httpSession.setAttribute("loguserct", ct);// Lưu công ty của tài khoản đăng nhập
 				}
-				System.out.println("dang nhap thanh cong");
-//				model.addAttribute("title", "Cẩm nang du lịch");
-//				model.addAttribute("message", "dang nhap thanh cong");
+				// Thông báo đăng nhập thành  công
 				redirectAttributes.addFlashAttribute("message", "dang nhap thanh cong");
 			}
 		} catch (Exception e) {
-			System.out.println("dang nhap that bai");
-//			model.addAttribute("title", "Cẩm nang du lịch");
-//			model.addAttribute("message", "dang nhap that bai");
+			// Thông báo đăng nhập thất bại
 			redirectAttributes.addFlashAttribute("message", "dang nhap that bai");
-			return "redirect:"+ referer;
+			return "redirect:"+ referer; // Trả về trang đăng nhập
 		}
 		return "redirect:"+ referer;
 	}
@@ -393,9 +386,9 @@ public class HomeController {
 	// Đăng xuất
 	@RequestMapping("dangxuat")
 	public String dangxuat(HttpSession httpSession) {
-		httpSession.removeAttribute("loguser");
-		httpSession.removeAttribute("loguserks");
-		httpSession.removeAttribute("loguserct");
+		httpSession.removeAttribute("loguser");// remove tài khoản đăng nhập
+		httpSession.removeAttribute("loguserks");// Remove khách sạn của tài khoản đăng nhập
+		httpSession.removeAttribute("loguserct");// Remove công ty của tài khoản đăng nhập
 		return "redirect:/home/trang-chu.html";//Trả về trang chủ
 	}
 
@@ -428,17 +421,14 @@ public class HomeController {
 		try {
 			session.save(user);
 			t.commit();
-			System.out.println("Register Compelete");
-			model.addAttribute("message", "Đăng ký thành công !");
-			// model.addAttribute("u", user); // Auto login
-			return "home/tttaikhoan";
+			model.addAttribute("message", "Đăng ký thành công !");// Thông báo đăng kí thành công
+			return "home/tttaikhoan";// Trả về trang thông tin tai khoản
 		} catch (Exception e) {
-			System.out.println("Register Failse");
 			t.rollback();
-			model.addAttribute("message", "Đăng ký thất bại !");
+			model.addAttribute("message", "Đăng ký thất bại !");// Thông báo đăng ký thất bại
 			model.addAttribute("login_check", 0);
 		} finally {
-			session.close();
+			session.close();// Đóng session
 		}
 		return "home/index";//Trả về trang index
 	}
@@ -453,15 +443,17 @@ public class HomeController {
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 
 		Session session = factory.getCurrentSession();
+		// Câu truy vấn lấy thông tin theo Loại tin theo slug
 		String hqllt = "from Loaitin where slug = :slugloaitintuc";
-		Query querylt = session.createQuery(hqllt);
+		Query querylt = session.createQuery(hqllt);// Thực hiện câu truy vấn 
 		querylt.setParameter("slugloaitintuc", slugloaitintuc);
 		Loaitin loaitin = (Loaitin) querylt.uniqueResult();
 		Integer idlt = loaitin.getIdloaitin();
 		
 		int total = 0, pageSize = 12;
+		// Câu truy vấn lấy thông tin Chitiettin theo idloaitin
 		String hql = "from Chitiettin where idloaitin = :idlt";
-		Query query = session.createQuery(hql);
+		Query query = session.createQuery(hql);// Thực hiện câu truy vấn 
 		query.setParameter("idlt", idlt);
 
 		total = query.list().size();
@@ -482,7 +474,7 @@ public class HomeController {
 		model.addAttribute("pagesize", pageSize);
 		model.addAttribute("pagecount", pageCount);
 
-		return "home/tintuc_ds";
+		return "home/tintuc_ds";// Trả về trang danh sách tin tức
 	}
 
 	
@@ -493,17 +485,18 @@ public class HomeController {
 	@RequestMapping("tin-tuc/bai-viet/{slugbaiviet}")
 	public String cttintuc(ModelMap model, @PathVariable("slugbaiviet") String slugbaiviet) {
 		Session session = factory.getCurrentSession();
+		//Câu truy vấn lấy thông tin theo slug
 		String hql = "from Tintuc where slug = :slugbaiviet";
-		Query query = session.createQuery(hql);
+		Query query = session.createQuery(hql);// thực hiện câu truy vấn 
 		query.setParameter("slugbaiviet", slugbaiviet);
 		Tintuc tt = (Tintuc) query.uniqueResult();
 		tt.setLuotxem(tt.getLuotxem() + 1);
 		String tieude = tt.getTieude();
 
-		model.addAttribute("cttt", tt);
-		model.addAttribute("title", tieude);
+		model.addAttribute("cttt", tt);// Lưu tin tức
+		model.addAttribute("title", tieude);// Lưu tiêu đề của tin tức
 
-		return "home/tintuc_ct";
+		return "home/tintuc_ct"; //Trả về trang chi tiết của tin tức
 	}
 
 	
@@ -514,15 +507,16 @@ public class HomeController {
 	@RequestMapping("khach-san/{slugkhachsan}")
 	public String ctkhachsan(ModelMap model, @PathVariable("slugkhachsan") String slugkhachsan) {
 		Session session = factory.getCurrentSession();
-		//String hql = "from Khachsan where idkhachsan = :idks";
+		// Câu truy vấn lấy thông tin khách sạn theo slug
 		String hql = "from Khachsan where slug = :slugkhachsan";
-		Query query = session.createQuery(hql);
+		Query query = session.createQuery(hql);// thực hiện câu truy vấn 
 		query.setParameter("slugkhachsan", slugkhachsan);
 		Khachsan ks = (Khachsan) query.uniqueResult();
 		String tenkhachsan = ks.getTenkhachsan();
 		Integer idtt = ks.getTinhthanh().getIdtinhthanh();
 		Integer idks = ks.getIdkhachsan();
 
+		// Câu truy vấn lấy thông tin khách sạn theo idtinhthanh
 		String hqlkstkv = "from Khachsan where idtinhthanh = :idtt";
 		Query querykstkv = session.createQuery(hqlkstkv);
 		querykstkv.setParameter("idtt", idtt);
@@ -543,13 +537,14 @@ public class HomeController {
 		querydgs.setParameter("idks", idks);
 		Danhgia dgs = (Danhgia) querydgs.uniqueResult();
 		
+		// Lưu đánh giá của khách sạn
 		model.addAttribute("dgs", dgs);
-		model.addAttribute("listdgks", listdgks);
+		model.addAttribute("listdgks", listdgks);// 
 		model.addAttribute("lstkhachsan", listks);
 		model.addAttribute("ctks", ks);
 		model.addAttribute("title", tenkhachsan);
 
-		return "home/khachsan";
+		return "home/khachsan";// Trả về trang khách sạn
 	}
 	
 	
@@ -560,6 +555,7 @@ public class HomeController {
 	@RequestMapping("tour/{slugtour}")
 	public String cttour(ModelMap model, @PathVariable("slugtour") String slugtour) {
 		Session session = factory.getCurrentSession();
+		//Lấy thông tin tour theo slug
 		String hql = "from Tour where slug = :slugtour";
 		Query query = session.createQuery(hql);
 		query.setParameter("slugtour", slugtour);
@@ -567,18 +563,20 @@ public class HomeController {
 		String tentour = tour.getTentour();
 		Integer idtt = tour.getTinhthanh().getIdtinhthanh();
 
+		//Lấy thông tin khách sạn theo idtinhthanh
 		String hqlkstkv = "from Khachsan where idtinhthanh = :idtt";
 		Query querykstkv = session.createQuery(hqlkstkv);
 		querykstkv.setParameter("idtt", idtt);
 		querykstkv.setMaxResults(12);
 		@SuppressWarnings("unchecked")
+		// Tạo danh sách khách sạn 
 		List<Khachsan> listks = querykstkv.list();
 
 		model.addAttribute("lstkhachsan", listks);
 		model.addAttribute("cttour", tour);
 		model.addAttribute("title", tentour);
 
-		return "home/tour";
+		return "home/tour";// Trả về trang tour
 	}
 	
 	
@@ -589,6 +587,8 @@ public class HomeController {
 	@RequestMapping("tinh-thanh/{slugtinhthanh}")
 	public String cttinhthanh(ModelMap model, @PathVariable("slugtinhthanh") String slugtinhthanh) {
 		Session session = factory.getCurrentSession();
+		
+		// Lấy thông tin tỉnh thành 
 		String hql = "from Tinhthanh where slug = :slugtinhthanh";
 		Query query = session.createQuery(hql);
 		query.setParameter("slugtinhthanh", slugtinhthanh);
@@ -596,6 +596,7 @@ public class HomeController {
 		String tentinh = tihthanh.getTinhthanh();
 		Integer idtth = tihthanh.getIdtinhthanh();
 		
+		// Lấy thông tin Khách sạn
 		String hqlksttt = "from Khachsan where idtinhthanh = :idtt";
 		Query queryksttt = session.createQuery(hqlksttt);
 		queryksttt.setParameter("idtt", idtth);
@@ -603,6 +604,7 @@ public class HomeController {
 		@SuppressWarnings("unchecked")
 		List<Khachsan> listks = queryksttt.list();
 		
+		//Lấy thông tin Tour
 		String hqltttt = "from Tour where diemden = :idtt";
 		Query querytttt = session.createQuery(hqltttt);
 		querytttt.setParameter("idtt", idtth);
@@ -614,7 +616,7 @@ public class HomeController {
 		model.addAttribute("listks", listks);
 		model.addAttribute("title", tentinh);
 
-		return "home/tinhthanh";
+		return "home/tinhthanh";// Trả về trang tỉnh thành
 	}
 	
 	
@@ -682,6 +684,7 @@ public class HomeController {
 		//	Tạo đường dẫn lưu hình ảnh
 		if(ks == null){
 			String photoPath = context.getRealPath("/files/khachsan/" + image.getOriginalFilename());
+			// Lưu hinnhf ảnh
 			try {
 				image.transferTo(new File(photoPath));
 			} catch (IllegalStateException e1) {
@@ -690,17 +693,21 @@ public class HomeController {
 				e1.printStackTrace();
 			}
 
-			Date ngaydang = new Date();
+			Date ngaydang = new Date(); // Tạo biến ngày kiểu date
+			// Lấy tài khoản theo id tài khoản
 			Taikhoan taikhoan = (Taikhoan) session.get(Taikhoan.class, idtaikhoantao);
+			// Lấy tỉnh thành theo id tỉnh thành
 			Tinhthanh tinhthanh = (Tinhthanh) session.get(Tinhthanh.class, idtinhthanh);
+			// Lây trang thái có id = 2
 			Trangthai trangthai = (Trangthai) session.get(Trangthai.class, 2);
 			String slugkhachsan = SlugsConverter.toSlug(tenkhachsan);
-			
+			// Create new Khachsan
 			Khachsan khachsan = new Khachsan(tenkhachsan, image.getOriginalFilename(), sodienthoai, diachi, taikhoan, ngaydang, tinhthanh, trangthai, slugkhachsan);
 			
 			try {
 				session.save(khachsan);
 				int idkhachsan = khachsan.getIdkhachsan();
+				// Lấy Khách sạn theo id khách sạn
 				Khachsan khachsanmoitao = (Khachsan) session.get(Khachsan.class, idkhachsan);
 				
 				// Vòng lặp thêm dich vụ
@@ -730,17 +737,14 @@ public class HomeController {
 				}
 				
 				t.commit();
-				System.out.println("Them thanh cong!");
 				return "home/index";
 			} catch (Exception e) {
 				t.rollback();
-				System.out.println("Them that bai!");
 			} finally {
 				session.close();
 			}
 		} else {
 			String tenks = ks.getTenkhachsan();
-			System.out.println("Ban da co khach san ten : " +tenks+ "  Vui long cho xac minh");
 		}
 		
 		return "home/index";
@@ -750,24 +754,30 @@ public class HomeController {
 	@RequestMapping(value = "danhgiakhachsan", method = RequestMethod.POST)
 	public String danhgiakhachsan(ModelMap model, 
 			HttpServletRequest request, RedirectAttributes redirectAttributes,
+			//Lấy thông tin từ các input với các name
 			@RequestParam("idtaikhoan") Integer idtaikhoan,
 			@RequestParam("idkhachsan") Integer idkhachsan,
 			@RequestParam("star") Integer star,
 			@RequestParam("noidung") String noidung) {
-		String referer = request.getHeader("Referer");
+		String referer = request.getHeader("Referer");//Đường dẫn trả về
 		Session session = factory.openSession();
-		Date thoigiandanhgia = new Date();
+		Date thoigiandanhgia = new Date();//Tạo biến thoigiandanhgia kiểu Date
+		// Lây khách sạn theo id khách sạn
 		Khachsan khachsan = (Khachsan) session.get(Khachsan.class, idkhachsan);
+		// Lấy tài khoản theo idtaikhoan
 		Taikhoan taikhoan = (Taikhoan) session.get(Taikhoan.class, idtaikhoan);
+		// Create new Danhgia
 		Danhgia danhgia = new Danhgia(khachsan, taikhoan, star, noidung, thoigiandanhgia);
 		Transaction t = session.beginTransaction();
 		try {
 			session.save(danhgia);
 			t.commit();
+			// Thông báo thành công
 			redirectAttributes.addFlashAttribute("message", "danh gia thanh cong");
 			return "redirect:"+ referer;
 		} catch (Exception e) {
 			t.rollback();
+			// Thông báo thất bại
 			redirectAttributes.addFlashAttribute("message", "danh gia that bai");
 		} finally {
 			session.close();
@@ -781,37 +791,41 @@ public class HomeController {
 	// Trang đặt phòng
 	@RequestMapping("dat-phong")
 	public String datphong(ModelMap model, HttpSession httpsession,
+			//Lấy thông tin từ các input với các name
 			@RequestParam("khachsan") String slugkhachsan,
 			@RequestParam("loaiphong") String slugloaiphong) {
 		
 		Session session = factory.getCurrentSession();
-		
+		// Lấy thông tin khách sạn 
 		String hqlks = "from Khachsan where slug = :slugkhachsan";
 		Query queryks = session.createQuery(hqlks);
 		queryks.setParameter("slugkhachsan", slugkhachsan);
 		Khachsan khachsan = (Khachsan) queryks.uniqueResult();
 		Integer idks = khachsan.getIdkhachsan();
-
+		
+		//Lấy thông tin loại phòng
 		String hqllp = "from Loaiphong where slug = :slugloaiphong";
 		Query querylp = session.createQuery(hqllp);
 		querylp.setParameter("slugloaiphong", slugloaiphong);
 		Loaiphong loaiphong = (Loaiphong) querylp.uniqueResult();
 		
+		// Lấy thông tin đánh giá
 		String hqldgs = "from Danhgia where idkhachsan = :idks group by idkhachsan";
 		Query querydgs = session.createQuery(hqldgs);
 		querydgs.setParameter("idks", idks);
 		Danhgia dgs = (Danhgia) querydgs.uniqueResult();
 		
-		model.addAttribute("title", "Đặt phòng");
-		model.addAttribute("khachsan", khachsan);
-		model.addAttribute("loaiphong", loaiphong);
-		model.addAttribute("dgs", dgs);
+		model.addAttribute("title", "Đặt phòng"); //Lưu đặt phòng
+		model.addAttribute("khachsan", khachsan);// Lưu khách sạn của đặt phòng
+		model.addAttribute("loaiphong", loaiphong);// Lưu loại phòng đặt
+		model.addAttribute("dgs", dgs);// Lưu đánh giá Khách sạn
 		
-		return "home/datphong";
+		return "home/datphong";// Trả về trang đặt phòng
 	}
 	@RequestMapping(value = "dat-phong-ks", method = RequestMethod.POST)
 	public String datphong(ModelMap model, 
 			HttpServletRequest request, RedirectAttributes redirectAttributes,
+			//Lấy thông tin từ input với các name
 			@RequestParam("ngaynhanphong") String ngaynhanphong,
 			@RequestParam("ngaytraphong") String ngaytraphong,
 			@RequestParam("soluongphong") Integer soluongphong,
@@ -822,31 +836,36 @@ public class HomeController {
 			@RequestParam("idloaiphong") Integer idloaiphong,
 			@RequestParam("idkhachsan") Integer idkhachsan) throws ParseException {
 		
+		//Format lại năm tháng ngày
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date datenhanphong = df.parse(ngaynhanphong);
 		Date datetraphong = df.parse(ngaytraphong);
 		
-		String referer = request.getHeader("Referer");
+		String referer = request.getHeader("Referer");// Đường dẫn trả về
 		Session session = factory.openSession();
+		// Get khachsan =  idkhachsan
 		Khachsan khachsan = (Khachsan) session.get(Khachsan.class, idkhachsan);
+		//Get loaiphong = idloaiphong
 		Loaiphong loaiphong = (Loaiphong) session.get(Loaiphong.class, idloaiphong);
+		// Get  trangthai id=2
 		Trangthai trangthai = (Trangthai) session.get(Trangthai.class, 2);
+		//Create new ưdatphong
 		Datphong datphong = new Datphong(khachsan, loaiphong, trangthai, datenhanphong, datetraphong, soluongphong, hodem, ten, sodienthoai, email);
 		Transaction t = session.beginTransaction();
 		try {
-			session.save(datphong);
+			session.save(datphong);// Lưu thông tin đặt phòng
 			t.commit();
-			System.out.println("Dat phong thanh cong");
+			// Thông báo dặt phòng thành công
 			redirectAttributes.addFlashAttribute("message", "dat phong thanh cong");
 			return "redirect:"+ referer;
 		} catch (Exception e) {
 			t.rollback();
-			System.out.println("Dat phong that bai");
+			// Thông báo thất bại
 			redirectAttributes.addFlashAttribute("message", "dat phong that bai");
 		} finally {
 			session.close();
 		}
-		return "redirect:"+ referer;
+		return "redirect:"+ referer; // Trả về trang đặt phòng
 	}
 	
 	
@@ -858,39 +877,36 @@ public class HomeController {
 	@RequestMapping(value = "timkiem", method = RequestMethod.GET)
 	public String TimKiem(Model model, @RequestParam(value = "tukhoa", defaultValue = "") String tukhoa) {
 		Session session = factory.openSession();
-		List<Khachsan> ks = null;
-		List<Tour> t = null;
-		List<Tintuc> tt = null;
+		List<Khachsan> ks = null;// Tạo danh sách khác sạn rỗng
+		List<Tour> t = null;// Tạo danh sách tour rỗng
+		List<Tintuc> tt = null;// Tạo danh sách tin tức rỗng
 
 		try {
+			// Lấy khách sạn theo từ khóa
 			String hqlks = "from Khachsan ks where ks.tenkhachsan like '%" + tukhoa + "%'";
 			Query queryks = session.createQuery(hqlks);
 			ks = queryks.list();
-
+			// Lấy tour theo từ khóa 
 			String hqlt = "from Tour t where t.tentour like '%" + tukhoa + "%'";
 			Query queryt = session.createQuery(hqlt);
 			t = queryt.list();
-
+			// Lấy Tin túc theo từ khóa
 			String hqltt = "from Tintuc tt where tt.tieude like '%" + tukhoa + "%' " + "or tt.tomtat like '%" + tukhoa
 					+ "%' or tt.noidung like '%" + tukhoa + "%' ";
 			Query querytt = session.createQuery(hqltt);
 			tt = querytt.list();
 
-			if (tt != null) {
+			if (tt != null) {// Nếu từ khóa like tiêu đề tin tức
 				model.addAttribute("tintuc", tt);
-				System.out.println("TIN TUC : " + tt);
 			}
-			if (ks != null) {
+			if (ks != null) { // nếu từ khóa like tên khách sạn 
 				model.addAttribute("ks", ks);
-				System.out.println("KHACH HAN : " + ks);
 			}
-			if (t != null) {
+			if (t != null) {// Nếu từ khóa like tên tour
 				model.addAttribute("t", t);
-				System.out.println("TOUR : " + t);
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		} finally {
 			session.close();
 		}
