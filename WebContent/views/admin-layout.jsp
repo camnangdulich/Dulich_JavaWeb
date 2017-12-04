@@ -46,7 +46,7 @@
     	<c:when test="${loguser.quyen.idquyen == 1}">
     		<!-- Navigation-->
 	        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	            <a class="navbar-brand" href="admin/dieu-khien.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
+	            <a class="navbar-brand" href="home/trang-chu.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
 	            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
 	                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                <span class="navbar-toggler-icon"></span>
@@ -124,8 +124,19 @@
 	                            <li>
 	                                <a href="admin/dskhachsan.html"><i class="fa fa-fw fa-list"></i> Danh sách khách sạn</a>
 	                            </li>
+	                        </ul>
+	                    </li>
+	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlcongty" data-parent="#exampleAccordion">
+	                            <i class="fa fa-fw fa-contao"></i>
+	                            <span class="nav-link-text">Quản lý công ty</span>
+	                        </a>
+	                        <ul class="sidenav-second-level collapse" id="qlcongty">
 	                            <li>
-	                                <a href="admin/tkhachsan.html"><i class="fa fa-fw fa-plus"></i> Thêm khách sạn mới</a>
+	                                <a href="admin/dscongty.html"><i class="fa fa-fw fa-list"></i> Danh sách công ty</a>
+	                            </li>
+	                            <li>
+	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm công ty mới</a>
 	                            </li>
 	                        </ul>
 	                    </li>
@@ -144,48 +155,6 @@
 	                        </ul>
 	                    </li>
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qltinhthanh" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-map-marker"></i>
-	                            <span class="nav-link-text">Quản lý tỉnh thành</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qltinhthanh">
-	                            <li>
-	                                <a href="admin/dstinhthanh.html"><i class="fa fa-fw fa-list"></i> Danh sách tỉnh thành</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm tỉnh thành mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlcongty" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-contao"></i>
-	                            <span class="nav-link-text">Quản lý công ty</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qlcongty">
-	                            <li>
-	                                <a href="admin/dscongty.html"><i class="fa fa-fw fa-list"></i> Danh sách công ty</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm công ty mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qltour" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-leaf"></i>
-	                            <span class="nav-link-text">Quản lý tour du lịch</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qltour">
-	                            <li>
-	                                <a href="admin/dstour.html"><i class="fa fa-fw fa-list"></i> Danh sách tour du lịch</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm tour du lịch mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qldichvu" data-parent="#exampleAccordion">
 	                            <i class="fa fa-fw fa-user-md"></i>
 	                            <span class="nav-link-text">Quản lý dịch vụ</span>
@@ -198,18 +167,6 @@
 	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm dịch vụ mới</a>
 	                            </li>
 	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="#">
-	                            <i class="fa fa-fw fa-file-text"></i>
-	                            <span class="nav-link-text">Danh sách đơn đặt phòng</span>
-	                        </a>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="#">
-	                            <i class="fa fa-fw fa-file"></i>
-	                            <span class="nav-link-text">Danh sách đơn đặt tour</span>
-	                        </a>
 	                    </li>
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link" href="admin/slugtool.html">
@@ -287,7 +244,7 @@
     	<c:when test="${loguser.quyen.idquyen == 2}">
 	    	<!-- Navigation-->
 	        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	            <a class="navbar-brand" href="admin/index.html">CamNangDuLich</a>
+	            <a class="navbar-brand" href="home/trang-chu.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
 	            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
 	                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                <span class="navbar-toggler-icon"></span>
@@ -295,38 +252,10 @@
 	            <div class="collapse navbar-collapse" id="navbarResponsive">
 	                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="admin/index.html">
+	                        <a class="nav-link" href="admin/dieu-khien.html">
 	                            <i class="fa fa-fw fa-dashboard"></i>
 	                            <span class="nav-link-text">Điều khiển</span>
 	                        </a>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qltaikhoan" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-user"></i>
-	                            <span class="nav-link-text">Quản lý tài khoản</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qltaikhoan">
-	                            <li>
-	                                <a href="admin/dstaikhoan.html"><i class="fa fa-fw fa-list"></i> Danh sách tài khoản</a>
-	                            </li>
-	                            <li>
-	                                <a href="admin/ttaikhoan.html"><i class="fa fa-fw fa-plus"></i> Thêm tài khoản mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlquyen" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-user-circle"></i>
-	                            <span class="nav-link-text">Quản lý quyền</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qlquyen">
-	                            <li>
-	                                <a href="admin/dsquyen.html"><i class="fa fa-fw fa-list"></i> Danh sách quyền</a>
-	                            </li>
-	                            <li>
-	                                <a href="admin/tquyen.html"><i class="fa fa-fw fa-plus"></i> Thêm quyền mới</a>
-	                            </li>
-	                        </ul>
 	                    </li>
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlbaiviet" data-parent="#exampleAccordion">
@@ -355,108 +284,6 @@
 	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm loại bài viết mới</a>
 	                            </li>
 	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlkhachsan" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-building"></i>
-	                            <span class="nav-link-text">Quản lý khách sạn</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qlkhachsan">
-	                            <li>
-	                                <a href="admin/dskhachsan.html"><i class="fa fa-fw fa-list"></i> Danh sách khách sạn</a>
-	                            </li>
-	                            <li>
-	                                <a href="admin/tkhachsan.html"><i class="fa fa-fw fa-plus"></i> Thêm khách sạn mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qllphong" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-building-o"></i>
-	                            <span class="nav-link-text">Quản lý loại phòng</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qllphong">
-	                            <li>
-	                                <a href="admin/dsloaiphong.html"><i class="fa fa-fw fa-list"></i> Danh sách loại phòng</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm loại phòng mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qltinhthanh" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-map-marker"></i>
-	                            <span class="nav-link-text">Quản lý tỉnh thành</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qltinhthanh">
-	                            <li>
-	                                <a href="admin/dstinhthanh.html"><i class="fa fa-fw fa-list"></i> Danh sách tỉnh thành</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm tỉnh thành mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlcongty" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-contao"></i>
-	                            <span class="nav-link-text">Quản lý công ty</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qlcongty">
-	                            <li>
-	                                <a href="admin/dscongty.html"><i class="fa fa-fw fa-list"></i> Danh sách công ty</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm công ty mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qltour" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-leaf"></i>
-	                            <span class="nav-link-text">Quản lý tour du lịch</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qltour">
-	                            <li>
-	                                <a href="admin/dstour.html"><i class="fa fa-fw fa-list"></i> Danh sách tour du lịch</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm tour du lịch mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qldichvu" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-user-md"></i>
-	                            <span class="nav-link-text">Quản lý dịch vụ</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qldichvu">
-	                            <li>
-	                                <a href="admin/dsdichvu.html"><i class="fa fa-fw fa-list"></i> Danh sách dịch vụ</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm dịch vụ mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="#">
-	                            <i class="fa fa-fw fa-file-text"></i>
-	                            <span class="nav-link-text">Danh sách đơn đặt phòng</span>
-	                        </a>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="#">
-	                            <i class="fa fa-fw fa-file"></i>
-	                            <span class="nav-link-text">Danh sách đơn đặt tour</span>
-	                        </a>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="admin/slugtool.html">
-	                            <i class="fa fa-fw fa-dashboard"></i>
-	                            <span class="nav-link-text">Slug tool</span>
-	                        </a>
 	                    </li>
 	                </ul>
 	                <ul class="navbar-nav sidenav-toggler">
@@ -528,7 +355,7 @@
     	<c:when test="${loguser.quyen.idquyen == 3}">
     		<!-- Navigation-->
 	        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	            <a class="navbar-brand" href="admin/dieu-khien.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
+	            <a class="navbar-brand" href="home/trang-chu.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
 	            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
 	                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                <span class="navbar-toggler-icon"></span>
@@ -634,7 +461,7 @@
     	<c:when test="${loguser.quyen.idquyen == 4}">
 	    	<!-- Navigation-->
 	        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	            <a class="navbar-brand" href="admin/dieu-khien.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
+	            <a class="navbar-brand" href="home/trang-chu.html"><img src="files/home/logo.png" style="position: absolute; top: 10px; left: 20px; width: 130px;"></a>
 	            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
 	                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                <span class="navbar-toggler-icon"></span>
