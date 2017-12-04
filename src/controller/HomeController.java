@@ -944,7 +944,7 @@ public class HomeController {
 		Session session = factory.getCurrentSession();
 		Transaction t = session.beginTransaction();
 		Taikhoan taikhoan = null;
-		String email = "fb" + me.getId() + "@mailcamnangdulich.com";
+		String email = me.getId() + "@fbmail.com";
 		String hql = "from Taikhoan where email = :emailtk";
 		Query query = session.createQuery(hql);
 		query.setParameter("emailtk", email);
