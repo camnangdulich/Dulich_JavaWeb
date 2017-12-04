@@ -186,51 +186,48 @@ public class HuyHomeController {
  		
  		
 ////	 Tìm kiếm theo từ khóa
- 		 @SuppressWarnings("unchecked")
- 		 @RequestMapping(value="timkiem",method=RequestMethod.GET )
-		public String TimKiem(Model model,  @RequestParam(value="tukhoa", defaultValue="") String tukhoa) {
- 			Session session = factory.openSession();
-	        List<Khachsan> ks = null;
-	        List<Tour> t = null;
-	        List<Tintuc> tt = null;
-	        
-	        try {
-	            String hqlks = "from Khachsan ks where ks.tenkhachsan like '%"+tukhoa+"%'";
-	            Query queryks = session.createQuery(hqlks);
-	           
-	            ks = queryks.list();
-	            
-	            String hqlt = "from Tour t where t.tentour like '%"+tukhoa+"%'";
-            Query queryt = session.createQuery(hqlt);
-            
-            t = queryt.list();
-            
-            String hqltt = "from Tintuc tt where tt.tieude like '%"+tukhoa+"%' "
-            		+ "or tt.tomtat like '%"+tukhoa+"%' or tt.noidung like '%"+tukhoa+"%' ";
-	            Query querytt = session.createQuery(hqltt);
-	      
-	            tt = querytt.list();
-	        	
-	            if(tt != null){
-	            	model.addAttribute("tintuc", tt);
-	            	System.out.println("TIN TUC : " + tt);
-	            }
-	            if(ks != null){
-	            	model.addAttribute("ks", ks);
-	            	System.out.println("KHACH HAN : " + ks);
-	            }
-	           if(t != null){
-            	model.addAttribute("t", t);
-            	System.out.println("TOUR : " + t);
-            }
-	            
-	        } catch (Exception e) {
-	           System.out.println(e.getMessage());
-	        } finally {
-	            session.close();
-	        }
-	        return "home/index";
- 	    }
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "timkiem", method = RequestMethod.GET)
+	public String TimKiem(Model model, @RequestParam(value = "tukhoa", defaultValue = "") String tukhoa) {
+		Session session = factory.openSession();
+		List<Khachsan> ks = null;
+		List<Tour> t = null;
+		List<Tintuc> tt = null;
+
+		try {
+			String hqlks = "from Khachsan ks where ks.tenkhachsan like '%" + tukhoa + "%'";
+			Query queryks = session.createQuery(hqlks);
+			ks = queryks.list();
+
+			String hqlt = "from Tour t where t.tentour like '%" + tukhoa + "%'";
+			Query queryt = session.createQuery(hqlt);
+			t = queryt.list();
+
+			String hqltt = "from Tintuc tt where tt.tieude like '%" + tukhoa + "%' " + "or tt.tomtat like '%" + tukhoa
+					+ "%' or tt.noidung like '%" + tukhoa + "%' ";
+			Query querytt = session.createQuery(hqltt);
+			tt = querytt.list();
+
+			if (tt != null) {
+				model.addAttribute("tintuc", tt);
+				System.out.println("TIN TUC : " + tt);
+			}
+			if (ks != null) {
+				model.addAttribute("ks", ks);
+				System.out.println("KHACH HAN : " + ks);
+			}
+			if (t != null) {
+				model.addAttribute("t", t);
+				System.out.println("TOUR : " + t);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return "home/index";
+	}
 
 }
 

@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Collections;
@@ -51,6 +54,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import entities.Chitiettin;
 import entities.Congty;
 import entities.Danhgia;
+import entities.Datphong;
 import entities.Dichvu;
 import entities.Khachsan;
 import entities.Loaiphong;
@@ -143,7 +147,7 @@ public class HomeController {
 	public List<Tintuc> lsttinxemnhieu(ModelMap model) {
 		Session session = factory.getCurrentSession();
 		int ttxnSize = 8;
-		String hql_ttxn = "from Tintuc ORDER BY luotxem DESC";
+		String hql_ttxn = "from Tintuc tt ORDER BY tt.luotxem DESC";
 		Query query_ttxn = session.createQuery(hql_ttxn);
 		query_ttxn.setMaxResults(ttxnSize);
 		@SuppressWarnings("unchecked")
@@ -169,7 +173,7 @@ public class HomeController {
 	public List<Danhgia> lstdanhgiakhachsan(ModelMap model) {
 		Session session = factory.getCurrentSession();
 		int dgksSize = 8;
-		String hql_dgks = "from Danhgia group by idkhachsan having avg(star) >= 4 ORDER BY star DESC";
+		String hql_dgks = "from Danhgia group by idkhachsan having avg(star) >= 3 ORDER BY star DESC";
 		Query query_dgks = session.createQuery(hql_dgks);
 		query_dgks.setMaxResults(dgksSize);
 		@SuppressWarnings("unchecked")
@@ -466,6 +470,7 @@ public class HomeController {
 		Query query = session.createQuery(hql);
 		query.setParameter("slugbaiviet", slugbaiviet);
 		Tintuc tt = (Tintuc) query.uniqueResult();
+		tt.setLuotxem(tt.getLuotxem() + 1);
 		String tieude = tt.getTieude();
 
 		model.addAttribute("cttt", tt);
@@ -774,6 +779,45 @@ public class HomeController {
 		model.addAttribute("dgs", dgs);
 		
 		return "home/datphong";
+	}
+	@RequestMapping(value = "dat-phong-ks", method = RequestMethod.POST)
+	public String datphong(ModelMap model, 
+			HttpServletRequest request, RedirectAttributes redirectAttributes,
+			@RequestParam("ngaynhanphong") String ngaynhanphong,
+			@RequestParam("ngaytraphong") String ngaytraphong,
+			@RequestParam("soluongphong") Integer soluongphong,
+			@RequestParam("hodem") String hodem,
+			@RequestParam("ten") String ten,
+			@RequestParam("sodienthoai") String sodienthoai,
+			@RequestParam("email") String email,
+			@RequestParam("idloaiphong") Integer idloaiphong,
+			@RequestParam("idkhachsan") Integer idkhachsan) throws ParseException {
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date datenhanphong = df.parse(ngaynhanphong);
+		Date datetraphong = df.parse(ngaytraphong);
+		
+		String referer = request.getHeader("Referer");
+		Session session = factory.openSession();
+		Khachsan khachsan = (Khachsan) session.get(Khachsan.class, idkhachsan);
+		Loaiphong loaiphong = (Loaiphong) session.get(Loaiphong.class, idloaiphong);
+		Trangthai trangthai = (Trangthai) session.get(Trangthai.class, 2);
+		Datphong datphong = new Datphong(khachsan, loaiphong, trangthai, datenhanphong, datetraphong, soluongphong, hodem, ten, sodienthoai, email);
+		Transaction t = session.beginTransaction();
+		try {
+			session.save(datphong);
+			t.commit();
+			System.out.println("Dat phong thanh cong");
+			redirectAttributes.addFlashAttribute("message", "dat phong thanh cong");
+			return "redirect:"+ referer;
+		} catch (Exception e) {
+			t.rollback();
+			System.out.println("Dat phong that bai");
+			redirectAttributes.addFlashAttribute("message", "dat phong that bai");
+		} finally {
+			session.close();
+		}
+		return "redirect:"+ referer;
 	}
 	
 	

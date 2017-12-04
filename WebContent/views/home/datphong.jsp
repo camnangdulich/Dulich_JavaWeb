@@ -7,31 +7,32 @@
 		<li class="breadcrumb-item"><a href="index.html">Home</a></li>
 		<li class="breadcrumb-item active">Đặt phòng</li>
 	</ol>
-
+	
 	<div class="row">
 		<!-- Thông tin liên hệ -->
 		<div class="col-lg-6">
 			<div class="card my-4">
 				<h5 class="card-header">Thông tin liên hệ</h5>
 				<div class="card-body">
-					<form action="home/datphong.html" method="post" >
-						<input name="loaiphong" value="${loaiphong.idloaiphong}" hidden="">
+					<form action="home/dat-phong-ks.html" method="post" >
+						<input name="idloaiphong" value="${loaiphong.idloaiphong}" hidden="">
+						<input name="idkhachsan" value="${khachsan.idkhachsan}" hidden="">
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Ngày nhận phòng</label>
 							<div class="col-8">
-								<input name="ngaynhanphong" class="form-control" type="date" value="">
+								<input id="Ngaydatphong-getdate" name="ngaynhanphong" class="form-control" type="date" value="">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Ngày trả phòng</label>
 							<div class="col-8">
-								<input name= "ngaytraphong" class="form-control" type="date" value="">
+								<input id="Ngaytraphong-getdate" name= "ngaytraphong" class="form-control" type="date" value="">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Số lượng phòng</label>
 							<div class="col-8">
-								<input name="soluong" class="form-control" type="number" value="" placeholder="Nhập số lượng phòng">
+								<input name="soluongphong" class="form-control" type="number" value="" placeholder="Nhập số lượng phòng">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -61,7 +62,7 @@
 						<div class="col-md-12">
 							<div class="form-check">
 								<label class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input">
+								<input type="checkbox" class="custom-control-input" required="required">
 									<span class="custom-control-indicator"></span>
 									<span class="custom-control-description">Tôi đã đọc và chấp
 										nhận các chính sách của khách sạn, điều khoản, điều kiện và
@@ -69,7 +70,7 @@
 								</label>
 							</div>
 							<div class="col-md-12 text-center">
-								<button class="btn btn-success" style="width: 200px;">Đặt phòng</button>
+								<button type="submit" class="btn btn-success" style="width: 200px;">Đặt phòng</button>
 							</div>
 						</div>
 					</form>
@@ -156,4 +157,26 @@
 
 	</div>
 	<!-- /.row -->
+	<script type="text/javascript">
+		/* ---------------------------------------------------------------------- */
+		/* ------------------------- Giới hạn ngày ------------------------------------
+		/* ---------------------------------------------------------------------- */
+		$(function getdate() {
+		    var today = new Date();
+		    var dd = today.getDate();
+		    var mm = today.getMonth() + 1; //January is 0!
+		    var yyyy = today.getFullYear();
+	
+		    if (dd < 10) {
+		        dd = '0' + dd
+		    }
+	
+		    if (mm < 10) {
+		        mm = '0' + mm
+		    }
+		    today = yyyy + '-' + mm + '-' + dd;
+		    document.getElementById("Ngaydatphong-getdate").setAttribute("min", today);
+		    document.getElementById("Ngaytraphong-getdate").setAttribute("min", today);
+		});
+	</script>
 </div>

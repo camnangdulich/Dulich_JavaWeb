@@ -36,11 +36,11 @@
 		<!-- Validation custom -->
 		<script src="js/validate_check.js"></script>
 		<script src="js/validate_check-huy.js"></script>
+		<!-- Editor -->
+		<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=0ikcnfgb9b5yiz208p1q53q4br1s1ic6vyeqi7ygjgylbngh"></script>
+		<script>tinymce.init({ selector:'textarea' });</script>
     </head>
-    <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="alert_admin_check('ten tour da ton tai')">
-    
-    
-    
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="alert_admin_check('${message}')">
     <c:choose>
     
     	<c:when test="${loguser.quyen.idquyen == 1}">

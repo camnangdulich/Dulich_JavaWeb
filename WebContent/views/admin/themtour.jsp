@@ -92,12 +92,6 @@
 							<label class="col-sm-2 col-form-label">Lịch trình</label>
                             <div class="col-sm-10">
                                 <div id="sample">
-                                    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
-                                    <script type="text/javascript">
-                                        bkLib.onDomLoaded(function () {
-                                            nicEditors.allTextAreas()
-                                        });
-                                    </script>
                                     <textarea name="lichtrinh" style="width: 100%; height: 100px;" placeholder="Nhập lịch trình tour">
                                     </textarea>${message}
                                 </div>

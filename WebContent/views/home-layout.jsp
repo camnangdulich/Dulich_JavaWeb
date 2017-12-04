@@ -95,7 +95,7 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                                <a class="dropdown-item" href="home/thong-tin-tai-khoan.html">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
 			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
@@ -108,7 +108,7 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                                <a class="dropdown-item" href="home/thong-tin-tai-khoan.html">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
 			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
@@ -122,7 +122,7 @@
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
 		                                <a onclick="taokhachsanpp()" class="dropdown-item" style="cursor: pointer;">Tạo khách sạn mới</a>
-		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                                <a class="dropdown-item" href="home/thong-tin-tai-khoan.html">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
 			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
@@ -135,8 +135,10 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="admin/dieu-khien.html">Quản lý khách sạn</a>
-		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            	<a class="dropdown-item" href="admin/dieu-khien.html">Trang điều khiển</a>
+		                                <a class="dropdown-item" href="admin/danh-sach-don-dat-phong.html">Quản lý đơn đặt phòng</a>
+		                                <a class="dropdown-item" href="admin/thong-tin-khach-san.html">Thông tin khách sạn</a>
+		                                <a class="dropdown-item" href="home/thong-tin-tai-khoan.html">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
 			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
@@ -149,8 +151,11 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="admin/dieu-khien.html">Quản lý tour du lịch</a>
-		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                            	<a class="dropdown-item" href="admin/dieu-khien.html">Trang điều khiển</a>
+		                            	<a class="dropdown-item" href="admin/danh-sach-don-dat-tour.html">Quản lý đơn đặt tour</a>
+		                            	<a class="dropdown-item" href="admin/danh-sach-don-dat-tour.html">Danh sách tour du lịch</a>
+		                                <a class="dropdown-item" href="admin/thong-tin-cong-ty.html">Thông tin công ty</a>
+		                                <a class="dropdown-item" href="home/thong-tin-tai-khoan.html">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
 			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
@@ -163,8 +168,8 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="#">Quản lý bài viết</a>
-		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                                <a class="dropdown-item" href="admin/dieu-khien.html">Quản lý bài viết</a>
+		                                <a class="dropdown-item" href="home/thong-tin-tai-khoan.html">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
 			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>
@@ -178,7 +183,7 @@
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
 		                                <a class="dropdown-item" href="admin/index.html">Đến trang điều khiển</a>
-		                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+		                                <a class="dropdown-item" href="home/thong-tin-tai-khoan.html">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
 			                            <a onclick="dangxuat()" class="nav-link" style="cursor: pointer;">Đăng xuất</a>

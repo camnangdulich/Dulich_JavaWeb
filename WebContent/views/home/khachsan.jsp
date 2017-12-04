@@ -211,7 +211,7 @@
 						<hr>
 						<div class="card mb-4">
 			                <div class="card-body">
-			                    <h5>Các bình luận cho khách sạn này</h5><hr>
+			                    <h5>Các đánh giá cho khách sạn này</h5><hr>
 			                    <div class="row">
 				                    <c:forEach var="dg" items="${listdgks}" end="9">
 				                        <div class="col-lg-12 portfolio-item">
@@ -318,17 +318,19 @@
                 <h5 class="card-header">Khách sạn trong khu vực</h5>
                 <div class="card-body">
 	                <c:forEach var="ks" items="${lstkhachsan}">
-	                	<div class="portfolio-item">
-	                        <div class="card h-80">
-	                            <a href="#"><img style="border-radius: 0;" class="card-img-top" src="files/khachsan/${ks.hinhanh}" alt="${ks.hinhanh}"></a>
-	                            <div class="card-body">
-	                                <h5 class="card-title">
-	                                    <a href="#">${ks.tenkhachsan}</a>
-	                                </h5>
-	                                <p class="p-fx">${ks.diachi}</p>
-	                            </div>
-	                        </div>
-	                    </div>
+	                	<c:if test="${ks.idkhachsan != ctks.idkhachsan}">
+	                		<div class="portfolio-item">
+		                        <div class="card h-80">
+		                            <a href="#"><img style="border-radius: 0;" class="card-img-top" src="files/khachsan/${ks.hinhanh}" alt="${ks.hinhanh}"></a>
+		                            <div class="card-body">
+		                                <h5 class="card-title">
+		                                    <a href="#">${ks.tenkhachsan}</a>
+		                                </h5>
+		                                <p class="p-fx">${ks.diachi}</p>
+		                            </div>
+		                        </div>
+		                    </div>
+	                	</c:if>
 	                </c:forEach>
                 </div>
             </div>
