@@ -78,16 +78,13 @@
                         <li style="margin-right: 15px;">
                         <form:form action="home/timkiem.html" method="get">
                             <div class="input-group">
-                            
                                 <input name="tukhoa" type="text" class="form-control" placeholder="Tìm kiếm...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-secondary" type="submit">Tìm!</button>
                                 </span>
-                             
                             </div>
-                            </form:form>
+                        </form:form>
                         </li>
-                        
                         <c:choose>
                         	<c:when test="${loguser.quyen.idquyen == 7}">
                         		<li class="nav-item dropdown">
@@ -182,7 +179,7 @@
 		                                Xin chào: ${loguser.ten}
 		                            </a>
 		                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-		                                <a class="dropdown-item" href="admin/index.html">Đến trang điều khiển</a>
+		                                <a class="dropdown-item" href="admin/dieu-khien.html">Đến trang điều khiển</a>
 		                                <a class="dropdown-item" href="home/thong-tin-tai-khoan.html">Thông tin tài khoản</a>
 		                            </div>
 		                            <li class="nav-item">
@@ -309,8 +306,8 @@
                     <input type="email" placeholder="Nhập email cửa bạn" name="reg_email" class="input_log" autofocus required>
                     <input type="password" placeholder="Nhập mật khẩu" name="reg_matkhau" class="input_log" required>
                     <input type="text" placeholder="Nhập số điện thoại" name="reg_sdt" class="input_log" required>
-                    <input type="text" placeholder="Nhập họ đệm" name="hodem" class="input_log" required>
-                    <input type="text" placeholder="Nhập tên của bạn" name="ten" class="input_log" required>
+                    <input type="text" placeholder="Nhập họ đệm" name="reg_hodem" class="input_log" required>
+                    <input type="text" placeholder="Nhập tên của bạn" name="reg_ten" class="input_log" required>
                     <button type="submit" class="log"><i class="fa fa-sign-in"></i> Đăng ký</button>
                     <div class="form-check">
                         <label class="custom-control custom-checkbox">

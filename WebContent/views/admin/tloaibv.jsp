@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-10 col-md-auto">
-					<form action="admin/tloaibv.html" method="post" id="themlbv"
+					<form action="admin/them-loai-bai-viet-moi.html" method="post" id="themlbv"
 						enctype="multipart/form-data">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Loại bài viết</label>

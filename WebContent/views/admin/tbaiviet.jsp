@@ -22,7 +22,7 @@
                                     <input name="hinhanh" id="my_file" type="file" class="custom-file-input" onchange="onFileSelected(event)">
                                 </label>
                                 <a onclick="document.getElementById('my_file').click();" style="cursor: pointer;">
-                                	<img id="myimage" src="files/avatar/av1.png" style="max-height: 120px;">
+                                	<img id="myimage" src="files/tintuc/default.jpg" style="max-height: 120px;">
                                 </a>
                             </div>
                         </div>
@@ -63,12 +63,6 @@
                         <div class="form-group row">
                             <div class="col-sm-12" id="label-validation">
                                 <div id="sample">
-                                    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
-                                    <script type="text/javascript">
-                                        bkLib.onDomLoaded(function () {
-                                            nicEditors.allTextAreas()
-                                        });
-                                    </script>
                                     <textarea name="noidung" style="width: 100%; height: 500px;">
                                     </textarea>
                                 </div>

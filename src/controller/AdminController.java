@@ -402,65 +402,65 @@ public class AdminController {
 	}
 
 	// Trang danh sách khách sạn
-	@RequestMapping("dskhachsan")
+	@RequestMapping("danh-sach-khach-san")
 	public String dskhachsan(ModelMap model) {
 		model.addAttribute("title", "Danh sách khách sạn");
 		return "admin/dskhachsan";
 	}
 
 	// Trang danh sách quyền
-	@RequestMapping("dsquyen")
+	@RequestMapping("danh-sach-quyen")
 	public String dsquyen(ModelMap model) {
 		model.addAttribute("title", "Danh sách quyền");
 		return "admin/dsquyen";
 	}
 
-	// Trang loại bài viết
-	@RequestMapping("dsloaibv")
+	// Trang danh sách loại bài viết
+	@RequestMapping("danh-sach-loai-bai-viet")
 	public String dsloaibv(ModelMap model) {
-		model.addAttribute("title", "Danh loại bài viết");
+		model.addAttribute("title", "Danh sách loại bài viết");
 		return "admin/dsloaibv";
 	}
 
-	// Trang loại phòng
-	@RequestMapping("dsloaiphong")
+	// Trang danh sách loại phòng
+	@RequestMapping("danh-sach-loai-phong")
 	public String dsloaiphong(ModelMap model) {
-		model.addAttribute("title", "Danh loại phòng");
+		model.addAttribute("title", "Danh sách loại phòng");
 		return "admin/dsloaiphong";
 	}
 
-	// Quản lý tỉnh thành
-	@RequestMapping("dstinhthanh")
+	// Trang danh sách tỉnh thành
+	@RequestMapping("danh-sach-tinh-thanh")
 	public String dstinhthanh(ModelMap model) {
 		model.addAttribute("title", "Danh sách tỉnh thành");
 		return "admin/dstinhthanh";
 	}
 
-	// Trang quản lý công ty
-	@RequestMapping("dscongty")
+	// Trang danh sách công ty
+	@RequestMapping("danh-sach-cong-ty")
 	public String dscongty(ModelMap model) {
 		model.addAttribute("title", "Danh sách công ty");
 		return "admin/dscongty";
 	}
 
 	// Trang danh sách dịch vụ
-	@RequestMapping("dsdichvu")
+	@RequestMapping("danh-sach-dich-vu")
 	public String dsdichvu(ModelMap model) {
 		model.addAttribute("title", "Danh sách dịch vụ");
 		return "admin/dsdichvu";
 	}
 
 	// Trang danh sách đặt tour
-	@RequestMapping("dsdattour")
+	@RequestMapping("danh-sach-dat-tour")
 	public String dsdattour(ModelMap model) {
-		model.addAttribute("title", "Danh sách đặt phòng");
+		model.addAttribute("title", "Danh sách đặt tour");
 		return "admin/dsdattour";
 	}
 
 	// Trang danh sách đánh giá
-	@RequestMapping("dsdanhgia")
+	@RequestMapping("danh-sach-danh-gia")
 	public String dsdanhgia(ModelMap model) {
-		model.addAttribute("title", "Danh sách đặt phòng");
+		model.addAttribute("title", "Danh sách đánh giá");
 		return "admin/dsdanhgia";
 	}
 	
@@ -478,12 +478,12 @@ public class AdminController {
 	// ------------------------------------------------------------------
 
 	// Thêm tài khoản mới
-	@RequestMapping("ttaikhoan")
+	@RequestMapping("them-tai-khoan-moi")
 	public String ttaikhoan(ModelMap model) {
 		model.addAttribute("title", "Thêm tài khoản mới");
 		return "admin/ttaikhoan";
 	}
-	@RequestMapping(value = "ttaikhoan", method = RequestMethod.POST)
+	@RequestMapping(value = "them-tai-khoan-moi", method = RequestMethod.POST)
 	public String ttaikhoan(ModelMap model, @RequestParam("quyen") Integer quyen, @RequestParam("email") String email,
 			@RequestParam("matkhau") String matkhau, @RequestParam("sdt") String sdt) throws InvalidKeyException {
 
@@ -525,7 +525,7 @@ public class AdminController {
 	}
 
 	// Thêm bài viết mới (Tin tức mới)
-	@RequestMapping("them-bai-viet")
+	@RequestMapping("them-bai-viet-moi")
 	public String tbaiviet(ModelMap model) {
 		model.addAttribute("title", "Thêm bài viết mới");
 		return "admin/tbaiviet";
@@ -538,59 +538,91 @@ public class AdminController {
 			@RequestParam("nguon") String nguon, @RequestParam("loaitin") List loaitin) {
 
 		Session session = factory.openSession();
-		String photoPath = context.getRealPath("/files/tintuc/" + image.getOriginalFilename());
-		try {
-			image.transferTo(new File(photoPath));
-		} catch (IllegalStateException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		Transaction t = session.beginTransaction();
 		Date ngaydang = new Date();
 		Taikhoan taikhoan = (Taikhoan) session.get(Taikhoan.class, idtk);
 		String slugtintuc = SlugsConverter.toSlug(tieude);
-		Tintuc tintuc = new Tintuc(taikhoan, image.getOriginalFilename(), tieude, tomtat, noidung, ngaydang, nguon,
-				slugtintuc, 0);
-		Transaction t = session.beginTransaction();
-		try {
-			session.save(tintuc);
-			int idtintuc = tintuc.getIdtintuc();
-			Tintuc tt = (Tintuc) session.get(Tintuc.class, idtintuc);
-			Loaitin ltm = (Loaitin) session.get(Loaitin.class, 1);
-			Chitiettin cttm = new Chitiettin(ltm, tt);
-			session.save(cttm);
+		String photoPath = context.getRealPath("/files/tintuc/" + image.getOriginalFilename());
+		
+		if (image.getOriginalFilename().equals("")) {
+			Tintuc tintuc = new Tintuc(taikhoan, "default.jpg", tieude, tomtat, noidung, ngaydang, nguon, slugtintuc, 0);
+			try {
+				session.save(tintuc);
+				int idtintuc = tintuc.getIdtintuc();
+				Tintuc tt = (Tintuc) session.get(Tintuc.class, idtintuc);
+				Loaitin ltm = (Loaitin) session.get(Loaitin.class, 1);
+				Chitiettin cttm = new Chitiettin(ltm, tt);
+				session.save(cttm);
 
-			for (int x = 0; x < loaitin.size(); x++) {
-				Object oj_idloaitin = loaitin.get(x);
-				int idloaitin = Integer.valueOf((String) oj_idloaitin);
-				Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaitin);
-				Chitiettin ctt = new Chitiettin(lt, tt);
-				try {
-					session.save(ctt);
-				} catch (Exception e) {
-					t.rollback();
+				for (int x = 0; x < loaitin.size(); x++) {
+					Object oj_idloaitin = loaitin.get(x);
+					int idloaitin = Integer.valueOf((String) oj_idloaitin);
+					Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaitin);
+					Chitiettin ctt = new Chitiettin(lt, tt);
+					try {
+						session.save(ctt);
+					} catch (Exception e) {
+						t.rollback();
+					}
 				}
+				t.commit();
+				System.out.println("Them thanh cong!");
+				return "admin/tbaiviet";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Thêm loại sản phẩm thất bại!");
+			} finally {
+				session.close();
 			}
-			t.commit();
-			System.out.println("Them thanh cong!");
-			return "admin/tbaiviet";
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Thêm loại sản phẩm thất bại!");
-		} finally {
-			session.close();
+		} else {
+			try {
+				image.transferTo(new File(photoPath));
+			} catch (IllegalStateException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			Tintuc tintuc = new Tintuc(taikhoan, image.getOriginalFilename(), tieude, tomtat, noidung, ngaydang, nguon, slugtintuc, 0);
+			try {
+				session.save(tintuc);
+				int idtintuc = tintuc.getIdtintuc();
+				Tintuc tt = (Tintuc) session.get(Tintuc.class, idtintuc);
+				Loaitin ltm = (Loaitin) session.get(Loaitin.class, 1);
+				Chitiettin cttm = new Chitiettin(ltm, tt);
+				session.save(cttm);
+
+				for (int x = 0; x < loaitin.size(); x++) {
+					Object oj_idloaitin = loaitin.get(x);
+					int idloaitin = Integer.valueOf((String) oj_idloaitin);
+					Loaitin lt = (Loaitin) session.get(Loaitin.class, idloaitin);
+					Chitiettin ctt = new Chitiettin(lt, tt);
+					try {
+						session.save(ctt);
+					} catch (Exception e) {
+						t.rollback();
+					}
+				}
+				t.commit();
+				System.out.println("Them thanh cong!");
+				return "admin/tbaiviet";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Thêm loại sản phẩm thất bại!");
+			} finally {
+				session.close();
+			}
 		}
 		return "admin/tbaiviet";
 	}
 	
 	// Thêm quyền mới
-	@RequestMapping("tquyen")
+	@RequestMapping("them-quyen-moi")
 	public String tquyen(ModelMap model) {
 		model.addAttribute("title", "Thêm quyền mới");
 		return "admin/tquyen";
 	}
-	@RequestMapping(value = "tquyen", method = RequestMethod.POST)
-	public String ttaikhoan(ModelMap model, @RequestParam("tenquyen") String tenquyen,
+	@RequestMapping(value = "them-quyen-moi", method = RequestMethod.POST)
+	public String tquyen(ModelMap model, @RequestParam("tenquyen") String tenquyen,
 			@RequestParam("mota") String mota) {
 
 		if (kiemtraQuyen(tenquyen)) {
@@ -620,12 +652,12 @@ public class AdminController {
 	}
 
 	// Thêm loai phòng
-	@RequestMapping("tloaiphong")
+	@RequestMapping("them-loai-phong-moi")
 	public String tloaiphong(ModelMap model) {
 		model.addAttribute("title", "Thêm loại phòng mới");
 		return "admin/tloaiphong";
 	}
-	@RequestMapping(value = "tloaiphong", method = RequestMethod.POST)
+	@RequestMapping(value = "them-loai-phong-moi", method = RequestMethod.POST)
 	public String tloaiphong(ModelMap model, @RequestParam("huong") Integer idhuong,
 			@RequestParam("tenloai") String tenloai, @RequestParam("mota") String mota,
 			@RequestParam("themgiuong") Integer themgiuong, @RequestParam("hinhanh") MultipartFile hinhanh,
@@ -691,7 +723,7 @@ public class AdminController {
 		return "admin/ttinhthanh";
 	}
 	@RequestMapping(value = "ttinhthanh", method = RequestMethod.POST)
-	public String ttaikhoan(ModelMap model, @RequestParam("hinhanh") MultipartFile hinhanh,
+	public String ttinhthanh(ModelMap model, @RequestParam("hinhanh") MultipartFile hinhanh,
 			@RequestParam("tentinh") String tentinh, @RequestParam("mota") String mota) {
 
 		Session session = factory.openSession();
@@ -745,12 +777,12 @@ public class AdminController {
 	}
 
 	// Thêm công ty mới
-	@RequestMapping("tcongty")
+	@RequestMapping("them-cong-ty-moi")
 	public String tcongty(ModelMap model) {
 		model.addAttribute("title", "Thêm công ty mới");
 		return "admin/tcongty";
 	}
-	@RequestMapping(value = "tcongty", method = RequestMethod.POST)
+	@RequestMapping(value = "them-cong-ty-moi", method = RequestMethod.POST)
 	public String tcongty(ModelMap model, @RequestParam("taikhoan") Integer taikhoan,
 			@RequestParam("tencongty") String tencongty, @RequestParam("diachi") String diachi,
 			@RequestParam("mota") String mota, @RequestParam("sodienthoai") String sodienthoai) {
@@ -782,12 +814,12 @@ public class AdminController {
 	}
 
 	// Thêm dịch vụ mới
-	@RequestMapping("tdichvu")
+	@RequestMapping("them-dich-vu-moi")
 	public String tdichvu(ModelMap model) {
 		model.addAttribute("title", "Thêm dịch vụ mới");
 		return "admin/tdichvu";
 	}
-	@RequestMapping(value = "tdichvu", method = RequestMethod.POST)
+	@RequestMapping(value = "them-dich-vu-moi", method = RequestMethod.POST)
 	public String tdichvu(ModelMap model, @RequestParam("tendichvu") String tendichvu,
 			@RequestParam("mota") String mota) {
 
@@ -816,12 +848,12 @@ public class AdminController {
 	}
 
 	// Thêm loại bài viết
-	@RequestMapping("tloaibv")
+	@RequestMapping("them-loai-bai-viet-moi")
 	public String tloaibv(ModelMap model) {
 		model.addAttribute("title", "Thêm loại bìa viết mới");
 		return "admin/tloaibv";
 	}
-	@RequestMapping(value = "tloaibv", method = RequestMethod.POST)
+	@RequestMapping(value = "them-loai-bai-viet-moi", method = RequestMethod.POST)
 	public String tloaibv(ModelMap model, @RequestParam("tenloaibv") String tenloaibv,
 			@RequestParam("mota") String mota) {
 
@@ -2152,6 +2184,7 @@ public class AdminController {
 		}
 		return null;
 	}
+	
 
 	// ------------------------------------------------------------------
 	// ===================== SLUG Tool Controller =======================

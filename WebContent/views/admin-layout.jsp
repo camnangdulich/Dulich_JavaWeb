@@ -54,7 +54,7 @@
 	            <div class="collapse navbar-collapse" id="navbarResponsive">
 	                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link" href="admin/index.html">
+	                        <a class="nav-link" href="admin/dieu-khien.html">
 	                            <i class="fa fa-fw fa-dashboard"></i>
 	                            <span class="nav-link-text">Điều khiển</span>
 	                        </a>
@@ -66,10 +66,10 @@
 	                        </a>
 	                        <ul class="sidenav-second-level collapse" id="qltaikhoan">
 	                            <li>
-	                                <a href="admin/dstaikhoan.html"><i class="fa fa-fw fa-list"></i> Danh sách tài khoản</a>
+	                                <a href="admin/danh-sach-tai-khoan.html"><i class="fa fa-fw fa-list"></i> Danh sách tài khoản</a>
 	                            </li>
 	                            <li>
-	                                <a href="admin/ttaikhoan.html"><i class="fa fa-fw fa-plus"></i> Thêm tài khoản mới</a>
+	                                <a href="admin/them-tai-khoan-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm tài khoản mới</a>
 	                            </li>
 	                        </ul>
 	                    </li>
@@ -80,49 +80,10 @@
 	                        </a>
 	                        <ul class="sidenav-second-level collapse" id="qlquyen">
 	                            <li>
-	                                <a href="admin/dsquyen.html"><i class="fa fa-fw fa-list"></i> Danh sách quyền</a>
+	                                <a href="admin/danh-sach-quyen.html"><i class="fa fa-fw fa-list"></i> Danh sách quyền</a>
 	                            </li>
 	                            <li>
-	                                <a href="admin/tquyen.html"><i class="fa fa-fw fa-plus"></i> Thêm quyền mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlbaiviet" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-newspaper-o"></i>
-	                            <span class="nav-link-text">Quản lý bài viết</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qlbaiviet">
-	                            <li>
-	                                <a href="admin/dsbaiviet.html"><i class="fa fa-fw fa-list"></i> Danh sách bài viết</a>
-	                            </li>
-	                            <li>
-	                                <a href="admin/tbaiviet.html"><i class="fa fa-fw fa-plus"></i> Thêm bài viết mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qllbaiviet" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-file-text-o"></i>
-	                            <span class="nav-link-text">Quản lý loại bài viết</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qllbaiviet">
-	                            <li>
-	                                <a href="admin/dsloaibv.html"><i class="fa fa-fw fa-list"></i> Danh sách loại bài viết</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm loại bài viết mới</a>
-	                            </li>
-	                        </ul>
-	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlkhachsan" data-parent="#exampleAccordion">
-	                            <i class="fa fa-fw fa-building"></i>
-	                            <span class="nav-link-text">Quản lý khách sạn</span>
-	                        </a>
-	                        <ul class="sidenav-second-level collapse" id="qlkhachsan">
-	                            <li>
-	                                <a href="admin/dskhachsan.html"><i class="fa fa-fw fa-list"></i> Danh sách khách sạn</a>
+	                                <a href="admin/them-quyen-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm quyền mới</a>
 	                            </li>
 	                        </ul>
 	                    </li>
@@ -133,10 +94,21 @@
 	                        </a>
 	                        <ul class="sidenav-second-level collapse" id="qlcongty">
 	                            <li>
-	                                <a href="admin/dscongty.html"><i class="fa fa-fw fa-list"></i> Danh sách công ty</a>
+	                                <a href="admin/danh-sach-cong-ty.html"><i class="fa fa-fw fa-list"></i> Danh sách công ty</a>
 	                            </li>
 	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm công ty mới</a>
+	                                <a href="admin/them-cong-ty-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm công ty mới</a>
+	                            </li>
+	                        </ul>
+	                    </li>
+	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlkhachsan" data-parent="#exampleAccordion">
+	                            <i class="fa fa-fw fa-building"></i>
+	                            <span class="nav-link-text">Quản lý khách sạn</span>
+	                        </a>
+	                        <ul class="sidenav-second-level collapse" id="qlkhachsan">
+	                            <li>
+	                                <a href="admin/danh-sach-khach-san.html"><i class="fa fa-fw fa-list"></i> Danh sách khách sạn</a>
 	                            </li>
 	                        </ul>
 	                    </li>
@@ -147,10 +119,10 @@
 	                        </a>
 	                        <ul class="sidenav-second-level collapse" id="qllphong">
 	                            <li>
-	                                <a href="admin/dsloaiphong.html"><i class="fa fa-fw fa-list"></i> Danh sách loại phòng</a>
+	                                <a href="admin/danh-sach-loai-phong.html"><i class="fa fa-fw fa-list"></i> Danh sách loại phòng</a>
 	                            </li>
 	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm loại phòng mới</a>
+	                                <a href="admin/them-loai-phong-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm loại phòng mới</a>
 	                            </li>
 	                        </ul>
 	                    </li>
@@ -161,10 +133,38 @@
 	                        </a>
 	                        <ul class="sidenav-second-level collapse" id="qldichvu">
 	                            <li>
-	                                <a href="admin/dsdichvu.html"><i class="fa fa-fw fa-list"></i> Danh sách dịch vụ</a>
+	                                <a href="admin/danh-sach-dich-vu.html"><i class="fa fa-fw fa-list"></i> Danh sách dịch vụ</a>
 	                            </li>
 	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm dịch vụ mới</a>
+	                                <a href="admin/them-dich-vu-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm dịch vụ mới</a>
+	                            </li>
+	                        </ul>
+	                    </li>
+	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlbaiviet" data-parent="#exampleAccordion">
+	                            <i class="fa fa-fw fa-newspaper-o"></i>
+	                            <span class="nav-link-text">Quản lý bài viết</span>
+	                        </a>
+	                        <ul class="sidenav-second-level collapse" id="qlbaiviet">
+	                            <li>
+	                                <a href="admin/danh-sach-bai-viet.html"><i class="fa fa-fw fa-list"></i> Danh sách bài viết</a>
+	                            </li>
+	                            <li>
+	                                <a href="admin/them-bai-viet-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm bài viết mới</a>
+	                            </li>
+	                        </ul>
+	                    </li>
+	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qllbaiviet" data-parent="#exampleAccordion">
+	                            <i class="fa fa-fw fa-file-text-o"></i>
+	                            <span class="nav-link-text">Quản lý loại bài viết</span>
+	                        </a>
+	                        <ul class="sidenav-second-level collapse" id="qllbaiviet">
+	                            <li>
+	                                <a href="admin/danh-sach-loai-bai-viet.html"><i class="fa fa-fw fa-list"></i> Danh sách loại bài viết</a>
+	                            </li>
+	                            <li>
+	                                <a href="admin/them-loai-bai-viet-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm loại bài viết mới</a>
 	                            </li>
 	                        </ul>
 	                    </li>
@@ -264,10 +264,10 @@
 	                        </a>
 	                        <ul class="sidenav-second-level collapse" id="qlbaiviet">
 	                            <li>
-	                                <a href="admin/dsbaiviet.html"><i class="fa fa-fw fa-list"></i> Danh sách bài viết</a>
+	                                <a href="admin/danh-sach-bai-viet.html"><i class="fa fa-fw fa-list"></i> Danh sách bài viết</a>
 	                            </li>
 	                            <li>
-	                                <a href="admin/tbaiviet.html"><i class="fa fa-fw fa-plus"></i> Thêm bài viết mới</a>
+	                                <a href="admin/them-bai-viet-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm bài viết mới</a>
 	                            </li>
 	                        </ul>
 	                    </li>
@@ -278,10 +278,10 @@
 	                        </a>
 	                        <ul class="sidenav-second-level collapse" id="qllbaiviet">
 	                            <li>
-	                                <a href="admin/dsloaibv.html"><i class="fa fa-fw fa-list"></i> Danh sách loại bài viết</a>
+	                                <a href="admin/danh-sach-loai-bai-viet.html"><i class="fa fa-fw fa-list"></i> Danh sách loại bài viết</a>
 	                            </li>
 	                            <li>
-	                                <a href="#"><i class="fa fa-fw fa-plus"></i> Thêm loại bài viết mới</a>
+	                                <a href="admin/them-loai-bai-viet-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm loại bài viết mới</a>
 	                            </li>
 	                        </ul>
 	                    </li>
@@ -294,43 +294,6 @@
 	                    </li>
 	                </ul>
 	                <ul class="navbar-nav ml-auto">
-	                    <li class="nav-item dropdown">
-	                        <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                            <i class="fa fa-fw fa-bell"></i>
-	                            <span class="indicator text-warning d-none d-lg-block">
-	                                <i class="fa fa-fw fa-circle"></i>
-	                            </span>
-	                        </a>
-	                        <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-	                            <h6 class="dropdown-header">Thông báo:</h6>
-	                            <div class="dropdown-divider"></div>
-	                            <a class="dropdown-item" href="#">
-	                                <span class="text-success">
-	                                    <strong><i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-	                                </span>
-	                                <span class="small float-right text-muted">11:21 AM</span>
-	                                <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-	                            </a>
-	                            <div class="dropdown-divider"></div>
-	                            <a class="dropdown-item" href="#">
-	                                <span class="text-danger">
-	                                    <strong><i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
-	                                </span>
-	                                <span class="small float-right text-muted">11:21 AM</span>
-	                                <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-	                            </a>
-	                            <div class="dropdown-divider"></div>
-	                            <a class="dropdown-item" href="#">
-	                                <span class="text-success">
-	                                    <strong><i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-	                                </span>
-	                                <span class="small float-right text-muted">11:21 AM</span><br>
-	                                <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-	                            </a>
-	                            <div class="dropdown-divider"></div>
-	                            <a class="dropdown-item small" href="#">View all alerts</a>
-	                        </div>
-	                    </li>
 	                    <li class="nav-item">
 	                        <form class="form-inline my-2 my-lg-0 mr-lg-2">
 	                            <div class="input-group">

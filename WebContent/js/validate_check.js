@@ -107,6 +107,12 @@ $(document).ready(function() {
 				number : true,
 				rangelength : [ 10, 11 ]
 			},
+			reg_hodem : {
+				required : true
+			},
+			reg_ten : {
+				required : true
+			},
 			reg_checkbox : 'required'
 		},
 		messages : {
@@ -123,7 +129,13 @@ $(document).ready(function() {
 				number : 'Số điện thoại không được chứa chữ',
 				rangelength : 'Số điện thoại phải từ 10 đến 11 số'
 			},
-			reg_checkbox : '	'
+			reg_hodem : {
+				required : 'Vui lòng nhập họ đệm'
+			},
+			reg_ten : {
+				required : 'Vui lòng nhập tên'
+			},
+			reg_checkbox : ''
 		}
 	});
 

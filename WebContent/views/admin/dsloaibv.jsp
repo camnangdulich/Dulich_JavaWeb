@@ -21,17 +21,17 @@
                 <table class="table table-bordered" id="dataTable">
                     <thead>
                         <tr>
-                            <th style="width: 50px;">ID</th>
-                            <th>Tên loại</th>
-                            <th>Mô tả</th>
-                            <th style="width: 50px;"><i class="fa fa-cog"></i></th>
+                            <th style="width: 10px;">ID</th>
+                            <th>Tên loại tin</th>
+                            <th>Mô tả loại tin</th>
+                            <th style="width: 20px;"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                         	<th>ID</th>
-                            <th>Tên loại</th>
-                            <th>Mô tả</th>
+                            <th>Tên loại tin</th>
+                            <th>Mô tả loại tin</th>
                             <th></th>
                         </tr>
                     </tfoot>

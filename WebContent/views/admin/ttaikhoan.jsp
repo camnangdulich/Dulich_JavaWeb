@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-10 col-md-auto">
-                    <form action="admin/ttaikhoan.html" method="post" enctype="multipart/form-data" id="ttaikhoan">
+                    <form action="admin/them-tai-khoan-moi.html" method="get" enctype="multipart/form-data" id="ttaikhoan" >
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Quyền</label>
                             <div class="col-sm-10" id="label-validation">
@@ -29,8 +29,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10" id="label-validation">
-                                <input id="email" name="email" type="email" class="form-control" placeholder="Nhập Email">
-                                <small id="loieml"></small>
+                                <input id="email" name="email" type="email" class="form-control" placeholder="Nhập Email" onchange="hihi()">
+                                <label id="loieml" class="error" style="display: block;"></label>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -59,34 +59,28 @@
                         </div>
                     </form>
 			        <script type="text/javascript">
-				        $('#btn-themtaikhoan').click(function (){
+				       function hihi(){
 				        	var varemail = $('#email').val();
 				        	$.ajax({
 				                type : "POST",
 				                contentType : "application/json",
 				                url : "${pageContext.request.contextPath}/admin/kt-email-ajax.html",
 				                data : varemail,
-				                //dataType: 'json',
-				                // timeout: 600000,
 				                success : function (result) {
-				                	//alert(jQuery.type( result ));
-				                    //console.log(result);
 				                    if(result == "true"){
-				                    	//alert('email ton tai');
-				                    	//setTimeout(function(){ alert("Hello"); }, 3000);
+				                    	document.getElementById("ttaikhoan").setAttribute("onsubmit", "return false;");
+				                    	$('#loieml').css('display', 'block');
 				                    	$('#loieml').text("email ton tai");
-				                    	
 				                    }else {
-				                    	//alert('email chua ton tai');
-				                    	//$('#loieml').text("email chua ton tai");
-				                    	//$( "#ttaikhoan" ).submit();
+				                    	document.getElementById("ttaikhoan").setAttribute("onsubmit", "return true;");
+				                    	$('#loieml').css('display', 'none');
 				                    }
 				                },
 				                error : function(e) {
 				                    alert("Lỗi ! Vui Lòng Kiểm Tra Lại");
 				                }
 				            });
-				        })
+				        }
 			        </script>
                 </div>
             </div>
