@@ -93,7 +93,7 @@
                             <div class="col-sm-10">
                                 <div id="sample">
                                     <textarea name="lichtrinh" style="width: 100%; height: 100px;" placeholder="Nhập lịch trình tour">
-                                    </textarea>${message}
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
