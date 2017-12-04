@@ -96,24 +96,24 @@ public class HomeController {
 	@ModelAttribute("lsttinhthanh")
 	public List<Tinhthanh> lsttinhthanh(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		String hql_tth = "from Tinhthanh";
-		Query query_tth = session.createQuery(hql_tth);
+		String hql_tth = "from Tinhthanh";//Câu truy vấn lấy thông tin tỉnh thành
+		Query query_tth = session.createQuery(hql_tth);//Chạy câu truy vấn
 		@SuppressWarnings("unchecked")
-		List<Tinhthanh> lsttinhthanh = query_tth.list();
-		return lsttinhthanh;
+		List<Tinhthanh> lsttinhthanh = query_tth.list();//Tạo danh sách tỉnh thành có tên là lsttinhthanh
+		return lsttinhthanh;//Trả về danh sách tỉnh thành
 	}
 
 	// Lấy thông tin tin tức mới nhất
 	@ModelAttribute("lsttintucmoi")
 	public List<Tintuc> lsttintucmoi(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int ttmSize = 8;
-		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";
-		Query query_ttm = session.createQuery(hql_ttm);
+		int ttmSize = 8;//Tạo biến int ttmSize lấy 8 tin mới nhất
+		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";//Câu truy vấn lấy tin tức mới nhất
+		Query query_ttm = session.createQuery(hql_ttm);//Chạy câu truy vấn 
 		query_ttm.setMaxResults(ttmSize);
 		@SuppressWarnings("unchecked")
-		List<Tintuc> lsttintucmoi = query_ttm.list();
-		return lsttintucmoi;
+		List<Tintuc> lsttintucmoi = query_ttm.list();//Tạo danh sách tin tức mới nhất có tên là lsttintucmoi
+		return lsttintucmoi;//Trả về danh sách các tin tức mới nhất
 	}
 
 	// Lấy thông tin tin liên quan
@@ -133,26 +133,26 @@ public class HomeController {
 	@ModelAttribute("lstsibarttm")
 	public List<Tintuc> lstsibarttm(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int ttmSize = 3;
-		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";
-		Query query_ttm = session.createQuery(hql_ttm);
+		int ttmSize = 3;//tạo biến in ttmSize = 3 để đổ vào SiBAR
+		String hql_ttm = "from Tintuc ORDER BY thoigian DESC";//Lấy tin tức mới nhất SIBAR
+		Query query_ttm = session.createQuery(hql_ttm);//Thực hiện câu truy vấn
 		query_ttm.setMaxResults(ttmSize);
 		@SuppressWarnings("unchecked")
-		List<Tintuc> lstsibarttm = query_ttm.list();
-		return lstsibarttm;
+		List<Tintuc> lstsibarttm = query_ttm.list();//Tạo danh sách tin tức mới SIBAR có tên lstsibarttm
+		return lstsibarttm;//Trả về danh sách tin tức mới SIBAR
 	}
 
 	// Lấy tin tức có lượt xem nhiều nhất
 	@ModelAttribute("lsttinxemnhieu")
 	public List<Tintuc> lsttinxemnhieu(ModelMap model) {
 		Session session = factory.getCurrentSession();
-		int ttxnSize = 8;
-		String hql_ttxn = "from Tintuc tt ORDER BY tt.luotxem DESC";
-		Query query_ttxn = session.createQuery(hql_ttxn);
+		int ttxnSize = 8;//Biến int ttxnSize giới hạn số lượng tin có lượt xem nhiều nhất 
+		String hql_ttxn = "from Tintuc tt ORDER BY tt.luotxem DESC";//Câu truy vấn lấy tin tức  có lượt xem nhiều nhất
+		Query query_ttxn = session.createQuery(hql_ttxn);//THực hiện câu truy vấn
 		query_ttxn.setMaxResults(ttxnSize);
 		@SuppressWarnings("unchecked")
-		List<Tintuc> lsttinxemnhieu = query_ttxn.list();
-		return lsttinxemnhieu;
+		List<Tintuc> lsttinxemnhieu = query_ttxn.list();//Tạ danh sách tin tức được xem nhiều nhất có tên lsttinxemnhieu
+		return lsttinxemnhieu;//Trả về danh sách tin tức có lượt xem nhiều nhất 
 	}
 
 	// Lấy tin tức có lượt xem nhiều nhất SIBAR
