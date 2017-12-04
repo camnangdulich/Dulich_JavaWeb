@@ -37,7 +37,7 @@
 		<script src="js/validate_check.js"></script>
 		<script src="js/validate_check-huy.js"></script>
     </head>
-    <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="alert_admin_check('${message}')">
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="alert_admin_check('ten tour da ton tai')">
     
     
     

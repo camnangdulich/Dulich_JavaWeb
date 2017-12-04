@@ -78,7 +78,7 @@ function alert_admin_check(message) {
 		swal({
 			title : "Thêm thất bại!",
 			type : "error",
-			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
+			text : "Tên  tour đã tồn tại, bạn vui lòng sử dụng một tên khác!",
 			showConfirmButton : true
 		});
 	} else if (message == 'them tour that bai') {
@@ -89,6 +89,8 @@ function alert_admin_check(message) {
 			showConfirmButton : true
 		});
 	}
+	
+	
 	//Thêm  dịch vụ
 	if (message == 'them dich vu thanh cong') {
 		swal({
@@ -101,7 +103,7 @@ function alert_admin_check(message) {
 		swal({
 			title : "Thêm thất bại!",
 			type : "error",
-			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
+			text : "Tên dịch vụ đã tồn tại, bạn vui lòng sử dụng một tên khác!",
 			showConfirmButton : true
 		});
 	} else if (message == 'them dich vu that  bai') {
@@ -112,6 +114,7 @@ function alert_admin_check(message) {
 			showConfirmButton : true
 		});
 	}
+	
 	//Thêm  công ty
 	if (message == 'them cong ty thanh cong') {
 		swal({
@@ -124,7 +127,7 @@ function alert_admin_check(message) {
 		swal({
 			title : "Thêm thất bại!",
 			type : "error",
-			text : "Tên loại bài viết đã tồn tại, bạn vui lòng sử dụng một tên loại bài viết khác!",
+			text : "Tên công ty  đã tồn tại, bạn vui lòng sử dụng một tên khác!",
 			showConfirmButton : true
 		});
 	} else if (message == 'them cong ty that bai') {
@@ -193,7 +196,7 @@ function kiemtraxoadichvu(idloaidichvu, tenloaidichvu) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến loại bài viết " + tenloaidichvu
+			swal("Xóa dịch vụ này!", "Dịch vụ này và các thông tin liên quan đến dịch vụ " + tenloaidichvu
 					+ " sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xdichvu/" + idloaidichvu + ".html"; // Sửa đường dẫn xóa
@@ -207,8 +210,8 @@ function kiemtraxoadichvu(idloaidichvu, tenloaidichvu) {
 function kiemtraxoatour(idtour, tentour) {
 	swal({
 		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin của tour " + tentour
-				+ " đều sẽ bị xóa hết!",
+		text : "Nếu bạn xóa, tất cả thông tin " + tentour
+				+ " đã dặt đều sẽ bị xóa hết!",
 		type : "warning",
 		showCancelButton : true,
 		confirmButtonColor : "#DD6B55",
@@ -219,8 +222,8 @@ function kiemtraxoatour(idtour, tentour) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến tour " + tentour
-					+ " sẽ bị xóa...", "success");
+			swal("Xóa đặt Tour!", "Tour và các thông tin liên quan đến" + tentour
+					+ " đã đặt sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xdattour/" + idtour + ".html"; // Sửa đường dẫn xóa
 			}, 1500);
@@ -246,7 +249,7 @@ function kiemtraxoat(idloaitour, tenloaitour) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến tour " + tenloaitour
+			swal("Xóa Tour!", "Tour và các thông tin liên quan đến tour " + tenloaitour
 					+ " sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xoatour/" + idloaitour + ".html"; // Sửa đường dẫn xóa
@@ -261,7 +264,7 @@ function kiemtraxoat(idloaitour, tenloaitour) {
 function kiemtraxoatintuc(idtintuc, tieudetintuc) {
 	swal({
 		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin của tour " + tieudetintuc
+		text : "Nếu bạn xóa, tất cả thông tin của bài viết " + tieudetintuc
 				+ " đều sẽ bị xóa hết!",
 		type : "warning",
 		showCancelButton : true,
@@ -273,7 +276,7 @@ function kiemtraxoatintuc(idtintuc, tieudetintuc) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa loại bài viết!", "Loại bài viết này và các thông tin liên quan đến tour " + tieudetintuc
+			swal("Xóa bài viết!", "Bài viết này và các thông tin liên quan đến bài viết " + tieudetintuc
 					+ " sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xtintuc/" + idtintuc + ".html"; // Sửa đường dẫn xóa
@@ -287,7 +290,7 @@ function kiemtraxoatintuc(idtintuc, tieudetintuc) {
 function kiemtraxoadatphong(iddatphong, Tenphongdat) {
 	swal({
 		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin của phong đã đặt đều sẽ bị xóa hết!",
+		text : "Nếu bạn xóa, tất cả thông tin của phòng đã đặt đều sẽ bị xóa hết!",
 		type : "warning",
 		showCancelButton : true,
 		confirmButtonColor : "#DD6B55",
@@ -298,7 +301,7 @@ function kiemtraxoadatphong(iddatphong, Tenphongdat) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa thông tin đặt phòng", "Loại phòng này và các thông tin liên quan đến đặt phòng sẽ bị xóa...", "success");
+			swal("Xóa thông tin đặt phòng", "Đơn đặt phòng và các thông tin liên quan đến đơn đặt phòng này sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xoadatphong/" + iddatphong + ".html"; // Sửa đường dẫn xóa
 			}, 1500);
@@ -313,7 +316,7 @@ function kiemtraxoadatphong(iddatphong, Tenphongdat) {
 function kiemtraxoactdv(idchitietdv, tenctdichvu) {
 	swal({
 		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin chi tiết dịch vụ đều sẽ bị xóa hết!",
+		text : "Nếu bạn xóa, tất cả thông tin dịch vụ đều sẽ bị xóa hết!",
 		type : "warning",
 		showCancelButton : true,
 		confirmButtonColor : "#DD6B55",
@@ -324,7 +327,7 @@ function kiemtraxoactdv(idchitietdv, tenctdichvu) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa chi tiết dịch vụ", "Các thông tin chi tiết dịch vụ sẽ bị xóa...", "success");
+			swal("Xóa dịch vụ", "Các thông tin dịch vụ sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xchitietdv/" + idchitietdv + ".html"; // Sửa đường dẫn xóa
 			}, 1500);
@@ -337,7 +340,7 @@ function kiemtraxoactdv(idchitietdv, tenctdichvu) {
 function kiemtraxoalp(idchitietlp) {
 	swal({
 		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin chi tiết loại phòng đều sẽ bị xóa hết!",
+		text : "Nếu bạn xóa, tất cả thông tin loại phòng của khách sạn đều sẽ bị xóa hết!",
 		type : "warning",
 		showCancelButton : true,
 		confirmButtonColor : "#DD6B55",
@@ -348,7 +351,7 @@ function kiemtraxoalp(idchitietlp) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa chi tiết loại phòng", "Các thông tin chi tiết loại phòng sẽ bị xóa...", "success");
+			swal("Xóa loại phòng", "Các thông loại phòng của khách sạn sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xchitietlp/" + idchitietlp + ".html"; // Sửa đường dẫn xóa
 			}, 1500);
