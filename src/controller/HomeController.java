@@ -56,6 +56,7 @@ import entities.Chitiettin;
 import entities.Congty;
 import entities.Danhgia;
 import entities.Datphong;
+import entities.Dattour;
 import entities.Dichvu;
 import entities.Khachsan;
 import entities.Loaiphong;
@@ -262,6 +263,28 @@ public class HomeController {
 		@SuppressWarnings("unchecked")
 		List<Chitietloaiphong> list = query.list();//Tạo danh sách chi tiết loại phòng
 		return list;//Trả về danh sách chi tiết loại phòng 
+	}
+	
+	// Lấy tất cả thông tin loại phòng
+	@ModelAttribute("loaiplist")
+	public List<Loaiphong> getlp(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Loaiphong";// Câu truy vấn lấy thông tin loại phòng
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Loaiphong> list = query.list();// Tạo danh sách Loại phòng có tên list
+		return list; // Trả về danh sách loại phòng
+	}
+
+	// Lấy tất cả thông tin tour
+	@ModelAttribute("tourlist")
+	public List<Tour> gett(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		String hql = "from Tour";// Câu truy vấn lấy thông tin các tour
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Tour> list = query.list();// Tạo danh sách tour có tên là list
+		return list;// Trả vê danh sách tour
 	}
 
 	
@@ -830,7 +853,7 @@ public class HomeController {
 	
 	
 	
-	
+	// Tìm kiếm
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "timkiem", method = RequestMethod.GET)
 	public String TimKiem(Model model, @RequestParam(value = "tukhoa", defaultValue = "") String tukhoa) {
@@ -873,6 +896,44 @@ public class HomeController {
 		}
 		return "home/index";
 	}
+	
+	
+	
+	// Đặt tour
+	@RequestMapping(value = "tour", method = RequestMethod.POST)
+	public String tour(ModelMap model,
+			//Lấy thông tin tứ các input 
+			@RequestParam("tentour") Integer tentour,
+			@RequestParam("hodem") String hodem,
+			@RequestParam("ten") String ten,
+			@RequestParam("songuoi") Integer songuoi,
+			@RequestParam("sodienthoai") String sodienthoai,
+			@RequestParam("email") String email,
+			@RequestParam("yeucau") String yeucau, RedirectAttributes a){
+				
+			Session session = factory.openSession();
+ 			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);//Lấy trạng thái có id là 2
+ 			Tour tuor = (Tour) session.get(Tour.class, tentour);//Lấy tour có id bằng iput có name là tour
+ 			//Tạo  Dattour với các thuộc tính của Dattour
+ 			Dattour dt = new Dattour(tuor, trang, hodem, ten, songuoi, sodienthoai, email, yeucau);
+ 			Transaction t = session.beginTransaction();
+ 			try {
+ 				session.save(dt);//Lưu các thuộc tính Datuor
+ 				t.commit();//Thực hiện update lên cơ sở dữ liệu
+ 				model.addAttribute("message", "Đặt tour thành công!");//Xuất thông báo
+ 				a.addFlashAttribute("message", "Đặt tour thannh cong");
+ 				return "redirect:/home/tour/"+tuor.getSlug()+".html";
+ 			} catch (Exception e) {
+ 				t.rollback();
+ 				System.out.println("Đặt tour false!");
+ 				a.addFlashAttribute("message", "Đặt tour thất bại!");
+ 			} finally {
+ 				session.close();//Đóng session
+ 			}
+		return "redirect:/home/tour/"+tuor.getSlug()+".html";//Trả về trang tour
+	}
+	
+	
 	
 	
 	
