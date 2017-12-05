@@ -296,16 +296,21 @@
 
         <!-- Register Popup -->
         <div id="register_pp" class="modal">
-            <form class="modal-content animate" action="home/dangky.html" method="get" id="register_form">
+            <form class="modal-content animate" action="home/dangky.html" method="post" id="register_form">
                 <div class="container_log" style="padding-bottom: 0px;">
                     <h2 class="text-center">Đăng ký</h2>
                     <hr>
                 </div>
 
                 <div class="container_log" style="padding-top: 0px;">
-                    <input type="email" placeholder="Nhập email cửa bạn" name="reg_email" class="input_log" autofocus required>
-                    <input type="password" placeholder="Nhập mật khẩu" name="reg_matkhau" class="input_log" required>
-                    <input type="text" placeholder="Nhập số điện thoại" name="reg_sdt" class="input_log" required>
+                    <input id="reg_email" type="email" placeholder="Nhập email của bạn" name="reg_email" class="input_log" 
+                    autofocus required onchange="kiemtraemailformdangky()">
+                    <label id="tbtrungemail" class="error" style="display: block;"></label>
+                    <input id="reg_matkhau" type="password" placeholder="Nhập mật khẩu" name="reg_matkhau" class="input_log" required>
+                    <input type="password" placeholder="Nhập lại mật khẩu" name="reg_rematkhau" class="input_log" required>
+                    <input id="reg_sdt" type="text" placeholder="Nhập số điện thoại" name="reg_sdt" class="input_log"
+                     required onchange="kiemtrasdtformdangky()">
+                    <label id="tbtrungsdt" class="error" style="display: block;"></label>
                     <input type="text" placeholder="Nhập họ đệm" name="reg_hodem" class="input_log" required>
                     <input type="text" placeholder="Nhập tên của bạn" name="reg_ten" class="input_log" required>
                     <button type="submit" class="log"><i class="fa fa-sign-in"></i> Đăng ký</button>
@@ -424,6 +429,7 @@
         <script src="js/openid-login.js" type="text/javascript"></script>
         <!-- Alert check js-->
 	    <script src="js/alert-check.js" type="text/javascript"></script>
+	    <script src="js/ajax-check-home.js" type="text/javascript"></script>
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/popper/popper.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

@@ -29,8 +29,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10" id="label-validation">
-                                <input id="email" name="email" type="email" class="form-control" placeholder="Nhập Email" onchange="hihi()">
-                                <label id="loieml" class="error" style="display: block;"></label>
+                                <input id="email" name="email" type="email" class="form-control" placeholder="Nhập Email" onchange="kiemtraemail()">
+                                <label id="tbtrungemail" class="error" style="display: block;"></label>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -59,7 +59,7 @@
                         </div>
                     </form>
 			        <script type="text/javascript">
-				       function hihi(){
+				       function kiemtraemail(){
 				        	var varemail = $('#email').val();
 				        	$.ajax({
 				                type : "POST",
@@ -69,15 +69,15 @@
 				                success : function (result) {
 				                    if(result == "true"){
 				                    	document.getElementById("ttaikhoan").setAttribute("onsubmit", "return false;");
-				                    	$('#loieml').css('display', 'block');
-				                    	$('#loieml').text("email ton tai");
+				                    	$('#tbtrungemail').css('display', 'block');
+				                    	$('#tbtrungemail').text("Email này đã tồn tại, vui lòng sử dụng email khác");
 				                    }else {
 				                    	document.getElementById("ttaikhoan").setAttribute("onsubmit", "return true;");
-				                    	$('#loieml').css('display', 'none');
+				                    	$('#tbtrungemail').css('display', 'none');
 				                    }
 				                },
 				                error : function(e) {
-				                    alert("Lỗi ! Vui Lòng Kiểm Tra Lại");
+				                    alert("Lỗi ! Kiểm tra email");
 				                }
 				            });
 				        }

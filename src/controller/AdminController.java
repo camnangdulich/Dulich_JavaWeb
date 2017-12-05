@@ -51,6 +51,7 @@ import entities.Tintuc;
 import entities.Tour;
 import entities.Trangthai;
 import model.EnDeCryption;
+import model.Mailer;
 import model.SlugsConverter;
 
 /**
@@ -66,6 +67,9 @@ public class AdminController {
 	SessionFactory factory;
 	@Autowired
 	ServletContext context;
+	
+	@Autowired
+	Mailer mailer;
 
 	// ------------------------------------------------------------------
 	// ===================== ModelAttribute =============================
@@ -483,46 +487,46 @@ public class AdminController {
 		model.addAttribute("title", "Thêm tài khoản mới");
 		return "admin/ttaikhoan";
 	}
-	@RequestMapping(value = "them-tai-khoan-moi", method = RequestMethod.POST)
-	public String ttaikhoan(ModelMap model, @RequestParam("quyen") Integer quyen, @RequestParam("email") String email,
-			@RequestParam("matkhau") String matkhau, @RequestParam("sdt") String sdt) throws InvalidKeyException {
-
-		if (kiemtraEmail(email)) {
-			System.out.println("Email ton tai >< stop");
-			model.addAttribute("title", "Thêm tài khoản mới");
-			model.addAttribute("message", "email ton tai");
-			return "admin/ttaikhoan";
-		} else {
-			System.out.println("Email khong ton tai >> next");
-			Session session = factory.openSession();
-			Date ngaytao = new Date();
-			Quyen rl = (Quyen) session.get(Quyen.class, quyen);
-			Trangthai trt = (Trangthai) session.get(Trangthai.class, 2);
-
-			// Password encryption
-			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
-			String Matkhaumahoa = encryption.encoding(matkhau);
-
-			Taikhoan tk = new Taikhoan(email, Matkhaumahoa, sdt, "av1.png", ngaytao, rl, trt);
-			Transaction t = session.beginTransaction();
-			try {
-				session.save(tk);
-				t.commit();
-				System.out.println("Them tai khoan thanh cong");
-				model.addAttribute("title", "Thêm tài khoản mới");
-				model.addAttribute("message", "them tai khoan thanh cong");
-				return "admin/ttaikhoan";
-			} catch (Exception e) {
-				t.rollback();
-				System.out.println("Them tai khoan that bai");
-				model.addAttribute("title", "Thêm tài khoản mới");
-				model.addAttribute("message", "them tai khoan that bai");
-			} finally {
-				session.close();
-			}
-		}
-		return "admin/ttaikhoan";
-	}
+//	@RequestMapping(value = "them-tai-khoan-moi", method = RequestMethod.POST)
+//	public String ttaikhoan(ModelMap model, @RequestParam("quyen") Integer quyen, @RequestParam("email") String email,
+//			@RequestParam("matkhau") String matkhau, @RequestParam("sdt") String sdt) throws InvalidKeyException {
+//
+//		if (kiemtraEmail(email)) {
+//			System.out.println("Email ton tai >< stop");
+//			model.addAttribute("title", "Thêm tài khoản mới");
+//			model.addAttribute("message", "email ton tai");
+//			return "admin/ttaikhoan";
+//		} else {
+//			System.out.println("Email khong ton tai >> next");
+//			Session session = factory.openSession();
+//			Date ngaytao = new Date();
+//			Quyen rl = (Quyen) session.get(Quyen.class, quyen);
+//			Trangthai trt = (Trangthai) session.get(Trangthai.class, 2);
+//
+//			// Password encryption
+//			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
+//			String Matkhaumahoa = encryption.encoding(matkhau);
+//
+//			Taikhoan tk = new Taikhoan(email, Matkhaumahoa, sdt, hodem, ten, "av1.png", ngaytao, rl, trt);
+//			Transaction t = session.beginTransaction();
+//			try {
+//				session.save(tk);
+//				t.commit();
+//				System.out.println("Them tai khoan thanh cong");
+//				model.addAttribute("title", "Thêm tài khoản mới");
+//				model.addAttribute("message", "them tai khoan thanh cong");
+//				return "admin/ttaikhoan";
+//			} catch (Exception e) {
+//				t.rollback();
+//				System.out.println("Them tai khoan that bai");
+//				model.addAttribute("title", "Thêm tài khoản mới");
+//				model.addAttribute("message", "them tai khoan that bai");
+//			} finally {
+//				session.close();
+//			}
+//		}
+//		return "admin/ttaikhoan";
+//	}
 
 	// Thêm bài viết mới (Tin tức mới)
 	@RequestMapping("them-bai-viet-moi")
@@ -1717,6 +1721,32 @@ public class AdminController {
 		}
 
 	}
+	
+	
+	// Xác nhận đơn đặt phòng
+	@RequestMapping("xnddp/{iddondatphong}/{emaildatphong}")
+	public String xnddp(ModelMap model, @PathVariable("iddondatphong") Integer iddondatphong,
+			@PathVariable("emaildatphong") String email) {
+		
+		Session session = factory.getCurrentSession();
+		Datphong dp = (Datphong) session.get(Datphong.class, iddondatphong);
+		Trangthai trangthai = (Trangthai) session.get(Trangthai.class, 1);
+		dp.setTrangthai(trangthai);
+		
+		String from = "kakaassasin123@gmail.com";
+		String subject = "Xác nhận đơn đặt phòng - Camnangdulich";
+//		String body = "Cảm ơn " + dp.getHodem() +" "+ dp.getTen()+ " đã quan tâm và sử dụng dịch vụ đặt phòng tại Camnangdulich!\n"
+//				+ "Đơn đặt phòng của bạn tại khách sạn " + dp.getKhachsan().getTenkhachsan() + " đã được xác nhận với các thông tin sau:\n"
+//				+ "Ngày nhận phòng: " + dp.getNgaynhanphong() + "\n"
+//				+ "Ngày trả phòng: " + dp.getNgaytraphong() + "\n"
+//				+ "Loại phòng: " + dp.getLoaiphong().getTenloai() + "\n"
+//				+ "Số lượng phòng: " + dp.getSoluongphong() + "\n"
+//				+ "Mô tả loại phòng: " + dp.getLoaiphong().getMota();
+		String body = "Cảm ơn " + dp.getHodem() +" "+ dp.getTen()+ " đơn đặt phòng của bạn tại khách sạn "+ dp.getKhachsan().getTenkhachsan() + " đã được xác nhận!";
+		mailer.send(from, email, subject, body);
+		
+		return "redirect:/admin/danh-sach-don-dat-phong.html";
+	}
 
 	
 	
@@ -2032,6 +2062,33 @@ public class AdminController {
 		}
 		return kt;
 	}
+	
+	// Kiểm tra số điện có tồn tại không
+	public boolean kiemtraSdt(String sdt) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		boolean kt = true;
+		try {
+			String hql = "from Taikhoan where sodienthoai = :sdt";
+			Query query = session.createQuery(hql);
+			query.setParameter("sdt", sdt);
+			@SuppressWarnings("unchecked")
+			List<Taikhoan> lstTaikhoans = query.list();
+			t.commit();
+			if (lstTaikhoans.size() != 0) {
+				return kt;
+			} else {
+				return false;
+			}
+		} catch (Exception ex) {
+			if (!(t == null)) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return kt;
+	}
 
 	// Kiểm tra quyền có tồn tại không
 	public boolean kiemtraQuyen(String tenquyen) {
@@ -2179,6 +2236,19 @@ public class AdminController {
 			System.out.println("EMAIL : " + emaildata);
 			boolean ktmail = kiemtraEmail(emaildata);
 			response.getWriter().print(ktmail);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	// Check số điện thoại
+	@RequestMapping(value = "kt-sdt-ajax", method = RequestMethod.POST)
+	public String ktsdtajax(HttpServletResponse response, @RequestBody String sdtdata) {
+		try {
+			System.out.println("SDT : " + sdtdata);
+			boolean ktsdt = kiemtraSdt(sdtdata);
+			response.getWriter().print(ktsdt);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

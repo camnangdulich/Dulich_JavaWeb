@@ -47,8 +47,8 @@
                     </tfoot>
                     <tbody>
                         <c:forEach var="dp" items="${dondatphonglst}">
-                            <tr>
-                            	<c:if test="${dp.khachsan.idkhachsan == loguserks.idkhachsan}">
+                        	<c:if test="${dp.khachsan.idkhachsan == loguserks.idkhachsan}">
+                            	<tr>
 	                            	<td>${dp.hodem} ${dp.ten}</td>
 	                                <td>${dp.sodienthoai}</td>
 	                                <td>${dp.email}</td>
@@ -61,7 +61,10 @@
 									       <td style="color: #5cb85c;">${dp.trangthai.trangthai}</td>
 									    </c:when>
 									    <c:when test="${dp.trangthai.idtrangthai == 2}">
-									        <td style="color: #f0ad4e;">${dp.trangthai.trangthai}</td>
+									        <td>
+									        	<a onclick="xacnhandondatphong('${dp.iddatphong}', '${dp.hodem} ${dp.ten}', '${dp.email}')" 
+									        	style="color: #f0ad4e; cursor: pointer;">${dp.trangthai.trangthai}</a>
+									        </td>
 									    </c:when>
 									    <c:otherwise>
 									        <td style="color: red;">${dp.trangthai.trangthai}</td>
@@ -73,8 +76,8 @@
 		                                	<i class="fa fa-times" title="Xóa đơn dặt phòng"></i>
 		                                </a>
 									</td>
-                            	</c:if>
-                            </tr>
+								 </tr>
+                           	</c:if>
                         </c:forEach>
                     </tbody>
                 </table>

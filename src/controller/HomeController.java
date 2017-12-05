@@ -306,7 +306,6 @@ public class HomeController {
 	public String index(ModelMap model, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		model.addAttribute("title", "Cẩm nang du lịch");
-		
 		return "home/index";//Trả về trang chủ 
 	}
 
@@ -399,36 +398,45 @@ public class HomeController {
 	// Đăng ký (register form)
 	@RequestMapping(value = "dangky", method = RequestMethod.POST)
 	//Lấy thông tin từ các input với các name
-	public String Register(ModelMap model, @RequestParam("reg_email") String email,
-			@RequestParam("reg_matkhau") String matkhau, @RequestParam("reg_sdt") String sdt)
-					throws InvalidKeyException {
+	public String Register(ModelMap model, HttpSession httpSession,
+			@RequestParam("reg_email") String email,
+			@RequestParam("reg_matkhau") String matkhau, 
+			@RequestParam("reg_sdt") String sdt,
+			@RequestParam("reg_hodem") String hodem,
+			@RequestParam("reg_ten") String ten) throws InvalidKeyException {
 
-		Session session = factory.openSession();
-		// Get role = 3 (member)
-		Quyen rl = (Quyen) session.get(Quyen.class, 3);
-		// Get trangthai = 2 (not activated)
-		Trangthai trt = (Trangthai) session.get(Trangthai.class, 2);
-		// Get ngaytao (getdate)
-		Date ngaytao = new Date();
+		if (kiemtraEmail(email)){
+			model.addAttribute("message", "dang ky email ton tai");
+			return "admin/index";
+		} else {
+			Session session = factory.openSession();
+			// Get role = 3 (member)
+			Quyen rl = (Quyen) session.get(Quyen.class, 5);
+			// Get trangthai = 2 (not activated)
+			Trangthai trt = (Trangthai) session.get(Trangthai.class, 2);
+			// Get ngaytao (getdate)
+			Date ngaytao = new Date();
 
-		// Password encryption
-		EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
-		String Matkhaumahoa = encryption.encoding(matkhau);
-		// Create new Taikhoan
-		Taikhoan user = new Taikhoan(email, Matkhaumahoa, sdt, "av1.png", ngaytao, rl, trt);
+			// Password encryption
+			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
+			String Matkhaumahoa = encryption.encoding(matkhau);
+			// Create new Taikhoan
+			Taikhoan user = new Taikhoan(email, Matkhaumahoa, sdt, hodem, ten, "default.jpg", ngaytao, rl, trt);
 
-		Transaction t = session.beginTransaction();
-		try {
-			session.save(user);
-			t.commit();
-			model.addAttribute("message", "Đăng ký thành công !");// Thông báo đăng kí thành công
-			return "home/tttaikhoan";// Trả về trang thông tin tai khoản
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Đăng ký thất bại !");// Thông báo đăng ký thất bại
-			model.addAttribute("login_check", 0);
-		} finally {
-			session.close();// Đóng session
+			Transaction t = session.beginTransaction();
+			try {
+				session.save(user);
+				t.commit();
+				model.addAttribute("message", "dang ky thanh cong");// Thông báo đăng kí thành công
+				httpSession.setAttribute("loguser", user);// Auto login
+				return "home/index";// Trả về trang chủ chờ xác minh
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "dang ky that bai");// Thông báo đăng ký thất bại
+				model.addAttribute("login_check", 0);
+			} finally {
+				session.close();// Đóng session
+			}
 		}
 		return "home/index";//Trả về trang index
 	}
@@ -745,6 +753,7 @@ public class HomeController {
 			}
 		} else {
 			String tenks = ks.getTenkhachsan();
+			System.out.println("Ban da co khach san ten : " +tenks+ "  Vui long cho xac minh");
 		}
 		
 		return "home/index";
@@ -985,6 +994,46 @@ public class HomeController {
 	
 	
 	
+	// ------------------------------------------------------------------
+	// ===================== CHECK Controller ===========================
+	// ------------------------------------------------------------------
+
+	// Kiểm tra email có tồn tại không
+	public boolean kiemtraEmail(String email) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		boolean kt = true;
+		try {
+			String hql = "from Taikhoan where email = :mail";
+			Query query = session.createQuery(hql);
+			query.setParameter("mail", email);
+			@SuppressWarnings("unchecked")
+			List<Taikhoan> lstTaikhoans = query.list();
+			t.commit();
+			if (lstTaikhoans.size() != 0) {
+				return kt;
+			} else {
+				return false;
+			}
+		} catch (Exception ex) {
+			if (!(t == null)) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return kt;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// ------------------- Send mail Controller -------------------------
 	// ------------------------------------------------------------------
 
@@ -1093,8 +1142,10 @@ public class HomeController {
 				
 				String sdt = "Facebook ID : "+me.getId();
 				String hinhanh = me.getPicture().getUrl();
+				String hodem = me.getLastName();
+				String ten = me.getFirstName();
 				
-				taikhoan = new Taikhoan(email, matkhaumahoa, sdt, hinhanh, ngaytao, quyen, trt);
+				taikhoan = new Taikhoan(email, matkhaumahoa, sdt, hodem, ten, hinhanh, ngaytao, quyen, trt);
 				try {
 					session.save(taikhoan);
 					t.commit();
@@ -1190,7 +1241,9 @@ public class HomeController {
         			// Tạo mới tài khoản với thông tin người dùng
         			
         			String sdt = "Google ID : " + userId;
-        			taikhoan = new Taikhoan(email, matkhaumahoa, sdt, pictureUrl, ngaytao, quyen, trt);
+        			String hodem = " ";
+        			String ten = familyName;
+        			taikhoan = new Taikhoan(email, matkhaumahoa, sdt, hodem, ten, pictureUrl, ngaytao, quyen, trt);
         			Transaction t = session.beginTransaction();
         			try {
         				session.save(taikhoan);

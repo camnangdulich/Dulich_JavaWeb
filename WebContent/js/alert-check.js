@@ -129,6 +129,30 @@ function alert_home_check(message) {
 		});
 	}
 	
+	// Kiểm tra đăng ký
+	if (message == 'dang ky thanh cong') {
+		swal({
+			title : "Đăng ký thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'dang ky email ton tai') {
+		swal({
+			title : "Đăng ký thất bại!",
+			type : "error",
+			text : "Email đã tồn tại, bạn vui lòng sử dụng một email khác!",
+			showConfirmButton : true
+		});
+	} else if (message == 'dang ky that bai') {
+		swal({
+			title : "Đăng ký thất bại!",
+			type : "error",
+			text : "Đăng ký tài khoản thất bại!",
+			showConfirmButton : true
+		});
+	}
+	
 	// Do something
 	// ...
 	
@@ -196,31 +220,6 @@ function kiemtraxoataikhoan(idtaikhoan, email) {
 	});
 };
 
-////Kiểm tra Xóa thông tin loại bài viết
-//function kiemtraxoaloaibv(idloaitin, loaitin) {
-//	swal({
-//		title : "Bạn chắc chắn muốn loại bài viết này không",
-//		text : "Nếu bạn xóa, tất cả thông tin của loại bài viết " + loaitin
-//				+ " đều sẽ bị xóa hết!",
-//		type : "warning",
-//		showCancelButton : true,
-//		confirmButtonColor : "#DD6B55",
-//		confirmButtonText : "Xóa bỏ!",
-//		cancelButtonText : "Hủy bỏ!",
-//		closeOnConfirm : false,
-//		closeOnCancel : true,
-//		showLoaderOnConfirm : true
-//	}, function(isConfirm) {
-//		if (isConfirm) {
-//			swal("Xóa loại bài viết!", "Tài khoản và các thông tin của " + loaitin
-//					+ " sẽ bị xóa...", "success");
-//			setTimeout(function() {
-//				window.location = "admin/xloaibv/" + idloaitin + ".html";
-//			}, 1500);
-//		}
-//	});
-//};
-
 // Kiểm tra Xóa thông tin khách sạn
 function kiemtraxoakhachsan() {
 	swal({
@@ -241,6 +240,31 @@ function kiemtraxoakhachsan() {
 					"success");
 			setTimeout(function() {
 				window.location = "admin/xkhachsan.html";
+			}, 1500);
+		}
+	});
+};
+
+// Xác nhân đơn đặt phòng
+function xacnhandondatphong(iddongdatphong, tennguoidatphong, emaildatphong) {
+	swal({
+		title : "Xác nhận đơn đặt phòng!",
+		text : "Xác nhận đơn đặt phòng của " + tennguoidatphong
+				+ " và gửi mail thông báo!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#5cb85c",
+		confirmButtonText : "Xác nhận!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xác nhận đơn!", "Đơn đặt phòng của " + tennguoidatphong
+					+ " sẽ được kích hoạt...", "success");
+			setTimeout(function() {
+				window.location = "admin/xnddp/" + iddongdatphong + "/" + emaildatphong + ".html";
 			}, 1500);
 		}
 	});

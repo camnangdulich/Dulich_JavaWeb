@@ -102,6 +102,11 @@ $(document).ready(function() {
 				required : true,
 				minlength : 5
 			},
+			reg_rematkhau : {
+				required : true,
+				minlength : 5,
+				equalTo: '#reg_matkhau'
+			},
 			reg_sdt : {
 				required : true,
 				number : true,
@@ -123,6 +128,11 @@ $(document).ready(function() {
 			reg_matkhau : {
 				required : 'Vui lòng nhập mật khẩu',
 				minlength : 'Vui lòng nhập ít nhất 5 kí tự'
+			},
+			reg_rematkhau : {
+				required : 'Vui lòng nhập lại mật khẩu',
+				minlength : 'Vui lòng nhập ít nhất 5 kí tự',
+				equalTo: 'Mật khẩu không trùng khớp'
 			},
 			reg_sdt : {
 				required : 'Vui lòng nhập số điện thoại',
