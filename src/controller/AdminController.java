@@ -1733,7 +1733,7 @@ public class AdminController {
 		Trangthai trangthai = (Trangthai) session.get(Trangthai.class, 1);
 		dp.setTrangthai(trangthai);
 		
-		String from = "kakaassasin123@gmail.com";
+		String from = "camnangdulich360@gmail.com";
 		String subject = "Xác nhận đơn đặt phòng - Camnangdulich";
 //		String body = "Cảm ơn " + dp.getHodem() +" "+ dp.getTen()+ " đã quan tâm và sử dụng dịch vụ đặt phòng tại Camnangdulich!\n"
 //				+ "Đơn đặt phòng của bạn tại khách sạn " + dp.getKhachsan().getTenkhachsan() + " đã được xác nhận với các thông tin sau:\n"

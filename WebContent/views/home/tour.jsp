@@ -5,7 +5,7 @@
     <div class="row" style="margin-top: 20px;">
         <div class="col-lg-6">
             <div class="ih-item square effect9 right_to_left" style="width: 100%; height: 100%;">
-                <a href="#">
+                <a>
                     <div class="img" ><img class="img-fluid rounded" src="files/tour/${cttour.hinhtour}" alt=""></div>
                     <div class="info">
                         <div class="info-back">
@@ -64,11 +64,11 @@
 		                    <c:forEach var="tur" items="${lstkhachsan}">
 		                        <div class="col-lg-4 col-sm-6 portfolio-item">
 		                            <div class="card h-80">
-		                                <a href="#"><img style="border-radius: 0; padding: 0;" class="card-img-top" 
+		                                <a href="home/khach-san/${tur.slug}.html"><img style="border-radius: 0; padding: 0;" class="card-img-top" 
 		                                src="files/khachsan/${tur.hinhanh}" alt="${tur.hinhanh}"></a>
 		                                <div class="card-body">
 		                                    <h6 class="card-title">
-		                                        <a href="#">${tur.tenkhachsan}</a>
+		                                        <a href="home/khach-san/${tur.slug}.html">${tur.tenkhachsan}</a>
 		                                    </h6>
 		                                    <p style="font-size: 13px;" class="card-text">${tur.diachi}</p>
 		                                </div>
@@ -76,16 +76,19 @@
 		                        </div>
 		                    </c:forEach>
 	                    </div>
+	                    <hr>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="chitiet">
                     <div class="modal-body tt-bv">
                         ${cttour.mota}
+                        <hr>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="luuy">
                     <div class="modal-body tt-bv">
                         ${cttour.luuy}
+                        <hr>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="nhacungcap">
@@ -107,10 +110,10 @@
 	                    <c:forEach var="tur" items="${lsttourdacbiet}">
 	                        <div class="col-lg-4 col-sm-6 portfolio-item">
 	                            <div class="card h-80">
-	                                <a href="#"><img style="border-radius: 0;" class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
+	                                <a href="home/tour/${tur.slug}.html"><img style="border-radius: 0;" class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
 	                                <div class="card-body">
 	                                    <h6 class="card-title">
-	                                        <a href="#">${tur.tentour}</a>
+	                                        <a href="home/tour/${tur.slug}.html">${tur.tentour}</a>
 	                                    </h6>
 	                                    <p style="font-size: 13px;" class="card-text">${tur.diemdi} <i class="fa fa-long-arrow-right"></i> ${tur.tinhthanh.tinhthanh}</p>
 	                                </div>
@@ -126,7 +129,7 @@
             <div class="card my-4">
                 <h5 class="card-header">Đặt tour du lịch</h5>
                 <div class="card-body">
-                <form action="home/tour.html" method="post" >
+                	<form action="home/tour.html" method="post" id="dattour_form">
 						<input name="tentour" value="${cttour.idtour}" hidden="">
 						<div class="form-group">
 							<input name="hodem" class="form-control" type="text" placeholder="Nhập họ đệm" value="${loguser.hodem}">
@@ -146,7 +149,6 @@
 						<div class="form-group">
 							<input name="yeucau" class="form-control" type="text" placeholder="Nhập yêu cầu" value="">
 						</div>
-						<p>thong bao: ${message }</p>
 						<button style="width: 100%" type="submit" class="btn btn-success">Đặt tour</button>
 					</form>
                 </div>

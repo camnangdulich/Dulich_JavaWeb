@@ -1,2 +1,2 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<h1>404</h1>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<span><label>L</label>ỗi.....</span> Trang này không tồn tại

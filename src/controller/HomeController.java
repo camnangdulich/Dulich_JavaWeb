@@ -303,10 +303,39 @@ public class HomeController {
 	// ------------------------------------------------------------------
 
 	@RequestMapping("trang-chu")
-	public String index(ModelMap model, HttpSession httpsession,
-			@RequestParam(value = "page", defaultValue = "1") int page) {
+	public String index(ModelMap model) {
 		model.addAttribute("title", "Cẩm nang du lịch");
 		return "home/index";//Trả về trang chủ 
+	}
+	
+	@RequestMapping("chinh-sach-khach-san")
+	public String chinhsachkhachsan(ModelMap model) {
+		model.addAttribute("title", "Chính sách khách sạn");
+		return "home/chinhsach";
+	}
+	
+	@RequestMapping("chinh-sach-quyen-rieng-tu")
+	public String chinhsachquyenriengtu(ModelMap model) {
+		model.addAttribute("title", "Chính sách quyền riêng tư");
+		return "home/chinhsachquyenriengtu";
+	}
+	
+	@RequestMapping("dieu-khoan-dieu-kien")
+	public String dieukhoandieukien(ModelMap model) {
+		model.addAttribute("title", "Điều khoản - điều kiện");
+		return "home/dieukhoan-dieukien";
+	}
+	
+	@RequestMapping("gioi-thieu")
+	public String gioithieu(ModelMap model) {
+		model.addAttribute("title", "Giới thiệu");
+		return "home/gioithieu";
+	}
+
+	@RequestMapping("phan-hoi")
+	public String phanhoi(ModelMap model) {
+		model.addAttribute("title", "Phản hồi");
+		return "home/phanhoi";
 	}
 
 	
@@ -397,8 +426,12 @@ public class HomeController {
 	
 	// Đăng ký (register form)
 	@RequestMapping(value = "dangky", method = RequestMethod.POST)
-	//Lấy thông tin từ các input với các name
-	public String Register(ModelMap model, HttpSession httpSession,
+	// Lấy thông tin từ các input với các name
+	public String Register(ModelMap model,
+			RedirectAttributes redirectattributes,
+			HttpSession httpSession,
+			HttpServletRequest request,
+			HttpServletResponse response,
 			@RequestParam("reg_email") String email,
 			@RequestParam("reg_matkhau") String matkhau, 
 			@RequestParam("reg_sdt") String sdt,
@@ -406,8 +439,8 @@ public class HomeController {
 			@RequestParam("reg_ten") String ten) throws InvalidKeyException {
 
 		if (kiemtraEmail(email)){
-			model.addAttribute("message", "dang ky email ton tai");
-			return "admin/index";
+			redirectattributes.addFlashAttribute("message", "dang ky email ton tai");
+			return "redirect:/home/trang-chu.html";
 		} else {
 			Session session = factory.openSession();
 			// Get role = 3 (member)
@@ -421,24 +454,105 @@ public class HomeController {
 			EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
 			String Matkhaumahoa = encryption.encoding(matkhau);
 			// Create new Taikhoan
-			Taikhoan user = new Taikhoan(email, Matkhaumahoa, sdt, hodem, ten, "default.jpg", ngaytao, rl, trt);
+			String random = RandomString.randomString(20);
+			Taikhoan user = new Taikhoan(email, Matkhaumahoa, sdt, hodem, ten, "default.jpg", ngaytao, rl, trt, random);
 
 			Transaction t = session.beginTransaction();
 			try {
 				session.save(user);
 				t.commit();
-				model.addAttribute("message", "dang ky thanh cong");// Thông báo đăng kí thành công
-				httpSession.setAttribute("loguser", user);// Auto login
-				return "home/index";// Trả về trang chủ chờ xác minh
+				redirectattributes.addFlashAttribute("message", "dang ky thanh cong");
+				String from = "camnangdulich360@gmail.com";
+				String subject = "Xác nhận tài khoản - Camnangdulich";
+				String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ request.getContextPath() + "/home/xac-nhan-tai-khoan/" + random + ".html";
+				String body = "Nhấn vào đường dẫn để xác nhận tài khoản :\n" + url;
+				mailer.send(from, email, subject, body);
+				return "redirect:/home/trang-chu.html";
 			} catch (Exception e) {
 				t.rollback();
-				model.addAttribute("message", "dang ky that bai");// Thông báo đăng ký thất bại
-				model.addAttribute("login_check", 0);
+				redirectattributes.addFlashAttribute("message", "dang ky that bai");
 			} finally {
-				session.close();// Đóng session
+				session.close();
 			}
 		}
-		return "home/index";//Trả về trang index
+		return "redirect:/home/trang-chu.html";
+	}
+	
+	// Xác nhận tài khoản
+	@RequestMapping("xac-nhan-tai-khoan/{keypass}")
+	public String xacnhantaikhoan(ModelMap model, @PathVariable("keypass") String keypass) {
+
+		Session session = factory.getCurrentSession();
+		// Câu truy vấn lấy thông tin theo Loại tin theo slug
+		String hql = "from Taikhoan where keypass = :keypass";
+		Query query = session.createQuery(hql);// Thực hiện câu truy vấn 
+		query.setParameter("keypass", keypass);
+		Taikhoan taikhoan = (Taikhoan) query.uniqueResult();
+		
+		if(taikhoan == null){
+			return "error/404";
+		}else{
+			Trangthai trangthai = (Trangthai) session.get(Trangthai.class, 1);
+			taikhoan.setTrangthai(trangthai);
+			taikhoan.setKeypass(null);
+			String tennguoidung = taikhoan.getHodem() +" "+ taikhoan.getTen();
+			model.addAttribute("tennguoidung",tennguoidung);
+			return "home/xntaikhoan";
+		}
+	}
+	
+	
+	// Đặt lại mật khẩu
+	@RequestMapping("dat-lai-mat-khau/{keypass}")
+	public String datlaimatkhau(ModelMap model, @PathVariable("keypass") String keypass) {
+
+		Session session = factory.getCurrentSession();
+		String hql = "from Taikhoan where keypass = :keypass";
+		Query query = session.createQuery(hql);// Thực hiện câu truy vấn 
+		query.setParameter("keypass", keypass);
+		Taikhoan taikhoan = (Taikhoan) query.uniqueResult();
+		
+		if (taikhoan == null){
+			return "error/404";
+		} else {
+			model.addAttribute("taikhoan",taikhoan);
+			return "home/datlaimatkhau";
+		}
+	}
+	
+	// Đặt lại mật khẩu Action
+	@RequestMapping(value = "dat-lai-mat-khau", method = RequestMethod.POST)
+	public String datlaimatkhauac(ModelMap model, RedirectAttributes redirectattributes,
+			@RequestParam("idtk") Integer idtaikhoan,
+			@RequestParam("matkhaumoi") String matkhau) throws InvalidKeyException {
+
+		EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
+		String mkmahoa = encryption.encoding(matkhau);
+		
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idtaikhoan);
+
+		tk.setMatkhau(mkmahoa);
+		tk.setKeypass(null);
+
+		try {
+			session.update(tk);
+			t.commit();
+			redirectattributes.addFlashAttribute("message", "dat lai mat khau thanh cong");
+			return "redirect:/home/trang-chu.html";
+		} catch (Exception e) {
+			t.rollback();
+			redirectattributes.addFlashAttribute("message", "dat lai mat khau that bai");
+			return "redirect:/home/trang-chu.html";
+		} finally {
+			session.close();
+		}
+		
+		
+		
+		
 	}
 
 	
@@ -474,8 +588,10 @@ public class HomeController {
 
 		Loaitin lt = (Loaitin) session.get(Loaitin.class, idlt);
 		String tenloaitin = lt.getLoaitin();
+		String slugloaitin = lt.getSlug();
 
 		model.addAttribute("title", tenloaitin);
+		model.addAttribute("slugloaitin", slugloaitin);
 		model.addAttribute("dslt", list);
 		model.addAttribute("idloaitin", idlt);
 		model.addAttribute("currentpage", page);
@@ -568,6 +684,7 @@ public class HomeController {
 		Query query = session.createQuery(hql);
 		query.setParameter("slugtour", slugtour);
 		Tour tour = (Tour) query.uniqueResult();
+		tour.setLuotxem(tour.getLuotxem() + 1);
 		String tentour = tour.getTentour();
 		Integer idtt = tour.getTinhthanh().getIdtinhthanh();
 
@@ -636,7 +753,7 @@ public class HomeController {
 	public String dstinhthanh(ModelMap model, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		Session session = factory.getCurrentSession();
-		int total = 0, pageSize = 12;
+		int total = 0, pageSize = 16;
 		String hql = "from Tinhthanh";
 		Query query = session.createQuery(hql);
 
@@ -655,6 +772,133 @@ public class HomeController {
 		model.addAttribute("pagecount", pageCount);
 
 		return "home/tinhthanh_ds";
+	}
+	
+	
+	// Danh sách tin tức mới
+	@RequestMapping("tin-tuc/tin-moi")
+	public String dstintucmoi(ModelMap model, HttpSession httpsession,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+		Session session = factory.getCurrentSession();
+		int total = 0, pageSize = 12;
+		String hql = "from Tintuc ORDER BY thoigian DESC";
+		Query query = session.createQuery(hql);
+
+		total = query.list().size();
+		query.setFirstResult(pageSize * (page - 1));
+		query.setMaxResults(pageSize);
+		int pageCount = (total) / pageSize + (total % pageSize > 0 ? 1 : 0);
+
+		@SuppressWarnings("unchecked")
+		List<Tintuc> list = query.list();
+
+		model.addAttribute("dslt", list);
+		model.addAttribute("title", "Tin mới");
+		model.addAttribute("currentpage", page);
+		model.addAttribute("pagesize", pageSize);
+		model.addAttribute("pagecount", pageCount);
+
+		return "home/tintucmoi_ds";
+	}
+	
+	// Danh sách tin tức xem nhiều
+	@RequestMapping("tin-tuc/tin-xem-nhieu")
+	public String dstintucxemnhieu(ModelMap model, HttpSession httpsession,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+		Session session = factory.getCurrentSession();
+		int total = 0, pageSize = 12;
+		String hql = "from Tintuc ORDER BY luotxem DESC";
+		Query query = session.createQuery(hql);
+
+		total = query.list().size();
+		query.setFirstResult(pageSize * (page - 1));
+		query.setMaxResults(pageSize);
+		int pageCount = (total) / pageSize + (total % pageSize > 0 ? 1 : 0);
+
+		@SuppressWarnings("unchecked")
+		List<Tintuc> list = query.list();
+
+		model.addAttribute("dslt", list);
+		model.addAttribute("title", "Tin xem nhiều");
+		model.addAttribute("currentpage", page);
+		model.addAttribute("pagesize", pageSize);
+		model.addAttribute("pagecount", pageCount);
+
+		return "home/tinxemnhieu_ds";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Danh sách khách sạn
+	@RequestMapping("khach-san/danh-sach")
+	public String dskhachsan(ModelMap model, HttpSession httpsession,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+		Session session = factory.getCurrentSession();
+		int total = 0, pageSize = 20;
+		
+		String hql = "from Khachsan";
+		Query query = session.createQuery(hql);
+		
+		String hqls = "from Danhgia group by idkhachsan";
+		Query querys = session.createQuery(hqls);
+
+		total = query.list().size();
+		query.setFirstResult(pageSize * (page - 1));
+		query.setMaxResults(pageSize);
+		int pageCount = (total) / pageSize + (total % pageSize > 0 ? 1 : 0);
+
+		@SuppressWarnings("unchecked")
+		List<Khachsan> list = query.list();
+		@SuppressWarnings("unchecked")
+		List<Danhgia> lists = querys.list();
+
+		model.addAttribute("khachsands", list);
+		model.addAttribute("dgks", lists);
+		model.addAttribute("title", "Danh sách khách sạn");
+		model.addAttribute("currentpage", page);
+		model.addAttribute("pagesize", pageSize);
+		model.addAttribute("pagecount", pageCount);
+
+		return "home/dskhachsan";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	// Danh sách tour du lich
+	@RequestMapping("tour/danh-sach")
+	public String dstourdulich(ModelMap model, HttpSession httpsession,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+		Session session = factory.getCurrentSession();
+		int total = 0, pageSize = 20;
+		String hql = "from Tour order by idtour desc";
+		Query query = session.createQuery(hql);
+
+		total = query.list().size();
+		query.setFirstResult(pageSize * (page - 1));
+		query.setMaxResults(pageSize);
+		int pageCount = (total) / pageSize + (total % pageSize > 0 ? 1 : 0);
+
+		@SuppressWarnings("unchecked")
+		List<Tour> list = query.list();
+
+		model.addAttribute("tourds", list);
+		model.addAttribute("title", "Danh sách tour du lịch");
+		model.addAttribute("currentpage", page);
+		model.addAttribute("pagesize", pageSize);
+		model.addAttribute("pagecount", pageCount);
+
+		return "home/dstour";
 	}
 	
 	
@@ -934,8 +1178,10 @@ public class HomeController {
 			@RequestParam("songuoi") Integer songuoi,
 			@RequestParam("sodienthoai") String sodienthoai,
 			@RequestParam("email") String email,
-			@RequestParam("yeucau") String yeucau, RedirectAttributes a){
-				
+			@RequestParam("yeucau") String yeucau, HttpSession httpSession, HttpServletRequest request,
+			HttpServletResponse response, RedirectAttributes redirectAttributes){
+			
+			String referer = request.getHeader("Referer");
 			Session session = factory.openSession();
  			Trangthai trang = (Trangthai) session.get(Trangthai.class, 2);//Lấy trạng thái có id là 2
  			Tour tuor = (Tour) session.get(Tour.class, tentour);//Lấy tour có id bằng iput có name là tour
@@ -945,17 +1191,15 @@ public class HomeController {
  			try {
  				session.save(dt);//Lưu các thuộc tính Datuor
  				t.commit();//Thực hiện update lên cơ sở dữ liệu
- 				model.addAttribute("message", "Đặt tour thành công!");//Xuất thông báo
- 				a.addFlashAttribute("message", "Đặt tour thannh cong");
- 				return "redirect:/home/tour/"+tuor.getSlug()+".html";
+ 				redirectAttributes.addFlashAttribute("message", "dat tour thanh cong");
+ 				return "redirect:"+ referer;
  			} catch (Exception e) {
  				t.rollback();
- 				System.out.println("Đặt tour false!");
- 				a.addFlashAttribute("message", "Đặt tour thất bại!");
+ 				redirectAttributes.addFlashAttribute("message", "dat tour that bai");
  			} finally {
  				session.close();//Đóng session
  			}
-		return "redirect:/home/tour/"+tuor.getSlug()+".html";//Trả về trang tour
+ 			return "redirect:"+ referer;
 	}
 	
 	
@@ -966,27 +1210,97 @@ public class HomeController {
 	
 	
 	
-
+	// Thông tin tài khoản
 	@RequestMapping("thong-tin-tai-khoan")
 	public String tttaikhoan(ModelMap model) {
 		model.addAttribute("title", "Thông tin tài khoản");
 		return "home/tttaikhoan";
 	}
+	@RequestMapping(value = "thong-tin-tai-khoan", method = RequestMethod.POST)
+	public String stttaikhoan(ModelMap model, 
+			HttpSession httpSession,
+			HttpServletRequest request,
+			HttpServletResponse response, 
+			@RequestParam("idtk") Integer idtk, 
+			@RequestParam("matkhau") String matkhau,
+			@RequestParam("hodem") String hodem, 
+			@RequestParam("ten") String ten,
+			@RequestParam("diachi") String diachi, 
+			@RequestParam("avatar") MultipartFile image) throws InvalidKeyException {
 
-	@RequestMapping("gioi-thieu")
-	public String gioithieu(ModelMap model) {
-		model.addAttribute("title", "Giới thiệu");
-		return "home/gioithieu";
-	}
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		Taikhoan tk = (Taikhoan) session.get(Taikhoan.class, idtk);
+		String photoPath = context.getRealPath("/files/avatar/" + image.getOriginalFilename());
+		
+		EnDeCryption encryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
+		String Matkhaumahoa = encryption.encoding(matkhau);
 
-	@RequestMapping("phan-hoi")
-	public String phanhoi(ModelMap model) {
-		model.addAttribute("title", "Phản hồi");
-		return "home/phanhoi";
+		tk.setMatkhau(Matkhaumahoa);
+		tk.setHodem(hodem);
+		tk.setTen(ten);
+		tk.setDiachi(diachi);
+
+		try {
+			if (image.getOriginalFilename().equals("")) {
+				session.update(tk);
+				t.commit();
+				httpSession.setAttribute("loguser", tk);
+				model.addAttribute("message", "cap nhat tai khoan thanh cong");
+				return "home/tttaikhoan";
+			} else {
+				image.transferTo(new File(photoPath));
+				tk.setAvatar(image.getOriginalFilename());
+				session.update(tk);
+				t.commit();
+				httpSession.setAttribute("loguser", tk);
+				model.addAttribute("message", "cap nhat tai khoan thanh cong");
+				return "home/tttaikhoan";
+			}
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", "cap nhat tai khoan that bai");
+			return "home/tttaikhoan";
+		} finally {
+			session.close();
+		}
 	}
 	
 	
 	
+	
+	
+
+
+	
+	
+	
+	// ------------------------------------------------------------------
+	// ===================== DELETE Controller ===========================
+	// ------------------------------------------------------------------
+	
+	// Xóa đánh giá khách sạn
+	@RequestMapping("xdgks/{id}")
+	public String xdgks(ModelMap model, 
+			@PathVariable("id") int idxoa,
+			HttpSession httpSession,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			RedirectAttributes redirectAttributes) {
+		String referer = request.getHeader("Referer");
+		Session session = factory.openSession();
+		Danhgia dg = (Danhgia) session.get(Danhgia.class, idxoa);
+		Transaction t = session.beginTransaction();
+		try {
+			session.delete(dg);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+		return "redirect:"+ referer;
+	}
 	
 	
 	
@@ -1039,40 +1353,44 @@ public class HomeController {
 
 	// ------------------- Send Mail Lấy lại mật khẩu -------------------
 	@RequestMapping(value = "passkeymailer", method = RequestMethod.POST)
-	public String passkeymailer(ModelMap model, HttpServletRequest request, @RequestParam("email") String email)
+	public String passkeymailer(ModelMap model, 
+			HttpServletRequest request,
+			@RequestParam("email") String email)
 			throws InvalidKeyException {
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 
-		String from = "kakaassasin123@gmail.com";
+		String from = "camnangdulich360@gmail.com";
 		String random = RandomString.randomString(20);
-		EnDeCryption cryption = new EnDeCryption("RHVvbmdOZ3V5ZW4=");
-		String passmahoa = cryption.encoding(random);
-		String subject = "Lấy Lại Mật Khẩu";
+		String subject = "Đặt lại mật khẩu - Camnangdulich";
 		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-				+ request.getContextPath() + "/dat-lai-mat-khau/" + random;
+				+ request.getContextPath() + "/home/dat-lai-mat-khau/" + random + ".html";
 		String body = "Nhấn vào đường dẫn để đặt lại mật khẩu :\n" + url;
 
 		String hql = "from Taikhoan where email = :emailtk";
 		Query query = session.createQuery(hql);
 		query.setParameter("emailtk", email);
 		Taikhoan tk = (Taikhoan) query.uniqueResult();
-		tk.setMatkhau(passmahoa);
+		
+		if (tk == null){
+			model.addAttribute("message", "repass mail khong ton tai");
+		} else {
+			tk.setKeypass(random);
+			try {
+				session.update(tk);
+				t.commit();
+				// Gửi mail
+				mailer.send(from, email, subject, body);
+				model.addAttribute("message", "repass mail thanh cong");
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "repass mail that bai");
+				return "home/index";
+			} finally {
+				session.close();
+			}
 
-		try {
-			session.update(tk);
-			t.commit();
-			// Gửi mail
-			mailer.send(from, email, subject, body);
-			System.out.println("thanh cong");
-		} catch (Exception e) {
-			t.rollback();
-			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
-			System.out.println("that bai");
-			return "redirect:/admin/index.html";
-		} finally {
-			session.close();
 		}
 		return "home/index";
 	}
@@ -1156,7 +1474,6 @@ public class HomeController {
 					System.out.println("Facebook Register Failse");
 					t.rollback();
 					model.addAttribute("message", "Đăng ký thất bại !");
-					model.addAttribute("login_check", 0);
 				} finally {
 					session.close();
 				}
@@ -1255,7 +1572,6 @@ public class HomeController {
         				System.out.println("Facebook Register Failse");
         				t.rollback();
         				model.addAttribute("message", "Đăng ký thất bại !");
-        				model.addAttribute("login_check", 0);
         			} finally {
         				session.close();
         			}

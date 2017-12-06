@@ -148,6 +148,202 @@ $(document).ready(function() {
 			reg_checkbox : ''
 		}
 	});
+	
+	// ------------- Kiểm tra form đặt lại mật khẩu -----------------
+	// -------------------------------------------------------
+	$("#datlaimatkhau_form").validate({
+		rules : {
+			matkhaumoi : {
+				required : true,
+				minlength : 5
+			},
+			rematkhaumoi : {
+				required : true,
+				minlength : 5,
+				equalTo : "#matkhaumoi"
+			}
+		},
+		messages : {
+			matkhaumoi : {
+				required : 'Vui lòng nhập mật khẩu mới',
+				minlength : 'Vui lòng nhập ít nhất 5 kí tự'
+			},
+			rematkhaumoi : {
+				required : 'Vui lòng nhập lại mật khẩu',
+				minlength : 'Vui lòng nhập ít nhất 5 kí tự',
+				equalTo : 'Mật khẩu không trùng khớp'
+			}
+		}
+	});
+	
+	// ------------- Kiểm tra form đánh giá khách sạn -----------------
+	// -------------------------------------------------------
+	$("#dgkhachsan_form").validate({
+		rules : {
+			star : {
+				required : true
+			},
+			noidung : {
+				required : true,
+				minlength : 10
+			}
+		},
+		messages : {
+			star : {
+				required : 'Vui lòng chọn một đánh giá'
+			},
+			noidung : {
+				required : 'Vui lòng nhập nội dung bình luận',
+				minlength : 'Vui lòng nhập ít nhất 10 kí tự'
+			}
+		}
+	});
+	
+	// ------------- Kiểm tra form đặt tour -----------------
+	// -------------------------------------------------------
+	$("#dattour_form").validate({
+		rules : {
+			hodem : {
+				required : true
+			},
+			ten : {
+				required : true
+			},
+			songuoi : {
+				required : true,
+				number : true,
+				max : 10
+			},
+			sodienthoai : {
+				required : true,
+				number : true,
+				rangelength : [ 10, 11 ]
+			},
+			email : {
+				required : true,
+				email : true
+			}
+		},
+		messages : {
+			hodem : {
+				required : 'Vui lòng nhập họ đệm'
+			},
+			ten : {
+				required : 'Vui lòng nhập tên'
+			},
+			songuoi : {
+				required : 'Vui lòng nhập số người',
+				number : 'Vui lòng nhập số',
+				max : 'Số người không được quá 10 người'
+					
+			},
+			sodienthoai : {
+				required : 'Vui lòng nhập số điện thoại',
+				number : 'Số điện thoại không được chứa chữ',
+				rangelength : 'Số điện thoại phải từ 10 đến 11 số'
+			},
+			email : {
+				required : 'Vui lòng nhập email',
+				email : 'Email không đúng định dạng'
+			}
+		}
+	});
+	
+	// ------------- Kiểm tra form đặt phòng -----------------
+	// -------------------------------------------------------
+	$("#datphong_form").validate({
+		rules : {
+			ngaynhanphong : {
+				required : true
+			},
+			ngaytraphong : {
+				required : true
+			},
+			soluongphong : {
+				required : true,
+				number : true,
+				max : 10
+			},
+			hodem : {
+				required : true
+			},
+			ten : {
+				required : true
+			},
+			sodienthoai : {
+				required : true,
+				number : true,
+				rangelength : [ 10, 11 ]
+			},
+			email : {
+				required : true,
+				email : true
+			},
+			chapnhan : {
+				required : true
+			}
+		},
+		messages : {
+			ngaynhanphong : {
+				required : 'Vui lòng chọn ngày nhận phòng'
+			},
+			ngaytraphong : {
+				required : 'Vui lòng chọn ngày trả phòng'
+			},
+			soluongphong : {
+				required : 'Vui lòng nhập số lượng phòng',
+				number : 'Vui lòng chỉ nhập số',
+				max : 'Bạn có thể đặt tối đa 10 phòng'
+			},
+			hodem : {
+				required : 'Vui lòng nhập họ đệm'
+			},
+			ten : {
+				required : 'Vui lòng nhập tên'
+			},
+			sodienthoai : {
+				required : 'Vui lòng nhập số điện thoại',
+				number : 'Số điện thoại không được chứa chữ',
+				rangelength : 'Số điện thoại phải từ 10 đến 11 số'
+			},
+			email : {
+				required : 'Vui lòng nhập email',
+				email : 'Email không đúng định dạng'
+			},
+			chapnhan : {
+				required : ''
+			}
+		}
+	});
+	
+	// ------------- Kiểm tra form thông tin tài khoản -----------------
+	// -------------------------------------------------------
+	$("#tttaikhoan_form").validate({
+		rules : {
+			matkhau : {
+				required : true,
+				minlength : 5
+			},
+			hodem : {
+				required : true
+			},
+			ten : {
+				required : true
+			}
+		},
+		messages : {
+			matkhau : {
+				required : 'Vui lòng nhập mật khẩu',
+				minlength : 'Nhập ít nhất 5 ký tự'
+			},
+			hodem : {
+				required : 'Vui lòng nhập họ đệm'
+			},
+			ten : {
+				required : 'Vui lòng nhập tên'
+			}
+		}
+	});
 
 	// ------------- Kiểm form lấy lại mật khẩu --------------
 	// -------------------------------------------------------

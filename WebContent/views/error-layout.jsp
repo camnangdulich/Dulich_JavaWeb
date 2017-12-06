@@ -13,7 +13,7 @@
 		<div class="header">
 			<div class="logo">
 				<h1>
-					<a href="#">Ohh</a>
+					<a href="home/trang-chu.html"><img style="width: 130px;" src="files/home/logo.png"></a>
 				</h1>
 			</div>
 		</div>
@@ -22,14 +22,12 @@
 		<div class="content">
 			<img src="files/errorpage/error-img.png" title="error" />
 			<p>
-				<span><label>O</label>hh.....</span>You Requested the page that is
-				no longer There.
+				<jsp:include page="${param.view}" />
 			</p>
-			<a href="#">Back To Home</a>
+			<a href="" onclick="onclick='window.history.go(-1)'">Trở lại trang trước</a>
 			<div class="copy-right">
 				<p>
-					&#169 All rights Reserved | Designed by <a
-						href="http://w3layouts.com/">W3Layouts</a>
+					Copyright © Cẩm nang du lịch 2017
 				</p>
 			</div>
 		</div>

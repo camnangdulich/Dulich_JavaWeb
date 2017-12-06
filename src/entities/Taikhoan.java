@@ -65,6 +65,20 @@ public class Taikhoan implements java.io.Serializable {
 		this.quyen = quyen;
 		this.trangthai = trangthai;
 	}
+	
+	public Taikhoan(String email, String matkhau, String sodienthoai, String hodem, String ten, String avatar, Date ngaytao, Quyen quyen,
+			Trangthai trangthai, String keypass) {
+		this.email = email;
+		this.matkhau = matkhau;
+		this.sodienthoai = sodienthoai;
+		this.hodem = hodem;
+		this.ten = ten;
+		this.avatar = avatar;
+		this.ngaytao = ngaytao;
+		this.quyen = quyen;
+		this.trangthai = trangthai;
+		this.keypass = keypass;
+	}
 
 	public Taikhoan(Quyen quyen, Trangthai trangthai, String email, String matkhau, String sodienthoai) {
 		this.quyen = quyen;

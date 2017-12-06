@@ -5,7 +5,7 @@
     <!-- Breadcrumbs -->
     <ol class="breadcrumb" style="margin-top: 20px;">
         <li class="breadcrumb-item">
-            <a href="index.html">Home</a>
+            <a href="home/trang-chu.html">Trang chủ</a>
         </li>
         <li class="breadcrumb-item active">Tin tức</li>
         <c:forEach var="tlt" items="${loaitinlst}">
@@ -25,13 +25,13 @@
 					<div class="col-md-6">
 						<!-- Blog Post -->
 						<div class="card mb-4">
-							<a href="#"><img class="card-img-top" src="files/tintuc/${dst.tintuc.hinhanh}" alt="Card image cap"></a>
+							<a href="home/tin-tuc/bai-viet/${dst.tintuc.slug}.html"><img class="card-img-top" src="files/tintuc/${dst.tintuc.hinhanh}" alt="Card image cap"></a>
 							<div class="card-body">
-								<a href="#"><h5 class="card-title rgtd">${dst.tintuc.tieude}</h5></a>
+								<a href="home/tin-tuc/bai-viet/${dst.tintuc.slug}.html"><h5 class="card-title rgtd">${dst.tintuc.tieude}</h5></a>
 								<p class="card-text p-fx">${dst.tintuc.tomtat}</p>
 							</div>
 							<div class="card-footer text-muted sp-ttm">
-								Đăng lúc ${dst.tintuc.thoigian} <a href="#">${dst.tintuc.taikhoan.ten}</a>
+								<i class="fa fa-fw fa-clock-o ft-lh"></i> Đăng lúc ${dst.tintuc.thoigian} - <i class="fa fa-fw fa-share-alt ft-lh"></i> ${dst.tintuc.taikhoan.ten}
 							</div>
 						</div>
 					</div>
@@ -54,7 +54,7 @@
 			<ul class="pagination justify-content-center mb-4">
 				<c:if test="${currentpage > 1 }">
 					<li class="page-item">
-						<a class="page-link" href="home/danh-sach-tin-tuc/2.html?page=${currentpage - 1}">&larr; Trước</a>
+						<a class="page-link" href="home/tin-tuc/${slugloaitin}.html?page=${currentpage - 1}">&larr; Trước</a>
 					</li>
 				</c:if>
 
@@ -69,7 +69,7 @@
 						</c:when>
 						<c:otherwise>
 							<li class="page-item">
-								<a class="page-link" href="admin/taikhoands.htm?page=${status.index }">${status.index }</a>
+								<a class="page-link" href="home/tin-tuc/${slugloaitin}.html?page=${status.index }">${status.index }</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -78,7 +78,7 @@
 				<c:if test="${currentpage < pagecount }">
 					<li>
 						<li class="page-item">
-							<a class="page-link" href="home/danh-sach-tin-tuc/2.html?page=${currentpage + 1}">Tiếp &rarr;</a>
+							<a class="page-link" href="home/tin-tuc/${slugloaitin}.html?page=${currentpage + 1}">Tiếp &rarr;</a>
 						</li>
 					</li>
 				</c:if>
@@ -91,13 +91,15 @@
             <div class="card mb-4">
                 <h5 class="card-header" style="border: none;">Danh mục tin tức</h5>
                 <div class="list-group" id="dmtt">
+                	<a href="home/tin-tuc/tin-moi.html" class="list-group-item">Tin mới</a>
+                	<a href="home/tin-tuc/tin-xem-nhieu.html" class="list-group-item">Tin xem nhiều</a>
                 	<c:forEach var="dmtt" items="${loaitinlst}">
                 		<c:choose>
 				        	<c:when test="${dmtt.idloaitin == idloaitin}">
-				        		<a href="#" class="list-group-item active">${dmtt.loaitin}</a>
+				        		<a href="home/tin-tuc/${dmtt.slug}.html" class="list-group-item active">${dmtt.loaitin}</a>
 				        	</c:when>
 				        	<c:otherwise>
-				        		<a href="#" class="list-group-item">${dmtt.loaitin}</a>
+				        		<a href="home/tin-tuc/${dmtt.slug}.html" class="list-group-item">${dmtt.loaitin}</a>
 				        	</c:otherwise>
 				        </c:choose>
 		            </c:forEach>
@@ -110,9 +112,9 @@
                 <div class="card-body">
 	                <c:forEach var="ttm" items="${lstsibarttm}">
 	                	<div class="card mb-4">
-	                        <img style="border-radius: inherit;" class="card-img-top" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
+	                        <a href="home/tin-tuc/bai-viet/${ttm.slug}.html"><img style="border-radius: inherit;" class="card-img-top" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}"></a>
 	                        <div class="card-body">
-	                            <h6 class="card-title">${ttm.tieude}</h6>
+	                            <a href="home/tin-tuc/bai-viet/${ttm.slug}.html"><h6 class="card-title">${ttm.tieude}</h6></a>
 	                            <div class="card-footer text-muted sp-ttm">
 									<i class="fa fa-fw fa-clock-o ft-lh"></i> ${ttm.thoigian}
 								</div>
@@ -122,7 +124,7 @@
                 </div>
                 <ul class="pagination justify-content-center mb-4">
                     <li class="page-item">
-                        <a class="page-link" href="#">Xem thêm &rarr;</a>
+                        <a class="page-link" href="home/tin-tuc/tin-moi.html">Xem thêm &rarr;</a>
                     </li>
                 </ul>
             </div>
@@ -133,9 +135,9 @@
                 <div class="card-body">
                     <c:forEach var="ttm" items="${lstsibarttxn}">
 	                	<div class="card mb-4">
-	                        <img style="border-radius: inherit;" class="card-img-top" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
+	                        <a href="home/tin-tuc/bai-viet/${ttm.slug}.html"><img style="border-radius: inherit;" class="card-img-top" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}"></a>
 	                        <div class="card-body">
-	                            <h6 class="card-title">${ttm.tieude}</h6>
+	                            <a href="home/tin-tuc/bai-viet/${ttm.slug}.html"><h6 class="card-title">${ttm.tieude}</h6></a>
 	                            <div class="card-footer text-muted sp-ttm">
 									<i class="fa fa-fw fa-eye ft-lh"></i> ${ttm.luotxem} lượt xem
 								</div>
@@ -145,7 +147,7 @@
                 </div>
                 <ul class="pagination justify-content-center mb-4">
                     <li class="page-item">
-                        <a class="page-link" href="#">Xem thêm &rarr;</a>
+                        <a class="page-link" href="home/tin-tuc/tin-xem-nhieu.html">Xem thêm &rarr;</a>
                     </li>
                 </ul>
             </div>

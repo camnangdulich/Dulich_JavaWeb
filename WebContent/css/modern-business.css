@@ -261,6 +261,66 @@ span.psw {
 	border-color: #4CAF50;
 }
 
+#datlaimatkhau_form .error{
+	color: red;
+	border-color: red;
+}
+
+#datlaimatkhau_form .valid{
+	border-color: #4CAF50;
+}
+
+#dgkhachsan_form .error{
+	color: red;
+	border-color: red;
+}
+
+#dgkhachsan_form .valid{
+	border-color: #4CAF50;
+}
+
+#dattour_form .error{
+	color: red;
+	border-color: red;
+}
+
+#dattour_form .valid{
+	border-color: #4CAF50;
+}
+
+#dattour_form label{
+	margin-bottom: 0px;
+	margin-top: 8px;
+}
+
+#datphong_form .error{
+	color: red;
+	border-color: red;
+}
+
+#datphong_form .valid{
+	border-color: #4CAF50;
+}
+
+#datphong_form label{
+	margin-bottom: 0px;
+	margin-top: 8px;
+}
+
+#tttaikhoan_form .error{
+	color: red;
+	border-color: red;
+}
+
+#tttaikhoan_form .valid{
+	border-color: #4CAF50;
+}
+
+#tttaikhoan_form label{
+	margin-bottom: 0px;
+	margin-top: 8px;
+}
+
 #dmtt .list-group-item{
 	border: none;
 	border-top: 1px solid rgba(0,0,0,.125);

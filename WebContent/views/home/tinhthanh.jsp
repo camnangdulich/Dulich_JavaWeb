@@ -9,7 +9,7 @@
             <div class="row">
             	<c:forEach var="tth" items="${lsttinhthanh}" end="6">
 	            	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-	                    <a href="#">
+	                    <a href="home/tinh-thanh/${tth.slug}.html">
 	                        <div class="img">
 	                        	<img src="files/tinhthanh/${tth.hinhanh}" class="img-responsive" style="width:100%" alt="${tth.tinhthanh}">
 	                        </div>
@@ -21,7 +21,7 @@
 	                </div>
             	</c:forEach>
             	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-                    <a href="#">
+                    <a href="home/tinh-thanh/danh-sach.html">
                         <div class="img">
                         	<img src="files/tinhthanh/Tất cả.jpg" class="img-responsive" style="width:100%" alt="Xem thêm tỉnh thành">
                         </div>
@@ -42,10 +42,10 @@
 	    <c:forEach var="ks" items="${listks}">
    			<div class="col-lg-3 col-sm-6 portfolio-item">
 	            <div class="card h-80">
-	                <a href="#"><img class="card-img-top" src="files/khachsan/${ks.hinhanh}" alt="${ks.hinhanh}"></a>
+	                <a href="home/khach-san/${ks.slug}.html"><img class="card-img-top" src="files/khachsan/${ks.hinhanh}" alt="${ks.hinhanh}"></a>
 	                <div class="card-body">
 	                    <h5 class="card-title">
-	                        <a href="#">${ks.tenkhachsan}</a>
+	                        <a href="home/khach-san/${ks.slug}.html">${ks.tenkhachsan}</a>
 	                    </h5>
 	                    <p class="p-fx" class="card-text">${ks.diachi}</p>
 	                    <span class="fa fa-star checked"></span>
@@ -67,10 +67,10 @@
     	<c:forEach var="tr" items="${listt}">
     		<div class="col-lg-3 col-sm-6 portfolio-item">
 	            <div class="card h-80">
-	                <a href="#"><img class="card-img-top" src="files/tour/${tr.hinhtour}" alt="${tr.hinhtour}"></a>
+	                <a href="home/tour/${tr.slug}.html"><img class="card-img-top" src="files/tour/${tr.hinhtour}" alt="${tr.hinhtour}"></a>
 	                <div class="card-body">
 	                    <h5 class="card-title">
-	                        <a href="#">${tr.tentour}</a>
+	                        <a href="home/tour/${tr.slug}.html">${tr.tentour}</a>
 	                    </h5>
 	                    <p style="font-size: 13px;" class="card-text">${tr.diemdi} <i class="fa fa-long-arrow-right"></i> ${tr.tinhthanh.tinhthanh}</p>
 	                    <h5 style="color: green;"><i class="fa fa-money"></i> 2.000.000 VNĐ</h5>

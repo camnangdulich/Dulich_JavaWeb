@@ -248,7 +248,7 @@
     <hr>
     <div class="row">
         <div class="col-md-12 text-center"> 
-            <button class="btn btn-success">Xem thêm các khách sạn khác</button>
+            <a href="home/khach-san/danh-sach.html"><button class="btn btn-success">Xem thêm các khách sạn khác</button></a>
         </div>
     </div>
     <!-- /.row -->
@@ -275,7 +275,7 @@
     <hr>
     <div class="row">
         <div class="col-md-12 text-center"> 
-            <button class="btn btn-success">Xem thêm các Tour du lịch khác</button>
+            <a href="home/tour/danh-sach.html"><button class="btn btn-success">Xem thêm các Tour du lịch khác</button></a>
         </div>
     </div>
     <hr>

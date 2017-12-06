@@ -9,7 +9,7 @@
             <div class="row">
             	<c:forEach var="tth" items="${tinhthanhds}">
 	            	<div class="col-sm-3 ih-item square effect13 top_to_bottom" style="width: 100%; height: 100%; padding: 0;">
-	                    <a href="#">
+	                    <a href="home/tinh-thanh/${tth.slug}.html">
 	                        <div class="img">
 	                        	<img src="files/tinhthanh/${tth.hinhanh}" class="img-responsive" style="width:100%" alt="${tth.tinhthanh}">
 	                        	<div class="card-footer sp-ttm">${tth.tinhthanh}</div>
@@ -26,7 +26,7 @@
 			<ul class="pagination justify-content-center mb-4" style="margin-top: 25px;">
 				<c:if test="${currentpage > 1 }">
 					<li class="page-item">
-						<a class="page-link" href="home/danh-sach-tin-tuc/2.html?page=${currentpage - 1}">&larr; Trước</a>
+						<a class="page-link" href="home/tinh-thanh/danh-sach.html?page=${currentpage - 1}">&larr; Trước</a>
 					</li>
 				</c:if>
 
@@ -41,7 +41,7 @@
 						</c:when>
 						<c:otherwise>
 							<li class="page-item">
-								<a class="page-link" href="admin/taikhoands.htm?page=${status.index }">${status.index }</a>
+								<a class="page-link" href="home/tinh-thanh/danh-sach.html?page=${status.index }">${status.index }</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -50,7 +50,7 @@
 				<c:if test="${currentpage < pagecount }">
 					<li>
 						<li class="page-item">
-							<a class="page-link" href="home/danh-sach-tin-tuc/2.html?page=${currentpage + 1}">Tiếp &rarr;</a>
+							<a class="page-link" href="home/tinh-thanh/danh-sach.html?page=${currentpage + 1}">Tiếp &rarr;</a>
 						</li>
 					</li>
 				</c:if>

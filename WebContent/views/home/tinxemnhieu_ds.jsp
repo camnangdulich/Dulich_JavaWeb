@@ -8,58 +8,76 @@
             <a href="home/trang-chu.html">Trang chủ</a>
         </li>
         <li class="breadcrumb-item active">Tin tức</li>
-        <li class="breadcrumb-item active">${cttt.tieude}</li>
+        <li class="breadcrumb-item active">Tin xem nhiều</li>
     </ol>
 
     <div class="row">
-        <!-- Chi tiết bài viết -->
-        <div class="col-lg-8 tt-bv">
-            <!-- Preview Image -->
-            <img class="img-fluid rounded" src="files/tintuc/${cttt.hinhanh}" alt="${cttt.hinhanh}">
-            <hr>
-            <!-- Date/Time -->
-            <p><i class="fa fa-fw fa-share-alt ft-lh"></i> Được chia sẻ bởi: ${cttt.taikhoan.hodem} ${cttt.taikhoan.ten} - 
-            <i class="fa fa-fw fa-eye ft-lh"></i> Lượt xem: ${cttt.luotxem} - 
-            <i class="fa fa-fw fa-clock-o ft-lh"></i> ${cttt.thoigian}</p>
-            <hr>
-            <!-- Post Content -->
-            <h4>${cttt.tieude}</h4>
-            <blockquote class="blockquote">
-                <p style="font-size: 16px; font-style: italic; font-weight: 500;">${cttt.tomtat}</p>
-            </blockquote>
-            <div>${cttt.noidung}
-            	<p style=" margin-top: 1rem; font-size: small; font-style: italic; text-align: right; padding-right: 1rem; color: crimson; ">
-            	Nguồn: ${cttt.nguon}</p>
-            </div>
-            <hr>
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h4>Tin liên quan</h4><hr>
-                    <c:forEach var="tlq" items="${lsttinlienquan}">
-                    	<div class="row">
-	                        <div class="col-lg-5">
-	                            <a href="home/tin-tuc/bai-viet/${tlq.slug}.html">
-	                                <img class="img-fluid rounded" src="files/tintuc/${tlq.hinhanh}" alt="${tlq.hinhanh}">
-	                            </a>
-	                        </div>
-	                        <div class="col-lg-7">
-	                            <a href="home/tin-tuc/bai-viet/${tlq.slug}.html"><h5 class="card-title">${tlq.tieude}</h5></a>
-	                            <p class="card-text p-fx">${tlq.tomtat}</p>
-	                            <a href="home/tin-tuc/bai-viet/${tlq.slug}.html">Xem thêm →</a>
-	                        </div>
-	                    </div>
-	                    <hr>
-                    </c:forEach>
-                </div>
-            </div>
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+			<div class="row">
+				<c:forEach var="dst" items="${dslt}">
+					<div class="col-md-6">
+						<!-- Blog Post -->
+						<div class="card mb-4">
+							<a href="home/tin-tuc/bai-viet/${dst.slug}.html"><img class="card-img-top" src="files/tintuc/${dst.hinhanh}" alt="Card image cap"></a>
+							<div class="card-body">
+								<a href="home/tin-tuc/bai-viet/${dst.slug}.html"><h5 class="card-title rgtd">${dst.tieude}</h5></a>
+								<p class="card-text p-fx">${dst.tomtat}</p>
+							</div>
+							<div class="card-footer text-muted sp-ttm">
+								<i class="fa fa-fw fa-eye ft-lh"></i> Lượt xem ${dst.luotxem} - <i class="fa fa-fw fa-share-alt ft-lh"></i> ${dst.taikhoan.ten}
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		   	<script type="text/javascript">
+				$(".p-fx").shorten({
+				    "showChars" : 100,
+				    "moreText"  : "...",
+				    "lessText"  : " ...",
+				});
+				$(".rgtd").shorten({
+				    "showChars" : 60,
+				    "moreText"  : "",
+				    "lessText"  : "",
+				});
+			</script>
+
+			<!-- Pagination -->
+			<ul class="pagination justify-content-center mb-4">
+				<c:if test="${currentpage > 1 }">
+					<li class="page-item">
+						<a class="page-link" href="home/tin-tuc/tin-xem-nhieu.html?page=${currentpage - 1}">&larr; Trước</a>
+					</li>
+				</c:if>
+
+				<c:forEach begin="1" end="${pagecount }" varStatus="status">
+					<c:choose>
+						<c:when test="${status.index == currentpage }">
+							<li class="page-item active">
+								<a class="page-link">${status.index }
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="home/tin-tuc/tin-xem-nhieu.html?page=${status.index }">${status.index }</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<c:if test="${currentpage < pagecount }">
+					<li>
+						<li class="page-item">
+							<a class="page-link" href="home/tin-tuc/tin-xem-nhieu.html?page=${currentpage + 1}">Tiếp &rarr;</a>
+						</li>
+					</li>
+				</c:if>
+			</ul>
         </div>
-       	<script type="text/javascript">
-			$(".card-text").shorten({
-			    "showChars" : 150,
-			    "moreText"  : "...",
-			    "lessText"  : "",
-			});
-		</script>
 
         <!-- Sidebar -->
         <div class="col-md-4">
@@ -111,9 +129,7 @@
                 <div class="card-body">
                     <c:forEach var="ttm" items="${lstsibarttxn}">
 	                	<div class="card mb-4">
-	                		<a href="home/tin-tuc/bai-viet/${ttm.slug}.html">
-	                        	<img style="border-radius: inherit;" class="card-img-top" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}">
-	                        </a>
+	                        <a href="home/tin-tuc/bai-viet/${ttm.slug}.html"><img style="border-radius: inherit;" class="card-img-top" src="files/tintuc/${ttm.hinhanh}" alt="${ttm.hinhanh}"></a>
 	                        <div class="card-body">
 	                            <a href="home/tin-tuc/bai-viet/${ttm.slug}.html"><h6 class="card-title">${ttm.tieude}</h6></a>
 	                            <div class="card-footer text-muted sp-ttm">
@@ -130,7 +146,6 @@
                 </ul>
             </div>
         </div>
-
     </div>
     <!-- /.row -->
 </div>

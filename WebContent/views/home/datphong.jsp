@@ -4,7 +4,7 @@
 <div class="container">
 	<!-- Breadcrumbs -->
 	<ol class="breadcrumb" style="margin-top: 20px;">
-		<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+		<li class="breadcrumb-item"><a href="home/trang-chu.html">Trang chủ</a></li>
 		<li class="breadcrumb-item active">Đặt phòng</li>
 	</ol>
 	
@@ -14,25 +14,25 @@
 			<div class="card my-4">
 				<h5 class="card-header">Thông tin liên hệ</h5>
 				<div class="card-body">
-					<form action="home/dat-phong-ks.html" method="post" >
+					<form action="home/dat-phong-ks.html" method="post" id="datphong_form">
 						<input name="idloaiphong" value="${loaiphong.idloaiphong}" hidden="">
 						<input name="idkhachsan" value="${khachsan.idkhachsan}" hidden="">
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Ngày nhận phòng</label>
 							<div class="col-8">
-								<input id="Ngaydatphong-getdate" name="ngaynhanphong" class="form-control" type="date" value="">
+								<input id="Ngaydatphong-getdate" name="ngaynhanphong" class="form-control" type="date">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Ngày trả phòng</label>
 							<div class="col-8">
-								<input id="Ngaytraphong-getdate" name= "ngaytraphong" class="form-control" type="date" value="">
+								<input id="Ngaytraphong-getdate" name="ngaytraphong" class="form-control" type="date">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-4 col-form-label">Số lượng phòng</label>
 							<div class="col-8">
-								<input name="soluongphong" class="form-control" type="number" value="" placeholder="Nhập số lượng phòng">
+								<input name="soluongphong" class="form-control" type="text" placeholder="Nhập số lượng phòng">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -62,11 +62,12 @@
 						<div class="col-md-12">
 							<div class="form-check">
 								<label class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" required="required">
+								<input name="chapnhan" type="checkbox" class="custom-control-input">
 									<span class="custom-control-indicator"></span>
-									<span class="custom-control-description">Tôi đã đọc và chấp
-										nhận các chính sách của khách sạn, điều khoản, điều kiện và
-										chính sách quyền riêng tư</span>
+									<span class="custom-control-description">Tôi đã đọc và chấp nhận các 
+									<a target="_blank" href="home/chinh-sach-khach-san.html">chính sách của khách sạn</a>, 
+									<a target="_blank" href="home/dieu-khoan-dieu-kien.html">điều khoản, điều kiện</a> và
+									<a target="_blank" href="home/chinh-sach-quyen-rieng-tu.html">chính sách quyền riêng tư</a></span>
 								</label>
 							</div>
 							<div class="col-md-12 text-center">
@@ -87,7 +88,7 @@
 						<div class="row">
 							<div class="col-md-6 ih-item square effect7"
 								style="height: 100%; padding: 0;">
-								<a href="#">
+								<a target="_blank" href="home/khach-san/${khachsan.slug}.html">
 									<div class="img">
 										<img class="img-fluid rounded" src="files/khachsan/${khachsan.hinhanh}" alt="">
 									</div>

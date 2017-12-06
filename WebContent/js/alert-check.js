@@ -134,8 +134,8 @@ function alert_home_check(message) {
 		swal({
 			title : "Đăng ký thành công!",
 			type : "success",
-			timer : 1500,
-			showConfirmButton : false
+			text : "Vui lòng kiểm tra email để xác minh tài khoản!",
+			showConfirmButton : true
 		});
 	} else if (message == 'dang ky email ton tai') {
 		swal({
@@ -149,6 +149,116 @@ function alert_home_check(message) {
 			title : "Đăng ký thất bại!",
 			type : "error",
 			text : "Đăng ký tài khoản thất bại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra lấy lại mật khẩu
+	if (message == 'repass mail thanh cong') {
+		swal({
+			title : "Gửi lại mật khẩu thành công!",
+			type : "success",
+			text : "Vui lòng kiểm tra email để đặt lại mật khẩu mới!",
+			showConfirmButton : true
+		});
+	} else if (message == 'repass mail khong ton tai') {
+		swal({
+			title : "Gửi lại mật khẩu thất bại!",
+			type : "error",
+			text : "Email này không tồn tại, vui lòng kiểm tra lại email!",
+			showConfirmButton : true
+		});
+	} else if (message == 'repass mail that bai') {
+		swal({
+			title : "Gửi lại mật khẩu thất bại!",
+			type : "error",
+			text : "Lỗi gửi lại mật khẩu, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra đặt lại mật khẩu
+	if (message == 'dat lai mat khau thanh cong') {
+		swal({
+			title : "Thay đổi mật khẩu thành công!",
+			type : "success",
+			text : "<a onclick='loginpp()'><button autofocus >Đăng nhập ngay!</button></a>",
+			html : true,
+			showConfirmButton : false
+		});
+	} else if (message == 'dat lai mat khau that bai') {
+		swal({
+			title : "Thay đổi mật khẩu thất bại!",
+			type : "error",
+			text : "Lỗi đặt lại mật khẩu, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra đánh giá khách sạn
+	if (message == 'danh gia thanh cong') {
+		swal({
+			title : "Đánh giá thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'danh gia that bai') {
+		swal({
+			title : "Đánh giá thất bại!",
+			type : "error",
+			text : "Đánh giá thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra đặt tour
+	if (message == 'dat tour thanh cong') {
+		swal({
+			title : "Đặt tour thành công!",
+			type : "success",
+			text : "Chúng tôi sẽ gửi mail thông báo nếu đơn đặt tour của bạn được xác nhận \n Bạn vui lòng kiểm tra email trong thời gian này!",
+			showConfirmButton : true
+		});
+	} else if (message == 'dat tour that bai') {
+		swal({
+			title : "Đặt tour thất bại!",
+			type : "error",
+			text : "Đặt tour thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra đặt phòng
+	if (message == 'dat phong thanh cong') {
+		swal({
+			title : "Đặt phòng thành công!",
+			type : "success",
+			text : "Chúng tôi sẽ gửi mail thông báo nếu đơn đặt phòng của bạn được xác nhận \n Bạn vui lòng kiểm tra email trong thời gian này!",
+			showConfirmButton : true
+		});
+	} else if (message == 'dat phong that bai') {
+		swal({
+			title : "Đặt phòng thất bại!",
+			type : "error",
+			text : "Đặt phòng thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra cập nhật tài khoản
+	if (message == 'cap nhat tai khoan thanh cong') {
+		swal({
+			title : "Cập nhật tài khoản thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'cap nhat tai khoan that bai') {
+		swal({
+			title : "Cập nhật tài khoản thất bại!",
+			type : "error",
+			text : "Cập nhật tài khoản thất bại, vui lòng kiểm tra lại!",
 			showConfirmButton : true
 		});
 	}
@@ -240,6 +350,29 @@ function kiemtraxoakhachsan() {
 					"success");
 			setTimeout(function() {
 				window.location = "admin/xkhachsan.html";
+			}, 1500);
+		}
+	});
+};
+
+// Kiểm tra Xóa thông tin đánh giá khách sạn
+function kiemtraxoadanhgiakhachsan(iddanhgia) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Đánh giá này của bạn sẽ bị xóa khỏi khách sạn này",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa đánh giá!", "Đánh giá này của bạn sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "home/xdgks/"+iddanhgia+".html";
 			}, 1500);
 		}
 	});

@@ -28,7 +28,7 @@ function kiemtraemailformdangky() {
 	});
 }
 
-//Kiểm tra trùng số điện thoại form đăng ký tài khoản
+// Kiểm tra trùng số điện thoại form đăng ký tài khoản
 function kiemtrasdtformdangky() {
 	var varemail = $('#reg_sdt').val();
 	$.ajax({
@@ -44,6 +44,30 @@ function kiemtrasdtformdangky() {
 			} else {
 				document.getElementById("register_form").setAttribute("onsubmit", "return true;");
 				$('#tbtrungsdt').css('display', 'none');
+			}
+		},
+		error : function(e) {
+			alert("Lỗi ! Kiểm tra số điện thoại");
+		}
+	});
+}
+
+// Kiểm tra email form lấy lại mật khẩu
+function kiemtraemailformrepass() {
+	var varemail = $('#repass_email').val();
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "admin/kt-email-ajax.html",
+		data : varemail,
+		success : function(result) {
+			if (result == "true") {
+				document.getElementById("repass_form").setAttribute("onsubmit", "return true;");
+				$('#tbemailkoco').css('display', 'none');
+			} else {
+				document.getElementById("repass_form").setAttribute("onsubmit", "return false;");
+				$('#tbemailkoco').css('display', 'block');
+				$('#tbemailkoco').text("Email này chưa đăng ký, vui lòng kiểm tra lại!");
 			}
 		},
 		error : function(e) {

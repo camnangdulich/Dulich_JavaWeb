@@ -213,21 +213,21 @@
                             <a class="ft-logo" href="home/trang-chu.html"><img src="files/home/logo.png"></a>
                         </h4>
                         <i class="fa fa-fw fa-phone text-white"></i><span class="text-white">Hotline:</span>
-                        <span class="text-white" style="font-size: larger;">0123456789</span>
+                        <span class="text-white" style="font-size: larger;">5003 555 678</span>
                         <p class="text-white" style="font-size: 15px; padding-top: 15px;">
                             CamNangDuLich luôn không ngừng đẩy mạnh hoạt động và phát triển, cả về sản phẩm,
                             dịch vụ và đội ngũ, nhằm đáp ứng rất tốt nhu cầu của khách hàng.</p>
                     </div>
                     <div class="col-md-2 ft-lk" style="padding-left: 35px;">
                         <h4>Liên kết</h4>
-                        <a href="#">Trang chủ</a><br>
-                        <a href="#">Địa điểm</a><br>
-                        <a href="#">Khách sạn</a><br>
-                        <a href="#">Tin tức</a><br>
-                        <a href="#">Giới thiệu</a><br>
-                        <a href="#">Phản hồi</a>
+                        <a href="home/trang-chu.html">Trang chủ</a><br>
+                        <a href="home/tour/danh-sach.html">Tour du lịch</a><br>
+                        <a href="home/khach-san/danh-sach.html">Khách sạn</a><br>
+                        <a href="home/tin-tuc/tin-moi.html">Tin tức</a><br>
+                        <a href="home/gioi-thieu.html">Giới thiệu</a><br>
+                        <a href="home/phan-hoi.html">Phản hồi</a>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="padding-right: 40px;">
                         <h4>Nhận tin mới</h4>
                         <p class="text-white" style="font-size: 15px;">
                             CamNangDuLich sẽ cập nhật thường xuyên về những ưu đãi,
@@ -240,16 +240,16 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-3" style="padding-left: 45px;">
+                    <div class="col-md-3" style="padding-left: 15px;">
                         <h4>Liên hệ</h4>
-                        <i class="fa fa-fw fa-map-marker text-white ft-lh"></i><span class="text-white">Địa chỉ liên hệ</span><br>
-                        <i class="fa fa-fw fa-phone text-white ft-lh"></i><span class="text-white">0123456789</span><br>
-                        <i class="fa fa-fw fa-envelope text-white ft-lh"></i><span class="text-white">abc@gmail.com</span><br>
-                        <i class="fa fa-fw fa-facebook text-white ft-lh"></i><span class="text-white">abc@facebook.com</span>
+                        <i class="fa fa-fw fa-map-marker text-white ft-lh"></i><span class="text-white">27 Nguyễn Tất Thành, Tân Lợi, Thành phố Buôn Ma Thuột, Đắk Lắk</span><br>
+                        <i class="fa fa-fw fa-phone text-white ft-lh"></i><span class="text-white">5003 555 678</span><br>
+                        <i class="fa fa-fw fa-envelope text-white ft-lh"></i><span class="text-white">camnangdulich360@gmail.com</span><br>
+                        <i class="fa fa-fw fa-facebook text-white ft-lh"></i><span class="text-white">camnangdulich@facebook.com</span>
                     </div>
                 </div>
                 <hr style="border-top: 1px solid rgba(255, 255, 255, 0.13);">
-                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+                <p class="m-0 text-center text-white">Copyright &copy; Cẩm nang du lịch 2017</p>
             </div>
             <!-- /.container -->
         </footer>
@@ -305,12 +305,12 @@
                 <div class="container_log" style="padding-top: 0px;">
                     <input id="reg_email" type="email" placeholder="Nhập email của bạn" name="reg_email" class="input_log" 
                     autofocus required onchange="kiemtraemailformdangky()">
-                    <label id="tbtrungemail" class="error" style="display: block;"></label>
+                    <label id="tbtrungemail" class="error" style="display: block; margin-bottom: 0px;"></label>
                     <input id="reg_matkhau" type="password" placeholder="Nhập mật khẩu" name="reg_matkhau" class="input_log" required>
                     <input type="password" placeholder="Nhập lại mật khẩu" name="reg_rematkhau" class="input_log" required>
                     <input id="reg_sdt" type="text" placeholder="Nhập số điện thoại" name="reg_sdt" class="input_log"
                      required onchange="kiemtrasdtformdangky()">
-                    <label id="tbtrungsdt" class="error" style="display: block;"></label>
+                    <label id="tbtrungsdt" class="error" style="display: block; margin-bottom: 0px;"></label>
                     <input type="text" placeholder="Nhập họ đệm" name="reg_hodem" class="input_log" required>
                     <input type="text" placeholder="Nhập tên của bạn" name="reg_ten" class="input_log" required>
                     <button type="submit" class="log"><i class="fa fa-sign-in"></i> Đăng ký</button>
@@ -345,8 +345,8 @@
                     <span>Điền Email của bạn vào form phía dưới, chúng tôi sẽ gửi mật khẩu mới về email của bạn!</span>
                     <br>
                     <label class="label_log"><i class="fa fa-envelope"></i><b> Email</b></label>
-                    <input type="email" placeholder="Nhập email của bạn" name="email" class="input_log" autofocus>
-
+                    <input id="repass_email" type="email" placeholder="Nhập email của bạn" name="email" class="input_log" autofocus onchange="kiemtraemailformrepass()">
+					<label id="tbemailkoco" class="error" style="display: block;"></label>
                     <button id="btn-forgot" type="submit" class="log" disabled="disabled" hidden=""><i class="fa fa-paper-plane"></i> Gửi lại mật khẩu</button>
                     <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Le1uDoUAAAAABM0IPZMlTwNs6QQaXE470V0betd"></div>
                     <script>
@@ -434,5 +434,7 @@
         <script src="vendor/popper/popper.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <!-- End Bootstrap core JavaScript -->
+        <!-- Image load js-->
+	    <script src="js/img-load.js" type="text/javascript"></script>
     </body>
 </html>

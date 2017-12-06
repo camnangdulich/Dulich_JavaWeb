@@ -5,7 +5,7 @@
     <div class="row" style="margin-top: 20px;">
         <div class="col-lg-6">
             <div class="ih-item square effect6 bottom_to_top" style="width: 100%; height: 100%;">
-                <a href="#">
+                <a>
                     <div class="img" ><img class="img-fluid rounded" src="files/khachsan/${ctks.hinhanh}" alt="${ctks.hinhanh}"></div>
                     <div class="info">
                         <div class="info-back">
@@ -169,10 +169,10 @@
                     	<c:choose>
                     		<c:when test="${loguser != null}">
 		                    	<div class="card md-4">
-									<form action="home/danhgiakhachsan.html" method="post" class="card-body">
+									<form action="home/danhgiakhachsan.html" method="post" class="card-body" id="dgkhachsan_form">
 										<div class="col-md-12 row" style="padding: 0px; margin: 0px;">
 											<div class="col-md-2" style="padding: 0px;">
-												<a href="#"> <img
+												<a href="home/thong-tin-tai-khoan.html"> <img
 													style="padding: 0px; border-radius: 0; width: 100px;"
 													class="card-img-top" src="files/avatar/${loguser.avatar}" alt="${loguser.avatar}">
 												</a>
@@ -187,11 +187,11 @@
 													<input name="idkhachsan" value="${ctks.idkhachsan}" hidden="">
 													<select name="star" class="form-control">
 														<option selected="selected" disabled="disabled">-- Chọn đánh giá --</option>
-														<option value="1">Quá tệ</option>
-														<option value="1">Không hài lòng</option>
-														<option value="3">Hài lòng</option>
-														<option value="4">Rất hài lòng</option>
 														<option value="5">Rất tốt</option>
+														<option value="4">Rất hài lòng</option>
+														<option value="3">Hài lòng</option>
+														<option value="2">Không hài lòng</option>
+														<option value="1">Quá tệ</option>
 													</select>
 												</div>
 											</div>
@@ -226,7 +226,7 @@
 					                                	</div>
 					                                	<div class="col-md-10" style="padding-right: 0px;">
 					                                		<c:if test="${dg.taikhoan.idtaikhoan == loguser.idtaikhoan || loguser.idtaikhoan == 1}">
-						                                		<a href="#">
+						                                		<a onclick="kiemtraxoadanhgiakhachsan(${dg.iddanhgia})">
 							                                		<i title="Xóa đánh giá này" class="fa fa-times" aria-hidden="true" 
 							                                		style="float: right; font-size: 13px; color: red;"></i>
 							                                	</a>
@@ -299,10 +299,10 @@
 	                    <c:forEach var="tur" items="${lsttourdacbiet}">
 	                        <div class="col-lg-4 col-sm-6 portfolio-item">
 	                            <div class="card h-80">
-	                                <a href="#"><img style="border-radius: 0;" class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
+	                                <a href="home/tour/${tur.slug}.html"><img style="border-radius: 0;" class="card-img-top" src="files/tour/${tur.hinhtour}" alt="${tur.hinhtour}"></a>
 	                                <div class="card-body">
 	                                    <h6 class="card-title">
-	                                        <a href="#">${tur.tentour}</a>
+	                                        <a href="home/tour/${tur.slug}.html">${tur.tentour}</a>
 	                                    </h6>
 	                                    <p style="font-size: 13px;" class="card-text">${tur.diemdi} <i class="fa fa-long-arrow-right"></i> ${tur.tinhthanh.tinhthanh}</p>
 	                                </div>
@@ -321,10 +321,10 @@
 	                	<c:if test="${ks.idkhachsan != ctks.idkhachsan}">
 	                		<div class="portfolio-item">
 		                        <div class="card h-80">
-		                            <a href="#"><img style="border-radius: 0;" class="card-img-top" src="files/khachsan/${ks.hinhanh}" alt="${ks.hinhanh}"></a>
+		                            <a href="home/khach-san/${ks.slug}.html"><img style="border-radius: 0;" class="card-img-top" src="files/khachsan/${ks.hinhanh}" alt="${ks.hinhanh}"></a>
 		                            <div class="card-body">
 		                                <h5 class="card-title">
-		                                    <a href="#">${ks.tenkhachsan}</a>
+		                                    <a href="home/khach-san/${ks.slug}.html">${ks.tenkhachsan}</a>
 		                                </h5>
 		                                <p class="p-fx">${ks.diachi}</p>
 		                            </div>
