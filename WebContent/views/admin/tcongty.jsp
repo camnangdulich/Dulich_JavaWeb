@@ -5,14 +5,14 @@
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#">Điều khiển</a></li>
-		<li class="breadcrumb-item active">Thêm Quyền</li>
+		<li class="breadcrumb-item active">Thêm công ty</li>
 	</ol>
 	<!-- Icon Cards-->
 	<div class="row">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-10 col-md-auto">
-					<form action="admin/tcongty.html" method="post"
+					<form action="admin/them-cong-ty-moi.html" method="post"
 						enctype="multipart/form-data" id="themcongty">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Tên công ty</label>
@@ -26,7 +26,7 @@
                             <div class="col-sm-10" id="label-validation">
                                 <select name="taikhoan" class="form-control">
                                 	<option selected="selected" disabled>-- Chọn tài khoản --</option>
-                                	<c:forEach var="tk" items="${tailist}">
+                                	<c:forEach var="tk" items="${tklist}">
                                     	<option value="${tk.idtaikhoan}">${tk.email}</option>
                                     </c:forEach>
                                 </select>
@@ -57,7 +57,7 @@
 						<div class="form-group row">
 							<div class="col-sm-2"></div>
 							<div class="col-sm-10 offset-md-3">
-								<button type="submit" class="btn btn-primary">Thêm Cty</button>
+								<button type="submit" class="btn btn-primary">Thêm công ty</button>
 							</div>
 						</div>
 					</form>

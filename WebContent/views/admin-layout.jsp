@@ -68,12 +68,14 @@
 	                            <li>
 	                                <a href="admin/danh-sach-tai-khoan.html"><i class="fa fa-fw fa-list"></i> Danh sách tài khoản</a>
 	                            </li>
+	                            <!-- 
 	                            <li>
 	                                <a href="admin/them-tai-khoan-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm tài khoản mới</a>
 	                            </li>
+	                             -->
 	                        </ul>
 	                    </li>
-	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+	                    <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlquyen" data-parent="#exampleAccordion">
 	                            <i class="fa fa-fw fa-user-circle"></i>
 	                            <span class="nav-link-text">Quản lý quyền</span>
@@ -86,7 +88,7 @@
 	                                <a href="admin/them-quyen-moi.html"><i class="fa fa-fw fa-plus"></i> Thêm quyền mới</a>
 	                            </li>
 	                        </ul>
-	                    </li>
+	                    </li>-->
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlcongty" data-parent="#exampleAccordion">
 	                            <i class="fa fa-fw fa-contao"></i>
@@ -112,6 +114,7 @@
 	                            </li>
 	                        </ul>
 	                    </li>
+	                    <!-- 
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qllphong" data-parent="#exampleAccordion">
 	                            <i class="fa fa-fw fa-building-o"></i>
@@ -126,6 +129,7 @@
 	                            </li>
 	                        </ul>
 	                    </li>
+	                    
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qldichvu" data-parent="#exampleAccordion">
 	                            <i class="fa fa-fw fa-user-md"></i>
@@ -140,6 +144,7 @@
 	                            </li>
 	                        </ul>
 	                    </li>
+	                    -->
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#qlbaiviet" data-parent="#exampleAccordion">
 	                            <i class="fa fa-fw fa-newspaper-o"></i>
@@ -168,12 +173,14 @@
 	                            </li>
 	                        </ul>
 	                    </li>
+	                    <!-- 
 	                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
 	                        <a class="nav-link" href="admin/slugtool.html">
 	                            <i class="fa fa-fw fa-dashboard"></i>
 	                            <span class="nav-link-text">Slug tool</span>
 	                        </a>
 	                    </li>
+	                     -->
 	                </ul>
 	                <ul class="navbar-nav sidenav-toggler">
 	                    <li class="nav-item">

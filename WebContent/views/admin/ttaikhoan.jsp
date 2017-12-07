@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-10 col-md-auto">
-                    <form action="admin/them-tai-khoan-moi.html" method="get" enctype="multipart/form-data" id="ttaikhoan" >
+                    <form action="admin/them-tai-khoan-moi.html" method="post" enctype="multipart/form-data" id="ttaikhoan" >
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Quyền</label>
                             <div class="col-sm-10" id="label-validation">

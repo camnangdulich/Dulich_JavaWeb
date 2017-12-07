@@ -58,15 +58,18 @@
 									       <td style="color: #5cb85c;">${dp.trangthai.trangthai}</td>
 									    </c:when>
 									    <c:when test="${dp.trangthai.idtrangthai == 2}">
-									        <td style="color: #f0ad4e;">${dp.trangthai.trangthai}</td>
+									        <td>
+										        <a onclick="xacnhandondattour('${dp.iddattour}', '${dp.hodem} ${dp.ten}', '${dp.email}')" 
+										        	style="color: #f0ad4e; cursor: pointer;">${dp.trangthai.trangthai}</a>
+									        </td>
 									    </c:when>
 									    <c:otherwise>
 									        <td style="color: red;">${dp.trangthai.trangthai}</td>
 									    </c:otherwise>
 									</c:choose>
 	                                <td>
-		                                <a  style="color: red; cursor: pointer;" onclick="">
-		                                	<i class="fa fa-times" title="Xóa đơn dặt phòng"></i>
+		                                <a  style="color: red; cursor: pointer;" onclick="kiemtraxoadattour('${dp.iddattour}','${dp.tour.tentour}')">
+		                                	<i class="fa fa-times" title="Xóa đơn dặt tour"></i>
 		                                </a>
 									</td>
                             	</c:if>

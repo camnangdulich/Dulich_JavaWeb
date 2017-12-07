@@ -1,7 +1,5 @@
 /controller/
 /entities/
-<<<<<<< HEAD
+/hibernate.cfg.xml
+/hibernate.reveng.xml
 /model/
-/service/
-=======
->>>>>>> 05ff4cc9ecc94219640aa37871763cbd217ad376

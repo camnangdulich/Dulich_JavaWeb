@@ -10,7 +10,7 @@
         <li class="breadcrumb-item">
             <a href="admin/index.html">Điều khiển</a>
         </li>
-        <li class="breadcrumb-item active">Danh sách loại tin</li>
+        <li class="breadcrumb-item active">Danh sách bài viết</li>
     </ol>
     <!-- Example DataTables Card-->
     <div class="card mb-3">
@@ -21,13 +21,13 @@
                 <table class="table table-bordered" id="dataTable">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th style="width: 10px;">Id</th>
                             <th>Tiêu đề</th>
                             <th>Tóm tắt</th>
                             <th>Thời gian</th>
                             <th>Người đăng</th>
                             <th>Loại tin</th>
-                            <th style="width: 50px;"><i class="fa fa-cog"></i></th>
+                            <th style="width: 20px;"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -59,7 +59,7 @@
 			                            </select>
 									</td>
 									<td>
-										<a href="admin/staikhoan/${u.idtintuc}.html" style="padding-right: 5px;">
+										<a href="admin/sbaiviet/${u.idtintuc}.html" style="padding-right: 5px;">
 											<i class="fa fa-pencil" title="Sửa bài viết"></i>
 										</a>
 										<a style="color: red; cursor: pointer;" 

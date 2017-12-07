@@ -47,7 +47,8 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12" id="label-validation">
-                                <input name="tieude" type="text" class="form-control" placeholder="Nhập tiêu đề">
+                                <input id="tieude" name="tieude" type="text" class="form-control" placeholder="Nhập tiêu đề" onchange="kiemtratieudebaiviet()">
+                                <label id="tbtrungtd" class="error" style="display: block; margin-bottom: 0px;"></label>
                             </div>
                         </div>
                         <div class="form-group row">

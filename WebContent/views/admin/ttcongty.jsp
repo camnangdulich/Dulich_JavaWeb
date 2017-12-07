@@ -14,23 +14,23 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-md-auto">
-                    <form action="admin/thong-tin-cong-ty.html" method="post">
+                    <form action="admin/thong-tin-cong-ty.html" method="post" id="ttct_form">
                     	<input name="idct" type="hidden" value="${loguserct.idcongty}">
                         <div class="form-group row">
                         	<label class="col-sm-2 col-form-label">Tên công ty</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" id="label-validation">
                                 <input name="tencongty" value="${loguserct.tencongty}" type="text" class="form-control" placeholder="Nhập tên công ty">
                             </div>
                         </div>
                         <div class="form-group row">
                         	<label class="col-sm-2 col-form-label">Số điện thoại</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" id="label-validation">
                                 <input name="sodienthoai" value="${loguserct.sodienthoai}" type="text" class="form-control" placeholder="Nhập số điện thoại">
                             </div>
                         </div>
                         <div class="form-group row">
                         	<label class="col-sm-2 col-form-label">Địa chỉ</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" id="label-validation">
                                 <input name="diachi" value="${loguserct.diachi}" type="text" class="form-control" placeholder="Nhập địa chỉ">
                             </div>
                         </div>

@@ -27,3 +27,27 @@ function kiemtrathongtinkhachsansuadichvu() {
 		}
 	});
 }
+
+//Kiểm tra trùng tên bài viết form bài viết
+function kiemtratieudebaiviet() {
+	var varemail = $('#tieude').val();
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "admin/kt-tdbv-ajax.html",
+		data : varemail,
+		success : function(result) {
+			if (result == "true") {
+				document.getElementById("thembaiviet").setAttribute("onsubmit", "return false;");
+				$('#tbtrungtd').css('display', 'block');
+				$('#tbtrungtd').text("Tiêu đề này đã có, vui lòng sử dụng tiêu đề khác");
+			} else {
+				document.getElementById("thembaiviet").setAttribute("onsubmit", "return true;");
+				$('#tbtrungtd').css('display', 'none');
+			}
+		},
+		error : function(e) {
+			alert("Lỗi ! Kiểm tra bài viết");
+		}
+	});
+}

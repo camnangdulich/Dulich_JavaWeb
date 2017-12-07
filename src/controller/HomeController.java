@@ -769,7 +769,7 @@ public class HomeController {
 	public String dstinhthanh(ModelMap model, HttpSession httpsession,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		Session session = factory.getCurrentSession();
-		int total = 0, pageSize = 16;
+		int total = 0, pageSize = 32;
 		String hql = "from Tinhthanh";
 		Query query = session.createQuery(hql);
 

@@ -42,7 +42,7 @@
                                 <td>${lbv.loaitin}</td>
                                 <td>${lbv.mota}</td>
                                 <td>
-                                	<a href="#" style="padding-right: 5px;">
+                                	<a href="admin/sloaibv/${lbv.idloaitin}.html" style="padding-right: 5px;">
 	                                	<i class="fa fa-pencil" title="Sửa loại bài viết"></i> 
 	                                </a>
 	                               <a style="color: red; cursor: pointer;" 

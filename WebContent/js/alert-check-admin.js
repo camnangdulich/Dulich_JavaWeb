@@ -223,6 +223,91 @@ function alert_admin_check(message) {
 		});
 	}
 	
+	// Kiểm tra sửa thông tin tour du lịch
+	if (message == 'sua tour thanh cong') {
+		swal({
+			title : "Sửa thông tin tour thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'sua tour that bai') {
+		swal({
+			title : "Sửa thông tin tour thất bại!",
+			type : "error",
+			text : "Sửa thông tin tour thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra thêm bài viết
+	if (message == 'them bai viet thanh cong') {
+		swal({
+			title : "Thêm bài viết thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'them bai viet that bai') {
+		swal({
+			title : "Thêm bài viết thất bại!",
+			type : "error",
+			text : "Thêm bài viết thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra sửa bài viết
+	if (message == 'sua bai viet thanh cong') {
+		swal({
+			title : "Sửa bài viết thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'sua bai viet that bai') {
+		swal({
+			title : "Sửa bài viết thất bại!",
+			type : "error",
+			text : "Sửa bài viết thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra sửa loai bài viết
+	if (message == 'sua loai bai viet thanh cong') {
+		swal({
+			title : "Sửa loại bài viết thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'sua loai bai viet that bai') {
+		swal({
+			title : "Sửa loại bài viết thất bại!",
+			type : "error",
+			text : "Sửa loại bài viết thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra sửa tài khoản
+	if (message == 'chinh sua tai khoan thanh cong') {
+		swal({
+			title : "Sửa tài khoản thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'chinh sua tai khoan that bai') {
+		swal({
+			title : "Sửa tài khoản thất bại!",
+			type : "error",
+			text : "Sửa tài khoản thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
 		
 	
 	
@@ -393,6 +478,31 @@ function kiemtraxoadatphong(iddatphong, Tenphongdat) {
 
 
 
+//===================KIỂM TRA XÓA ĐẶT TOUR===============
+function kiemtraxoadattour(iddattour, tentour) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, thông tin của đơn đặt tour này sẽ bị xóa!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa thông tin đặt tour", "Đơn đặt tour và các thông tin liên quan đến đơn đặt tour này sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xdattour/" + iddattour + ".html"; // Sửa đường dẫn xóa
+			}, 1500);
+		}
+	});
+};
+
+
+
 
 //===================KIỂM TRA XÓA CHI TIẾT DỊCH VỤ===============
 function kiemtraxoactdv(idchitietdv, tenctdichvu) {
@@ -486,6 +596,105 @@ function xacnhandondatphong(iddongdatphong, tennguoidatphong, emaildatphong) {
 					+ " sẽ được kích hoạt...", "success");
 			setTimeout(function() {
 				window.location = "admin/xnddp/" + iddongdatphong + "/" + emaildatphong + ".html";
+			}, 1500);
+		}
+	});
+};
+
+//Xác nhân đơn đặt tour
+function xacnhandondattour(iddondattour, tennguoidattour, emaildattour) {
+	swal({
+		title : "Xác nhận đơn đặt tour!",
+		text : "Xác nhận đơn đặt tour của " + tennguoidattour
+				+ " và gửi mail thông báo!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#5cb85c",
+		confirmButtonText : "Xác nhận!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xác nhận đơn!", "Đơn đặt tour của " + tennguoidattour
+					+ " sẽ được kích hoạt...", "success");
+			setTimeout(function() {
+				window.location = "admin/xnddt/" + iddondattour + "/" + emaildattour + ".html";
+			}, 1500);
+		}
+	});
+};
+
+//Xác nhận khách sạn
+function xacnhankhachsan(idkhachsan, tenkhachsan) {
+	swal({
+		title : "Xác nhận khách sạn!",
+		text : "Xác nhận khách sạn " + tenkhachsan
+				+ " và gửi mail thông báo!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#5cb85c",
+		confirmButtonText : "Xác nhận!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xác nhận khách sạn!", "Khách sạn " + tenkhachsan + " sẽ được kích hoạt...", "success");
+			setTimeout(function() {
+				window.location = "admin/xnks/" + idkhachsan +".html";
+			}, 1500);
+		}
+	});
+};
+
+//Khóa khách sạn
+function khoakhachsan(idkhachsan, tenkhachsan) {
+	swal({
+		title : "Khóa khách sạn!",
+		text : "Khóa khách sạn " + tenkhachsan
+				+ " và gửi mail thông báo!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "red",
+		confirmButtonText : "Khóa!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Khóa khách sạn!", "Khách sạn " + tenkhachsan
+					+ " sẽ bị khóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/blockks/" + idkhachsan +".html";
+			}, 1500);
+		}
+	});
+};
+
+//Kiểm tra Xóa thông tin tài khoản
+function kiemtraxoataikhoan(idtaikhoan, email) {
+	swal({
+		title : "Bạn chắc chắn muốn xóa?",
+		text : "Nếu bạn xóa, tất cả thông tin của tài khoản " + email
+				+ " đều sẽ bị xóa hết!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#DD6B55",
+		confirmButtonText : "Xóa bỏ!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xóa tài khoản!", "Tài khoản và các thông tin của " + email
+					+ " sẽ bị xóa...", "success");
+			setTimeout(function() {
+				window.location = "admin/xtaikhoan/" + idtaikhoan + ".html";
 			}, 1500);
 		}
 	});

@@ -67,9 +67,6 @@
                                 	<a href="admin/staikhoan/${u.idtaikhoan}.html" style="padding-right: 5px;">
 	                                	<i class="fa fa-pencil" title="Sửa tài khoản"></i> 
 	                                </a>
-	                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('${u.idtaikhoan}','${u.email}')">
-	                                	<i class="fa fa-times" title="Xóa tài khoản"></i>
-	                                </a>
 								</td>
                             </tr>
                         </c:forEach>

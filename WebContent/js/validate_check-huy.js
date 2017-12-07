@@ -168,7 +168,7 @@ $(document).ready(function() {
 			lichtrinh : 'Vui lòng nhập lịch trình',
 			gia : {
 				required : 'Vui lòng nhập giá ',
-				digits : 'Giá phải là sô'
+				digits : 'Vui lòng chỉ nhập số'
 			}
 		}
 	});
@@ -193,7 +193,7 @@ $(document).ready(function() {
 			lichtrinh : 'Vui lòng nhập lịch trình',
 			gia : {
 				required : 'Vui lòng nhập giá ',
-				digits : 'Giá phải là sô'
+				digits : 'Vui lòng chỉ nhập số'
 			}
 		}
 	});
@@ -215,7 +215,7 @@ $(document).ready(function() {
 			diachi : 'Vui lòng nhập địa chỉ',
 			sodienthoai : {
 				required : 'Vui lòng nhập số điện thoại ',
-				digits : 'Phải là số',
+				digits : 'Vui lòng chỉ nhập số',
 				rangelength : "Số điện thoại phải gồm 10 hoặc 11 số"
 					
 			}

@@ -296,31 +296,6 @@ function alert_home_check(message) {
 // -------------------------------------- Delete_Alert_Check ------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------
 
-// Kiểm tra Xóa thông tin tài khoản
-function kiemtraxoataikhoan(idtaikhoan, email) {
-	swal({
-		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin của tài khoản " + email
-				+ " đều sẽ bị xóa hết!",
-		type : "warning",
-		showCancelButton : true,
-		confirmButtonColor : "#DD6B55",
-		confirmButtonText : "Xóa bỏ!",
-		cancelButtonText : "Hủy bỏ!",
-		closeOnConfirm : false,
-		closeOnCancel : true,
-		showLoaderOnConfirm : true
-	}, function(isConfirm) {
-		if (isConfirm) {
-			swal("Xóa tài khoản!", "Tài khoản và các thông tin của " + email
-					+ " sẽ bị xóa...", "success");
-			setTimeout(function() {
-				window.location = "admin/xtaikhoan/" + idtaikhoan + ".html";
-			}, 1500);
-		}
-	});
-};
-
 // Kiểm tra Xóa thông tin khách sạn
 function kiemtraxoakhachsan() {
 	swal({

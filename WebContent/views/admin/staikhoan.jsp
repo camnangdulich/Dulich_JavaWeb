@@ -41,10 +41,21 @@
                             <hr>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Trạng thái</label>
+                            <div class="col-sm-10">
+                                <select name="trangthai" class="form-control">
+                                	<option selected="selected" hidden value="${user.trangthai.idtrangthai}">${user.trangthai.trangthai}</option>
+                                	<c:forEach var="q" items="${trtlist}">
+                                    	<option value="${q.idtrangthai}">${q.trangthai}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10" id="label-validation">
                                 <input name="email" type="email" class="form-control" value="${user.email}" placeholder="Nhập Email">
-  								<small class="form-text text-muted">${message}</small>
                             </div>
                         </div>
                         <div class="form-group row">

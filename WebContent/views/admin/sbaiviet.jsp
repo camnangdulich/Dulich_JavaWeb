@@ -47,13 +47,6 @@
 						<div class="form-group row">
 							<div class="col-sm-12" id="label-validation">
 								<div id="sample">
-									<script type="text/javascript"
-										src="http://js.nicedit.com/nicEdit-latest.js"></script>
-									<script type="text/javascript">
-										bkLib.onDomLoaded(function() {
-											nicEditors.allTextAreas()
-										});
-									</script>
 									<textarea name="noidung" style="width: 100%; height: 500px;" 
 									value = "${sbv.noidung }">
                                     </textarea>
@@ -65,8 +58,22 @@
 								<button type="submit" class="btn btn-primary">Sửa bài viết</button>
 							</div>
 						</div>
-
 					</form>
+					<script type="text/javascript">
+                       	// Các input thay đổi thì mới được submit
+                        $('form')
+                        .each(function(){
+                            $(this).data('serialized', $(this).serialize())
+                        })
+                        .on('change input', function(){
+                            $(this)             
+                                .find('input:submit, button:submit')
+                                    .prop('disabled', $(this).serialize() == $(this).data('serialized'))
+                            ;
+                         })
+                        .find('input:submit, button:submit')
+                            .prop('disabled', true);
+                    </script>
 				</div>
 			</div>
 		</div>

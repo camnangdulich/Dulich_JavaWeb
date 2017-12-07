@@ -27,7 +27,6 @@
                             <th>Số điện thoại</th>
                             <th>Ngày tạo</th>
                             <th>Tài khoản</th>
-                            <th><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -38,7 +37,6 @@
                             <th>Số điện thoại</th>
                             <th>Ngày tạo</th>
                             <th>Tài khoản</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -50,14 +48,6 @@
                                 <td>${ct.sodienthoai}</td>
                                 <td>${ct.ngaytao}</td>
                                 <td>${ct.taikhoan.email}</td>
-                                <td>
-                                	<a href="#" style="padding-right: 5px;">
-	                                	<i class="fa fa-pencil" title="Sửa tài khoản"></i> 
-	                                </a>
-	                                <a id="xoataikhoan" style="color: red; cursor: pointer;" onclick="kiemtraxoataikhoan('${u.email}',2)">
-	                                	<i class="fa fa-times" title="Xóa tài khoản"></i>
-	                                </a>
-								</td>
                             </tr>
                         </c:forEach>
                     </tbody>

@@ -28,7 +28,6 @@
                             <th>Người đăng</th>
                             <th>Tỉnh thành</th>
                             <th>Trạng thái</th>
-                            <th style="width: 50px;"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -40,13 +39,12 @@
                             <th>Người đăng</th>
                             <th>Tỉnh thành</th>
                             <th>Trạng thái</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <c:forEach var="ks" items="${kslist}">
                             <tr>
-                            	<td style="width: 50px;"><img src="files/avatar/${ks.hinhanh}" width="50px" height="50px"></td>
+                            	<td style="width: 50px;"><img src="files/khachsan/${ks.hinhanh}" height="50px"></td>
                                 <td>${ks.tenkhachsan}</td>
                                 <td>${ks.sodienthoai}</td>
                                 <td>${ks.diachi}</td>
@@ -54,23 +52,19 @@
                                 <td>${ks.tinhthanh.tinhthanh}</td>
                                 <c:choose>
 								    <c:when test="${ks.trangthai.idtrangthai == 1}">
-								       <td style="color: #5cb85c;">${ks.trangthai.trangthai}</td>
+								       <td>
+								       	<a style="cursor: pointer; color: #5cb85c;" onclick="khoakhachsan('${ks.idkhachsan}','${ks.tenkhachsan}')">${ks.trangthai.trangthai}</a>
+								       	</td>
 								    </c:when>
 								    <c:when test="${ks.trangthai.idtrangthai == 2}">
-								        <td style="color: #f0ad4e;">${ks.trangthai.trangthai}</td>
+								        <td>
+								        	<a style="cursor: pointer; color: #f0ad4e;" onclick="xacnhankhachsan('${ks.idkhachsan}','${ks.tenkhachsan}')">${ks.trangthai.trangthai}</a>
+								        </td>
 								    </c:when>
 								    <c:otherwise>
 								        <td style="color: red;">${ks.trangthai.trangthai}</td>
 								    </c:otherwise>
 								</c:choose>
-                                <td>
-                                	<a href="#" style="padding-right: 5px;">
-	                                	<i class="fa fa-pencil" title="Sửa quyền"></i> 
-	                                </a>
-	                                <a style="color: red; cursor: pointer;" onclick="kiemtraxoakhachsan()">
-	                                	<i class="fa fa-times" title="Xóa quyền"></i>
-	                                </a>
-								</td>
                             </tr>
                         </c:forEach>
                     </tbody>

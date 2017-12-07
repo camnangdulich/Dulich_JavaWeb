@@ -450,6 +450,147 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	// ------------- Kiểm tra form thông tin công ty -----------------
+	// -------------------------------------------------------
+	$("#ttct_form").validate({
+		rules : {
+			tencongty : {
+				required : true,
+				minlength : 5
+			},
+			sodienthoai : {
+				required : true,
+				number : true,
+				rangelength : [ 10, 11 ]
+			},
+			diachi : {
+				required : true,
+				minlength : 10
+			}
+		},
+		messages : {
+			tencongty : {
+				required : 'Vui lòng nhập tên công ty',
+				minlength : 'Vui lòng nhập ít nhất 5 ký tự'
+			},
+			sodienthoai : {
+				required : 'Vui lòng nhập số điện thoại',
+				number : 'Vui lòng chỉ nhập số',
+				rangelength : 'Số điện thoại phải từ 10 đến 11 số'
+			},
+			diachi : {
+				required : 'Vui lòng nhập địa chỉ',
+				minlength : 'Địa chỉ ít nhât 10 ký tự'
+			}
+		}
+	});
+	
+//	// ------------- Kiểm tra form sửa tour -----------------
+//	// -------------------------------------------------------
+//	$("#suatour").validate({
+//		rules : {
+//			tentour : {
+//				required : true,
+//				minlength : 10
+//			},
+//			diemdi : {
+//				required : true
+//			},
+//			diemden : {
+//				required : true
+//			},
+//			ngaykhoihanh : {
+//				required : true
+//			},
+//			gia : {
+//				required : true,
+//				number : true,
+//				min : 500000,
+//				max : 9999999
+//			},
+//			lichtrinh : {
+//				required : true
+//			}
+//		},
+//		messages : {
+//			tentour : {
+//				required : 'Vui lòng nhập tên tour',
+//				minlength : 'Vui lòng nhập ít nhất 10 ký tự'
+//			},
+//			diemdi : {
+//				required : 'Vui lòng chọn một điểm đi'
+//			},
+//			diemden : {
+//				required : 'Vui lòng chọn một điểm đến'
+//			},
+//			ngaykhoihanh : {
+//				required : 'Vui lòng nhập thời gian khởi hành'
+//			},
+//			gia : {
+//				required : 'Vui lòng nhập giá',
+//				number : 'Vui lòng chỉ nhập số',
+//				min : 'Vui lòng nhập ít nhất 500,000 VNĐ',
+//				max : 'Vui lòng nhập nhiều nhất 9,999,999 VNĐ'
+//			},
+//			lichtrinh : {
+//				required : 'Vui lòng nhập lịch trình'
+//			}
+//		}
+//	});
+//	
+//	// ------------- Kiểm tra form th tour -----------------
+//	// -------------------------------------------------------
+//	$("#suatour").validate({
+//		rules : {
+//			tentour : {
+//				required : true,
+//				minlength : 10
+//			},
+//			diemdi : {
+//				required : true
+//			},
+//			diemden : {
+//				required : true
+//			},
+//			ngaykhoihanh : {
+//				required : true
+//			},
+//			gia : {
+//				required : true,
+//				number : true,
+//				min : 500000,
+//				max : 9999999
+//			},
+//			lichtrinh : {
+//				required : true
+//			}
+//		},
+//		messages : {
+//			tentour : {
+//				required : 'Vui lòng nhập tên tour',
+//				minlength : 'Vui lòng nhập ít nhất 10 ký tự'
+//			},
+//			diemdi : {
+//				required : 'Vui lòng chọn một điểm đi'
+//			},
+//			diemden : {
+//				required : 'Vui lòng chọn một điểm đến'
+//			},
+//			ngaykhoihanh : {
+//				required : 'Vui lòng nhập thời gian khởi hành'
+//			},
+//			gia : {
+//				required : 'Vui lòng nhập giá',
+//				number : 'Vui lòng chỉ nhập số',
+//				min : 'Vui lòng nhập ít nhất 500,000 VNĐ',
+//				max : 'Vui lòng nhập nhiều nhất 9,999,999 VNĐ'
+//			},
+//			lichtrinh : {
+//				required : 'Vui lòng nhập lịch trình'
+//			}
+//		}
+//	});
 
 	// ------------- Kiểm form lấy lại mật khẩu --------------
 	// -------------------------------------------------------
