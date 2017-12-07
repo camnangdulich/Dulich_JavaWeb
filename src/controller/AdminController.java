@@ -1260,15 +1260,14 @@ public class AdminController {
 		try {
 			session.update(ct);
 			t.commit();
-			model.addAttribute("message", "Chỉnh sửa thông tin thành công!");
+			model.addAttribute("message", "ttct sua thanh cong");
 			model.addAttribute("title", "Thông tin công ty");
 			httpSession.setAttribute("loguserct", ct);
 			return "admin/ttcongty";
 		} catch (Exception e) {
 			t.rollback();
-			model.addAttribute("message", "Chỉnh thông tin thất bại !" + e.getMessage());
+			model.addAttribute("message", "ttct sua that bai");
 			model.addAttribute("title", "Thông tin công ty");
-			System.out.println("Thất bại");
 		} finally {
 			session.close();
 		}
@@ -1306,8 +1305,7 @@ public class AdminController {
 				session.update(ks);
 				t.commit();
 				httpSession.setAttribute("loguserks", ks);
-				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
-				System.out.println("thanh cong khong them anh");
+				model.addAttribute("message", "ttks sua thanh cong");
 				return "admin/ttkhachsan";
 			} else {
 				image.transferTo(new File(photoPath));
@@ -1315,14 +1313,12 @@ public class AdminController {
 				session.update(ks);
 				t.commit();
 				httpSession.setAttribute("loguserks", ks);
-				model.addAttribute("message", "Chỉnh sửa tin tức thành công !");
-				System.out.println("thanh cong co them anh");
+				model.addAttribute("message", "ttks sua thanh cong");
 				return "admin/ttkhachsan";
 			}
 		} catch (Exception e) {
 			t.rollback();
-			model.addAttribute("message", "Chỉnh sửa tin tức thất bại !" + e.getMessage());
-			System.out.println("that bai");
+			model.addAttribute("message", "ttks sua that bai");
 		} finally {
 			session.close();
 		}
@@ -1742,7 +1738,7 @@ public class AdminController {
 //				+ "Loại phòng: " + dp.getLoaiphong().getTenloai() + "\n"
 //				+ "Số lượng phòng: " + dp.getSoluongphong() + "\n"
 //				+ "Mô tả loại phòng: " + dp.getLoaiphong().getMota();
-		String body = "Cảm ơn " + dp.getHodem() +" "+ dp.getTen()+ " đơn đặt phòng của bạn tại khách sạn "+ dp.getKhachsan().getTenkhachsan() + " đã được xác nhận!";
+		String body = "Cảm ơn " + dp.getHodem() +" "+ dp.getTen()+ " ,đơn đặt phòng của bạn tại khách sạn "+ dp.getKhachsan().getTenkhachsan() + " đã được xác nhận!";
 		mailer.send(from, email, subject, body);
 		
 		return "redirect:/admin/danh-sach-don-dat-phong.html";
@@ -1957,13 +1953,26 @@ public class AdminController {
 
 	// Xóa đặt phòng
 	@RequestMapping("xoadatphong/{id}")
-	public String xoadatphong(ModelMap model, @PathVariable("id") int idxoa) {
+	public String xoadatphong(ModelMap model, 
+			HttpSession httpSession,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@PathVariable("id") int idxoa) {
 		Session session = factory.openSession();
 		Datphong dp = (Datphong) session.get(Datphong.class, idxoa);
 		Transaction t = session.beginTransaction();
 		try {
 			session.delete(dp);
 			t.commit();
+			
+			String email = dp.getEmail();
+			String from = "camnangdulich360@gmail.com";
+			String subject = "Hủy đơn đặt phòng - Camnangdulich";
+			String body = "Đơn đặt phòng của bạn tại khách sạn " +dp.getKhachsan().getTenkhachsan()
+					+ " đã bị hủy, vui lòng liên hệ với người quản trị để biết thêm chi tiết.";
+			// Send mail thông báo hủy đơn đặt phòng này
+			mailer.send(from, email, subject, body);
+			
 		} catch (Exception e) {
 			t.rollback();
 		} finally {

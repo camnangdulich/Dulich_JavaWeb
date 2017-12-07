@@ -189,6 +189,40 @@ function alert_admin_check(message) {
 		});
 	}
 	
+	// Kiểm tra sửa thông tin khách sạn
+	if (message == 'ttks sua thanh cong') {
+		swal({
+			title : "Sửa thông tin khách sạn thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'ttks sua thanh cong') {
+		swal({
+			title : "Sửa thông tin khách sạn thất bại!",
+			type : "error",
+			text : "Sửa thông tin khách sạn thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra sửa thông tin công ty
+	if (message == 'ttct sua thanh cong') {
+		swal({
+			title : "Sửa thông tin công ty thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'ttct sua that bai') {
+		swal({
+			title : "Sửa thông tin công ty thất bại!",
+			type : "error",
+			text : "Sửa thông tin công ty thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
 		
 	
 	
@@ -338,7 +372,7 @@ function kiemtraxoatintuc(idtintuc, tieudetintuc) {
 function kiemtraxoadatphong(iddatphong, Tenphongdat) {
 	swal({
 		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin của phòng đã đặt đều sẽ bị xóa hết!",
+		text : "Nếu bạn xóa, thông tin của đơn đặt phòng này sẽ bị xóa!",
 		type : "warning",
 		showCancelButton : true,
 		confirmButtonColor : "#DD6B55",
@@ -432,6 +466,29 @@ function kiemtraxoadanhgia(iddanhgia, tenkhachsan) {
 };
 
 
-
+//Xác nhân đơn đặt phòng
+function xacnhandondatphong(iddongdatphong, tennguoidatphong, emaildatphong) {
+	swal({
+		title : "Xác nhận đơn đặt phòng!",
+		text : "Xác nhận đơn đặt phòng của " + tennguoidatphong
+				+ " và gửi mail thông báo!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : "#5cb85c",
+		confirmButtonText : "Xác nhận!",
+		cancelButtonText : "Hủy bỏ!",
+		closeOnConfirm : false,
+		closeOnCancel : true,
+		showLoaderOnConfirm : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Xác nhận đơn!", "Đơn đặt phòng của " + tennguoidatphong
+					+ " sẽ được kích hoạt...", "success");
+			setTimeout(function() {
+				window.location = "admin/xnddp/" + iddongdatphong + "/" + emaildatphong + ".html";
+			}, 1500);
+		}
+	});
+};
 
 

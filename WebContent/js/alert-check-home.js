@@ -369,27 +369,3 @@ function kiemtraxoadanhgiakhachsan(iddanhgia) {
 	});
 };
 
-// Xác nhân đơn đặt phòng
-function xacnhandondatphong(iddongdatphong, tennguoidatphong, emaildatphong) {
-	swal({
-		title : "Xác nhận đơn đặt phòng!",
-		text : "Xác nhận đơn đặt phòng của " + tennguoidatphong
-				+ " và gửi mail thông báo!",
-		type : "warning",
-		showCancelButton : true,
-		confirmButtonColor : "#5cb85c",
-		confirmButtonText : "Xác nhận!",
-		cancelButtonText : "Hủy bỏ!",
-		closeOnConfirm : false,
-		closeOnCancel : true,
-		showLoaderOnConfirm : true
-	}, function(isConfirm) {
-		if (isConfirm) {
-			swal("Xác nhận đơn!", "Đơn đặt phòng của " + tennguoidatphong
-					+ " sẽ được kích hoạt...", "success");
-			setTimeout(function() {
-				window.location = "admin/xnddp/" + iddongdatphong + "/" + emaildatphong + ".html";
-			}, 1500);
-		}
-	});
-};

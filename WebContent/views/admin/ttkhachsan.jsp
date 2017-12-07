@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-md-auto">
-                    <form action="admin/thong-tin-khach-san.html" method="post" enctype="multipart/form-data">
+                    <form action="admin/thong-tin-khach-san.html" method="post" enctype="multipart/form-data" id="ttks_form">
                     	<input name="idks" type="hidden" value="${loguserks.idkhachsan}">
                         <div class="form-group row">
                             <div class="col-sm-12">
@@ -51,12 +51,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" id="label-validation">
                                 <input name="tenkhachsan" value="${loguserks.tenkhachsan}" type="text" class="form-control" placeholder="Nhập tên khách sạn">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" id="label-validation">
                                 <input name="sodienthoai" value="${loguserks.sodienthoai}" type="text" class="form-control" placeholder="Nhập số điện thoại">
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" id="label-validation">
                                 <input name="diachi" value="${loguserks.diachi}" type="text" class="form-control" placeholder="Nhập địa chỉ">
                             </div>
                         </div>
@@ -81,6 +81,21 @@
                             </div>
                         </div>
                     </form>
+                    <script type="text/javascript">
+                       	// Các input thay đổi thì mới được submit
+                        $('form')
+                        .each(function(){
+                            $(this).data('serialized', $(this).serialize())
+                        })
+                        .on('change input', function(){
+                            $(this)             
+                                .find('input:submit, button:submit')
+                                    .prop('disabled', $(this).serialize() == $(this).data('serialized'))
+                            ;
+                         })
+                        .find('input:submit, button:submit')
+                            .prop('disabled', true);
+                    </script>
                 </div>
             </div>
         </div>
