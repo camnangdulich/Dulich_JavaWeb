@@ -26,6 +26,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +62,7 @@ import entities.Dichvu;
 import entities.Khachsan;
 import entities.Loaiphong;
 import entities.Loaitin;
+import entities.Phanhoi;
 import entities.Quyen;
 import entities.Taikhoan;
 import entities.Tinhthanh;
@@ -1216,6 +1218,37 @@ public class HomeController {
  			}
  			return "redirect:"+ referer;
 	}
+	
+	// Phản hồi
+	@RequestMapping(value = "phan-hoi", method = RequestMethod.POST)
+	public String phanhoi(ModelMap model, @RequestParam("hoten") String hoten,
+			@RequestParam("email") String email,
+			@RequestParam("noidung") String noidung) {
+
+			Session session = factory.openSession();
+			Phanhoi ph = new Phanhoi(hoten, email, noidung);
+			Transaction t = session.beginTransaction();
+			try {
+				session.save(ph);
+				t.commit();
+				model.addAttribute("message", "Phản hồi thành công!");
+				
+				String from = "kakaassasin123@gmail.com";
+				String subject = "Phản hồi - Camnangdulich";
+				String body = "Người phản hồi: "+hoten+" ("+email+") - Nội dung: "+noidung;
+				mailer.send(from, "camnangdulich360@gmail.com", subject, body);
+				
+				return "home/phanhoi";
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Phản hồi thất bại!");
+			} finally {
+				session.close();
+			}
+		
+		return "home/phanhoi";
+	}
+	
 	
 	
 	

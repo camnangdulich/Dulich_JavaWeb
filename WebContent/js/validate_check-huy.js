@@ -289,6 +289,5 @@ $(document).ready(function() {
 		}
 	});
 	
-	
 
 });

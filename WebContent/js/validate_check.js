@@ -16,6 +16,30 @@ $(document).ready(function() {
 			tukhoa : 'Vui lòng nhập từ khóa cần chuyển đồi'
 		}
 	});
+	
+	
+	// ------------- Phản hồi	---------------------
+	// -------------------------------------------------------
+	$("#khphanhoi").validate({
+		rules : {
+			hoten : 'required',
+			email :{ 
+				required:true,
+				email: true
+			},
+			noidung : 'required'
+		},
+		messages : {
+			hoten : 'Vui lòng nhập họ tên',
+			email :{ 
+				required:'Vui lòng nhập email',
+				email: 'Định dạng email sai'
+			},
+			noidung: 'Vui lòng nhập nội phản hồi'
+		
+		}
+	});
+	
 
 	// ------------- Kiểm tra form thêm tài khoản ------------
 	// -------------------------------------------------------
