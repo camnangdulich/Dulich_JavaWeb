@@ -28,23 +28,23 @@
                 <h5 class="card-header">Thông tin phản hồi</h5>
                 <div class="card-body">
                     <div class="col-md-12">
-                        <form action="mailer/repwd_mailer.html" method="post">
+                        <form action="home/phan-hoi.html" method="post" id="khphanhoi">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Họ và tên</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Nhập họ và tên">
+                                <div class="col-sm-9" id="label-validation">
+                                    <input name="hoten" type="text" class="form-control" placeholder="Nhập họ và tên">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Email</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-9" id="label-validation">
                                     <input name="email" type="email" class="form-control" placeholder="Nhập email của bạn">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Nội dung phản hồi</label>
-                                <div class="col-sm-9">
-                                    <textarea class="form-control" rows="8" placeholder="Nhập nội dung phản hồi"></textarea>
+                                <div class="col-sm-9" id="label-validation">
+                                    <textarea name="noidung" class="form-control" rows="8" placeholder="Nhập nội dung phản hồi"></textarea>
                                 </div>
                                 ${message}
                             </div>
