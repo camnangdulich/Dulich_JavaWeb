@@ -22,20 +22,23 @@
 		    		<div class="card-header">
 			            <i class="fa fa-table"></i> Bảng dịch vụ
 			        </div>
-		    		<form action="admin/thong-tin-khach-san/sua-dich-vu.html" method="post" style="padding-left: 20px; padding-top: 20px;">
+		    		<form action="admin/thong-tin-khach-san/sua-dich-vu.html" method="post" 
+		    		style="padding-left: 20px; padding-top: 20px;" id="suadvttks_form">
                     	<input name="idks" type="hidden" value="${loguserks.idkhachsan}">
                         <div class="form-group row">
                             <div class="col-sm-12">
                                  <c:forEach var="a" items="${dichvulst}">
 	                                <div class="form-check form-check-inline">
 									  	<label class="custom-control custom-checkbox form-check-label">
-									        <input name="dichvu" type="checkbox" class="custom-control-input" value="${a.iddichvu}">
+									        <input id="dichvu" name="dichvu" type="checkbox" class="custom-control-input" 
+									        value="${a.iddichvu}">
 										  	<span class="custom-control-indicator"></span>
 										  	<span class="custom-control-description">${a.tendichvu}</span>
 										</label>
 									</div><br>
 								 </c:forEach>
                             </div>
+                            <label id="tbtrungdv" class="error" style="display: block; margin-bottom: 0px;"></label>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 offset-md-3">
@@ -43,6 +46,21 @@
                             </div>
                         </div>
                     </form>
+                    <script type="text/javascript">
+                       	// Các input thay đổi thì mới được submit
+                        $('form')
+                        .each(function(){
+                            $(this).data('serialized', $(this).serialize())
+                        })
+                        .on('change input', function(){
+                            $(this)             
+                                .find('input:submit, button:submit')
+                                    .prop('disabled', $(this).serialize() == $(this).data('serialized'))
+                            ;
+                         })
+                        .find('input:submit, button:submit')
+                            .prop('disabled', true);
+                       </script>
 		    	</div>
 	    	</div>
 	    	<div class="col-md-8">
@@ -55,25 +73,28 @@
 			                <table class="table table-bordered" id="dataTable">
 			                    <thead>
 			                        <tr>
+			                        	<th style="width: 20px;">ID</th>
 			                            <th>Tên dịch vụ</th>
-			                            <th style="width: 50px;"><i class="fa fa-cog"></i></th>
+			                            <th style="width: 10px;"><i class="fa fa-cog"></i></th>
 			                        </tr>
 			                    </thead>
 			                    <tfoot>
 			                        <tr>
+			                        	<th>ID</th>
 			                            <th>Tên dịch vụ</th>
 			                            <th></th>
 			                        </tr>
 			                    </tfoot>
 			                    <tbody>
-			                    	<c:forEach var="a" items="${ctdvlist}">
+			                    	<c:forEach var="a" items="${ctdvlist}" varStatus="stt">
 			                    		<c:if test="${a.khachsan.idkhachsan == loguserks.idkhachsan}" >
 		                            		<tr>
+		                            			<td>${a.idchitietdichvu}</td>
 		                                   	 	<td>${a.dichvu.tendichvu}</td>
 			                                	<td>
 					                                <a style="color: red; cursor: pointer;" 
 					                                onclick="kiemtraxoactdv('${a.idchitietdichvu}')">
-					                                	<i class="fa fa-times" title="Xóa quyền"></i>
+					                                	<i class="fa fa-times" title="Xóa loại dịch vụ này"></i>
 					                                </a>
 												</td>
 		                            		</tr>

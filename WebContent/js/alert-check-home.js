@@ -263,36 +263,27 @@ function alert_home_check(message) {
 		});
 	}
 	
-	// Do something
-	// ...
-	
-};
-
-// -------------------------------------- Admin_Alert_Check -------------------------------------------------
-// ----------------------------------------------------------------------------------------------------------
-
-function alert_admin_check(message) {
-
-	// Kiểm tra thêm tài khoản
-	if (message == 'them tai khoan thanh cong') {
+	// Kiểm tra tạo khách sạn
+	if (message == 'tao khach san thanh cong') {
 		swal({
-			title : "Thêm tài khoản thành công!",
+			title : "Tạo khách sạn thành công!",
 			type : "success",
-			timer : 1500,
-			showConfirmButton : false
-		});
-	} else if (message == 'email ton tai') {
-		swal({
-			title : "Thêm tài khoản thất bại!",
-			type : "error",
-			text : "Email đã tồn tại, bạn vui lòng sử dụng một email khác!",
+			text : "Chúng tôi sẽ gửi mail thông báo nếu khách sạn của bạn được xác nhận \n Bạn vui lòng kiểm tra email trong thời gian này!",
 			showConfirmButton : true
 		});
-	} else if (message == 'them tai khoan that bai') {
+	} else if (message == 'tao khach san that bai') {
 		swal({
-			title : "Thêm tài khoản thất bại!",
+			title : "Tạo khách sạn thất bại!",
 			type : "error",
-			text : "Thêm tài khoản thất bại!",
+			text : "Tạo khách sạn thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	} else if (message == 'khach san da tao cho xac minh') {
+		swal({
+			title : "Tạo khách sạn thất bại!",
+			type : "error",
+			text : "Bạn không thể tạo thêm khách sạn bởi vì tài khoản này đã đăng ký một khách sạn trước đó," +
+					" bạn vui lòng chờ xác nhận khách sạn hoặc liên hệ với người quản trị",
 			showConfirmButton : true
 		});
 	}

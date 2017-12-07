@@ -571,8 +571,8 @@
             <script src="js/sb-admin-datatables.min.js"></script>
             <!--<script src="js/sb-admin-charts.min.js"></script>-->
             <!-- Alert check js-->
-	        <script src="js/alert-check.js" type="text/javascript"></script>
-	        <script src="js/alert-check-huy.js" type="text/javascript"></script>
+	        <script src="js/alert-check-admin.js" type="text/javascript"></script>
+	        <script src="js/ajax-check-admin.js" type="text/javascript"></script>
 	        <!-- Image load js-->
 	        <script src="js/img-load.js" type="text/javascript"></script>
         </div>

@@ -185,6 +185,20 @@ public class HomeController {
 		List<Danhgia> lstdanhgiakhachsan = query_dgks.list();//Tạo danh sách khách sạn có nhiều sao 
 		return lstdanhgiakhachsan;//Trả về danh sách khách sạn có nhiều sao nhất
 	}
+	
+	// Lấy đánh giá khách sạn
+	@ModelAttribute("lstdgks")
+	public List<Danhgia> lstdgks(ModelMap model) {
+		Session session = factory.getCurrentSession();
+		int dgksSize = 8;//biến kiểu int số lượng khách sạn có sao nhiều nhất
+		//Câu truy vấn lấy khách sạn có nhiều sao nhất 
+		String hql_dgks = "from Danhgia group by idkhachsan";
+		Query query_dgks = session.createQuery(hql_dgks);//THực hiện câu truy vấn 
+		query_dgks.setMaxResults(dgksSize);// Set sô lượng khách sạn có nhiều sao nhất
+		@SuppressWarnings("unchecked")
+		List<Danhgia> lstdanhgiakhachsan = query_dgks.list();//Tạo danh sách khách sạn có nhiều sao 
+		return lstdanhgiakhachsan;//Trả về danh sách khách sạn có nhiều sao nhất
+	}
 
 	// Lấy tour có lượt xem nhiều nhất
 	@ModelAttribute("lsttournoibat")
@@ -921,8 +935,8 @@ public class HomeController {
 			@RequestParam("idtinhthanh") Integer idtinhthanh,
 			@RequestParam("diachi") String diachi,
 			@RequestParam("idtaikhoantao") Integer idtaikhoantao,
-			@RequestParam("lstdichvu") List lstdichvu,
-			@RequestParam("lstloaiphong") List lstloaiphong) {
+			@RequestParam("lstdichvu[]") List lstdichvu,
+			@RequestParam("lstloaiphong[]") List lstloaiphong) {
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -989,15 +1003,16 @@ public class HomeController {
 				}
 				
 				t.commit();
+				model.addAttribute("message", "tao khach san thanh cong");
 				return "home/index";
 			} catch (Exception e) {
 				t.rollback();
+				model.addAttribute("message", "tao khach san that bai");
 			} finally {
 				session.close();
 			}
 		} else {
-			String tenks = ks.getTenkhachsan();
-			System.out.println("Ban da co khach san ten : " +tenks+ "  Vui long cho xac minh");
+			model.addAttribute("message", "khach san da tao cho xac minh");
 		}
 		
 		return "home/index";
@@ -1163,7 +1178,7 @@ public class HomeController {
 		} finally {
 			session.close();
 		}
-		return "home/index";
+		return "home/timkiem";
 	}
 	
 	

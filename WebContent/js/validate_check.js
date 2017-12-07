@@ -344,6 +344,53 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	// ------------- Kiểm tra form tạo khách sạn -----------------
+	// -------------------------------------------------------
+	$("#taokhachsan_form").validate({
+		rules : {
+			tenkhachsan : {
+				required : true,
+				minlength : 5
+			},
+			sodienthoai : {
+				required : true,
+				number : true,
+				rangelength : [ 10, 11 ]
+			},
+			idtinhthanh : {
+				required : true
+			},
+			diachi : {
+				required : true,
+				minlength : 10
+			},
+			hinhanh : {
+				required : true
+			}
+		},
+		messages : {
+			tenkhachsan : {
+				required : 'Vui lòng nhập tên khách sạn',
+				minlength : 'Vui lòng nhập ít nhất 5 ký tự'
+			},
+			sodienthoai : {
+				required : 'Vui lòng nhập số điện thoại',
+				number : 'Vui lòng chỉ nhập số',
+				rangelength : 'Số điện thoại phải từ 10 đến 11 số'
+			},
+			idtinhthanh : {
+				required : 'Vui lòng chọn một tỉnh thành'
+			},
+			diachi : {
+				required : 'Vui lòng nhập địa chỉ',
+				minlength : 'Địa chỉ ít nhât 10 ký tự'
+			},
+			hinhanh : {
+				required : 'Vui lòng chọn hình ảnh'
+			}
+		}
+	});
 
 	// ------------- Kiểm form lấy lại mật khẩu --------------
 	// -------------------------------------------------------

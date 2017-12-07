@@ -75,3 +75,27 @@ function kiemtraemailformrepass() {
 		}
 	});
 }
+
+//Kiểm tra tên khách sạn form tạo khách sạn
+function kiemtratenkhachsanformtaokhachsan() {
+	var varemail = $('#tenkhachsan_taoks').val();
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "admin/kt-tks-ajax.html",
+		data : varemail,
+		success : function(result) {
+			if (result == "true") {
+				document.getElementById("taokhachsan_form").setAttribute("onsubmit", "return false;");
+				$('#tbtrungtks').css('display', 'block');
+				$('#tbtrungtks').text("Tên khách sạn này đã được sử dụng");
+			} else {
+				document.getElementById("taokhachsan_form").setAttribute("onsubmit", "return true;");
+				$('#tbtrungtks').css('display', 'none');
+			}
+		},
+		error : function(e) {
+			alert("Lỗi ! Kiểm tra tên khách sạn");
+		}
+	});
+}

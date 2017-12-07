@@ -43,6 +43,21 @@
                             </div>
                         </div>
                     </form>
+                    <script type="text/javascript">
+                       	// Các input thay đổi thì mới được submit
+                        $('form')
+                        .each(function(){
+                            $(this).data('serialized', $(this).serialize())
+                        })
+                        .on('change input', function(){
+                            $(this)             
+                                .find('input:submit, button:submit')
+                                    .prop('disabled', $(this).serialize() == $(this).data('serialized'))
+                            ;
+                         })
+                        .find('input:submit, button:submit')
+                            .prop('disabled', true);
+                       </script>
 		    	</div>
 	    	</div>
 	    	<div class="col-md-8">
@@ -55,12 +70,14 @@
 			                <table class="table table-bordered" id="dataTable">
 			                    <thead>
 			                        <tr>
+			                        	<th style="width: 20px;">ID</th>
 			                            <th>Tên loại phòng</th>
-			                            <th style="width: 50px;"><i class="fa fa-cog"></i></th>
+			                            <th style="width: 10px;"><i class="fa fa-cog"></i></th>
 			                        </tr>
 			                    </thead>
 			                    <tfoot>
 			                        <tr>
+			                        	<th>ID</th>
 			                            <th>Tên loại phòng</th>
 			                            <th></th>
 			                        </tr>
@@ -69,11 +86,12 @@
 			                    	<c:forEach var="a" items="${ctlplist}">
 			                    		<c:if test="${a.khachsan.idkhachsan == loguserks.idkhachsan}" >
 		                            		<tr>
+		                            			<td>${a.idchitietloaiphong}</td>
 		                                   	 	<td>${a.loaiphong.tenloai}</td>
 			                                	<td>
 					                                <a style="color: red; cursor: pointer;" 
 					                                onclick="kiemtraxoalp('${a.idchitietloaiphong}')">
-					                                	<i class="fa fa-times" title="Xóa chi tiet loại phòng"></i>
+					                                	<i class="fa fa-times" title="Xóa chi tiết loại phòng"></i>
 					                                </a>
 												</td>
 		                            		</tr>

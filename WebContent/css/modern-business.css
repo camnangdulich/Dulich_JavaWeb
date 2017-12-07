@@ -321,6 +321,24 @@ span.psw {
 	margin-top: 8px;
 }
 
+#taokhachsan_form .input_log{
+	width: 100%;
+    padding: .5rem .75rem;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#taokhachsan_form .error{
+	color: red;
+	border-color: red;
+}
+
+#taokhachsan_form .valid{
+	border-color: #4CAF50;
+}
+
 #dmtt .list-group-item{
 	border: none;
 	border-top: 1px solid rgba(0,0,0,.125);

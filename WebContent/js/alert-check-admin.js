@@ -4,14 +4,6 @@
  * and open the template in the editor.
  */
 
-function alert_home_check(message) {
-	
-	
-	// Do something
-	// ...
-	
-};
-
 // -------------------------------------- Admin_Alert_Check -------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------
 
@@ -139,7 +131,63 @@ function alert_admin_check(message) {
 		});
 	}
 	
+	// Kiểm tra thêm tài khoản
+	if (message == 'them tai khoan thanh cong') {
+		swal({
+			title : "Thêm tài khoản thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'email ton tai') {
+		swal({
+			title : "Thêm tài khoản thất bại!",
+			type : "error",
+			text : "Email đã tồn tại, bạn vui lòng sử dụng một email khác!",
+			showConfirmButton : true
+		});
+	} else if (message == 'them tai khoan that bai') {
+		swal({
+			title : "Thêm tài khoản thất bại!",
+			type : "error",
+			text : "Thêm tài khoản thất bại!",
+			showConfirmButton : true
+		});
+	}
 	
+	// Kiểm tra ttks sửa dịch vụ
+	if (message == 'ttks sua dich vu thanh cong') {
+		swal({
+			title : "Thêm dịch vụ thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'ttks sua dich vu that bai') {
+		swal({
+			title : "Thêm dịch vụ thất bại!",
+			type : "error",
+			text : "Thêm dịch vụ thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
+	
+	// Kiểm tra ttks sửa loại phòng
+	if (message == 'ttks sua loai phong thanh cong') {
+		swal({
+			title : "Thêm loại phòng thành công!",
+			type : "success",
+			timer : 1500,
+			showConfirmButton : false
+		});
+	} else if (message == 'ttks sua loai phong that bai') {
+		swal({
+			title : "Thêm loại phòng thất bại!",
+			type : "error",
+			text : "Thêm loại phòng thất bại, vui lòng kiểm tra lại!",
+			showConfirmButton : true
+		});
+	}
 	
 		
 	
@@ -340,7 +388,7 @@ function kiemtraxoactdv(idchitietdv, tenctdichvu) {
 function kiemtraxoalp(idchitietlp) {
 	swal({
 		title : "Bạn chắc chắn muốn xóa?",
-		text : "Nếu bạn xóa, tất cả thông tin loại phòng của khách sạn đều sẽ bị xóa hết!",
+		text : "Nếu bạn xóa, thông tin loại phòng của khách sạn này sẽ bị xóa!",
 		type : "warning",
 		showCancelButton : true,
 		confirmButtonColor : "#DD6B55",
@@ -351,7 +399,7 @@ function kiemtraxoalp(idchitietlp) {
 		showLoaderOnConfirm : true
 	}, function(isConfirm) {
 		if (isConfirm) {
-			swal("Xóa loại phòng", "Các thông loại phòng của khách sạn sẽ bị xóa...", "success");
+			swal("Xóa loại phòng", "Thông tin loại phòng này của khách sạn sẽ bị xóa...", "success");
 			setTimeout(function() {
 				window.location = "admin/xchitietlp/" + idchitietlp + ".html"; // Sửa đường dẫn xóa
 			}, 1500);

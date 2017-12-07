@@ -1356,11 +1356,11 @@ public class AdminController {
 				}
 			}
 			t.commit();
-			System.out.println("Them thanh cong!");
+			model.addAttribute("message", "ttks sua dich vu thanh cong");
 			return "admin/sdvcttkhachsan";
 		} catch (Exception e) {
 			t.rollback();
-			System.out.println("Them that bai!");
+			model.addAttribute("message", "ttks sua dich vu that bai");
 		} finally {
 			session.close();
 		}
@@ -1395,11 +1395,11 @@ public class AdminController {
 				}
 			}
 			t.commit();
-			System.out.println("Them thanh cong!");
+			model.addAttribute("message", "ttks sua loai phong thanh cong");
 			return "admin/slpcttkhachsan";
 		} catch (Exception e) {
 			t.rollback();
-			System.out.println("Them that bai!");
+			model.addAttribute("message", "ttks sua loai phong that bai");
 		} finally {
 			session.close();
 		}
@@ -2197,6 +2197,33 @@ public class AdminController {
 		}
 		return kt;
 	}
+	
+	// Kiểm tra tên dịch vụ đã tồn tại
+	public boolean kiemtradichvubyid(String iddichvu) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		boolean kt = true;
+		try {
+			String hql = "from Dichvu where iddichvu = :iddichvu";
+			Query query = session.createQuery(hql);
+			query.setParameter("iddichvu", iddichvu);
+			@SuppressWarnings("unchecked")
+			List<Dichvu> lstdv = query.list();
+			t.commit();
+			if (lstdv.size() != 0) {
+				return kt;
+			} else {
+				return false;
+			}
+		} catch (Exception ex) {
+			if (!(t == null)) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return kt;
+	}
 
 	// Kiểm tra tên công ty đã tồn tại
 	public boolean kiemtracongty(String congty) {
@@ -2224,6 +2251,33 @@ public class AdminController {
 		}
 		return kt;
 	}
+	
+	// Kiểm tra tên khách sạn đã tồn tại
+	public boolean kiemtrakhachsan(String khachsan) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		boolean kt = true;
+		try {
+			String hql = "from Khachsan where tenkhachsan = :tenks";
+			Query query = session.createQuery(hql);
+			query.setParameter("tenks", khachsan);
+			@SuppressWarnings("unchecked")
+			List<Khachsan> lstkhachsan = query.list();
+			t.commit();
+			if (lstkhachsan.size() != 0) {
+				return kt;
+			} else {
+				return false;
+			}
+		} catch (Exception ex) {
+			if (!(t == null)) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return kt;
+	}
 
 	// ------------------------------------------------------------------
 	// ===================== AJAX CHECK Controller ======================
@@ -2233,7 +2287,6 @@ public class AdminController {
 	@RequestMapping(value = "kt-email-ajax", method = RequestMethod.POST)
 	public String ktemailajax(HttpServletResponse response, @RequestBody String emaildata) {
 		try {
-			System.out.println("EMAIL : " + emaildata);
 			boolean ktmail = kiemtraEmail(emaildata);
 			response.getWriter().print(ktmail);
 		} catch (IOException e) {
@@ -2246,9 +2299,33 @@ public class AdminController {
 	@RequestMapping(value = "kt-sdt-ajax", method = RequestMethod.POST)
 	public String ktsdtajax(HttpServletResponse response, @RequestBody String sdtdata) {
 		try {
-			System.out.println("SDT : " + sdtdata);
 			boolean ktsdt = kiemtraSdt(sdtdata);
 			response.getWriter().print(ktsdt);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	// Check tên khách sạn
+	@RequestMapping(value = "kt-tks-ajax", method = RequestMethod.POST)
+	public String kttksajax(HttpServletResponse response, @RequestBody String tksdata) {
+		try {
+			boolean kttks = kiemtrakhachsan(tksdata);
+			response.getWriter().print(kttks);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	// Check id dịch vụ
+	@RequestMapping(value = "kt-iddv-ajax", method = RequestMethod.POST)
+	public String ktiddvajax(HttpServletResponse response, @RequestBody String iddvdata) {
+		try {
+			System.out.println("ID-DV: " + iddvdata);
+			boolean ktiddvdata = kiemtradichvubyid(iddvdata);
+			response.getWriter().print(ktiddvdata);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

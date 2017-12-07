@@ -34,6 +34,7 @@
         <script src="lib/jquery.mockjax.js"></script>
 		<script src="lib/jquery.form.js"></script>
 		<script src="dist/jquery.validate.js"></script>
+		<script src="dist/additional-methods.js"></script>
 		
 		<!-- Validation custom -->
 		<script src="js/validate_check.js"></script>
@@ -366,7 +367,18 @@
         
         <!-- Thêm khách sạn Popup -->
         <div id="taokhachsan_pp" class="modal">
-            <form class="modal-content animate" action="home/taokhachsan.html" method="post" 
+        		<script>
+					$(document).ready(function() {
+						$("#taokhachsan_form").validate();
+					});
+				</script>
+				<style>
+					form.cmxform label.error {
+						display: none;
+						color: red;
+					}
+				</style>
+            <form class="modal-content animate cmxform" action="home/taokhachsan.html" method="post" 
             id="taokhachsan_form" enctype="multipart/form-data" style="width: 50%;">
                 <div class="container_log" style="padding-bottom: 0px;">
                     <h2 class="text-center">Tạo khách sạn của bạn</h2>
@@ -376,36 +388,41 @@
                 <div class="container_log" style="padding-top: 0px;">
                     <span>Chọn hình ảnh và dịch vụ khách sạn của bạn</span>
                     <br>
-                    <input type="file" name="hinhanh" value="cont" style="
+                    <input type="file" name="hinhanh" accept="image/*" value="cont" style="
 					    width: 100%;
 					    padding: .5rem .75rem;
 					    margin: 8px 0;
 					    display: inline-block;
 					    border: 1px solid #ccc;
 					    box-sizing: border-box;">
+					    <hr>
                     <c:forEach var="dv" items="${dichvulst}">
                     	<div class="form-check form-check-inline">
 						  	<label class="custom-control custom-checkbox form-check-label">
-						        <input name="lstdichvu" type="checkbox" class="custom-control-input" value="${dv.iddichvu}">
+						        <input required minlength="5" name="lstdichvu[]" type="checkbox" class="custom-control-input" value="${dv.iddichvu}">
 							  	<span class="custom-control-indicator"></span>
 							  	<span class="custom-control-description">${dv.tendichvu}</span>
 							</label>
 						</div>
                     </c:forEach>
+                    <br><label for="lstdichvu[]" class="error"></label>
                     <p style="margin-top: 15px;">Chọn các loại phòng của khách sạn 
                     <a href="#" style="padding-left: 10px; font-size: smaller; font-style: italic;">( xem chi tiết loại phòng )</a></p>
                     <hr>
                     <c:forEach var="lp" items="${loaiphonglst}">
                     	<div class="form-check form-check-inline">
 						  	<label class="custom-control custom-checkbox form-check-label">
-						        <input name="lstloaiphong" type="checkbox" class="custom-control-input" value="${lp.idloaiphong}">
+						        <input required minlength="4" name="lstloaiphong[]" type="checkbox" class="custom-control-input" value="${lp.idloaiphong}">
 							  	<span class="custom-control-indicator"></span>
 							  	<span class="custom-control-description">${lp.tenloai}</span>
 							</label>
 						</div>
                     </c:forEach>
+                    <br><label for="lstloaiphong[]" class="error"></label>
                     <hr>
-                    <input type="text" placeholder="Nhập tên khách sạn của bạn" name="tenkhachsan" class="input_log" autofocus>
+                    <input id="tenkhachsan_taoks" type="text" placeholder="Nhập tên khách sạn của bạn" name="tenkhachsan" class="input_log" autofocus
+                     onchange="kiemtratenkhachsanformtaokhachsan()">
+                    <label id="tbtrungtks" class="error" style="display: block;"></label>
                     <input type="text" placeholder="Nhập số điện thoại liên hệ" name="sodienthoai" class="input_log">
                     <select name="idtinhthanh" class="form-control" id="exampleSelect1">
 						<option selected="selected" disabled="disabled">-- Chọn tỉnh thành --</option>
@@ -428,7 +445,7 @@
         <script src="js/ontop.js" type="text/javascript"></script>
         <script src="js/openid-login.js" type="text/javascript"></script>
         <!-- Alert check js-->
-	    <script src="js/alert-check.js" type="text/javascript"></script>
+	    <script src="js/alert-check-home.js" type="text/javascript"></script>
 	    <script src="js/ajax-check-home.js" type="text/javascript"></script>
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/popper/popper.min.js"></script>
