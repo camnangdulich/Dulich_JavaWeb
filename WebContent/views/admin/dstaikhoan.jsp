@@ -48,7 +48,7 @@
                             <tr>
                                 <td style="width: 50px;"><img src="files/avatar/${u.avatar}" width="50px" height="50px"></td>
                                 <td>${u.email}</td>
-                                <td>${u.matkhau}</td>
+                                <td style="-webkit-text-security: disc;">${u.matkhau}</td>
                                 <td>${u.hodem} ${u.ten}</td>
                                 <td>${u.sodienthoai}</td>
                                 <td>${u.quyen.quyen}</td>
